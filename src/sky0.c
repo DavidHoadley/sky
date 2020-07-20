@@ -6,8 +6,37 @@
  *          ABN 22 957 381 638
  *
  * Description: (see sky0.h)
+ * 
+ * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * * Redistributions of source code must retain the above copyright notice, this
+ *   list of conditions and the following disclaimer.
+ * * Redistributions in binary form must reproduce the above copyright notice,
+ *   this list of conditions and the following disclaimer in the documentation
+ *   and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ *
  *==============================================================================
  */
+/*------------------------------------------------------------------------------
+ * Notes:
+ *      Character set: UTF-8. (Non ASCII characters appear in this file)
+ *----------------------------------------------------------------------------*/
 
 /* ANSI includes etc. */
 #include <math.h>
@@ -17,7 +46,7 @@
 
 #include "astron.h"
 #include "general.h"
-#include "missing-maths.h"
+#include "more-maths.h"                 // for normalize()
 ///+
 #include <stdio.h>
 #include "spa.h"
@@ -27,7 +56,7 @@
 /*
  * Local #defines and typedefs
  */
-DEFINE_THIS_FILE;                        // For use by REQUIRE() - assertions.
+DEFINE_THIS_FILE;                       // For use by REQUIRE() - assertions.
 
 /*      Convert from units of 0.1 milliarcsec to radians */
 #define MILLIARCSECx10_TO_RAD  (PI / (180.0 * 3600.0 * 10000.0))
@@ -414,24 +443,18 @@ GLOBAL void sky0_appToTirs(const V3D_Vector *appV,
     first stage of converting apparent coordinates to topocentric coordinates.
     The resulting vector depends upon the current rotational position of the
     Earth. (For the second stage, to obtain topocentric coordinates, call
-    routine astsite_tirsToTopo()).
+    routine sky_siteTirsToTopo()).
  \param[in] appV     Position vector of apparent place
                      (unit vector in equatorial coordinates)
  \param[in] j2kUT1_d days since J2000.0, UT1 timescale, as returned by function
-                     asttime_updateTimes() in the \a j2kUT1_d field of the
-                     Asttime_Times struct.
+                     sky_updateTimes() in the \a j2kUT1_d field of the
+                     Sky_Times struct.
  \param[in] eqEq_rad Equation of the equinoxes (radian), as returned by function
                      sky0_epsilonSpa() in the \a eqEq_rad field of the
                      Sky0_Nut1980 struct.
    
  \param[out] terInterV  Position vector in Terrestrial Intermediate Ref System
    
-    Apparent coordinates are geocentric coordinates, measured using the true
-    equator of date (and the Celestial Intermediate Pole), same as Intermediate
-    coordinates. But the origin of Right Ascension measurements is the true
-    equinox of date whereas Intermediate coordinates measure Right Ascension
-    from the Celestial Intermediate Origin.
-
  \par When to call this function
     When you have the position of a celestial object expressed in Apparent
     coordinates, use this function to convert it to Terrestrial coordinates at
@@ -442,7 +465,7 @@ GLOBAL void sky0_appToTirs(const V3D_Vector *appV,
     of this object, you will need to call this function (once) every time around
     your control loop.
  \par
-    Follow this function with a call to astsite_tirsToTopo() to obtain the
+    Follow this function with a call to sky_siteTirsToTopo() to obtain the
     object's position in topocentric coordinates at the observing site.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {

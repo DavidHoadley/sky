@@ -6,11 +6,41 @@
  *          ABN 22 957 381 638
  *
  * Description: (see moon.h)
+ * 
+ * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * * Redistributions of source code must retain the above copyright notice, this
+ *   list of conditions and the following disclaimer.
+ * * Redistributions in binary form must reproduce the above copyright notice,
+ *   this list of conditions and the following disclaimer in the documentation
+ *   and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ *
  *==============================================================================
  */
+/*------------------------------------------------------------------------------
+ * Notes:
+ *      Character set: UTF-8. (Non ASCII characters appear in this file)
+ *----------------------------------------------------------------------------*/
 
 /* ANSI includes etc. */
 #include <float.h>
+#include "before-math.h"                /* for sincos() */
 #include <math.h>
 #include <stdlib.h>
 
@@ -18,16 +48,16 @@
 #include "moon.h"
 
 #include "general.h"
-#include "missing-maths.h"
+#include "more-maths.h"                 /* for normalize() */
 ///+
 #include <stdio.h>
-#include "rdwrite.h"
+#include "skyio.h"
 ///-
 
 /*
  * Local #defines and typedefs
  */
-DEFINE_THIS_FILE;                       // For use by REQUIRE() - assertions.
+DEFINE_THIS_FILE;                       /* For use by REQUIRE() - assertions. */
 
 typedef struct {
     double lp_rad;  // L' - Mean Longitude of the Moon (radian)
@@ -85,11 +115,11 @@ typedef struct {
 LOCAL void moonOrbitals(double t_cy, OrbTerms *orb);
 LOCAL void moonLongDist(const OrbTerms *orb, double *long_udeg, double *dist_m);
 LOCAL double moonLatitude(const OrbTerms *orb);
-LOCAL double riseSetApprox(double                risesetGuess_d,
-                           bool                  getMoonrise,
-                           const Asttime_DeltaTs *deltas,
-                           const Astsite_Prop *site,
-                           Astsite_Horizon    *topo);
+LOCAL double riseSetApprox(double             risesetGuess_d,
+                           bool               getMoonrise,
+                           const Sky_DeltaTs  *deltas,
+                           const Sky_SiteProp *site,
+                           Sky_SiteHorizon    *topo);
 
 /*
  * Global variables accessible by other modules
@@ -113,7 +143,7 @@ LOCAL const double au_km = 1.49597871464e8;  // one Astronomical Unit (km)
  *
  *------------------------------------------------------------------------------
  */
-GLOBAL void moon_nrelApp2(double              t_cy,
+GLOBAL void moon_nrelApp2(double             t_cy,
                           const Sky0_Nut1980 *nut,
                           V3D_Vector *appV,
                           double     *dist_au)
@@ -216,7 +246,7 @@ GLOBAL void moon_nrelApp2(double              t_cy,
 
 
 
-GLOBAL void moon_nrelApparent(double j2kTT_cy, Sky_PosEq *pos)
+GLOBAL void moon_nrelApparent(double j2kTT_cy, Sky_TrueEquatorial *pos)
 /*! Calculate the Moon's position as a unit vector and a distance, in apparent
     coordinates. It calls moon_nrelApp2() to obtain the Moon's position, after
     having called sky0_nutationSpa() to obtain the necessary nutation terms.
@@ -230,7 +260,7 @@ GLOBAL void moon_nrelApparent(double j2kTT_cy, Sky_PosEq *pos)
         - if you want the Moon's position at multiple sites simultaneously at a
           single time, call this function, then follow it with a call to routine
           sky0_appToTirs(), and then make a separate call to
-          astsite_tirsToTopo() for each of one those sites.
+          sky_siteTirsToTopo() for each of one those sites.
         - if you want the Moon's position at one or more sites at closely spaced
           times (e.g. for tracking the Moon), pass this function to the
           skyfast_init() function.  skyfast_init() will
@@ -271,40 +301,40 @@ GLOBAL void moon_nrelApparent(double j2kTT_cy, Sky_PosEq *pos)
 
 
 
-GLOBAL void moon_nrelTopocentric(double                j2kdUtc,
-                                 const Asttime_DeltaTs *deltas,
-                                 const Astsite_Prop    *site,
-                                 Astsite_Horizon *topo)
+GLOBAL void moon_nrelTopocentric(double             j2kdUtc,
+                                 const Sky_DeltaTs  *deltas,
+                                 const Sky_SiteProp *site,
+                                 Sky_SiteHorizon *topo)
 /*! Calls moon_nrelApparent() to calculate the Moon's position in apparent 
  *  coordinates using the NREL Moon Position Algorithm, and then converts this
  *  to topocentric horizon coordinates at the specified site.
  \param[in]  j2kdUtc  UTC time in "J2KD" form - i.e days since J2000.0
                       (= JD - 2 451 545.0)
- \param[in]  deltas   Delta T values, as set by the asttime_init() (or 
-                      asttime_initSimple() or asttime_initDetailed()) routines
+ \param[in]  deltas   Delta T values, as set by the sky_initTime() (or 
+                      sky_initTimeSimple() or sky_initTimeDetailed()) routines
  \param[in]  site     Properties of the observing site, particularly its
                       geometric location on the surface of the Earth, as set by
-                      the astsite_setLocation() function (or astsite_setLoc2())
+                      the sky_setSiteLocation() function (or sky_setSiteLoc2())
  \param[out] topo     Topocentric position, in both rectangular (unit vector)
                       form, and as Azimuth and Elevation (altitude) angles
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
-    Asttime_Times atime;      // time, in various timescales
-    Sky_PosEq     pos;        // geocentric position of the Moon and distance
-    V3D_Vector    terInterV;  // unit vector in Terrestrial Intermed Ref System
+    Sky_Times          atime;     // time, in various timescales
+    Sky_TrueEquatorial pos;       // geocentric position of the Moon and dist.
+    V3D_Vector         terInterV; // unit vector in Terrestrial Intermed Ref Sys
 
     REQUIRE_NOT_NULL(deltas);
     REQUIRE_NOT_NULL(site);
     REQUIRE_NOT_NULL(topo);
 
-    asttime_updateTimes(j2kdUtc, deltas, &atime);
+    sky_updateTimes(j2kdUtc, deltas, &atime);
 
     /* Calculate Moon apparent position */
     moon_nrelApparent(atime.j2kTT_cy, &pos);
 
     /* Convert apparent position to topocentric Azimuth/Elevation coords */
     sky0_appToTirs(&pos.appCirsV, atime.j2kUT1_d, pos.eqEq_rad, &terInterV);
-    astsite_tirsToTopo(&terInterV, pos.distance_au, site, topo);
+    sky_siteTirsToTopo(&terInterV, pos.distance_au, site, topo);
 }
 
 
@@ -313,9 +343,9 @@ GLOBAL double moon_riseSet(int                   year,
                            int                   month,
                            int                   day,
                            bool                  getMoonrise,
-                           const Asttime_DeltaTs *deltas,
-                           const Astsite_Prop    *site,
-                           Astsite_Horizon *topo)
+                           const Sky_DeltaTs *deltas,
+                           const Sky_SiteProp    *site,
+                           Sky_SiteHorizon *topo)
 /*! Routine to calculate the time of moonrise or moonset for the day specified
     by \a year, \a month and \a day. This function uses the NREL MPA algorithm
     of moon_nrelTopocentric() to calculate the Moon's position.
@@ -324,17 +354,17 @@ GLOBAL double moon_riseSet(int                   year,
                          (= JD - 2 451 545.0), UTC timescale).
                          To view this as a local date and time, add this
                          value to \a site->timezone_d and pass the result to
-                         function asttime_j2kdToCal().
+                         function sky_j2kdToCalTime().
  \param[in]  year, month, day
                          Date for which moonrise or moonset time is desired
  \param[in]  getMoonrise If true, get moonrise time. If false, get moonset time
- \param[in]  deltas      Delta T values, as set by the asttime_init() (or 
-                         asttime_initSimple() or asttime_initDetailed())
+ \param[in]  deltas      Delta T values, as set by the sky_initTime() (or 
+                         sky_initTimeSimple() or sky_initTimeDetailed())
                          routines
  \param[in]  site        Properties of the observing site, particularly its
                          geometric location on the surface of the Earth and its
-                         time zone, as set by the astsite_setLocation() function
-                         (or astsite_setLoc2()) and astsite_setTimeZone().
+                         time zone, as set by the sky_setSiteLocation() function
+                         (or sky_setSiteLoc2()) and sky_setSiteTimeZone().
  \param[out] topo        \b Optional. Topocentric position of the Moon at rise
                          or set, in both rectangular (unit vector) form, and as
                          Azimuth and Elevation (altitude) angles. If you are not
@@ -350,9 +380,9 @@ GLOBAL double moon_riseSet(int                   year,
     If the routine encounters an error, it will return 0.0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
-    Astsite_Horizon topo1;      // Moon apparent position
+    Sky_SiteHorizon topo1;      // Moon apparent position
     double          estimate_d; // estimate of the MJD of Moon rise or set time
-    Astsite_Prop    st;         // copy of site details, without refraction
+    Sky_SiteProp    st;         // copy of site details, without refraction
     int             i;          // iteration counter
 
     REQUIRE_NOT_NULL(deltas);
@@ -367,7 +397,7 @@ GLOBAL double moon_riseSet(int                   year,
     st.refracPT = 0.0;
 
     /* Make an initial guess of civil noon on the specified day */
-    estimate_d = asttime_calToJ2kd(year, month, day,
+    estimate_d = sky_calTimeToJ2kd(year, month, day,
                                    12, 0, 0.0, site->timeZone_d * 24.0);
 
     /* Iterate to settle on a time. */
@@ -665,11 +695,11 @@ LOCAL double moonLatitude(const OrbTerms *orb)
 
 
 
-LOCAL double riseSetApprox(double                risesetGuess_d,
-                           bool                  getMoonrise,
-                           const Asttime_DeltaTs *deltas,
-                           const Astsite_Prop *site,
-                           Astsite_Horizon    *topo)
+LOCAL double riseSetApprox(double             risesetGuess_d,
+                           bool               getMoonrise,
+                           const Sky_DeltaTs  *deltas,
+                           const Sky_SiteProp *site,
+                           Sky_SiteHorizon    *topo)
 /* Routine to calculate the time of Moon rise or set for the day specified by
    MJDrisesetGuess. The result returned is an approximate value, whose accuracy
    depends upon how close MJDrisesetGuess is to true Moon rise or set time.
@@ -703,7 +733,7 @@ LOCAL double riseSetApprox(double                risesetGuess_d,
     double     riseSetApprox_d;// Improved estimate of rise or set time
 
     moon_nrelTopocentric(risesetGuess_d, deltas, site, topo);
-    astsite_azElToHaDec(&topo->rectV, site, &ha1_rad, &dec_rad);
+    sky_siteAzElToHaDec(&topo->rectV, site, &ha1_rad, &dec_rad);
     
     /* Assuming the Moon's declination remains constant over the period, find
      * out where dec circle intersects the Elevation = -50 arcminutes circle.

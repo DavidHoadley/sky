@@ -1,35 +1,61 @@
 /*==============================================================================
- * rdwrite.c - output and formatting routines
+ * skyio.c - output and formatting routines and a read routine
  *
- * Author:  David Hoadley
+ * Author:  David Hoadley <vcrumble@westnet.com.au>
  *          Loco2Gen
  *          ABN 22 957 381 638
  *
- * Description: (see output.h)
+ * Description: (see skyio.h)
  * 
- * Character set: UTF-8. Non-ASCII characters appear in this file.
+ *
+ * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * * Redistributions of source code must retain the above copyright notice, this
+ *   list of conditions and the following disclaimer.
+ * * Redistributions in binary form must reproduce the above copyright notice,
+ *   this list of conditions and the following disclaimer in the documentation
+ *   and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ *
  *==============================================================================
  */
+/*------------------------------------------------------------------------------
+ * Notes:
+ *      Character set: UTF-8. (Non-ASCII characters appear in this file)
+ *----------------------------------------------------------------------------*/
 
 /* ANSI includes etc. */
 #include <ctype.h>
 #include <math.h>
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>                     /* for memcpy() */
 
 /* Local and project includes */
-#include "rdwrite.h"
+#include "skyio.h"
 
-#include "astron.h"
-#include "asttime.h"
 #include "general.h"
+#include "sky.h"
 
 /*
  * Local #defines and typedefs
  */
 DEFINE_THIS_FILE;                       // For use by REQUIRE() - assertions.
-
 
 /*
  * Prototypes for local functions (not called from other modules)
@@ -62,20 +88,20 @@ LOCAL const char fieldSeparator = ',';
  *
  *------------------------------------------------------------------------------
  */
-GLOBAL char *fmtDms(char destStr[],
-                    int destStrLen,
-                    double angle_rad,
-                    int decimals)
-/*! Routine to take an angle in radian and return a string of the form
+GLOBAL char *skyio_degToDmsStr(char destStr[],
+                               int destStrLen,
+                               double angle_deg,
+                               int decimals)
+/*! Routine to take an angle in degrees and return a string of the form
         [±]DDD°MM′SS.sss″
     correctly rounding according to the number of decimal places to be shown.
-    The angle is assumed to be within the range (-2*Pi, 2*Pi). Angles which
+    The angle is assumed to be within the range (-360.0, 360.0). Angles which
     round to ±360° will be written out as 0°.
  \returns                Pointer to \a destStr
  \param[out] destStr     Destination character string
  \param[in]  destStrLen  Length of destination string
- \param[in]  angle_rad   The angle to be written out (radian).
-                           Valid range:(-2*Pi, 2*Pi); larger numbers may well be
+ \param[in]  angle_deg   The angle to be written out (degrees).
+                           Valid range:(-360, 360); larger numbers may well be
                            written OK, but there is a risk of overflowing an
                            intermediate variable. No error will be detected,
                            just a wrong answer will be written.
@@ -88,7 +114,7 @@ GLOBAL char *fmtDms(char destStr[],
     const int  minLen = 8 + (sizeof(cDegree) - 1) + (sizeof(cMinute) - 1)
                           + (sizeof(cSecond) - 1);
 
-    long int angle_asxd;    // angle_rad, converted to arcseconds x 10^decimals
+    long int angle_asxd;    // angle_deg, converted to arcseconds x 10^decimals
     int      reqLen;        // required length of string to fit the output
     int      i, j;
     int      roundup;
@@ -112,8 +138,8 @@ GLOBAL char *fmtDms(char destStr[],
     for (i = 0; i < decimals; i++) {
         roundup *= 10;
     }
-    angle_asxd = lround(radToDeg(angle_rad) * 3600.0 * roundup);
-    if (angle_rad < 0) {
+    angle_asxd = lround(angle_deg * 3600.0 * roundup);
+    if (angle_deg < 0) {
         angle_asxd = -angle_asxd;
     }
 
@@ -157,7 +183,7 @@ GLOBAL char *fmtDms(char destStr[],
         q = ldiv(q.quot, 10);
         destStr[--i] = digits[q.rem];        
     }
-    destStr[--i] = (angle_rad < 0.0) ? '-' : '+';
+    destStr[--i] = (angle_deg < 0.0) ? '-' : '+';
     while (i > 0) {
         destStr[--i] = ' ';
     }
@@ -167,20 +193,20 @@ GLOBAL char *fmtDms(char destStr[],
 
 
 
-GLOBAL char *fmtHms(char destStr[],
-                    int destStrLen,
-                    double angle_rad,
-                    int decimals)
-/*! Routine to take an angle in radian and return a string in hours, minutes and
+GLOBAL char *skyio_hrsToHmsStr(char destStr[],
+                               int destStrLen,
+                               double angle_h,
+                               int decimals)
+/*! Routine to take an angle in hours and return a string in hours, minutes and
     seconds form - "±HH:MM:SS.sss" - 
     correctly rounding according to the number of decimal places to be shown.
-    The angle is assumed to be within the range (-2*Pi, 2*Pi). Angles which
+    The angle is assumed to be within the range (-24.0, 24.0). Angles which
     round to ±24:00:00 will be written out as 0:00:00.
  \returns                Pointer to \a destStr
  \param[out] destStr     Destination character string
  \param[in]  destStrLen  Length of destination string
- \param[in]  angle_rad   The angle to be written out (radian).
-                         Valid range:(-2*Pi, 2*Pi); larger numbers may well be
+ \param[in]  angle_h     The angle to be written out (hours).
+                         Valid range:(-24.0, 24.0); larger numbers may well be
                          written OK, but there is a risk of overflowing an
                          intermediate variable. No error will be detected,
                          just a wrong answer will be written.
@@ -190,7 +216,7 @@ GLOBAL char *fmtHms(char destStr[],
                          clamped to this range.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
-    long int angle_sxd;     // angle_rad, converted to seconds x 10^decimals
+    long int angle_sxd;     // angle_h, converted to seconds x 10^decimals
     int      i, j;
     int      reqLen;        // required length of string to fit the output
     int      roundup;
@@ -215,8 +241,8 @@ GLOBAL char *fmtHms(char destStr[],
     for (i = 0; i < decimals; i++) {
         roundup *= 10;
     }
-    angle_sxd = lround(radToHrs(angle_rad) * 3600.0 * roundup);
-    if (angle_rad < 0) {
+    angle_sxd = lround(angle_h * 3600.0 * roundup);
+    if (angle_h < 0) {
         angle_sxd = -angle_sxd;
     }
 
@@ -253,7 +279,7 @@ GLOBAL char *fmtHms(char destStr[],
         destStr[--i] = digits[q.rem];        
     }
 
-    destStr[--i] = (angle_rad < 0.0) ? '-' : '+';
+    destStr[--i] = (angle_h < 0.0) ? '-' : '+';
     
     ENSURE(i == 0);     // If not, we have stuffed up filling the string
 
@@ -262,17 +288,20 @@ GLOBAL char *fmtHms(char destStr[],
 
 
 
-GLOBAL double readSexagesimal(const char angleStr[],
-                              int strSize,
-                              const char **endPtr,
-                              int *error)
-/*! Convert a string containing an angle (or a time) to the angle's value. The
- *  field containing the angle consists of one, two or three subfields. The
- *  location of the decimal point (if any) is what determines how many subfields
- *  are present. The following are all examples of valid angles (or times):
- *      - 21.625 or +21.625°
- *      - -21 37.5 or 21:37.5 or -21°37.5′ or 21h37.5m
- *      - +21 37 30 or 21:37:30.0 or -21°37′30.0″
+GLOBAL double skyio_sxStrToAng(const char angleStr[],
+                               int strSize,
+                               const char **endPtr,
+                               int *error)
+/*! Convert a string containing an angle (or a time) in sexagesimal format to
+    the angle's value. The field containing the angle consists of either one
+    subfield (decimal degrees or hours), two subfields (degrees and arcminutes
+    or hours and minutes) three subfields (degrees, arcminutes and arcseconds or
+    hours minutes and seconds). The location of the decimal point (if any) is
+    what determines how many subfields are present. The following are all
+    examples of valid angles (or times):
+        - 21.625 or +21.625°
+        - -21 37.5 or 21:37.5 or -21°37.5′ or 21h37.5m
+        - +21 37 30 or 21:37:30.0 or -21°37′30.0″
 
     If the string contains degrees, minutes and seconds, the result will be in
     degrees. If the string contains hours, minutes and seconds, the result will
@@ -401,54 +430,20 @@ GLOBAL double readSexagesimal(const char angleStr[],
 
 
 
-GLOBAL void printMatrix(const V3D_Matrix *m)
-/*!  Write out the contents of a V3D_Matrix
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-{
-    printf("%12.9f, %12.9f, %12.9f\n", m->a[0][0], m->a[0][1], m->a[0][2]);
-    printf("%12.9f, %12.9f, %12.9f\n", m->a[1][0], m->a[1][1], m->a[1][2]);
-    printf("%12.9f, %12.9f, %12.9f\n", m->a[2][0], m->a[2][1], m->a[2][2]);
-}
-
-
-
-GLOBAL void printVector(const V3D_Vector *v)
-/*!  Write out the contents of a V3D_Vector
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-{
-    printf("x = %12.9f, y = %12.9f, z = %12.9f\n", v->a[0], v->a[1], v->a[2]);
-}
-
-
-
-#ifdef INCLUDE_MJD_ROUTINES
-GLOBAL void printMjd(double mjd)
-/*!  Write out a Modified Julian Date as a calendar date and time.
+GLOBAL void skyio_printJ2kd(double j2kd)
+/*! Write out a J2KD as a calendar date and time. The date and time are written
+    in ISO format, separated by a space. Time is written to three decimal places
+    of seconds. No newline is written at the end.
+ \param[in]  j2kd  The date/time in J2KD format.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     int y, m, d, h, mins;
     double s;
 
-    asttime_mjdToCal(mjd, &y, &m, &d, &h, &mins, &s);
-//    printf("%04d-%02d-%02d %02d:%02d:%05.2f", y, m, d, h, mins, s);
-    printf("%04d-%02d-%02d %02d:%02d:%08.5f", y, m, d, h, mins, s);
+    sky_j2kdToCalTime(j2kd, &y, &m, &d, &h, &mins, &s);
+    printf("%04d-%02d-%02d %02d:%02d:%06.3f", y, m, d, h, mins, s);
 }
-#endif
 
-
-
-GLOBAL void printJ2kd(double j2kd)
-/*!  Write out a J2KD as a calendar date and time. The date and time are written
- *   in ISO format, separated by a space. No newline is written at the end.
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-{
-    int y, m, d, h, mins;
-    double s;
-
-    asttime_j2kdToCal(j2kd, &y, &m, &d, &h, &mins, &s);
-//    printf("%04d-%02d-%02d %02d:%02d:%05.2f", y, m, d, h, mins, s);
-    printf("%04d-%02d-%02d %02d:%02d:%08.5f", y, m, d, h, mins, s);
-}
 
 /*
  *------------------------------------------------------------------------------
@@ -458,5 +453,7 @@ GLOBAL void printJ2kd(double j2kd)
  *------------------------------------------------------------------------------
  */
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+
 
 

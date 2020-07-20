@@ -1,74 +1,70 @@
 /*==============================================================================
- * astsite.c - astronomical routines related to an observing site
+ * sky-site.c - astronomical routines related to an observing site
  *
- * Author:  David Hoadley
+ * Author:  David Hoadley <vcrumble@westnet.com.au>
  *          Loco2Gen
  *          ABN 22 957 381 638
  *
- * Description: (see astsite.h)
+ * Description: (see the "Site routines" sections of sky.h)
+ * 
  *
- * Character set: UTF-8. (Non ASCII characters appear in this file)
+ * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * * Redistributions of source code must retain the above copyright notice, this
+ *   list of conditions and the following disclaimer.
+ * * Redistributions in binary form must reproduce the above copyright notice,
+ *   this list of conditions and the following disclaimer in the documentation
+ *   and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  *
  *==============================================================================
  */
+/*------------------------------------------------------------------------------
+ * Notes:
+ *      Character set: UTF-8. (Non ASCII characters appear in this file)
+ *----------------------------------------------------------------------------*/
 
-/*! \page page-var-suffixes Suffixes on variable and parameter names
- * 
- *  In accordance with the naming convention spelt out in the
- *  style guide, many variables and constants have a suffix indicating their
- *  units. Mostly these are SI units, for example
- *      -  _d (days), _h (hours) _s (seconds) _ns (nanoseconds)
- *      -  _m (metres), _km (kilometres), _kmps (kilometres/second)
- *      -  _rad (radian), _deg (degrees), _radps (radian/second)
- *      -  _degC (degrees Celsius)
- * 
- *  But we also have units for astronomical quantities as recommended by the
- *  International Astronomical Union (IAU) style manual
- *  (https://www.iau.org/publications/proceedings_rules/units/), for example
- *      -  _as (arcseconds) _mas (milliarcseconds), (see \ref page-sec-arcsec)
- *      -  _au (Astronomical Unit (of distance))
- *      -  _a (Julian year)
- * 
- *  This last unit implies that we could use "ka" for millennia, and we do. But
- *  we also have quantities measured in Julian centuries. The IAU guidelines
- *  specifically rule out using "ha" for this (quite right: "ha" means
- *  hectares), and they oppose "cy", but they make no recommendation of an
- *  alternative. But the _Astronomical Almanac_ does use "cy" for a Julian
- *  century, so I will use suffix _cy.
- *      -  _ka (Julian millennium), _cy (Julian century)
- * 
- *  Another convention that applies here: Objects whose name ends in a capital V
- *  are 3-dimensional vectors (often unit position vectors, or direction
- *  cosines) but not exclusively so. Objects whose name ends in a capital M are
- *  matrices, typically 3x3 rotation matrices. Occasionally, this is combined
- *  with a suffix. So a name like \c earthV_au means a vector whose components
- *  are scaled in Astronomical Units.
- */
 
 /* ANSI includes etc. */
+#include "before-math.h"                /* for sincos() */
 #include <math.h>
-///+
-#include <stdio.h>
-#include "rdwrite.h"
-///-
 
 /* Local and project includes */
-#include "astsite.h"
-
-#include "astron.h"
-#include "asttime.h"
+#include "sky.h"
 #include "general.h"
-#include "missing-maths.h"
 
 /*
  * Local #defines and typedefs 
  */
 DEFINE_THIS_FILE;                       /* For use by REQUIRE() - assertions */
 
+/*      Un-comment the following if you are running comparison tests vs the
+        NREL SPA code for Sun positions. It changes the constants describing
+        the Earth to match those used in the SPA itself (instead of using the
+        (better) constants from the Astronomical Almanac). Also it disables
+ *      the correction for diurnal aberration (because SPA does not calculate
+ *      this correction). */
+#define SPA_COMPARISONS
+
 /*
  * Prototypes for local functions (not called from other modules).
  */
-LOCAL void createAzElBaseM(Astsite_Prop *site);
+LOCAL void createAzElBaseM(Sky_SiteProp *site);
 
 /*
  * Global variables accessible by other modules 
@@ -78,7 +74,7 @@ LOCAL void createAzElBaseM(Astsite_Prop *site);
 /*
  * Local variables (not accessed by other modules)
  */
-#if 0
+#ifndef SPA_COMPARISONS
 /*      Constants found in the 2007 Astronomical Almanac, pages K6 & K7 */
 LOCAL const double c_kmps = 299792.458;      // speed of light (km/s)
 LOCAL const double f = 0.0033528197;         // flattening factor of the geoid
@@ -108,10 +104,10 @@ LOCAL const double esq = f + f - f * f;      // square of eccentricity of geoid
  *
  *------------------------------------------------------------------------------
  */
-GLOBAL void astsite_setLocation(double latitude_deg,
+GLOBAL void sky_setSiteLocation(double latitude_deg,
                                 double longitude_deg,
                                 double height_m,
-                                Astsite_Prop *site)
+                                Sky_SiteProp *site)
 /*! Initialise the \a site structure by calculating those site-related values
     that do not change with time.
  \param[in]  latitude_deg   Latitude of site (ϕ) (degrees)
@@ -120,7 +116,7 @@ GLOBAL void astsite_setLocation(double latitude_deg,
 
  \param[out] site           All fields initialised
 
-    This is a simplified version of astsite_setLoc2(), which is good enough
+    This is a simplified version of sky_setSiteLoc2(), which is good enough
     for most purposes.
 
     This function calculates the quantities that will be used to convert
@@ -138,18 +134,18 @@ GLOBAL void astsite_setLocation(double latitude_deg,
 
     The \a site->refracPT field is initialised assuming that the site pressure
     is 1010 hPa and the temperature is 10 °C. If other values are required,
-    follow this call by a call to astsite_setTempPress().
+    follow this call by a call to sky_setSiteTempPress().
 
     The \a site->timezone_d field is initialised to 0, assuming that the site
     time zone is UTC. If another value is required, follow this call by a call
-    to astsite_setTimeZone().
+    to sky_setSiteTimeZone().
 
  \par When to call this function
     At program initialisation time only
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     /* Use same values for astronomical and geodetic lat/long */
-    astsite_setLoc2(latitude_deg,
+    sky_setSiteLoc2(latitude_deg,
                          longitude_deg,
                          latitude_deg,
                          longitude_deg,
@@ -159,13 +155,13 @@ GLOBAL void astsite_setLocation(double latitude_deg,
 
 
 
-GLOBAL void astsite_setLoc2(double astLat_deg,
+GLOBAL void sky_setSiteLoc2(double astLat_deg,
                             double astLong_deg,
                             double geodLat_deg,
                             double geodLong_deg,
                             double height_m,
-                            Astsite_Prop *site)
-/*! Alternative initialisation function to astsite_setLocation(). It initialises
+                            Sky_SiteProp *site)
+/*! Alternative initialisation function to sky_setSiteLocation(). It initialises
  *  the \a site structure, but it supports a distinction between Astronomical
  *  latitude & longitude and Geodetic latitude & longitude.
  \param[in]  astLat_deg     Astronomical Latitude of site (ϕA) (degrees)
@@ -178,7 +174,7 @@ GLOBAL void astsite_setLoc2(double astLat_deg,
  \param[out] site           All fields initialised
 
     This function calculates the same quantities as described for
-    astsite_setLocation().
+    sky_setSiteLocation().
     The only difference is that the \a site.azElBaseM rotation matrix is based
     on Astronomical latitude and latitude (instead of Geodetic).
 
@@ -190,21 +186,21 @@ GLOBAL void astsite_setLoc2(double astLat_deg,
  \note Distinguishing between Astronomical lat & lon and Geodetic lat & lon
     is only required for very precise work. It is most likely that you won't
     actually know the Astronomical coords, and it won't matter. Use function
-    astsite_setLocation() instead - it sets the Astronomical coords to the same
+    sky_setSiteLocation() instead - it sets the Astronomical coords to the same
     values as the  Geodetic or GPS coords.
 
     The \a site->refracPT field is initialised assuming that the site pressure
     is 1010 hPa and the temperature is 10 °C. If other values are required,
-    follow this call by a call to astsite_setTempPress().
+    follow this call by a call to sky_setSiteTempPress().
 
     The \a site->timezone_d field is initialised to 0, assuming that the site
     time zone is UTC. If another value is required, follow this call by a call
-    to astsite_setTimeZone().
+    to sky_setSiteTimeZone().
 
  \par When to call this function
     At program initialisation time only, if you need to distinguish between
     Astronomical latitude/longitude and Geodetic latitude/longitude. Otherwise
-    call astsite_setLocation() instead.
+    call sky_setSiteLocation() instead.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     double     geodLat_rad;         // Geodetic Latitude (radian)
@@ -254,8 +250,8 @@ GLOBAL void astsite_setLoc2(double astLat_deg,
     v3d_createRotationMatrix(&mat2, Zaxis, PI);
     v3d_multMxM(&site->haDecM, &mat2, &mat1);
 
-    /* 6. Other initialisations, in case astsite_setTempPressure() or
-       astsite_setTimeZone() don't get called. */
+    /* 6. Other initialisations, in case sky_setSiteTempPressure() or
+       sky_setSiteTimeZone() don't get called. */
     site->refracPT = 1.0;               // Default to 10 °C and 1010 hPa
     site->timeZone_d = 0.0;             // Default to UTC.
 
@@ -264,9 +260,9 @@ GLOBAL void astsite_setLoc2(double astLat_deg,
 
 
 
-GLOBAL void astsite_setTempPress(double temperature_degC,
+GLOBAL void sky_setSiteTempPress(double temperature_degC,
                                  double pressure_hPa,
-                                 Astsite_Prop *site)
+                                 Sky_SiteProp *site)
 /*! Set refraction coefficients based on atmospheric temperature and pressure
     at the site.
  \param[in]  temperature_degC - average annual air temperature at the site (°C)
@@ -276,11 +272,11 @@ GLOBAL void astsite_setTempPress(double temperature_degC,
                                 coefficient for pressure & temperature
 
     This coefficient will be used in the simple refraction algorithm that is
-    called from routine astsite_tirsToTopo().
+    called from routine sky_siteTirsToTopo().
 
  \par When to call this function
-    1. At program initialisation time, after calling astsite_setLocation() (or
-        astsite_setLoc2())
+    1. At program initialisation time, after calling sky_setSiteLocation() (or
+        sky_setSiteLoc2())
     2. If you have updated values of pressure or temperature
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
@@ -296,8 +292,8 @@ GLOBAL void astsite_setTempPress(double temperature_degC,
 
 
 
-GLOBAL void astsite_setTimeZone(double timeZone_h,
-                                Astsite_Prop *site)
+GLOBAL void sky_setSiteTimeZone(double timeZone_h,
+                                Sky_SiteProp *site)
 /*! Set the time zone offset for this site.
  \param[in]  timeZone_h  Zonal correction (hours). Time zones east of
                            Greenwich are positive (e.g. Australian Eastern
@@ -308,8 +304,8 @@ GLOBAL void astsite_setTimeZone(double timeZone_h,
                            a day 
 
  \par When to call this function
-    1. At program initialisation time, after calling astsite_setLocation() (or
-        astsite_setLoc2())
+    1. At program initialisation time, after calling sky_setSiteLocation() (or
+        sky_setSiteLoc2())
     2. If daylight saving begins or ends during the time the program is running
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
@@ -320,9 +316,9 @@ GLOBAL void astsite_setTimeZone(double timeZone_h,
 
 
 
-GLOBAL void astsite_setupSurface(double azimuth_deg,
+GLOBAL void sky_setupSiteSurface(double azimuth_deg,
                                  double slope_deg,
-                                 Astsite_Horizon *surface)
+                                 Sky_SiteHorizon *surface)
 /*! Set the orientation and slope of a surface (such as a solar panel) for which
     you want to calculate the incidence angle of incoming radiation.
  \param[in]  azimuth_deg  The azimuth angle of the normal to the surface
@@ -333,7 +329,7 @@ GLOBAL void astsite_setupSurface(double azimuth_deg,
                           of the normal to the surface.
  \param[out] surface      The coordinates of the normal to the surface, in both
                           polar and rectangular forms. The rectangular form will
-                          be passed later to astsite_incidence_rad().
+                          be passed later to sky_siteIncidence_rad().
 
  \par When to call this function
     At program initialisation time only, if you have a surface of interest.
@@ -350,12 +346,12 @@ GLOBAL void astsite_setupSurface(double azimuth_deg,
 
 
 
-GLOBAL void astsite_adjustForPolarMotion(const Asttime_Polar *polar,
-                                         Astsite_Prop *site)
+GLOBAL void sky_adjustSiteForPolarMotion(const Sky_PolarMot *polar,
+                                         Sky_SiteProp *site)
 /*! Modify our azEl rotation matrix to incorporate a polar motion rotation
     matrix
  \param[in]     polar   Polar motion parameters, as set by function
-                        asttime_setPolarMotion()
+                        sky_setPolarMotion()
  \param[in,out] site    Fields \a azElM and possibly \a azElPolM are updated
 
  \par When to call this function
@@ -363,7 +359,7 @@ GLOBAL void astsite_adjustForPolarMotion(const Asttime_Polar *polar,
     with it. So you only need to call this routine if:
         1. you are bothering about polar motion at all, and
         2. changes were made to the \a polar structure by a recent call to 
-            function asttime_setPolarMotion(). This routine is only ever to be
+            function sky_setPolarMotion(). This routine is only ever to be
             called after that routine has run. This is expected to be very
             infrequently - once per day is more than enough.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -381,10 +377,10 @@ GLOBAL void astsite_adjustForPolarMotion(const Asttime_Polar *polar,
 
 
 
-GLOBAL void astsite_tirsToTopo(const V3D_Vector   *terInterV,
+GLOBAL void sky_siteTirsToTopo(const V3D_Vector   *terInterV,
                                double             dist_au,
-                               const Astsite_Prop *site,
-                               Astsite_Horizon *topo)
+                               const Sky_SiteProp *site,
+                               Sky_SiteHorizon *topo)
 /*! Transform a coordinate vector from the Terrestrial Intermediate Reference
     System to topocentric Az/El coordinates for the observing site whose
     properties are described in parameter "site". Note: there is a mixture of
@@ -399,7 +395,7 @@ GLOBAL void astsite_tirsToTopo(const V3D_Vector   *terInterV,
                         treated as infinity.
  \param[in]  site       Block of data describing the observing site, as
                         initialised by one of the functions
-                        astsite_setLocation() or astsite_setLoc2().
+                        sky_setSiteLocation() or sky_setSiteLoc2().
  \param[out] topo       Topocentric position, both as a vector in horizon
                         coordinates, and as azimuth (radian) and elevation
                         (radian).
@@ -417,7 +413,6 @@ GLOBAL void astsite_tirsToTopo(const V3D_Vector   *terInterV,
     sites, passing the relevant \a site data block to each call.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
-    double e0_deg;          // Elevation (not corrected for refraction, degrees)
     double dEl_rad;         // Change in elevation from refraction (radian)
     double w;
     double tanZd;           // Tangent of zenith distance
@@ -444,7 +439,7 @@ GLOBAL void astsite_tirsToTopo(const V3D_Vector   *terInterV,
        simply adding the correction vector [as though the two vectors were in
        the same coordinate system] is minuscule, since the "deflection of the
        vertical" is so small - almost certainly < 20 arcseconds.) */
-#if 0
+#ifndef SPA_COMPARISONS
     topo->rectV.a[1] += site->diurnalAberr;
 #else
 #warning "Correction for diurnal aberration is not being applied"
@@ -464,13 +459,17 @@ GLOBAL void astsite_tirsToTopo(const V3D_Vector   *terInterV,
        instead of the more detailed atmospheric model used by Stromlo. 
        Unfortunately, this formula is expressed in degrees, so we have to
        convert back and forth. */
-    e0_deg = radToDeg(topo->elevation_rad);
-    if (e0_deg > -2.0) {
-        dEl_rad = degToRad(1.02 / (60.0 * tan(degToRad(e0_deg + 10.3 
-                                                       / (e0_deg + 5.11)))))
-                  * site->refracPT;
-    } else {
-        dEl_rad = 0.0;
+    {
+        double e0_deg;      // Elevation (not corrected for refraction, degrees)
+        
+        e0_deg = radToDeg(topo->elevation_rad);
+        if (e0_deg > -2.0) {
+            dEl_rad = degToRad(1.02 / (60.0 * tan(degToRad(e0_deg + 10.3 
+                                                           / (e0_deg + 5.11)))))
+                      * site->refracPT;
+        } else {
+            dEl_rad = 0.0;
+        }
     }
 #elif 0
     /* Correct for atmospheric refraction using a radian version of the above */
@@ -511,14 +510,14 @@ GLOBAL void astsite_tirsToTopo(const V3D_Vector   *terInterV,
 
 
 
-GLOBAL void astsite_azElToHaDec(const V3D_Vector   *topoV,
-                                const Astsite_Prop *site,
+GLOBAL void sky_siteAzElToHaDec(const V3D_Vector   *topoV,
+                                const Sky_SiteProp *site,
                                 double *hourAngle_rad,
                                 double *declination_rad)
 /*! Take a topocentric position vector in Azimuth/Elevation frame and use it to
     calculate the observed Hour Angle and Declination.
  \param[in]  topoV            Topocentric position vector in Azimuth/Elevation
-                              frame (as returned by the astsite_tirsToTopo()
+                              frame (as returned by the sky_siteTirsToTopo()
                               function)
  \param[in]  site             Field \a haDecM - rotation matrix to HA/Dec
                               coordinates
@@ -529,7 +528,7 @@ GLOBAL void astsite_azElToHaDec(const V3D_Vector   *topoV,
     the refracted position of the object.
 
  \par When to call this function
-    After each call to astsite_tirsToTopo(), but only if you want hour angle and
+    After each call to sky_siteTirsToTopo(), but only if you want hour angle and
     declination. 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
@@ -547,23 +546,23 @@ GLOBAL void astsite_azElToHaDec(const V3D_Vector   *topoV,
 
 
 
-GLOBAL double astsite_incidence_rad(const V3D_Vector *topoV,
+GLOBAL double sky_siteIncidence_rad(const V3D_Vector *topoV,
                                     const V3D_Vector *surfaceV)
 /*! Calculate the incidence angle of rays from the celestial object described
     by \a topoV (such as the sun) falling onto a surface described by
     \a surfaceV (such as a solar panel).
  \returns    Incidence angle of the radiation (radian)
  \param[in]  topoV      Unit vector pointing to the celestial object, as
-                        returned by the astsite_tirsToTopo() routine (in the
+                        returned by the sky_siteTirsToTopo() routine (in the
                         \a topo->rectV field). Must be of unity magnitude,
                         otherwise an assertion failure occurs.
  \param[in]  surfaceV   Unit vector of normal to the surface, as returned by
-                        routine astsite_setupSurface() (in the \a surface->rectV
+                        routine sky_setupSiteSurface() (in the \a surface->rectV
                         field). Must be of unity magnitude, otherwise an
                         assertion failure occurs.
 
  \par When to call this function
-    After each call to astsite_tirsToTopo(), but only if you have a surface that
+    After each call to sky_siteTirsToTopo(), but only if you have a surface that
     you want the incidence angle for. 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
@@ -582,7 +581,7 @@ GLOBAL double astsite_incidence_rad(const V3D_Vector *topoV,
  *
  *------------------------------------------------------------------------------
  */
-LOCAL void createAzElBaseM(Astsite_Prop *site)
+LOCAL void createAzElBaseM(Sky_SiteProp *site)
 /* Calculates the transformation matrix to convert a coordinate vector
    expressed in a terrestrial equatorial coordinate frame to one expressed in
    the horizon coordinate frame.
@@ -643,3 +642,167 @@ LOCAL void createAzElBaseM(Astsite_Prop *site)
 }
 
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/*! \page page-conventions Conventions used in this code
+ *      - \subpage page-var-suffixes
+ *      - \subpage page-sec-arcsec
+ *      - \subpage page-sign-conventions
+ *      - \subpage page-interval-notation
+ *  */
+
+/*! \page page-time About time
+ *      - \subpage page-timescales
+ *      - \subpage page-time-variables
+ *  */
+
+/*! \page page-var-suffixes Suffixes on variable and parameter names
+ * 
+ *  In accordance with the naming convention spelt out in the
+ *  style guide, many variables and constants have a suffix indicating their
+ *  units. Mostly these are SI units, for example
+ *      -  _d (days), _h (hours) _s (seconds) _ns (nanoseconds)
+ *      -  _m (metres), _km (kilometres), _kmps (kilometres/second)
+ *      -  _rad (radian), _deg (degrees), _radps (radian/second)
+ *      -  _degC (degrees Celsius)
+ * 
+ *  But we also have units for astronomical quantities as recommended by the
+ *  International Astronomical Union (IAU) style manual
+ *  (https://www.iau.org/publications/proceedings_rules/units/), for example
+ *      -  _as (arcseconds) _mas (milliarcseconds), (see \ref page-sec-arcsec)
+ *      -  _au (Astronomical Unit (of distance))
+ *      -  _a (Julian year)
+ * 
+ *  This last unit implies that we could use "ka" for millennia, and we do. But
+ *  we also have quantities measured in Julian centuries. The IAU guidelines
+ *  specifically rule out using "ha" for this (quite right: "ha" means
+ *  hectares), and they oppose "cy", but they make no recommendation of an
+ *  alternative. But the _Astronomical Almanac_ does use "cy" for a Julian
+ *  century, so I will use suffix _cy.
+ *      -  _ka (Julian millennium), _cy (Julian century)
+ * 
+ *  Another convention that applies here: Objects whose name ends in a capital V
+ *  are 3-dimensional vectors (often unit position vectors, or direction
+ *  cosines) but not exclusively so. Objects whose name ends in a capital M are
+ *  matrices, typically 3x3 rotation matrices. Occasionally, this is combined
+ *  with a suffix. So a name like \c earthV_au means a vector whose components
+ *  are scaled in Astronomical Units.
+ */
+
+/*! \page page-sec-arcsec Seconds versus arcseconds
+ *  The fact that time in hours is subdivided into minutes and seconds, and
+ *  angles in degrees are also subdivided into minutes and seconds, normally
+ *  does not cause confusion. But astronomers measure angles on the celestial
+ *  sphere using both units of time (for Right Ascension and Hour Angles) and
+ *  units of degrees (for many other angles). So if we talk about an angle of
+ *  n minutes, or n seconds, do we mean a fraction of an hour, or a degree?
+ * 
+ *  For this reason, astronomers refer to the fractions of a degree as
+ *  arcminutes, and reserve the term "minutes" for fractions of an hour. And
+ *  fractions of an arcminute are called arcseconds rather than seconds. This
+ *  program follows that convention, particularly in the use of suffixes on
+ *  variable names (see page \ref page-var-suffixes). Variables in units of
+ *  seconds of time have the suffix _s, those in units of arcseconds have the
+ *  suffix _as.
+ * 
+ *  In general, within this program most angles are stored in units of radians,
+ *  and only converted to degrees-arcminutes-arcseconds, or
+ *  hours-minutes-seconds when being written out in text form.
+ *  The symbol ′ is used for arcminutes only, never for minutes of time.
+ *  The symbol ″ is used for arcseconds only, never for seconds of time.
+ */
+
+/*! \page page-interval-notation Interval notation
+ *  Frequently throughout the documentation and comments, valid ranges of
+ *  function parameters are expressed in interval notation. This is a pair of
+ *  numbers representing the two ends of the range, separated by a comma. The
+ *  the pair of numbers is surrounded by brackets. Square brackets
+ *  indicate an inclusive end-of-range, and round brackets (parentheses)
+ *  indicate an exclusive end-of range.
+ * 
+ *  Examples:
+ *  - [0,10] means all values from 0 to 10 inclusive
+ *  - [0.0, 360.0) means all values from 0.0 up to but not including 360.0
+ *      itself.
+ *  - (-π, +π] means all values from -π, but not including -π itself, up to and
+ *      including +π.
+ */
+
+/*! \page page-sign-conventions Sign and direction conventions
+ *  The following conventions apply throughout this software.
+ *      - Terrestrial coordinates (latitude and longitude).
+ *          - Polar form\n
+ *            Longitudes east of Greenwich are positive, those west are 
+ *            negative.
+ *            Latitudes north of the equator are positive, those south are 
+ *            negative. When the Earth is viewed from above the north pole
+ *            looking towards the centre of the earth, longitude increases in an
+ *            anticlockwise direction. 
+ *          - Rectangular form\n
+ *            The position is indicated by a vector, whose components are as
+ *            follows:
+ *              - the x axis points from the centre of the earth towards the 
+ *                equator at 0° longitude,
+ *              - the y axis points to 90° longitude, and
+ *              -  the z axis points to the north pole.
+ *              .
+ *            This is a right-handed set.
+ *
+ *      - Equatorial coordinates (Right Ascension and declination).
+ *          - Polar form\n
+ *            The equator is the projection of the Earth's equator out into
+ *            space, and the north celestial pole is the projection of the north
+ *            pole out into space. When viewed from north celestial pole looking
+ *            down towards the origin, Right Ascension increases in an
+ *            anticlockwise direction (i.e. eastwards, like longitude), and
+ *            north declinations are positive, south are negative.
+ *          - Rectangular form\n
+ *              - x points to the March Equinox (0° RA),
+ *                  (\ref page-vernal-equinox "unfortunately" known as the
+ *                  vernal equinox).
+ *              - y points to 90° RA, and
+ *              - z points to the north celestial pole.
+ *              .
+ *            (This is also a right-handed set.)
+ *
+ *      - Ecliptic coordinates. (Ecliptic latitude and longitude).\n
+ *        These are exactly analogous to terrestrial coordinates, in that
+ *        longitude increases anticlockwise, and the rectangular coordinate
+ *        vector is a right-handed set.
+ *
+ *      - Horizon coordinates (azimuth and elevation (or altitude)).
+ *          - Polar form\n
+ *            Azimuth increases in a clockwise direction from True North (just
+ *            like a compass bearing).
+ *          - Rectangular form\n
+ *              - x points to the True North horizon,
+ *              - y  points the East horizon, and
+ *              - z points to the zenith.
+ *              .
+ *            This is a left-handed set. (Compared to a right-handed set, the x
+ *            and y axes are swapped.)
+ *
+ *      - (Hour angle and declination).
+ *          - Polar form\n
+ *            Hour angles are measured positive westward. This means it
+ *            increases clockwise, unlike Right Ascension.
+ *          - Rectangular form\n
+ *              - x points to the intersection of the local meridian and the
+ *                celestial equator,
+ *              - y points to HA = 90°, and
+ *              - z points to the north celestial pole.
+ *              .
+ *            Like Horizon coordinates, this is a left-handed set.
+ */
+
+/*! \page page-vernal-equinox Vernal equinox
+ *  The equinox that occurs in March is normally referred to as the vernal
+ *  equinox. This is unfortunate, because of the meaning of the word vernal:
+ * \par
+ *      \b ver′nal \em adj. of or occurring in spring.\n
+ *      -- The Collins Concise Dictionary, 4th edn. 1999
+ * 
+ *  Obviously it never occurred to the person who coined this term for the
+ *  equinox that the Southern Hemisphere exists. Because \em everybody in the
+ *  Southern Hemisphere knows that the spring equinox occurs in September, not
+ *  March.
+ */
+

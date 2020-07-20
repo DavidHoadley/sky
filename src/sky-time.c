@@ -1,33 +1,54 @@
 /*==============================================================================
- * asttime.c - astronomical time routines
+ * sky-time.c - astronomical time routines
  *
  * Author:  David Hoadley
  *          Loco2Gen
  *          ABN 22 957 381 638
  *
- * Description: (see asttime.h)
+ * Description: (see the "Time routines" sections of sky.h)
+ * 
  *
- * Character set: UTF-8. (Non ASCII characters appear in this file)
+ * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * * Redistributions of source code must retain the above copyright notice, this
+ *   list of conditions and the following disclaimer.
+ * * Redistributions in binary form must reproduce the above copyright notice,
+ *   this list of conditions and the following disclaimer in the documentation
+ *   and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  *
  *==============================================================================
  */
-
+/*------------------------------------------------------------------------------
+ * Notes:
+ *      Character set: UTF-8. (Non ASCII characters appear in this file)
+ *----------------------------------------------------------------------------*/
 
 /* ANSI includes etc. */
 #include <math.h>
 #include <time.h>
 
 /* Local and project includes */
-#include "asttime.h"
+#include "sky.h"
 
 #include "astron.h"
 #include "general.h"
-#include "missing-maths.h"
-#include "spa.h"
-///+
-#include <stdio.h>
-#include "test.h"
-///-
+
 /*
  * Local #defines and typedefs 
  */
@@ -75,7 +96,7 @@ LOCAL double calendarToJ2kd(int year, int month, int day);
  *
  *------------------------------------------------------------------------------
  */
-GLOBAL void asttime_init(int deltaAT_s, double deltaUT_s, Asttime_DeltaTs *d)
+GLOBAL void sky_initTime(int deltaAT_s, double deltaUT_s, Sky_DeltaTs *d)
 /*! Set up the various delta time values for use in ongoing calculations.
  \param[in]  deltaAT_s  (= TAI - UTC). Cumulative number of leap seconds
                          (seconds)
@@ -91,7 +112,7 @@ GLOBAL void asttime_init(int deltaAT_s, double deltaUT_s, Asttime_DeltaTs *d)
     Call at program startup time.
     Use this routine if you have opted for option 3A, 3B or 3D in the note at
     the bottom of this file (see \ref page-timescales).
-    (Use asttime_initDetailed() if you have opted for option 3C.)
+    (Use sky_initTimeDetailed() if you have opted for option 3C.)
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     const double deltaTAI_s = 32.184;   // TT - TAI (seconds)
@@ -110,12 +131,12 @@ GLOBAL void asttime_init(int deltaAT_s, double deltaUT_s, Asttime_DeltaTs *d)
 
 
 
-GLOBAL void asttime_initDetailed(double mjdUtc,
+GLOBAL void sky_initTimeDetailed(double mjdUtc,
                                  double usnoMjdBase,
                                  double usnoCoeffC11,
                                  double usnoCoeffC12,
                                  int    deltaAT_s,
-                                 Asttime_DeltaTs *d)
+                                 Sky_DeltaTs *d)
 /*! Set up the various delta time values for use in ongoing calculations. This
     version of the function uses a prediction formula to calculate the value
     of delta_UT, rather than having it specified directly.
@@ -141,7 +162,7 @@ GLOBAL void asttime_initDetailed(double mjdUtc,
  \par When to call this function
     Call this function at program startup time.
     Use this routine if you have opted for option 3C in the note at the bottom
-    of this file (see \ref page-timescales). (Use asttime_init() instead, if you
+    of this file (see \ref page-timescales). (Use sky_initTime() instead, if you
     have opted for option 3A, 3B or 3D.) If your program runs uninterrupted for
     many days, you may wish to call this function once per day with an updated
     value for \a mjdUtc.
@@ -150,12 +171,12 @@ GLOBAL void asttime_initDetailed(double mjdUtc,
     double deltaUT_s;                   // UT1 - UTC (seconds)
     
     deltaUT_s = getDeltaUT1_s(mjdUtc, usnoMjdBase, usnoCoeffC11, usnoCoeffC12);
-    asttime_init(deltaAT_s, deltaUT_s, d);
+    sky_initTime(deltaAT_s, deltaUT_s, d);
 }
 
 
 
-GLOBAL void asttime_initSimple(Asttime_DeltaTs *d)
+GLOBAL void sky_initTimeSimple(Sky_DeltaTs *d)
 /*! Initialise delta times with simple default values.
  \param[out] d    Fields initialised as follows:
                         - \a d->deltaUT_d initialised to 0.0
@@ -165,27 +186,27 @@ GLOBAL void asttime_initSimple(Asttime_DeltaTs *d)
  \par When to call this function
     Call this function at program startup time.
     Use this routine if you don't need the high accuracy of sub-second time. But
-    if you do need it, call asttime_init() or asttime_initDetailed() instead.
+    if you do need it, call sky_initTime() or sky_initTimeDetailed() instead.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     /* Use the 2019 value of deltaAT_s. This value will slowly go out of date,
        but in practice, accuracy will hardly be affected.
        Assume deltaUT = 0.0 */
-    asttime_init(37, 0.0, d);
+    sky_initTime(37, 0.0, d);
 }
 
 
 
-GLOBAL void asttime_updateTimes(double j2kUtc_d,
-                                const Asttime_DeltaTs *d,
-                                Asttime_Times *t)
+GLOBAL void sky_updateTimes(double            j2kUtc_d,
+                            const Sky_DeltaTs *d,
+                            Sky_Times *t)
 /*! Convert the given "J2KD" in the UTC timescale to the other timescales, and
     pre-calculate some other quantities
  \param[in]  j2kUtc_d  Date in "J2KD" form - i.e. the number of days elapsed
                        since 2000 Jan 1.5 (= JD - 2 451 545.0), UTC timescale
  \param[in]  d         The various delta T values as set by one of
-                       asttime_init(), asttime_initDetailed() or
-                       asttime_initSimple()
+                       sky_initTime(), sky_initTimeDetailed() or
+                       sky_initTimeSimple()
  \param[out] t         All fields are updated
 
  \par Reference
@@ -205,7 +226,7 @@ GLOBAL void asttime_updateTimes(double j2kUtc_d,
 
 
 
-GLOBAL double asttime_calToJ2kd(int year, int month, int day,
+GLOBAL double sky_calTimeToJ2kd(int year, int month, int day,
                                 int hour, int minute, double second,
                                 double tz_h)
 /*! Return the number of days (and fraction of a day) since noon 2000 Jan 1
@@ -234,14 +255,14 @@ GLOBAL double asttime_calToJ2kd(int year, int month, int day,
 
 
 
-GLOBAL double asttime_unixTimeToJ2kd(time_t unixTime)
+GLOBAL double sky_unixTimeToJ2kd(time_t unixTime)
 /*! Convert a time in Unix system time format to days since 2000 Jan 1, noon UTC
  \returns  days since Julian Date 2 451 545.0, UTC timescale
  \param[in] unixTime - time in C standard \c time_t (or unix) format
                         ((sort of) seconds since 1-Jan-1970 UTC)
 
  \note This routine has no better resolution than one second. Use routine
-   asttime_unixTimespecToMjd() or asttime_calToMjd() instead, if you need
+   sky_unixTimespecToMjd() or sky_calTimeToMjd() instead, if you need
    sub-second resolution
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
@@ -250,7 +271,7 @@ GLOBAL double asttime_unixTimeToJ2kd(time_t unixTime)
 
 
 
-GLOBAL double asttime_unixTimespecToJ2kd(struct timespec uTs)
+GLOBAL double sky_unixTimespecToJ2kd(struct timespec uTs)
 /*! Convert a time in Unix timespec format to days since 2000 Jan 1, noon UTC
  \returns  days since Julian Date 2 451 545.0, UTC timescale
  \param[in] uTs - time in "timespec" format, a combination of (sort of) seconds
@@ -265,7 +286,7 @@ GLOBAL double asttime_unixTimespecToJ2kd(struct timespec uTs)
 
 
 
-GLOBAL void asttime_j2kdToCal(double j2k_d,
+GLOBAL void sky_j2kdToCalTime(double j2k_d,
                               int *year,
                               int *month,
                               int *day,
@@ -290,7 +311,7 @@ GLOBAL void asttime_j2kdToCal(double j2k_d,
  \note To obtain calendar date and time for any timezone other than UTC, add
     the time zone offset (in units of fraction of a day) to \a mjd before
     calling this routine. The \a timezone_d field of the site properties struct
-    (type Astsite_Prop) provides this value.
+    (type Sky_SiteProp) provides this value.
  \par
     If \a second turns out to be within half a millisecond of the next round
     minute, this routine rounds time upwards.
@@ -343,7 +364,7 @@ GLOBAL void asttime_j2kdToCal(double j2k_d,
 
 
 #ifdef INCLUDE_MJD_ROUTINES
-GLOBAL double asttime_calToMjd(int year, int month, int day,
+GLOBAL double sky_calTimeToMjd(int year, int month, int day,
                                int hour, int minute, double second,
                                double tz_h)
 /*! Return the Modified Julian Date (= Julian Date - 2 400 000.5) of a calendar
@@ -372,14 +393,14 @@ GLOBAL double asttime_calToMjd(int year, int month, int day,
 
 
 
-GLOBAL double asttime_unixTimeToMjd(time_t unixTime)
+GLOBAL double sky_unixTimeToMjd(time_t unixTime)
 /*! Convert a time in Unix system time format to Modified Julian Date
  \returns  the Modified Julian Date (= Julian Date - 2 400 000.5), UTC timescale
  \param[in] unixTime - time in C standard \c time_t (or unix) format
                         ((sort of) seconds since 1-Jan-1970 UTC)
 
  \note This routine has no better resolution than one second. Use routine
-   asttime_unixTimespecToMjd() or asttime_calToMjd() instead, if you need
+   sky_unixTimespecToMjd() or sky_calTimeToMjd() instead, if you need
    sub-second resolution
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
@@ -388,7 +409,7 @@ GLOBAL double asttime_unixTimeToMjd(time_t unixTime)
 
 
 
-GLOBAL double asttime_unixTimespecToMjd(struct timespec uTs)
+GLOBAL double sky_unixTimespecToMjd(struct timespec uTs)
 /*! Convert a time in Unix timespec format to Modified Julian Date
  \returns  the Modified Julian Date (= Julian Date - 2 400 000.5), UTC timescale
  \param[in] uTs - time in "timespec" format, a combination of (sort of) seconds
@@ -403,16 +424,16 @@ GLOBAL double asttime_unixTimespecToMjd(struct timespec uTs)
 
 
 
-GLOBAL void asttime_updateTimesFromMjd(double mjdUtc,
-                                const Asttime_DeltaTs *d,
-                                Asttime_Times *t)
+GLOBAL void sky_updateTimesFromMjd(double mjdUtc,
+                                const Sky_DeltaTs *d,
+                                Sky_Times *t)
 /*! Convert the given MJD in the UTC timescale to the other timescales, and
     pre-calculate some other quantities
  Inputs
  \param[in]  mjdUtc  Modified Julian Date (= JD - 2 400 000.5), UTC timescale
  \param[in]  d       The various delta T values as set by one of
-                     asttime_init(), asttime_initDetailed() or
-                     asttime_initSimple()
+                     sky_initTime(), sky_initTimeDetailed() or
+                     sky_initTimeSimple()
  \param[out] t       All fields except \a gmst_rad and \a gast_rad are updated
 
  \par Reference
@@ -442,7 +463,7 @@ GLOBAL void asttime_updateTimesFromMjd(double mjdUtc,
 
 
 
-GLOBAL void asttime_mjdToCal(double mjd,
+GLOBAL void sky_mjdToCalTime(double mjd,
                              int *year,
                              int *month,
                              int *day,
@@ -467,7 +488,7 @@ GLOBAL void asttime_mjdToCal(double mjd,
  \note To obtain calendar date and time for any timezone other than UTC, add
     the time zone offset (in units of fraction of a day) to \a mjd before
     calling this routine. The \a timezone_d field of the site properties struct
-    (type Astsite_Prop) provides this value.
+    (type Sky_SiteProp) provides this value.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {    
     int32_t j;
@@ -501,10 +522,10 @@ GLOBAL void asttime_mjdToCal(double mjd,
 
 
 
-GLOBAL void asttime_setPolarMotion(double xPolar_as,
-                                   double yPolar_as,
-                                   double t_cy,
-                                   Asttime_Polar *polar)
+GLOBAL void sky_setPolarMotion(double xPolar_as,
+                               double yPolar_as,
+                               double t_cy,
+                               Sky_PolarMot *polar)
 /*! Update polar motion correction.
  \param[in] xPolar_as   Polar motion in x (arcseconds)
  \param[in] yPolar_as   Polar motion in y (arcseconds)
@@ -521,7 +542,7 @@ GLOBAL void asttime_setPolarMotion(double xPolar_as,
     small that it can be ignored altogether with only a tiny loss of accuracy. 
 
  \note Every time this routine is called, the routine 
-    astsite_adjustForPolarMotion() must be called for every site. (Typically
+    sky_adjustSiteForPolarMotion() must be called for every site. (Typically
     this will be only one site.)
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
@@ -702,9 +723,9 @@ LOCAL double calendarToJ2kd(int year, int month, int day)
                 could introduce an error of up to 0.00375° in the direction from
                 the ground, if you are unlucky. For most purposes, this is good
                 enough. Initialise your code with the function
-                asttime_initSimple(), or call asttime_init() with \a deltaUT_s
+                sky_initTimeSimple(), or call sky_initTime() with \a deltaUT_s
                 set to 0.0
-        - \b B. Check Bulletin A every few months, and call asttime_init() with
+        - \b B. Check Bulletin A every few months, and call sky_initTime() with
                 \a deltaUT_s set to the value of DUT1 given near the top of the
                 file, described as "transmitted with time signals". This will
                 give a better approximation.
@@ -716,7 +737,7 @@ LOCAL double calendarToJ2kd(int year, int month, int day)
                              CoeffC11  CoeffC12       MJDbase
 
                 Take the three numbers and pass them to the function
-                asttime_initDetailed()
+                sky_initTimeDetailed()
                 which will use this formula to predict the value. This method
                 is good enough be used by large astronomical telescopes.
         - \b D. Check Bulletin A every week, and use the values in the table for
@@ -728,8 +749,8 @@ LOCAL double calendarToJ2kd(int year, int month, int day)
     5. ΔTT = TT - UTC. This is also obtainable from
             ΔTT = ΔTAI + ΔAT.
 
-    Once you have set the above with asttime_init(), asttime_initSimple() or
-    asttime_initDetailed(), then calling asttime_updateTimes() will convert a
+    Once you have set the above with sky_initTime(), sky_initTimeSimple() or
+    sky_initTimeDetailed(), then calling sky_updateTimes() will convert a
     time in the UTC timescale to various times in the other timescales, ready
     for use.
 
@@ -741,7 +762,7 @@ LOCAL double calendarToJ2kd(int year, int month, int day)
     itself moves around a tiny amount. This is called polar motion. If this
     matters to you, the values of polar motion can be obtained from the same
     Bulletin A described above. But for normal purposes, you can just enter zero
-    for these parameters (or just not call asttime_setPolarMotion() at all).
+    for these parameters (or just not call sky_setPolarMotion() at all).
 */
 
 /*
@@ -790,7 +811,8 @@ must be deltaTT (or deltaAT) which is wrong by some number of whole seconds.
  *  Many astronomical algorithms use one of the forms based on time since
  *  J2000.0 (i.e. either J2KD, J2KC or J2KM) as their time variable.
  *  For this reason, the conversion routines from calendar date/time
- *  (asttime_calToJ2kd())and from the unix \c time_t and \c timespec formats
- *  (asttime_unixTimeToJ2kd() and asttime_unixTimespecToJ2kd()) return a
+ *  (sky_calTimeToJ2kd())and from the unix \c time_t and \c timespec formats
+ *  (sky_unixTimeToJ2kd() and sky_unixTimespecToJ2kd()) return a
  *  variable in the J2KD form (rather than the JD or MJD forms).
  */
+

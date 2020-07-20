@@ -1,11 +1,12 @@
 /*==============================================================================
- * sunfast.c - <one-line description>
+ * skyfast.c - set up and use interpolation for rapid calculation of a celestial
+ *             object's apparent coordinates.
  *
  * Author:  David Hoadley
  *          Loco2Gen
  *          ABN 22 957 381 638
  *
- * Description: (see sunfast.h)
+ * Description: (see skyfast.h)
  * 
  *
  * Copyright (C) 2020 David Hoadley <vcrumble@westnet.com.au>
@@ -31,12 +32,12 @@
 // /+
 #include <stdio.h>
 #include "astc1.h"
-#include "rdwrite.h"
+#include "skyio.h"
 #include "test.h"
 // /-
 
 /* Local and project includes */
-#include "sunfast.h"
+#include "skyfast.h"
 
 #include "sky0.h"
 #include "astron.h"
@@ -49,33 +50,25 @@
 DEFINE_THIS_FILE;                       // For use by REQUIRE() - assertions.
 
 /*      --- Definitions that you may need to or wish to modify --- */
-//#define BARE_METAL
-#ifdef BARE_METAL
+//#define BARE_METAL_THREADS
+//#define POSIX_THREADS
+//#define NO_THREADS
+#if defined(BARE_METAL_THREADS)
 #define startCriticalSection()      disableInterrupts()
 #define endCriticalSection()        enableInterrupts()
 
-#else
+#elif defined(POSIX_THREADS)
 #include <pthread.h>
 
 #define startCriticalSection()      pthread_mutex_lock(&mutex)
 #define endCriticalSection()        pthread_mutex_unlock(&mutex)
+
+#else /* Must be NO_THREADS */
+#define startCriticalSection()      ((void)0)
+#define endCriticalSection()        ((void)0)
+
 #endif
 
-#if 0
-///#define SLOW_RECALC_RATE_mins       60  // Time between recalculations (minutes)
-///#define SLOW_RECALC_RATE_mins       750  // Time between recalculations (minutes)
-#define SLOW_RECALC_RATE_mins       1440  /* Time between recalcs (minutes) */
-
-
-/*      --- Definitions that are calculated from the above #define(s).
-            Don't edit these directly --- */
-
-/*      Derived from the above. Note, because I use integer arithmetic here, I
-        am assuming that you have chosen a value of SLOW_RECALC_RATE_mins that
-        divides exactly into one day. */
-#define RECALCS_PER_DAY            (1440 / SLOW_RECALC_RATE_mins)
-#define SLOW_RECALC_RATE_cy        (SLOW_RECALC_RATE_mins / (1440.0 * JUL_CENT))
-#endif
 
 
 /*
@@ -91,15 +84,18 @@ DEFINE_THIS_FILE;                       // For use by REQUIRE() - assertions.
 /*
  * Local variables (not accessed by other modules)
  */
-LOCAL Sky_PosEq     lfiA, lfiB, lfiC;
-LOCAL Sky_PosEq     *last = &lfiA;      // items calculated for time in past
-LOCAL Sky_PosEq     *next = &lfiB;      // items calculated for time ahead
-LOCAL Sky_PosEq     *oneAfter = &lfiC;  // items calculated for time after next
-LOCAL volatile bool oneAfterIsValid = false;
-LOCAL pthread_mutex_t mutex;
+LOCAL Sky_TrueEquatorial  lfiA, lfiB, lfiC;
+LOCAL Sky_TrueEquatorial  *last = &lfiA;      // items calculated for time in past
+LOCAL Sky_TrueEquatorial  *next = &lfiB;      // items calculated for time ahead
+LOCAL Sky_TrueEquatorial  *oneAfter = &lfiC;  // items calculated for time after next
+LOCAL volatile bool       oneAfterIsValid = false;
 
-LOCAL void (*callback)(double j2kTT_cy, Sky_PosEq *pos);
+LOCAL void (*callback)(double j2kTT_cy, Sky_TrueEquatorial *pos);
 LOCAL double        recalcInterval_cy = 0.0; // time between full recalculations
+
+#ifdef POSIX_THREADS
+LOCAL pthread_mutex_t mutex;
+#endif
 
 /*
  *==============================================================================
@@ -112,11 +108,11 @@ LOCAL double        recalcInterval_cy = 0.0; // time between full recalculations
  *
  *------------------------------------------------------------------------------
  */
-GLOBAL void skyfast_init(double mjdUtc,
-                         int    fullRecalcInterval_mins,
-                         const Asttime_DeltaTs *deltas,
+GLOBAL void skyfast_init(double            tStartUtc_d,
+                         int               fullRecalcInterval_mins,
+                         const Sky_DeltaTs *deltas,
                          void (*getApparent)(double j2kTT_cy,
-                                             Sky_PosEq *pos)
+                                             Sky_TrueEquatorial *pos)
                          )
 /*! Initialise those items that take a long time to calculate, but which do not
     need to be recalculated frequently. This routine calls a function that you
@@ -124,8 +120,8 @@ GLOBAL void skyfast_init(double mjdUtc,
     distance, and the Equation of the Equinoxes, as derived from nutation
     calculations. This routine calls that function
         1.  for the time specified by \a mjdUtc,
-        2.  for time \a mjdUtc + \a fullRecalcalcInterval_mins, and
-        3.  for time \a mjdUtc + 2 x \a fullRecalcalcInterval_mins.
+        2.  for time \a tStartUtc_d + \a fullRecalcalcInterval_mins, and
+        3.  for time \a tStartUtc_d + 2 x \a fullRecalcalcInterval_mins.
         .
     For example, to track the Sun, specify the function sun_nrelApparent() when
     calling this routine. To track the Moon, specify the function 
@@ -134,17 +130,21 @@ GLOBAL void skyfast_init(double mjdUtc,
     The routine skyfast_getApprox() can then be called
     (at a high frequency if required) to calculate the current position of the
     object, using these values to do it.
- \param[in]  mjdUtc  Modified Julian Date (=JD - 2 400 000.5), UTC timescale
+ \param[in]  tStartUtc_d  Time for first full calculation using function
+                          \a getApparent(). UTC time in "J2KD" form - i.e days
+                          since J2000.0 (= JD - 2 451 545.0)
  \param[in]  fullRecalcInterval_mins
-                     Interval of time between full recalculation of the object's
-                     position using the function supplied to \a getApparent
-                     (minutes). This value must be greater than zero.
- \param[in]  deltas  Delta T values, as set by the asttime_init() (or 
-                     asttime_initSimple() or asttime_initDetailed()) routines
- \param      getApparent
-                     Function to get the position of a celestial object in
-                     apparent coordinates (i.e. referred to the true equinox and
-                     equator at the time), in rectangular form.
+                          Interval of time between full recalculation of the
+                          object's position using the function supplied to
+                          \a getApparent (minutes). This value must be greater
+                          than zero. (Otherwise you will get a precondition
+                          failure.)
+ \param[in]  deltas       Delta T values, as set by the sky_initTime() (or 
+                          sky_initTimeSimple() or sky_initTimeDetailed())
+                          routines
+ \param      getApparent  Function to get the position of a celestial object in
+                          apparent coordinates (i.e. referred to the true
+                          equinox and equator at the time), in rectangular form.
 
  \par When to call this function
     At program initialisation time.
@@ -155,31 +155,33 @@ GLOBAL void skyfast_init(double mjdUtc,
     Celestial Intermediate coordinates (i.e. referred to the true equator and
     the Celestial Intermediate Origin (CIO) at time \a t_cy) instead. If so,
     the function does not need to fill in the \a eqEq_rad field of struct
-    Sky_PosEq.
+    Sky_TrueEquatorial.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
-    double  calcTimeTT_d;
-    double  calcTimeTT_cy;
-    int     ret;
+    Sky_Times   atime;              // time, in various timescales
+    double      calcTimeTT_cy;
+#ifdef POSIX_THREADS
+    int         ret;
+#endif
 
     REQUIRE_NOT_NULL(deltas);
     REQUIRE_NOT_NULL(getApparent);
     REQUIRE(fullRecalcInterval_mins > 0);
 
-#ifndef BARE_METAL
+
+#ifdef POSIX_THREADS
     ret = pthread_mutex_init(&mutex, NULL);
     ASSERT(ret == 0);   // There is no possible recovery from an error here.
 #endif
     /* Save the function address for later call by skyfast_backgroundUpdate() */
     callback = getApparent;
     
+    sky_updateTimes(tStartUtc_d, deltas, &atime);
+
     /* Save the recalculation rate, converted from minutes to centuries. */
     recalcInterval_cy = fullRecalcInterval_mins / (1440.0 * JUL_CENT);
 
-    calcTimeTT_d = mjdUtc + deltas->deltaTT_d;
-    /* Round down to nearest SLOW_RECALC_RATE_mins (e.g. nearest hour) */
-//    calcTimeTT_d = floor(calcTimeTT_d * RECALCS_PER_DAY) / RECALCS_PER_DAY;
-    calcTimeTT_cy = (calcTimeTT_d - MJD_J2000) / JUL_CENT;
+    calcTimeTT_cy = atime.j2kTT_cy;
     getApparent(calcTimeTT_cy, last);
     
     /* Now do the same for the next time (e.g. next hour) */
@@ -191,6 +193,7 @@ GLOBAL void skyfast_init(double mjdUtc,
     getApparent(calcTimeTT_cy, oneAfter);
     oneAfterIsValid = true;
 }
+
 
 
 GLOBAL void skyfast_backgroundUpdate(void)
@@ -232,16 +235,18 @@ GLOBAL void skyfast_backgroundUpdate(void)
 
 
 GLOBAL void skyfast_getApprox(double t_cy,
-                              Sky_PosEq *approx)
+                              Sky_TrueEquatorial *approx)
 /*! Get the best approximation to the celestial object's apparent coordinates
     and distance, and the equation of the equinoxes, based on an interpolation
     between two sets of such data that we have previously calculated.
  \param[in]  t_cy     Julian centuries since J2000.0, TT timescale. This must
- *                    specify a time no earlier than the time specified in
- *                    argument \a mjdUtc in the call to skyfast_init(), and
- *                    preferably within the range
- *                    [\a mjdUtc, \a mjdUtc + \a fullRecalcalcInterval_mins].
+                      specify a time no earlier than the time specified in
+                      argument \a tStartUtc_d in the call to skyfast_init().
  \param[out] approx   position vector, distance, etc, obtained by interpolation
+
+    Although the position is described as approximate, the position returned can
+    be very accurate, as shown in \ref page-interpolation, depending on the
+    interpolation interval that was specified to routine skyfast_init().
 
  \note
     This function will return an approximate position in apparent coordinates
@@ -254,7 +259,7 @@ GLOBAL void skyfast_getApprox(double t_cy,
     coordinates.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
-    Sky_PosEq *temp;
+    Sky_TrueEquatorial *temp;
     double a;
     double b;
 

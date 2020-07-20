@@ -70,6 +70,16 @@
  *
  *==============================================================================
  */
+/*------------------------------------------------------------------------------
+ * Notes:
+ *      Character set: UTF-8. (Non ASCII characters appear in this file)
+ *      Things you might want to edit: definition of macro INCLUDE_MJD_ROUTINES
+ *----------------------------------------------------------------------------*/
+
+#include <time.h>
+
+#include "general.h"
+#include "vectors3d.h"
 
 /*
  * Global #defines and typedefs
@@ -120,6 +130,11 @@ typedef struct {
 } Sky_SiteHorizon;
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *                      The TIME routines and structs
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -131,11 +146,11 @@ typedef struct {
 /*      Un-comment the following line if you want routines that convert calendar
         dates and times to and from Modified Julian Date (MJD) format (where 
         MJD = JD - 2 400 000.5).  */
-/* #define INCLUDE_MJD_ROUTINES  */
+/*--- #define INCLUDE_MJD_ROUTINES ---*/
 
 /*!     This structure contains relatively constant data, and is set up by one
-        of the three functions asttime_init(), asttime_initSimple() or
-        asttime_initDetailed(). The data which can vary
+        of the three functions sky_initTime(), sky_initTimeSimple() or
+        sky_initTimeDetailed(). The data which can vary
         is not expected to vary any more frequently than once per day or even
         less. Do not modify any of the fields in this structure directly; use
         the routines in this file to make all changes. In general, you won't
@@ -150,7 +165,7 @@ typedef struct {
         rotation) data, in various forms that we will find useful. 
 
         Do not modify any of these fields directly - use
-        the asttime_updateTimes() function to update them.
+        the sky_updateTimes() function to update them.
  
         But you will almost certainly want to read the values of any of the
         individual fields, and/or pass them to functions. In particular, the
@@ -168,7 +183,7 @@ typedef struct {
 
 /*!     This structure contains polar motion parameters and a rotation
         matrix. Do not modify any of these fields directly - use the
-        asttime_setPolarMotion() function to do that. In general, you won't
+        sky_setPolarMotion() function to do that. In general, you won't
         need to access any of the individual fields here. */
 typedef struct {
     bool       correctionInUse; // if false, polar motion is being ignored
@@ -181,14 +196,14 @@ typedef struct {
  * Global functions available to be called by other modules
  */
 /*      1. Initialise this module by choosing one of the following 3 fns */
-void sky_initDeltaTs(int deltaAT_s, double deltaUT_s, Sky_DeltaTs *d);
-void sky_initDeltaTsSimple(Sky_DeltaTs *d);
-void sky_initDeltaTsDetailed(double mjdUtc,
-                             double usnoMjdBase,
-                             double usnoCoeffC11,
-                             double usnoCoeffC12,
-                             int    deltaAT_s,
-                             Sky_DeltaTs *d);
+void sky_initTime(int deltaAT_s, double deltaUT_s, Sky_DeltaTs *d);
+void sky_initTimeSimple(Sky_DeltaTs *d);
+void sky_initTimeDetailed(double mjdUtc,
+                          double usnoMjdBase,
+                          double usnoCoeffC11,
+                          double usnoCoeffC12,
+                          int    deltaAT_s,
+                          Sky_DeltaTs *d);
 
 /*      2. Get the time in "J2KD" form from one of the following functions. */
 double sky_calTimeToJ2kd(int year, int month, int day,
@@ -249,7 +264,7 @@ void sky_setPolarMotion(double xPolar_as,
                         double t_cy,
                         Sky_PolarMot *polar);
 /*      6b. If you have called the routine above, you must also call the routine
-        astsite_adjustForPolarMotion() for every observing site you are
+        sky_adjustSiteForPolarMotion() for every observing site you are
         calculating positions for */
 
 /*      Other routines */
@@ -331,7 +346,7 @@ void sky_setupSiteSurface(double azimuth_deg,
                           double slope_deg,
                           Sky_SiteHorizon *surface);
 
-/*      Call the following if you have called asttime_setPolarMotion() to change
+/*      Call the following if you have called sky_setPolarMotion() to change
         polar motion parameters. */
 void sky_adjustSiteForPolarMotion(const Sky_PolarMot *polar,
                                   Sky_SiteProp *site);
@@ -339,7 +354,7 @@ void sky_adjustSiteForPolarMotion(const Sky_PolarMot *polar,
 
 /*      You will need to call one or more of the following functions each time
         around your main loop, to convert to site-specific coords. (Typically
-        you will call astsite_tirsToTopo() to convert from terrestrial
+        you will call sky_siteTirsToTopo() to convert from terrestrial
         intermediate coordinates to topocentric coordinates.) */
 void sky_siteTirsToTopo(const V3D_Vector   *terInterV,
                         double             dist_au,
@@ -359,11 +374,6 @@ double sky_siteIncidence_rad(const V3D_Vector *topoV,
 /*
  * Global variables accessible by other modules
  */
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 
 #ifdef __cplusplus
 }

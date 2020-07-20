@@ -11,6 +11,7 @@
  * Description:
  *          Some astronomical constants, and angle conversions that are used in
  *          astronomical software.
+ * 
  *==============================================================================
  */
 #include "general.h"        /* For PI, degToRad(), radToDeg() etc., C standard*/
@@ -64,26 +65,6 @@ static inline double radToHrs(double angle_rad) { return angle_rad * RAD2HRS; };
 
 #endif
 
-/*! Struct used for holding an object's coordinates in equatorial apparent or
- *  CIRS coordinates. Apparent coordinates are those referred to the true
- *  equator and equinox of the time indicated in field #timestamp_cy. CIRS
- *  coordinates are in the Celestial Intermediate Reference System, referred
- *  to the true equator of time #timestamp_cy and to the Celestial Intermediate
- *  Origin (CIO) instead of the equinox. If the object is in Apparent
- *  coordinates, the Equation of the Equinoxes (#eqEq_rad) field is required as
- *  part of converting to topocentric coordinates. If the object is in CIRS
- *  coordinates, field #eqEq_rad can be ignored. */
-typedef struct {
-    double      timestamp_cy;   /*!< Time applying to the other figures in
-                                     this struct (centuries since J2000.0, TT
-                                     timescale) */
-    V3D_Vector  appCirsV;       /*!< Direction of object in apparent or CIRS 
-                                     coordinates (effectively a unit vector). */
-    double      distance_au;    /*!< Distance to object (Astronomical Units) or
-                                     0.0 for far distant objects (that is, those
-                                     with negligible diurnal parallax) */
-    double      eqEq_rad;       /*!< Equation of the Equinoxes (radian). */
-} Sky_PosEq;
 
 #endif /*ASTRON_H*/
 

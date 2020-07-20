@@ -6,15 +6,44 @@
  *          ABN 22 957 381 638
  *
  * Description: (see sunpos.h)
+ *  
+ * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * * Redistributions of source code must retain the above copyright notice, this
+ *   list of conditions and the following disclaimer.
+ * * Redistributions in binary form must reproduce the above copyright notice,
+ *   this list of conditions and the following disclaimer in the documentation
+ *   and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ *
  *==============================================================================
  */
+/*------------------------------------------------------------------------------
+ * Notes:
+ *      Character set: UTF-8. (Non ASCII characters appear in this file)
+ *----------------------------------------------------------------------------*/
 
 /* ANSI includes etc. */
 #include <float.h>
 #include <math.h>
 ///+
 #include <stdio.h>
-#include "rdwrite.h"
+#include "skyio.h"
 #include "test.h"
 ///-
 
@@ -24,7 +53,7 @@
 #include "star.h"
 #include "astron.h"
 #include "general.h"
-#include "missing-maths.h"                  // for sincos()
+#include "more-maths.h"                  // for normalize()
 #include "vectors3d.h"
 
 /*
@@ -50,15 +79,15 @@ typedef struct {
 LOCAL double sunLongitude(double t_ka);
 LOCAL double sunLatitude(double t_ka);
 LOCAL double sunDistance(double t_ka);
-LOCAL double solarNoonApprox(double noonGuess_d,
-                             const Asttime_DeltaTs *deltas,
-                             const Astsite_Prop *site,
-                             Astsite_Horizon *topo);
-LOCAL double riseSetApprox(double risesetGuess_d,
-                           bool   getSunrise,
-                           const Asttime_DeltaTs *deltas,
-                           const Astsite_Prop *site,
-                           Astsite_Horizon *topo);
+LOCAL double solarNoonApprox(double             noonGuess_d,
+                             const Sky_DeltaTs  *deltas,
+                             const Sky_SiteProp *site,
+                             Sky_SiteHorizon *topo);
+LOCAL double riseSetApprox(double             risesetGuess_d,
+                           bool               getSunrise,
+                           const Sky_DeltaTs  *deltas,
+                           const Sky_SiteProp *site,
+                           Sky_SiteHorizon *topo);
 
 /*
  * Global variables accessible by other modules 
@@ -125,7 +154,7 @@ GLOBAL void sun_aaApparentApprox(double n,
 
 
 
-GLOBAL void sun_nrelApp2(double              t_cy,
+GLOBAL void sun_nrelApp2(double             t_cy,
                          const Sky0_Nut1980 *nut,
                          V3D_Vector *appV,
                          double     *dist_au)
@@ -188,7 +217,7 @@ GLOBAL void sun_nrelApp2(double              t_cy,
 
 
 
-GLOBAL void sun_nrelApparent(double j2kTT_cy, Sky_PosEq *pos)
+GLOBAL void sun_nrelApparent(double j2kTT_cy, Sky_TrueEquatorial *pos)
 /*! Calculate the Sun's position as a unit vector and a distance, in apparent
     coordinates. It calls sun_nrelApp2() to obtain the Sun's position, after
     having called sky0_nutationSpa() to obtain the necessary nutation terms.
@@ -202,7 +231,7 @@ GLOBAL void sun_nrelApparent(double j2kTT_cy, Sky_PosEq *pos)
  *      - if you want the Sun's position at multiple sites simultaneously at a
  *        single time, call this function, then follow it with a call to routine
  *        sky0_appToTirs(), and then make a separate call to
- *        astsite_tirsToTopo() for each of one those sites.
+ *        sky_siteTirsToTopo() for each of one those sites.
  *      - if you want the Sun's position at one or more sites at closely spaced
  *        times (e.g. for tracking the Sun), pass this function to the
  *        skyfast_init() function.  skyfast_init() will
@@ -243,20 +272,20 @@ GLOBAL void sun_nrelApparent(double j2kTT_cy, Sky_PosEq *pos)
 
 
 
-GLOBAL void sun_nrelTopocentric(double                j2kUtc_d,
-                                const Asttime_DeltaTs *deltas,
-                                const Astsite_Prop    *site,
-                                Astsite_Horizon *topo)
+GLOBAL void sun_nrelTopocentric(double             j2kUtc_d,
+                                const Sky_DeltaTs  *deltas,
+                                const Sky_SiteProp *site,
+                                Sky_SiteHorizon *topo)
 /*! Calls sun_nrelApparent() to calculate the Sun's position in apparent 
     coordinates using the NREL Sun Position Algorithm, and then converts this
     to topocentric horizon coordinates at the specified site.
  \param[in]  j2kUtc_d UTC time in "J2KD" form - i.e days since J2000.0
                       (= JD - 2 451 545.0)
- \param[in]  deltas   Delta T values, as set by the asttime_init() (or 
-                      asttime_initSimple() or asttime_initDetailed()) routines
+ \param[in]  deltas   Delta T values, as set by the sky_initTime() (or 
+                      sky_initTimeSimple() or sky_initTimeDetailed()) routines
  \param[in]  site     Properties of the observing site, particularly its
                       geometric location on the surface of the Earth, as set by
-                      the astsite_setLocation() function (or astsite_setLoc2())
+                      the sky_setSiteLocation() function (or sky_setSiteLoc2())
  \param[out] topo     Topocentric position, in both rectangular (unit vector)
                       form, and as Azimuth and Elevation (altitude) angles
 
@@ -265,85 +294,34 @@ GLOBAL void sun_nrelTopocentric(double                j2kUtc_d,
     for a single site. But if you are going to be calculating it repeatedly, or
     for multiple sites, use of this function will cause you to perform a great
     many needless recalculations. Use skyfast_getApprox(), followed by
-    sky0_appToTirs() and astsite_tirsToTopo() instead.
+    sky0_appToTirs() and sky_siteTirsToTopo() instead.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
-    Asttime_Times atime;      // time, in various timescales
-    Sky_PosEq     pos;        // geocentric position of the Sun and distance
-    V3D_Vector    terInterV;  // unit vector in Terrestrial Intermed Ref System
+    Sky_Times   atime;      // time, in various timescales
+    Sky_TrueEquatorial   pos;        // geocentric position of the Sun and distance
+    V3D_Vector  terInterV;  // unit vector in Terrestrial Intermed Ref System
 
     REQUIRE_NOT_NULL(deltas);
     REQUIRE_NOT_NULL(site);
     REQUIRE_NOT_NULL(topo);
 
-    asttime_updateTimes(j2kUtc_d, deltas, &atime);
+    sky_updateTimes(j2kUtc_d, deltas, &atime);
 
-#if 0
-    /* Calculate nutation (steps 3.4 of the algorithm in the SPA document) */
-    sky0_nutationSpa(atime.j2kTT_cy, &nut);
-    
-    /* Calculate the mean obliquity of the ecliptic (step 3.5) and the equation
-       of the equinoxes */
-    sky0_epsilonSpa(atime.j2kTT_cy, &nut);
-#if 0
-    {
-        printf("Diff in ΔΨ = %f, diff in Δε = %f, diff in ε0 = %f\n",
-               radToArcsec(nut.dPsi_rad) - (spa.del_psi * 3600.0),
-               radToArcsec(nut.dEps_rad) - (spa.del_epsilon * 3600.0),
-               radToArcsec(nut.eps0_rad) - spa.epsilon0);
-    }
-#endif
-
-    /* Calculate sun apparent position */
-    sun_nrelApp2(atime.j2kTT_cy, &nut, &appV, &dist_au);
-#if 0
-    {
-        double ra_rad, dec_rad;
-        double var1aErr_as;
-
-        v3d_rectToPolar(&ra_rad, &dec_rad, &appV);
-        var1aErr_as = radToArcsec(errorMag(degToRad(spa.alpha),
-                                          ra_rad,
-                                          degToRad(spa.delta),
-                                          dec_rad));
-        if (var1aErr_as > 1.0e-4) {
-            printf("var1aErr_as = %f\n", var1aErr_as);
-        }
-    }
-#endif
-
-#if 0
-    /* Get sidereal times */
-    atime.gmst_rad = sky0_gmSiderealTimeSpa(atime.j2kUT1_d);
-    asttime_updateGast(nut.eqEq_rad, &atime);
-#endif
-#if 0
-    ///+
-    if (   ((radToArcsec(atime.gmst_rad) - (spa.nu0 * 3600.0)) > 1.0e-5)
-        || ((radToArcsec(atime.gast_rad) - (spa.nu * 3600.0)) > 1.0e-5))
-    { 
-        printf("Diff in GMST = %f, diff in GAST = %f\n",
-               radToArcsec(atime.gmst_rad) - (spa.nu0 * 3600.0),
-               radToArcsec(atime.gast_rad) - (spa.nu * 3600.0));
-    }
-    ///-
-#endif
-#endif
     sun_nrelApparent(atime.j2kTT_cy, &pos);
 
     /* Convert apparent position to topocentric Azimuth/Elevation coords */
     sky0_appToTirs(&pos.appCirsV, atime.j2kUT1_d, pos.eqEq_rad, &terInterV);
-    astsite_tirsToTopo(&terInterV, pos.distance_au, site, topo);
+    sky_siteTirsToTopo(&terInterV, pos.distance_au, site, topo);
 }
 
 
 
-GLOBAL double sun_solarNoon(int year,
-                            int month,
-                            int day,
-                            const Asttime_DeltaTs *deltas,
-                            const Astsite_Prop    *site,
-                            Astsite_Horizon *topo)
+GLOBAL double sun_solarNoon(int                year,
+                            int                month,
+                            int                day,
+                            const Sky_DeltaTs  *deltas,
+                            const Sky_SiteProp *site,
+                            Sky_SiteHorizon *topo)
 /*! Routine to calculate the time of solar noon (Sun transit) for the day
     specified by \a year, \a month and \a day. This function uses the NREL SPA
     algorithm of sun_nrelTopocentric() to calculate the Sun's position.
@@ -351,15 +329,15 @@ GLOBAL double sun_solarNoon(int year,
                        \a day (returned as a J2KD date (= JD - 2 451 545.0),
                        UTC timescale). To view this as a local date and time,
                        add this value to \a site->timezone_d and pass the result
-                       to function asttime_j2kdToCal().
+                       to function sky_j2kdToCalTime().
  \param[in] year, month, day
                        Date for which solar noon is desired
- \param[in]  deltas    Delta T values, as set by the asttime_init() (or 
-                       asttime_initSimple() or asttime_initDetailed()) routines
+ \param[in]  deltas    Delta T values, as set by the sky_initTime() (or 
+                       sky_initTimeSimple() or sky_initTimeDetailed()) routines
  \param[in]  site      Properties of the observing site, particularly its
                        geometric location on the surface of the Earth and its
-                       time zone, as set by the astsite_setLocation() function
-                       (or astsite_setLoc2())
+                       time zone, as set by the sky_setSiteLocation() function
+                       (or sky_setSiteLoc2())
  \param[out] topo      \b Optional. Topocentric position of the Sun at
                        transit, in both rectangular (unit vector) form, and as
                        Azimuth and Elevation (altitude) angles. If you are not
@@ -370,14 +348,14 @@ GLOBAL double sun_solarNoon(int year,
  to get a result within about 0.05 seconds.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
-    Astsite_Horizon topo1;      // Sun apparent position
+    Sky_SiteHorizon topo1;      // Sun apparent position
     double          estimate_d; // estimate of the J2KD of solar noon
 
     REQUIRE_NOT_NULL(deltas);
     REQUIRE_NOT_NULL(site);
 
     /* Make an initial guess of civil noon on the specified day */
-    estimate_d = asttime_calToJ2kd(year, month, day,
+    estimate_d = sky_calTimeToJ2kd(year, month, day,
                                    12, 0, 0.0, site->timeZone_d * 24.0);
 
     estimate_d = solarNoonApprox(estimate_d, deltas, site, &topo1);
@@ -391,13 +369,13 @@ GLOBAL double sun_solarNoon(int year,
 
 
 
-GLOBAL double sun_riseSet(int year,
-                          int month,
-                          int day,
-                          bool   getSunrise,
-                          const Asttime_DeltaTs *deltas,
-                          const Astsite_Prop    *site,
-                          Astsite_Horizon *topo)
+GLOBAL double sun_riseSet(int                year,
+                          int                month,
+                          int                day,
+                          bool               getSunrise,
+                          const Sky_DeltaTs  *deltas,
+                          const Sky_SiteProp *site,
+                          Sky_SiteHorizon *topo)
 /*! Routine to calculate the time of sunrise or sunset for the day specified by
     \a year, \a month and \a day. This function uses the NREL SPA algorithm of 
     sun_nrelTopocentric() to calculate the Sun's position.
@@ -406,17 +384,17 @@ GLOBAL double sun_riseSet(int year,
                          (= JD - 2 451 545.0), UTC timescale).
                          To view this as a local date and time, add this
                          value to \a site->timezone_d and pass the result to
-                         function asttime_j2kdToCal().
+                         function sky_j2kdToCalTime().
  \param[in] year, month, day
                          Date for which sunrise or sunset time is desired
  \param[in]  getSunrise  If true, get sunrise time. If false, get sunset time
- \param[in]  deltas      Delta T values, as set by the asttime_init() (or 
-                         asttime_initSimple() or asttime_initDetailed())
+ \param[in]  deltas      Delta T values, as set by the sky_initTime() (or 
+                         sky_initTimeSimple() or sky_initTimeDetailed())
                          routines
  \param[in]  site        Properties of the observing site, particularly its
                          geometric location on the surface of the Earth and its
-                         time zone, as set by the astsite_setLocation() function
-                         (or astsite_setLoc2()) and astsite_setTimeZone().
+                         time zone, as set by the sky_setSiteLocation() function
+                         (or sky_setSiteLoc2()) and sky_setSiteTimeZone().
  \param[out] topo        \b Optional. Topocentric position of the Sun at rise or
                          set, in both rectangular (unit vector) form, and as
                          Azimuth and Elevation (altitude) angles. If you are not
@@ -437,9 +415,9 @@ GLOBAL double sun_riseSet(int year,
  *  or disappears.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
-    Astsite_Horizon topo1;      // Sun apparent position
+    Sky_SiteHorizon topo1;      // Sun apparent position
     double          estimate_d; // estimate of the MJD of sunrise or sunset time
-    Astsite_Prop    st;         // copy of site details, without refraction
+    Sky_SiteProp    st;         // copy of site details, without refraction
 
     REQUIRE_NOT_NULL(deltas);
     REQUIRE_NOT_NULL(site);
@@ -454,10 +432,10 @@ GLOBAL double sun_riseSet(int year,
 
     /* Make an initial guess of 6 AM (or 6 PM) on the specified day */
     if (getSunrise) {
-        estimate_d = asttime_calToJ2kd(year, month, day,
+        estimate_d = sky_calTimeToJ2kd(year, month, day,
                                        6, 0, 0.0, site->timeZone_d * 24.0);
     } else {
-        estimate_d = asttime_calToJ2kd(year, month, day,
+        estimate_d = sky_calTimeToJ2kd(year, month, day,
                                        18, 0, 0.0, site->timeZone_d * 24.0);
     }
 
@@ -468,9 +446,6 @@ GLOBAL double sun_riseSet(int year,
         return estimate_d;
     }
     estimate_d = riseSetApprox(estimate_d, getSunrise, deltas, &st, &topo1);
-    ///+
-    ///estimate_d = riseSetApprox(estimate_d, getSunrise, deltas, &st, &topo1);
-    ///-
 
     if (topo != NULL) {
         *topo = topo1;
@@ -863,10 +838,10 @@ LOCAL double sunDistance(double t_ka)
 
 
 
-LOCAL double solarNoonApprox(double noonGuess_d,
-                             const Asttime_DeltaTs *deltas,
-                             const Astsite_Prop    *site,
-                             Astsite_Horizon *topo)
+LOCAL double solarNoonApprox(double             noonGuess_d,
+                             const Sky_DeltaTs  *deltas,
+                             const Sky_SiteProp *site,
+                             Sky_SiteHorizon *topo)
 /* Routine to calculate the time of solar noon for the day specified by
    noonGuess_d. The result returned is an approximate value, whose accuracy
    depends upon how close noonGuess_d is to true solar noon.
@@ -891,7 +866,7 @@ LOCAL double solarNoonApprox(double noonGuess_d,
     double          ha_rad;     // hour angle of the Sun (radian)
     
     sun_nrelTopocentric(noonGuess_d, deltas, site, topo);
-    astsite_azElToHaDec(&topo->rectV, site, &ha_rad, &dec);
+    sky_siteAzElToHaDec(&topo->rectV, site, &ha_rad, &dec);
 
     /* HA gives time since celestial object passed meridian (so -ve HA gives
        time until object will pass meridian) in units of Sidereal time. But
@@ -902,11 +877,11 @@ LOCAL double solarNoonApprox(double noonGuess_d,
 
 
 
-LOCAL double riseSetApprox(double risesetGuess_d,
-                           bool getSunrise,
-                           const Asttime_DeltaTs *deltas,
-                           const Astsite_Prop *site,
-                           Astsite_Horizon *topo)
+LOCAL double riseSetApprox(double             risesetGuess_d,
+                           bool               getSunrise,
+                           const Sky_DeltaTs  *deltas,
+                           const Sky_SiteProp *site,
+                           Sky_SiteHorizon *topo)
 /* Routine to calculate the time of Sun rise or set for the day specified by
    risesetGuess_d. The result returned is an approximate value, whose accuracy
    depends upon how close risesetGuess_d is to true Sun rise or set time.
@@ -938,7 +913,8 @@ LOCAL double riseSetApprox(double risesetGuess_d,
  *  This routine uses the equation 
  *      cos(HA) = (sin(-50′) - sin(ϕA) sin(δ)) / (cos(ϕA) cos(δ))
  *  which means it will fail if astronomical latitude ϕA = π/2 (i.e. at the
- *  poles). Find a better expression.
+ *  poles), and will presumably get less accurate the closer to the poles we
+ *  get. Find a better expression.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     double          ha1_rad;    // Hour angle of Sun at time riseSetGuess_d(rad)
@@ -948,7 +924,7 @@ LOCAL double riseSetApprox(double risesetGuess_d,
     double          riseSetApprox_d;// Improved estimate of rise or set time
 
     sun_nrelTopocentric(risesetGuess_d, deltas, site, topo);
-    astsite_azElToHaDec(&topo->rectV, site, &ha1_rad, &dec_rad);
+    sky_siteAzElToHaDec(&topo->rectV, site, &ha1_rad, &dec_rad);
     
     /* assuming Dec remains constant over the period, find out where dec circle
        intersects the Elevation = -50 arcminute circle */

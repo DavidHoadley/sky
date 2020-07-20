@@ -1,16 +1,22 @@
-#ifndef SUNFAST_H
-#define SUNFAST_H
+#ifndef SKYFAST_H
+#define SKYFAST_H
 /*============================================================================*/
 /*! \file
- * sunfast.h - set up and use interpolation for rapid calculation of a celestial
+ * \brief
+ * skyfast.h - set up and use interpolation for rapid calculation of a celestial
  *             object's apparent coordinates.
  *
- * Author:  David Hoadley <vcrumble@westnet.com.au>
+ * \author  David Hoadley <vcrumble@westnet.com.au>
  *          Loco2Gen
  *          ABN 22 957 381 638
  *
- * Description:
- *          <more detailed description>
+ * \details
+ *          Routines to set up interpolation for celestial tracking, get the
+ *          interpolated position at a given time, and to update the endpoints
+ *          used by the interpolation algorithm. The error introduced by using
+ *          interpolation rather than fully calculating each and every position
+ *          can be very small - see \ref page-interpolation (the end of this
+ *          source file)
  * 
  * \copyright
  * \parblock
@@ -32,9 +38,7 @@
  *
  *==============================================================================
  */
-#include "astron.h"
-#include "asttime.h"
-#include "astsite.h"
+#include "sky.h"
 
 /*
  * Global #defines and typedefs
@@ -47,14 +51,13 @@ extern "C" {
 /*
  * Global functions available to be called by other modules
  */
-void skyfast_init(double mjdUtc,
-                  int    fullRecalcInterval_mins,
-                  const Asttime_DeltaTs *deltas,
-                  void (*getApparent)(double j2kTT_cy, Sky_PosEq *pos)
+void skyfast_init(double            tStartUtc_d,
+                  int               fullRecalcInterval_mins,
+                  const Sky_DeltaTs *deltas,
+                  void (*getApparent)(double j2kTT_cy, Sky_TrueEquatorial *pos)
                   );
 void skyfast_backgroundUpdate(void);
-void skyfast_getApprox(double t_cy,
-                         Sky_PosEq *approx);
+void skyfast_getApprox(double t_cy, Sky_TrueEquatorial *approx);
 
 /*
  * Global variables accessible by other modules
@@ -64,5 +67,33 @@ void skyfast_getApprox(double t_cy,
 }
 #endif
 
-#endif /* SUNFAST_H */
+/*! \page page-interpolation Interpolation and its errors
+ *  The interpolation process obtains an estimate of the apparent position (or 
+ *  alternatively, the celestial intermediate position) of a celestial object
+ *  by interpolating between previously calculated position vectors. The amount
+ *  of error introduced by this process depends of course on how much the
+ *  position changed between the two previously calculated times. Here is a
+ *  table of the errors when this process is used to obtain the position of the
+ *  Sun. The errors are calculated from
+ *      sqrt((azimuth_error * cos(elevation))^2 + elevation_error^2)
+ *
+ *  The interpolation interval (in hours) is the time between the two previously
+ *  fully calculated vectors. It is the value supplied to parameter \a 
+ *  
+ *  ###Maximum absolute position error (arcseconds) for different interpolation intervals (hours)
+ * hours|1      |2     |3     |4     |5     |6     |8     |10    |12    |15    |16    |18    |20    |22    |24    |
+ * :----|------:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
+ * Sun  |0.0005 |0.002 |0.005 |0.008 |0.013 |0.018 |0.033 |0.051 |0.074 |0.115 |0.131 |0.166 |0.205 |0.248 |0.296 |
+ *
+ *  As can be seen, the errors are very small for the Sun even with 24 hours
+ *  between full calculations (i.e. a value of 1440 minutes supplied to
+ *  parameter \a fullRecalcInterval_mins of function skyfast_init()).
+ *  Actually a full twenty-four hours of tracking of the Sun can be obtained by
+ *  supplying 720 minutes to this parameter, without ever having to call the
+ *  function skyfast_backgroundUpdate(). This is because skyfast_init()
+ *  calculates three apparent positions, not just two.
+ * 
+ */
+
+#endif /* SKYFAST_H */
 
