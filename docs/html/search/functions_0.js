@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['moon_5fnrelapp2_125',['moon_nrelApp2',['../moon_8h.html#a9b267f69e671ecb03fe804c51cb8f214',1,'moon.c']]],
-  ['moon_5fnrelapparent_126',['moon_nrelApparent',['../moon_8h.html#ae26dfd26ce7ba3a93eaa9ac24982016d',1,'moon.c']]],
-  ['moon_5fnreltopocentric_127',['moon_nrelTopocentric',['../moon_8h.html#a3f0db3b9becd20ad7efe437f6e999394',1,'moon.c']]],
-  ['moon_5friseset_128',['moon_riseSet',['../moon_8h.html#a1f11644142c66b3c46fbd792ff279d6f',1,'moon.c']]]
+  ['demo1_130',['demo1',['../main_8c.html#a1e4ce4fefd4fcee5ddf10b3e7b2b9ea5',1,'main.c']]],
+  ['demo2_131',['demo2',['../main_8c.html#ae916f1bc9b0d73b4e1221d325c364e4b',1,'main.c']]]
 ];

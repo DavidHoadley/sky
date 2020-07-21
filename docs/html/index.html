@@ -87,14 +87,11 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="title">sunpos Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="el" href="main_8c_source.html">main.c</a> - Simple demo program for Sun position using rectangular coordinates</p>
-<dl class="section author"><dt>Author</dt><dd>David Hoadley <a href="#" onclick="location.href='mai'+'lto:'+'vcr'+'um'+'ble'+'@w'+'est'+'ne'+'t.c'+'om'+'.au'; return false;">vcrum<span style="display: none;">.nosp@m.</span>ble@<span style="display: none;">.nosp@m.</span>westn<span style="display: none;">.nosp@m.</span>et.c<span style="display: none;">.nosp@m.</span>om.au</a></dd></dl>
-<p>This program calls two demo routines to calculate the Sun's position. The first calculates it using the NREL SPA algorithm (see reference), but implemented in rectangular coordinates. The second runs a loop to repeatedly calculate the position, but using interpolation between two previously calculated positions.</p>
+<div class="textblock"><p>This program calls two demo routines to calculate the Sun's position. The first calculates it using the NREL SPA algorithm (see reference), but implemented in rectangular coordinates. The second runs a loop to repeatedly calculate the position, but using interpolation between two previously calculated positions.</p>
 <p>The interpolation will introduce a very small error in position. For the value of 720 minutes supplied to routine <a class="el" href="skyfast_8h.html#ac22205943c218e19d4313fc71dda43d4" title="Initialise those items that take a long time to calculate, but which do not need to be recalculated f...">skyfast_init()</a>, the maximum error that is introduced is less than 0.075 arcseconds. Given that the NREL-SPA algorithm itself is only accurate to approximately 1 arcsecond, this is pretty good.</p>
 <p>This demo shows some of the use of the routines in <a class="el" href="sky_8h.html" title="sky.h - structures and routines for astronomical observing &amp; tracking">sky.h</a> and <a class="el" href="sun_8h.html" title="sun.h - routines to calculate the Sun&#39;s position">sun.h</a>, and for interpolation, <a class="el" href="skyfast_8h.html" title="skyfast.h - set up and use interpolation for rapid calculation of a celestial object&#39;s apparent coord...">skyfast.h</a></p>
-<dl class="section user"><dt>Reference:</dt><dd>Reda, Ibrahim and Andreas, Afshin. <em>Solar Position Algorithm for Solar Radiation Applications.</em> National Renewable Energy Laboratory, publication no. NREL/TP-560-34302, June 2003, revised January 2008</dd></dl>
-<hr  />
- </div></div><!-- PageDoc -->
+<dl class="section user"><dt>Reference:</dt><dd>Reda, Ibrahim and Andreas, Afshin. <em>Solar Position Algorithm for Solar Radiation Applications.</em> National Renewable Energy Laboratory, publication no. NREL/TP-560-34302, June 2003, revised January 2008 </dd></dl>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

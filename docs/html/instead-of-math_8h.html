@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('instead-of-math_8h.html',''); initResi
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="instead-of-math_8h.html" title="instead-of-math.h - header to be included instead of math.h sincos(). Needs to be included before inc...">instead-of-math.h</a> - header to be included instead of math.h sincos(). Needs to be included before including the math.h header from the standard C library.  
+<p><a class="el" href="instead-of-math_8h.html" title="instead-of-math.h - header to be included instead of math.h">instead-of-math.h</a> - header to be included instead of math.h  
 <a href="#details">More...</a></p>
 
 <p><a href="instead-of-math_8h_source.html">Go to the source code of this file.</a></p>
@@ -104,9 +104,9 @@ Macros</h2></td></tr>
 <tr class="separator:a4d60cec10ffd2a404e95b69346033416"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="instead-of-math_8h.html" title="instead-of-math.h - header to be included instead of math.h sincos(). Needs to be included before inc...">instead-of-math.h</a> - header to be included instead of math.h sincos(). Needs to be included before including the math.h header from the standard C library. </p>
+<div class="textblock"><p><a class="el" href="instead-of-math_8h.html" title="instead-of-math.h - header to be included instead of math.h">instead-of-math.h</a> - header to be included instead of math.h </p>
 <dl class="section author"><dt>Author</dt><dd>David Hoadley <a href="#" onclick="location.href='mai'+'lto:'+'vcr'+'um'+'ble'+'@w'+'est'+'ne'+'t.c'+'om'+'.au'; return false;">vcrum<span style="display: none;">.nosp@m.</span>ble@<span style="display: none;">.nosp@m.</span>westn<span style="display: none;">.nosp@m.</span>et.c<span style="display: none;">.nosp@m.</span>om.au</a></dd></dl>
-<p>Description: This header needs to be included instead of the standard library header math.h, in order to provide some routines that are missing or possibly missing from math.h. This header will include math.h for you.</p>
+<p>This header needs to be included instead of the standard C library header math.h, in order to provide some routines that are missing or possibly missing from math.h. This header will include math.h for you.</p>
 <p>The reason it must be included instead of math.h is a little obscure. One of the routines we want is the sincos() routine. Two versions of math.h actually do have it: The GNU C library does, and the Apple Clang library also has it, but under a different name.</p>
 <p>The problem is, to gain access to the function, we need to include the appropriate incantation BEFORE including math.h if we are using the GNU C library, but we need to add definitions AFTER including math.h if we are using the Apple Clang library.</p>
 <p>So use this header instead of math.h to look after this problem.</p>
@@ -114,13 +114,14 @@ Macros</h2></td></tr>
 <li><a class="el" href="instead-of-math_8h.html#a4d60cec10ffd2a404e95b69346033416" title="Normalizes a cyclic double precision floating point variable x to the interval [0,...">normalize()</a> <br  />
  A proper modulo function. Unlike fmod(), result is always positive. Used to to normalize a cyclic variable to a range, e.g. an angle in radian to the range [0, 2Pi), or an angle in degrees to the range [0, 360.0)</li>
 </ul>
-<p>Copyright (c) 2020, David Hoadley <a href="#" onclick="location.href='mai'+'lto:'+'vcr'+'um'+'ble'+'@w'+'est'+'ne'+'t.c'+'om'+'.au'; return false;">vcrum<span style="display: none;">.nosp@m.</span>ble@<span style="display: none;">.nosp@m.</span>westn<span style="display: none;">.nosp@m.</span>et.c<span style="display: none;">.nosp@m.</span>om.au</a> All rights reserved.</p>
-<p>Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p>
+<dl class="section copyright"><dt>Copyright</dt><dd><p class="startdd">Copyright (c) 2020, David Hoadley <a href="#" onclick="location.href='mai'+'lto:'+'vcr'+'um'+'ble'+'@w'+'est'+'ne'+'t.c'+'om'+'.au'; return false;">vcrum<span style="display: none;">.nosp@m.</span>ble@<span style="display: none;">.nosp@m.</span>westn<span style="display: none;">.nosp@m.</span>et.c<span style="display: none;">.nosp@m.</span>om.au</a> All rights reserved.</p>
+<p class="interdd">Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p>
 <ul>
 <li>Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.</li>
 <li>Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.</li>
 </ul>
-<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+<p class="enddd">THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </p>
+</dd></dl>
 <hr  />
  
 <p class="definition">Definition in file <a class="el" href="instead-of-math_8h_source.html">instead-of-math.h</a>.</p>
@@ -159,7 +160,7 @@ Macros</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line">            { *sinA_ = sin(angle_rad_);      \</div>
 <div class="line">              *cosA_ = cos(angle_rad_); }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="instead-of-math_8h_source.html#l00114">114</a> of file <a class="el" href="instead-of-math_8h_source.html">instead-of-math.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="instead-of-math_8h_source.html#l00115">115</a> of file <a class="el" href="instead-of-math_8h_source.html">instead-of-math.h</a>.</p>
 
 </div>
 </div>
@@ -201,7 +202,7 @@ Macros</h2></td></tr>
 <p>This function returns the same results as <code>fmod()</code> for positive <em>x</em> and <em>range</em>. Where it differs is in its handling of negative values of <em>x</em>.</p>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="instead-of-math_8h_source.html#l00143">143</a> of file <a class="el" href="instead-of-math_8h_source.html">instead-of-math.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="instead-of-math_8h_source.html#l00144">144</a> of file <a class="el" href="instead-of-math_8h_source.html">instead-of-math.h</a>.</p>
 
 </div>
 </div>

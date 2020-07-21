@@ -3,13 +3,11 @@
 /*============================================================================*/
 /*!\file
  * \brief instead-of-math.h - header to be included instead of math.h
- * sincos(). Needs to be included before including
- *                        the math.h header from the standard C library.
  *
  * \author  David Hoadley <vcrumble@westnet.com.au>
  *
- * Description:
- *          This header needs to be included instead of the standard library
+ * \details
+ *          This header needs to be included instead of the standard C library
  *          header math.h, in order to provide some routines that are missing
  *          or possibly missing from math.h. This header will include math.h
  *          for you.
@@ -34,6 +32,8 @@
  *                      [0, 2Pi), or an angle in degrees to the range [0, 360.0)
  *
  *
+ * \copyright
+ * \parblock
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
  * All rights reserved.
  *
@@ -57,6 +57,7 @@
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
+ * \endparblock
  *
  *==============================================================================
  */

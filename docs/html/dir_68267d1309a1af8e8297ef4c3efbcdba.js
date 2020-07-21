@@ -3,7 +3,7 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "astron.h", "astron_8h.html", "astron_8h" ],
     [ "general.h", "general_8h_source.html", null ],
     [ "instead-of-math.h", "instead-of-math_8h.html", "instead-of-math_8h" ],
-    [ "main.c", "main_8c_source.html", null ],
+    [ "main.c", "main_8c.html", "main_8c" ],
     [ "moon.c", "moon_8c_source.html", null ],
     [ "moon.h", "moon_8h.html", "moon_8h" ],
     [ "sky-site.c", "sky-site_8c_source.html", null ],

@@ -1,32 +1,42 @@
 /*============================================================================*/
-/*! \file
- * \mainpage
- * main.c - Simple demo program for Sun position using rectangular coordinates
+/*!\file
+ * 
+ * \brief main.c - Simple demo program for Sun position using rectangular
+ *                   coordinates
  *
  * \author  David Hoadley <vcrumble@westnet.com.au>
  *
  * \details
- *      This program calls two demo routines to calculate the Sun's position.
- *      The first calculates it using the NREL SPA algorithm (see reference),
- *      but implemented in rectangular coordinates. The second runs a loop to
- *      repeatedly calculate the position, but using interpolation between two
- *      previously calculated positions.
+ *      See [the main page](@ref index) (or the end of this source file) for a
+ *      description of this file.
  * 
- *      The interpolation will introduce a very small error in position. For the
- *      value of 720 minutes supplied to routine skyfast_init(), the maximum
- *      error that is introduced is less than 0.075 arcseconds.
- *      Given that the NREL-SPA algorithm itself is only
- *      accurate to approximately 1 arcsecond, this is pretty good.
+ * \copyright
+ * \parblock
+ * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
+ * All rights reserved.
  *
- *      This demo shows some of the use of the routines in sky.h and sun.h,
- *      and for interpolation, skyfast.h
- * 
- * \par Reference:
- *          Reda, Ibrahim and Andreas, Afshin.
- *          _Solar Position Algorithm for Solar Radiation Applications._
- *          National Renewable Energy Laboratory, publication no. 
- *          NREL/TP-560-34302, June 2003, revised January 2008
- * 
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * * Redistributions of source code must retain the above copyright notice, this
+ *   list of conditions and the following disclaimer.
+ * * Redistributions in binary form must reproduce the above copyright notice,
+ *   this list of conditions and the following disclaimer in the documentation
+ *   and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ * \endparblock
+ *
  *==============================================================================
  */
 
@@ -60,9 +70,6 @@ void sunTopocentricFast(double             j2kUtc_d,
 
 
 
-/*
- *==============================================================================
- */
 int main(void)
 {
     demo1();
@@ -121,7 +128,7 @@ void sunTopocentricFast(double             j2kUtc_d,
 
 
 void demo1(void)
-/*  Sample code demonstrating the calculation of the position of the Sun using
+/*! Sample code demonstrating the calculation of the position of the Sun using
  *  rectangular coordinates
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
@@ -161,7 +168,7 @@ void demo1(void)
 
 
 void demo2(void)
-/*  Sample code using the greatly simplified calculation of the position
+/*! Sample code using the greatly simplified calculation of the position
  *  of the Sun using interpolated coordinates.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
@@ -206,3 +213,27 @@ void demo2(void)
         sleep(1);       /* Just use a simple delay for this demo. */
     }
 }
+
+/*!
+ *  \mainpage
+ *      This program calls two demo routines to calculate the Sun's position.
+ *      The first calculates it using the NREL SPA algorithm (see reference),
+ *      but implemented in rectangular coordinates. The second runs a loop to
+ *      repeatedly calculate the position, but using interpolation between two
+ *      previously calculated positions.
+ *
+ *      The interpolation will introduce a very small error in position. For the
+ *      value of 720 minutes supplied to routine skyfast_init(), the maximum
+ *      error that is introduced is less than 0.075 arcseconds.
+ *      Given that the NREL-SPA algorithm itself is only
+ *      accurate to approximately 1 arcsecond, this is pretty good.
+ *
+ *      This demo shows some of the use of the routines in sky.h and sun.h,
+ *      and for interpolation, skyfast.h
+ *
+ * \par Reference:
+ *          Reda, Ibrahim and Andreas, Afshin.
+ *          _Solar Position Algorithm for Solar Radiation Applications._
+ *          National Renewable Energy Laboratory, publication no.
+ *          NREL/TP-560-34302, June 2003, revised January 2008
+ */
