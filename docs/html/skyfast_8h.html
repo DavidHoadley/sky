@@ -181,7 +181,7 @@ Functions</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>Although the parameter name <em>getApparent</em> suggests that you must supply a function which calculates an object's position in apparent coordinates, it is also possible to supply a function which returns the position in Celestial Intermediate coordinates (i.e. referred to the true equator and the Celestial Intermediate Origin (CIO) at time <em>t_cy</em>) instead. If so, the function does not need to fill in the <em>eqEq_rad</em> field of struct <a class="el" href="struct_sky___true_equatorial.html" title="Struct used for holding an object&#39;s coordinates in equatorial apparent or Intermediate coordinates.">Sky_TrueEquatorial</a>.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="skyfast_8c_source.html#l00118">118</a> of file <a class="el" href="skyfast_8c_source.html">skyfast.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="skyfast_8c_source.html#l00112">112</a> of file <a class="el" href="skyfast_8c_source.html">skyfast.c</a>.</p>
 
 </div>
 </div>
@@ -207,7 +207,7 @@ Functions</h2></td></tr>
 <dl class="section user"><dt>When to call this function</dt><dd>This function is designed to be called in a low priority loop, or at background level, using any available leftover processor time to slowly precalculate values for the "time after next". It needs to have been called before the high frequency routine <a class="el" href="skyfast_8h.html#afb9144e153624a3bf899af40eca07ac0" title="Get the best approximation to the celestial object&#39;s apparent coordinates and distance,...">skyfast_getApprox()</a> (which is interpolating between time "last" and time "next") arrives at time "next" and therefore needs to access the data for time "oneAfter".</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="skyfast_8c_source.html#l00206">206</a> of file <a class="el" href="skyfast_8c_source.html">skyfast.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="skyfast_8c_source.html#l00200">200</a> of file <a class="el" href="skyfast_8c_source.html">skyfast.c</a>.</p>
 
 </div>
 </div>
@@ -249,7 +249,7 @@ Functions</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>This function will return an approximate position in apparent coordinates (i.e. referred to the true equator and equinox at time <em>t_cy</em>) if the function that you passed to the <a class="el" href="skyfast_8h.html#ac22205943c218e19d4313fc71dda43d4" title="Initialise those items that take a long time to calculate, but which do not need to be recalculated f...">skyfast_init()</a> function returned apparent coordinates. This function will return an approximate position in Celestial Intermediate coordinates (i.e. referred to the true equator and the Celestial Intermediate Origin (CIO)) at time <em>t_cy</em>) if the function that you passed to the <a class="el" href="skyfast_8h.html#ac22205943c218e19d4313fc71dda43d4" title="Initialise those items that take a long time to calculate, but which do not need to be recalculated f...">skyfast_init()</a> function returned CIRS coordinates.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="skyfast_8c_source.html#l00244">244</a> of file <a class="el" href="skyfast_8c_source.html">skyfast.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="skyfast_8c_source.html#l00235">235</a> of file <a class="el" href="skyfast_8c_source.html">skyfast.c</a>.</p>
 
 </div>
 </div>

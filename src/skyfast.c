@@ -36,12 +36,6 @@
 
 /* ANSI includes etc. */
 #include <math.h>
-// /+
-#include <stdio.h>
-#include "astc1.h"
-#include "skyio.h"
-#include "test.h"
-// /-
 
 /* Local and project includes */
 #include "skyfast.h"
@@ -227,9 +221,6 @@ GLOBAL void skyfast_backgroundUpdate(void)
     REQUIRE(recalcInterval_cy > 0.0);   /* skyfast_init() must be called before now */
 
     if (!oneAfterIsValid) {
-        // /+
-        printf("Updating the low frequency items\n");
-        // /-
         t_cy = next->timestamp_cy + recalcInterval_cy;
         callback(t_cy, oneAfter);
 

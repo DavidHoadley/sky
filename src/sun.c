@@ -43,7 +43,6 @@
 /* Local and project includes */
 #include "sun.h"
 
-#include "star.h"
 #include "astron.h"
 #include "general.h"
 #include "vectors3d.h"

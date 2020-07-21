@@ -150,10 +150,6 @@ GLOBAL void moon_nrelApp2(double             t_cy,
     NREL Moon Position Algorithm.
  \param[in]  t_cy    Julian centuries since J2000.0, TT timescale
  \param[in]  nut     Nutation terms and obliquity of the ecliptic
- \param[in]  epsM    Rotation matrix from ecliptic frame to equatorial frame,
-                     as returned by function astc0_createEps1980Matrix(). It
-                     is equal to R1(-ε) where ε is the true obliquity of
-                     the ecliptic
  \param[out] appV    Position vector of Moon in apparent coordinates (unit
                        vector i.e. direction cosines)
  \param[out] dist_au Geocentric distance of the Moon (Astronomical Units)
