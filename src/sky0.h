@@ -6,8 +6,6 @@
  *                  Algorithm
  *
  * \author  David Hoadley
- *          Loco2Gen
- *          ABN 22 957 381 638
  *
  * \details
  *          This is one of three alternative modules: sky0.h / sky0.c,

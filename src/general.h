@@ -3,9 +3,7 @@
 /*==============================================================================
  * general.h - definitions of general use to (standard) C programs
  *
- * Author:  David Hoadley
- *          Loco2Gen
- *          ABN 22 957 381 638
+ * Author:  David Hoadley <vcrumble@westnet.com.au>
  *
  * Description:
  *      Definitions that almost all of our C programs can find useful. Defines
@@ -173,8 +171,8 @@ static_assert(sizeof(uint32_t) == 4, "typedef of uint32_t is wrong");
 /*      Convert angle from one unit to another */
 #ifdef PREDEF_STANDARD_C_1999
 /*          Compiler supports inline functions */
-static inline double degToRad(double angle_deg) { return angle_deg * DEG2RAD; };
-static inline double radToDeg(double angle_rad) { return angle_rad * RAD2DEG; };
+static inline double degToRad(double angle_deg) { return angle_deg * DEG2RAD; }
+static inline double radToDeg(double angle_rad) { return angle_rad * RAD2DEG; }
 
 #else
 /*          C89/C90 compiler only - no inline functions. Need macros instead */
@@ -282,6 +280,7 @@ static inline double radToDeg(double angle_rad) { return angle_rad * RAD2DEG; };
 #define ENABLE_NULL_CHECKING
 
 #ifdef ENABLE_NULL_CHECKING
+#  include <stddef.h>                       /* Make sure NULL is defined */
 #  define REQUIRE_NOT_NULL(pointer_)  ASSERT((pointer_) != NULL)
 #else
 #  define REQUIRE_NOT_NULL(pointer_)  ((void)0)

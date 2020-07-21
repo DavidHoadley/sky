@@ -2,8 +2,6 @@
  * sky0.c - astronomical coordinate conversion for NREL Sun Position Algorithm
  *
  * Author:  David Hoadley
- *          Loco2Gen
- *          ABN 22 957 381 638
  *
  * Description: (see sky0.h)
  * 
@@ -39,19 +37,13 @@
  *----------------------------------------------------------------------------*/
 
 /* ANSI includes etc. */
-#include <math.h>
+#include "instead-of-math.h"
 
 /* Local and project includes */
 #include "sky0.h"
 
 #include "astron.h"
 #include "general.h"
-#include "more-maths.h"                 // for normalize()
-///+
-#include <stdio.h>
-#include "spa.h"
-#include "test.h"
-///-
 
 /*
  * Local #defines and typedefs
@@ -415,19 +407,6 @@ GLOBAL double sky0_gmSiderealTimeSpa(double du)
     
     tu = du / JUL_CENT;
     gmst_rad = B0 + B1 * du + (tu * tu * (B2 + (tu * B3))); 
-#if 0
-    ///+
-    ///printf("constants %20.15f, %20.15f, %18e, %18e\n", B0, B1, B2, B3);
-    ///printf("constants %20.15f, %20.15f, %18e, %18e\n", B0 - B0d, B1 - B1d, B2 - B2d, B3 - B3d);
-    if ((radToArcsec(normalize(gmst_rad, TWOPI)) - (spa.nu0 * 3600.0)) > 1.0e-6) {
-        printf("du - (jd - 2451545.0) = %e, (%f), ",
-               du - (spa.jd - 2451545.0),
-               (du - (spa.jd - 2451545.0)) * 360.0 * 3600.0);
-        printf("tu - jc = %e\n", tu - spa.jc);
-        printf("GMST %f, spa.nu0 %f\n", radToArcsec(normalize(gmst_rad, TWOPI)), spa.nu0 * 3600.0);
-    }
-    ///-
-#endif
 
     return normalize(gmst_rad, TWOPI);
 }

@@ -40,7 +40,7 @@
 
 /* ANSI includes etc. */
 #include <float.h>
-#include "before-math.h"                /* for sincos() */
+#include "instead-of-math.h"                /* for sincos() & normalize() */
 #include <math.h>
 #include <stdlib.h>
 
@@ -48,7 +48,6 @@
 #include "moon.h"
 
 #include "general.h"
-#include "more-maths.h"                 /* for normalize() */
 ///+
 #include <stdio.h>
 #include "skyio.h"

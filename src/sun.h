@@ -5,8 +5,6 @@
  * \brief sun.h - routines to calculate the Sun's position
  *
  * \author  David Hoadley
- *          Loco2Gen
- *          ABN 22 957 381 638
  *
  * \details
  *      Alternative routines which calculate the sun's position with differing

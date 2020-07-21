@@ -2,8 +2,6 @@
  * sky-time.c - astronomical time routines
  *
  * Author:  David Hoadley
- *          Loco2Gen
- *          ABN 22 957 381 638
  *
  * Description: (see the "Time routines" sections of sky.h)
  * 

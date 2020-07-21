@@ -2,8 +2,6 @@
  * skyio.c - output and formatting routines and a read routine
  *
  * Author:  David Hoadley <vcrumble@westnet.com.au>
- *          Loco2Gen
- *          ABN 22 957 381 638
  *
  * Description: (see skyio.h)
  * 

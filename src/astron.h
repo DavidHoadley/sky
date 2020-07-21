@@ -5,10 +5,8 @@
  * \brief astron.h - assorted definitions useful for astronomy
  *
  * \author  David Hoadley
- *          Loco2Gen
- *          ABN 22 957 381 638
  *
- * Description:
+ * \details
  *          Some astronomical constants, and angle conversions that are used in
  *          astronomical software.
  * 
@@ -42,15 +40,15 @@
 #ifdef PREDEF_STANDARD_C_1999
 /*          Compiler supports inline functions */
 static inline double arcsecToRad(double angle_arcsec) {
-                                            return angle_arcsec*ARCSEC2RAD; };
+                                            return angle_arcsec*ARCSEC2RAD; }
 static inline double radToArcsec(double angle_rad) {
-                                            return angle_rad * RAD2ARCSEC; };
+                                            return angle_rad * RAD2ARCSEC; }
 
-static inline double secToRad(double angle_s)   { return angle_s * SEC2RAD; };
-static inline double radToSec(double angle_rad) { return angle_rad * RAD2SEC; };
+static inline double secToRad(double angle_s)   { return angle_s * SEC2RAD; }
+static inline double radToSec(double angle_rad) { return angle_rad * RAD2SEC; }
 
-static inline double hrsToRad(double angle_h)   { return angle_h * HRS2RAD; };
-static inline double radToHrs(double angle_rad) { return angle_rad * RAD2HRS; };
+static inline double hrsToRad(double angle_h)   { return angle_h * HRS2RAD; }
+static inline double radToHrs(double angle_rad) { return angle_rad * RAD2HRS; }
 
 #else
 /*          C89/C90 compiler only - no inline functions. Need macros instead */

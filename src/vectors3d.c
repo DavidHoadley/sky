@@ -37,7 +37,7 @@
  *----------------------------------------------------------------------------*/
 
 /* ANSI includes etc. */
-#include "before-math.h"                /* for sincos() */
+#include "instead-of-math.h"                /* for sincos() */
 #include <math.h>
 #include <stdlib.h>                     /* for NULL */
 

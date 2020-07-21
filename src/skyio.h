@@ -5,8 +5,6 @@
  * \brief skyio.h - output and formatting routines and a read routine
  *
  * \author  David Hoadley <vcrumble@westnet.com.au>
- *          Loco2Gen
- *          ABN 22 957 381 638
  *
  * \details
  *          Routines for reading and writing out assorted astronomical things,
@@ -18,8 +16,8 @@
  *            a string in Degrees Minutes Seconds form, and doing it correctly.
  *            Quite a few people need this one.
  *          - reading an angle from a string
- *          - write out a Modified Julian Date as a calendar date and time.
- *          - write out the contents of matrices and vectors.
+ *          - write out a Julian Date (in J2KD form - see 
+ *            \ref page-time-variables) as a calendar date and time.
  * 
  *          These routines were mainly developed for debugging.
  *
@@ -59,6 +57,7 @@
  *----------------------------------------------------------------------------*/
 
 #include "general.h"
+#include "astron.h"
 
 /*
  * Global #defines and typedefs
@@ -119,8 +118,8 @@ static inline char *skyio_radToDmsStr(char destStr[],
 #else
  /*          C89/C90 compiler - no inline functions. Need macros instead */
  #define skyio_radToDmsStr(destStr__, destStrLen__, angle_rad__, decimals__)  \
-    return skyio_degToDmsStr(destStr__, destStrLen__,                         \
-                             radToDeg(angle_rad__), decimals__);
+    skyio_degToDmsStr(destStr__, destStrLen__,                                \
+                      radToDeg(angle_rad__), decimals__);
 #endif
 
 
@@ -154,8 +153,8 @@ static inline char *skyio_radToHmsStr(char destStr[],
 #else
  /*          C89/C90 compiler - no inline functions. Need macros instead */
  #define skyio_radToHmsStr(destStr__, destStrLen__, angle_rad__, decimals__)  \
-    return skyio_hrsToHmsStr(destStr__, destStrLen__,                         \
-                             radToHrs(angle_rad__), decimals__);
+    skyio_hrsToHmsStr(destStr__, destStrLen__,                                \
+                      radToHrs(angle_rad__), decimals__);
 #endif
 
 

@@ -2,8 +2,6 @@
  * sun.c - routines to calculate the Sun's position
  *
  * Author:  David Hoadley
- *          Loco2Gen
- *          ABN 22 957 381 638
  *
  * Description: (see sunpos.h)
  *  
@@ -35,17 +33,12 @@
  */
 /*------------------------------------------------------------------------------
  * Notes:
- *      Character set: UTF-8. (Non ASCII characters appear in this file)
+ *      Character set: UTF-8. (Non -ASCII characters appear in this file)
  *----------------------------------------------------------------------------*/
 
 /* ANSI includes etc. */
 #include <float.h>
-#include <math.h>
-///+
-#include <stdio.h>
-#include "skyio.h"
-#include "test.h"
-///-
+#include "instead-of-math.h"            /* for normalize() */
 
 /* Local and project includes */
 #include "sun.h"
@@ -53,7 +46,6 @@
 #include "star.h"
 #include "astron.h"
 #include "general.h"
-#include "more-maths.h"                  // for normalize()
 #include "vectors3d.h"
 
 /*
@@ -933,10 +925,10 @@ LOCAL double riseSetApprox(double             risesetGuess_d,
     /* If there is no intersection, the Sun either doesn't rise or doesn't set
        on this day at this latitude.  */
     if (cosHa2 > 1.0) {
-///        printf("Sun does not rise\n");
+        /* Sun does not rise */
         riseSetApprox_d = 0.0;
     } else if (cosHa2 < -1.0) {
-///        printf("Sun does not set\n");
+        /* Sun does not set */
         riseSetApprox_d = 0.0;
     } else {
         if (getSunrise) {

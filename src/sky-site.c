@@ -2,8 +2,6 @@
  * sky-site.c - astronomical routines related to an observing site
  *
  * Author:  David Hoadley <vcrumble@westnet.com.au>
- *          Loco2Gen
- *          ABN 22 957 381 638
  *
  * Description: (see the "Site routines" sections of sky.h)
  * 
@@ -41,7 +39,7 @@
 
 
 /* ANSI includes etc. */
-#include "before-math.h"                /* for sincos() */
+#include "instead-of-math.h"                /* for sincos() */
 #include <math.h>
 
 /* Local and project includes */
@@ -57,9 +55,9 @@ DEFINE_THIS_FILE;                       /* For use by REQUIRE() - assertions */
         NREL SPA code for Sun positions. It changes the constants describing
         the Earth to match those used in the SPA itself (instead of using the
         (better) constants from the Astronomical Almanac). Also it disables
- *      the correction for diurnal aberration (because SPA does not calculate
- *      this correction). */
-#define SPA_COMPARISONS
+        the correction for diurnal aberration (because SPA does not calculate
+        this correction). */
+/*--- #define SPA_COMPARISONS ---*/
 
 /*
  * Prototypes for local functions (not called from other modules).

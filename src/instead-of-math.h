@@ -1,25 +1,37 @@
-#ifndef BEFORE_MATH_H
-#define BEFORE_MATH_H
+#ifndef INSTEAD_OF_MATH_H
+#define INSTEAD_OF_MATH_H
 /*============================================================================*/
 /*!\file
- * \brief before-math.h - sincos(). Needs to be included before including
+ * \brief instead-of-math.h - header to be included instead of math.h
+ * sincos(). Needs to be included before including
  *                        the math.h header from the standard C library.
  *
  * \author  David Hoadley <vcrumble@westnet.com.au>
- *          Loco2Gen
- *          ABN 22 957 381 638
  *
  * Description:
- *          The sincos() routine is missing, or possibly missing from the
- *          standard C library math.h. Actually, the GNU C library does have
- *          it, if you give the correct incantation before including math.h.
- *          Also, the Apple Clang library also has it, but under a different
- *          name. So include this header to make it available if possible, or
- *          to define a substitute.
+ *          This header needs to be included instead of the standard library
+ *          header math.h, in order to provide some routines that are missing
+ *          or possibly missing from math.h. This header will include math.h
+ *          for you.
  * 
- *          Because of the way the GNU library works, you must include this file
- *          before you include math.h in any module that you need it. This is
- *          why it is called before-math.h
+ *          The reason it must be included instead of math.h is a little
+ *          obscure. One of the routines we want is the sincos() routine. Two
+ *          versions of math.h actually do have it: The GNU C library does, and
+ *          the Apple Clang library also has it, but under a different name.
+ *
+ *          The problem is, to gain access to the function, we need to include
+ *          the appropriate incantation BEFORE including math.h if we are using
+ *          the GNU C library, but we need to add definitions AFTER including
+ *          math.h if we are using the Apple Clang library.
+ *
+ *          So use this header instead of math.h to look after this problem.
+ *
+ *          This header also provides the following missing function:
+ *              - normalize()   
+ *                      A proper modulo function. Unlike fmod(), result is
+ *                      always positive. Used to to normalize a cyclic variable
+ *                      to a range, e.g. an angle in radian to the range
+ *                      [0, 2Pi), or an angle in degrees to the range [0, 360.0)
  *
  *
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
@@ -58,10 +70,16 @@
 /*
  * Global functions available to be called by other modules
  */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* -------------- The possible missing sincos() function -------------- */
 #if defined(__APPLE__)
     /* This is the CLANG compiler on an Apple computer (probably a mac). There
        is a sincos() function available, but it is called __sincos() instead.
        Re-direct all calls to sincos() to use __sincos() instead. */
+#  include <math.h>             /* Must be done before defining fn below */
 #  if defined (PREDEF_STANDARD_C_1999)
     /*          Compiler supports inline functions */
     static inline void sincos(double angle_rad, double *sinA, double *cosA)
@@ -78,10 +96,12 @@
        the GNU C library, but it is only accessible if the following macro is
        defined BEFORE including <math.h>. So do it here. */
 #   define _GNU_SOURCE
+#   include <math.h>
 
 #else
     /* No sincos() function available. Oh well. Get sine and cosine separately.
        This is less efficient than a true sincos(), but at least it will work.*/
+#  include <math.h>
 #  if defined (PREDEF_STANDARD_C_1999)
     /*          Compiler supports inline functions */
     static inline void sincos(double angle_rad, double *sinA, double *cosA)
@@ -98,18 +118,40 @@
 #endif
 
 
+/* -------------- The definitely missing normalize() function -------------- */
+
+/*! Normalizes a cyclic double precision floating point variable \a x
+    to the interval [0, range), assuming \a range is > 0. (If \a range is
+    negative, this will normalize \a x to the interval (range, 0], but this is
+    not the main use case for this function.)
+ \returns The value of \a x, within the range [0, range)
+ \param[in] x       The variable (e.g. an angle in degrees or radian)
+ \param[in] range   The range to normalize \a x to (e.g. 2Pi or 360.0). It must
+                    be non-zero.
+
+    This function returns the same results as \c fmod() for positive \a x and
+    \a range. Where it differs is in its handling of negative values of \a x.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+#if defined (PREDEF_STANDARD_C_1999)
+/*          Compiler supports inline functions */
+static inline double normalize(double x, double range)
+{
+    return x - floor(x / range) * range;
+}
+#else
+ /*          C89/C90 compiler - no inline functions. Need macros instead */
+ #define normalize(x__, range__)  ((x__) - floor((x__) / (range__)) * (range__))
+#endif
+
+
 /*
  * Global variables accessible by other modules
  */
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* BEFORE_MATH_H */
+#endif /* INSTEAD_OF_MATH_H */
 
