@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>sunpos: src/main.c Source File</title>
+<title>Sun position: src/main.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,8 +25,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">sunpos
-   &#160;<span id="projectnumber">0.0.1</span>
+   <div id="projectname">Sun position
+   &#160;<span id="projectnumber">0.0.10-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -306,26 +306,30 @@ $(document).ready(function(){initNavTree('main_8c_source.html',''); initResizabl
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">/*!</span></div>
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment"> *  \mainpage</span></div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment"> *      This program calls two demo routines to calculate the Sun&#39;s position.</span></div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment"> *      The first calculates it using the NREL SPA algorithm (see reference),</span></div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment"> *      but implemented in rectangular coordinates. The second runs a loop to</span></div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment"> *      repeatedly calculate the position, but using interpolation between two</span></div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment"> *      previously calculated positions.</span></div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment"> *      The interpolation will introduce a very small error in position. For the</span></div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment"> *      value of 720 minutes supplied to routine skyfast_init(), the maximum</span></div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment"> *      error that is introduced is less than 0.075 arcseconds.</span></div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment"> *      Given that the NREL-SPA algorithm itself is only</span></div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment"> *      accurate to approximately 1 arcsecond, this is pretty good.</span></div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment"> *      This demo shows some of the use of the routines in sky.h and sun.h,</span></div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment"> *      and for interpolation, skyfast.h</span></div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment"> * \par Reference:</span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment"> *          Reda, Ibrahim and Andreas, Afshin.</span></div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment"> *          _Solar Position Algorithm for Solar Radiation Applications._</span></div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment"> *          National Renewable Energy Laboratory, publication no.</span></div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment"> *          NREL/TP-560-34302, June 2003, revised January 2008</span></div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment"> *      The first (called demo1()) calculates it using the NREL SPA algorithm </span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment"> *      (see reference), but implemented in rectangular coordinates.</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment"> *      The second (called demo2()) runs a loop to repeatedly calculate the</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment"> *      position, but using interpolation between two previously calculated</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment"> *      positions.</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment"> *      The interpolation will introduce a very small error in position. For the</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment"> *      value of 720 minutes supplied to routine skyfast_init(), the maximum</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment"> *      error that is introduced is less than 0.075 arcseconds.</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment"> *      Given that the NREL-SPA algorithm itself is only</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment"> *      accurate to approximately 1 arcsecond, this is pretty good.</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment"> *      This demo shows some of the use of the routines in sky.h and sun.h,</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment"> *      and for interpolation, skyfast.h.</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment"> *      To view the source code of these demos, go to main.c and click on the</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment"> *      link &quot;Go to the source code of this file&quot;</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment"> * \par Reference:</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment"> *          Reda, Ibrahim and Andreas, Afshin.</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment"> *          _Solar Position Algorithm for Solar Radiation Applications._</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment"> *          National Renewable Energy Laboratory, publication no.</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment"> *          NREL/TP-560-34302, June 2003, revised January 2008</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment"> */</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="astruct_sky___true_equatorial_html_adef22951bb0a838e98406ee8fa36e641"><div class="ttname"><a href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">Sky_TrueEquatorial::appCirsV</a></div><div class="ttdeci">V3D_Vector appCirsV</div><div class="ttdoc">Direction of object in apparent or CIRS coordinates (effectively a unit vector).</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00107">sky.h:107</a></div></div>

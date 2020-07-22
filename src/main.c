@@ -217,10 +217,11 @@ void demo2(void)
 /*!
  *  \mainpage
  *      This program calls two demo routines to calculate the Sun's position.
- *      The first calculates it using the NREL SPA algorithm (see reference),
- *      but implemented in rectangular coordinates. The second runs a loop to
- *      repeatedly calculate the position, but using interpolation between two
- *      previously calculated positions.
+ *      The first (called demo1()) calculates it using the NREL SPA algorithm 
+ *      (see reference), but implemented in rectangular coordinates.
+ *      The second (called demo2()) runs a loop to repeatedly calculate the
+ *      position, but using interpolation between two previously calculated
+ *      positions.
  *
  *      The interpolation will introduce a very small error in position. For the
  *      value of 720 minutes supplied to routine skyfast_init(), the maximum
@@ -229,7 +230,10 @@ void demo2(void)
  *      accurate to approximately 1 arcsecond, this is pretty good.
  *
  *      This demo shows some of the use of the routines in sky.h and sun.h,
- *      and for interpolation, skyfast.h
+ *      and for interpolation, skyfast.h.
+ *
+ *      To view the source code of these demos, go to main.c and click on the
+ *      link "Go to the source code of this file"
  *
  * \par Reference:
  *          Reda, Ibrahim and Andreas, Afshin.

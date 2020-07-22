@@ -22,7 +22,7 @@ for the JavaScript code in this file
 */
 var NAVTREE =
 [
-  [ "sunpos", "index.html", [
+  [ "Sun position", "index.html", [
     [ "Conventions used in this code", "page-conventions.html", "page-conventions" ],
     [ "About time", "page-time.html", "page-time" ],
     [ "Vernal equinox", "page-vernal-equinox.html", null ],

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>sunpos: Main Page</title>
+<title>Sun position: Main Page</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,8 +25,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">sunpos
-   &#160;<span id="projectnumber">0.0.1</span>
+   <div id="projectname">Sun position
+   &#160;<span id="projectnumber">0.0.10-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -84,12 +84,13 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">sunpos Documentation</div>  </div>
+<div class="title">Sun position Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This program calls two demo routines to calculate the Sun's position. The first calculates it using the NREL SPA algorithm (see reference), but implemented in rectangular coordinates. The second runs a loop to repeatedly calculate the position, but using interpolation between two previously calculated positions.</p>
+<div class="textblock"><p>This program calls two demo routines to calculate the Sun's position. The first (called <a class="el" href="main_8c.html#a1e4ce4fefd4fcee5ddf10b3e7b2b9ea5" title="Sample code demonstrating the calculation of the position of the Sun using rectangular coordinates.">demo1()</a>) calculates it using the NREL SPA algorithm (see reference), but implemented in rectangular coordinates. The second (called <a class="el" href="main_8c.html#ae916f1bc9b0d73b4e1221d325c364e4b" title="Sample code using the greatly simplified calculation of the position of the Sun using interpolated co...">demo2()</a>) runs a loop to repeatedly calculate the position, but using interpolation between two previously calculated positions.</p>
 <p>The interpolation will introduce a very small error in position. For the value of 720 minutes supplied to routine <a class="el" href="skyfast_8h.html#ac22205943c218e19d4313fc71dda43d4" title="Initialise those items that take a long time to calculate, but which do not need to be recalculated f...">skyfast_init()</a>, the maximum error that is introduced is less than 0.075 arcseconds. Given that the NREL-SPA algorithm itself is only accurate to approximately 1 arcsecond, this is pretty good.</p>
-<p>This demo shows some of the use of the routines in <a class="el" href="sky_8h.html" title="sky.h - structures and routines for astronomical observing &amp; tracking">sky.h</a> and <a class="el" href="sun_8h.html" title="sun.h - routines to calculate the Sun&#39;s position">sun.h</a>, and for interpolation, <a class="el" href="skyfast_8h.html" title="skyfast.h - set up and use interpolation for rapid calculation of a celestial object&#39;s apparent coord...">skyfast.h</a></p>
+<p>This demo shows some of the use of the routines in <a class="el" href="sky_8h.html" title="sky.h - structures and routines for astronomical observing &amp; tracking">sky.h</a> and <a class="el" href="sun_8h.html" title="sun.h - routines to calculate the Sun&#39;s position">sun.h</a>, and for interpolation, <a class="el" href="skyfast_8h.html" title="skyfast.h - set up and use interpolation for rapid calculation of a celestial object&#39;s apparent coord...">skyfast.h</a>.</p>
+<p>To view the source code of these demos, go to <a class="el" href="main_8c.html" title="main.c - Simple demo program for Sun position using rectangular coordinates">main.c</a> and click on the link "Go to the source code of this file"</p>
 <dl class="section user"><dt>Reference:</dt><dd>Reda, Ibrahim and Andreas, Afshin. <em>Solar Position Algorithm for Solar Radiation Applications.</em> National Renewable Energy Laboratory, publication no. NREL/TP-560-34302, June 2003, revised January 2008 </dd></dl>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
