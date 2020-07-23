@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sun position: src/sky.h File Reference</title>
+<title>Sun position: sky.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.0.10-1</span>
+   &#160;<span id="projectnumber">0.1.0-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -192,7 +192,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="sky_8h.html" title="sky.h - structures and routines for astronomical observing &amp; tracking">sky.h</a> - structures and routines for astronomical observing &amp; tracking </p>
 <p><br  />
- </p><dl class="section author"><dt>Author</dt><dd>David Hoadley <a href="#" onclick="location.href='mai'+'lto:'+'vcr'+'um'+'ble'+'@w'+'est'+'ne'+'t.c'+'om'+'.au'; return false;">vcrum<span style="display: none;">.nosp@m.</span>ble@<span style="display: none;">.nosp@m.</span>westn<span style="display: none;">.nosp@m.</span>et.c<span style="display: none;">.nosp@m.</span>om.au</a></dd></dl>
+ </p><dl class="section author"><dt>Author</dt><dd>David Hoadley</dd></dl>
 <p>This collection is in two parts:</p><ul>
 <li>time routines. Routines for handling the different timescales used in astronomy, and for calculating the rotational orientation of the Earth. The timescales involved are TT, UT1 and UTC (see <a class="el" href="page-timescales.html">Timescales, and converting between them</a>). Also included here is a routine to set polar motion parameters.</li>
 <li>site routines. Data that is specific to an observing site on the Earth, and routines to convert astronomical coordinates to site-specific (i.e. topocentric) coordinates at the site. More than one site may be supported simultaneously, if required.</li>
@@ -203,20 +203,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 <li><a class="el" href="moon_8h.html" title="moon.h - routines to calculate the Moon&#39;s position">moon.h</a> (and <a class="el" href="moon_8c_source.html">moon.c</a>) if you want to track the Moon, using the NREL Moon Position Algorithm</li>
 <li>(future) a module for tracking other planets</li>
 <li>(future) a module for tracking stars</li>
+<li><a class="el" href="skyio_8h.html" title="skyio.h - output and formatting routines and a read routine">skyio.h</a> (and <a class="el" href="skyio_8c_source.html">skyio.c</a>) for input-output routines: conversions of angles to and from strings in sexagesimal (e.g. degrees, minutes and seconds) form; writing out a day number as a date &amp; time.</li>
+<li><a class="el" href="vectors3d_8h.html" title="vectors3d.h - Three dimensional geometry, vectors and matrices">vectors3d.h</a> (and <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>) which implements the rectangular matrix and vector operations used by these algorithms,</li>
 </ul>
 <p>You will need to separately include one of the following modules:</p><ul>
 <li><a class="el" href="sky0_8h.html" title="sky0.h - astronomical coordinate conversion for NREL Sun Position Algorithm">sky0.h</a> (and <a class="el" href="sky0_8c_source.html">sky0.c</a>) for nutation routines and sidereal time routines suitable for tracking the Sun or the Moon using the NREL Solar Position Algorithm and Moon Position Algorithm</li>
 <li>(future) sky1.h (and sky1.c) for IAU 1980 precession, nutation and sidereal time routines, suitable for tracking stars</li>
 <li>(future) sky2.h (and sky2.c) for IAU 2000 precession, nutation and sidereal time routines, suitable for tracking stars</li>
 </ul>
-<dl class="section copyright"><dt>Copyright</dt><dd><p class="startdd">Copyright (c) 2020, David Hoadley <a href="#" onclick="location.href='mai'+'lto:'+'vcr'+'um'+'ble'+'@w'+'est'+'ne'+'t.c'+'om'+'.au'; return false;">vcrum<span style="display: none;">.nosp@m.</span>ble@<span style="display: none;">.nosp@m.</span>westn<span style="display: none;">.nosp@m.</span>et.c<span style="display: none;">.nosp@m.</span>om.au</a> All rights reserved.</p>
-<p class="interdd">Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p>
-<ul>
-<li>Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.</li>
-<li>Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.</li>
-</ul>
-<p class="enddd">THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </p>
-</dd></dl>
 <hr  />
  
 <p class="definition">Definition in file <a class="el" href="sky_8h_source.html">sky.h</a>.</p>
@@ -270,7 +264,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 <dl class="section user"><dt>When to call this function</dt><dd>Call at program startup time. Use this routine if you have opted for option 3A, 3B or 3D in the note at the bottom of this file (see <a class="el" href="page-timescales.html">Timescales, and converting between them</a>). (Use <a class="el" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902" title="Set up the various delta time values for use in ongoing calculations.">sky_initTimeDetailed()</a> if you have opted for option 3C.)</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00097">97</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00096">96</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
 </div>
@@ -305,7 +299,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 <dl class="section user"><dt>When to call this function</dt><dd>Call this function at program startup time. Use this routine if you don't need the high accuracy of sub-second time. But if you do need it, call <a class="el" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a" title="Set up the various delta time values for use in ongoing calculations.">sky_initTime()</a> or <a class="el" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902" title="Set up the various delta time values for use in ongoing calculations.">sky_initTimeDetailed()</a> instead.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00177">177</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00176">176</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
 </div>
@@ -377,7 +371,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 <dl class="section user"><dt>When to call this function</dt><dd>Call this function at program startup time. Use this routine if you have opted for option 3C in the note at the bottom of this file (see <a class="el" href="page-timescales.html">Timescales, and converting between them</a>). (Use <a class="el" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a" title="Set up the various delta time values for use in ongoing calculations.">sky_initTime()</a> instead, if you have opted for option 3A, 3B or 3D.) If your program runs uninterrupted for many days, you may wish to call this function once per day with an updated value for <em>mjdUtc</em>.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00132">132</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00131">131</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
 </div>
@@ -451,7 +445,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 </dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00227">227</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00226">226</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
 </div>
@@ -482,7 +476,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 <dl class="section note"><dt>Note</dt><dd>This routine has no better resolution than one second. Use routine sky_unixTimespecToMjd() or sky_calTimeToMjd() instead, if you need sub-second resolution</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00256">256</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00255">255</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
 </div>
@@ -512,7 +506,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 </dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00272">272</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00271">271</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
 </div>
@@ -560,7 +554,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 <dl class="section user"><dt>Reference</dt><dd><em>Astronomical Almanac</em> 2007, page B9 (for Earth Rotation Angle)</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00198">198</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00197">197</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
 </div>
@@ -617,7 +611,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 <dl class="section note"><dt>Note</dt><dd>Every time this routine is called, the routine <a class="el" href="sky_8h.html#a297ba340f931e59201a108c6a9e67800" title="Modify our azEl rotation matrix to incorporate a polar motion rotation matrix.">sky_adjustSiteForPolarMotion()</a> must be called for every site. (Typically this will be only one site.)</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00523">523</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00522">522</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
 </div>
@@ -691,7 +685,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 <dl class="section user"><dt></dt><dd>If <em>second</em> turns out to be within half a millisecond of the next round minute, this routine rounds time upwards.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00287">287</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00286">286</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
 </div>

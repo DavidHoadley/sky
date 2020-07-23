@@ -11,8 +11,9 @@
  *          and performing operations upon them, such as adding or subtracting
  *          vectors, coordinate rotation, conversion to and from polar coords.
  *
- * \copyright
- * \parblock
+ *==============================================================================
+ */
+/*
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
  * All rights reserved.
  *
@@ -36,9 +37,6 @@
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
- * \endparblock
- *
- *==============================================================================
  */
 
 #ifdef __cplusplus
@@ -131,4 +129,3 @@ V3D_Matrix *v3d_multMxM(V3D_Matrix *destM,
 #endif
 
 #endif /*VECTORS3D_H*/
-

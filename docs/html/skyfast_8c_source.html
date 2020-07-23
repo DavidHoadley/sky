@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sun position: src/skyfast.c Source File</title>
+<title>Sun position: skyfast.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.0.10-1</span>
+   &#160;<span id="projectnumber">0.1.0-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -95,329 +95,328 @@ $(document).ready(function(){initNavTree('skyfast_8c_source.html',''); initResiz
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * Description: (see skyfast.h)</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * </span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * Copyright (c) 2020, David Hoadley &lt;vcrumble@westnet.com.au&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> * All rights reserved.</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> * Redistribution and use in source and binary forms, with or without</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> * modification, are permitted provided that the following conditions are met:</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> * * Redistributions of source code must retain the above copyright notice, this</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> *   list of conditions and the following disclaimer.</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> * * Redistributions in binary form must reproduce the above copyright notice,</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"> *   this list of conditions and the following disclaimer in the documentation</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"> *   and/or other materials provided with the distribution.</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"> * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"> * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"> * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"> * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"> * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"> * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"> * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> * POSSIBILITY OF SUCH DAMAGE.</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> *==============================================================================</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">/* ANSI includes etc. */</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &lt;math.h&gt;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">/* Local and project includes */</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="skyfast_8h.html">skyfast.h</a>&quot;</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sky0_8h.html">sky0.h</a>&quot;</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="astron_8h.html">astron.h</a>&quot;</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &quot;general.h&quot;</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sun_8h.html">sun.h</a>&quot;</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> * Local #defines and typedefs</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;DEFINE_THIS_FILE;                       <span class="comment">// For use by REQUIRE() - assertions.</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">/*      --- Definitions that you may need to or wish to modify --- */</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">//#define BARE_METAL_THREADS</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">//#define POSIX_THREADS</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">//#define NO_THREADS</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#if defined(BARE_METAL_THREADS)</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#define startCriticalSection()      disableInterrupts()</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#define endCriticalSection()        enableInterrupts()</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#elif defined(POSIX_THREADS)</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#include &lt;pthread.h&gt;</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#define startCriticalSection()      pthread_mutex_lock(&amp;mutex)</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#define endCriticalSection()        pthread_mutex_unlock(&amp;mutex)</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#else </span><span class="comment">/* Must be NO_THREADS */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#define startCriticalSection()      ((void)0)</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#define endCriticalSection()        ((void)0)</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * Copyright (c) 2020, David Hoadley &lt;vcrumble@westnet.com.au&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * All rights reserved.</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> * Redistribution and use in source and binary forms, with or without</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> * modification, are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> * * Redistributions of source code must retain the above copyright notice, this</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *   list of conditions and the following disclaimer.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> * * Redistributions in binary form must reproduce the above copyright notice,</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> *   this list of conditions and the following disclaimer in the documentation</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"> *   and/or other materials provided with the distribution.</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"> * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"> * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"> * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"> * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"> * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"> * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"> * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"> * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> * POSSIBILITY OF SUCH DAMAGE.</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> *==============================================================================</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">/* ANSI includes etc. */</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;math.h&gt;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">/* Local and project includes */</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="skyfast_8h.html">skyfast.h</a>&quot;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sky0_8h.html">sky0.h</a>&quot;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="astron_8h.html">astron.h</a>&quot;</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &quot;general.h&quot;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sun_8h.html">sun.h</a>&quot;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"> * Local #defines and typedefs</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;DEFINE_THIS_FILE;                       <span class="comment">// For use by REQUIRE() - assertions.</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">/*      --- Definitions that you may need to or wish to modify --- */</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">//#define BARE_METAL_THREADS</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">//#define POSIX_THREADS</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">//#define NO_THREADS</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#if defined(BARE_METAL_THREADS)</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#define startCriticalSection()      disableInterrupts()</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#define endCriticalSection()        enableInterrupts()</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#elif defined(POSIX_THREADS)</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#include &lt;pthread.h&gt;</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#define startCriticalSection()      pthread_mutex_lock(&amp;mutex)</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#define endCriticalSection()        pthread_mutex_unlock(&amp;mutex)</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#else </span><span class="comment">/* Must be NO_THREADS */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#define startCriticalSection()      ((void)0)</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#define endCriticalSection()        ((void)0)</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"> * Prototypes for local functions (not called from other modules)</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"> * Prototypes for local functions (not called from other modules)</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"> * Global variables accessible by other modules</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment"> * Global variables accessible by other modules</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"> * Local variables (not accessed by other modules)</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;LOCAL <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a>  lfiA, lfiB, lfiC;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;LOCAL <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a>  *last = &amp;lfiA;      <span class="comment">// items calculated for time in past</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;LOCAL <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a>  *next = &amp;lfiB;      <span class="comment">// items calculated for time ahead</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;LOCAL <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a>  *oneAfter = &amp;lfiC;  <span class="comment">// items calculated for time after next</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;LOCAL <span class="keyword">volatile</span> <span class="keywordtype">bool</span>       oneAfterIsValid = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;LOCAL void (*callback)(<span class="keywordtype">double</span> j2kTT_cy, <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a> *pos);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;LOCAL <span class="keywordtype">double</span>        recalcInterval_cy = 0.0; <span class="comment">// time between full recalculations</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#ifdef POSIX_THREADS</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;LOCAL pthread_mutex_t mutex;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"> *==============================================================================</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"> * Implementation</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment"> *==============================================================================</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment"> * Global functions callable by other modules</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="skyfast_8h.html#ac22205943c218e19d4313fc71dda43d4">  112</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="skyfast_8h.html#ac22205943c218e19d4313fc71dda43d4">skyfast_init</a>(<span class="keywordtype">double</span>            tStartUtc_d,</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                         <span class="keywordtype">int</span>               fullRecalcInterval_mins,</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                         <span class="keyword">const</span> <a class="code" href="struct_sky___delta_ts.html">Sky_DeltaTs</a> *deltas,</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                         <span class="keywordtype">void</span> (*getApparent)(<span class="keywordtype">double</span> j2kTT_cy,</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                                             <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a> *pos)</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                         )<span class="comment"></span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">/*! Initialise those items that take a long time to calculate, but which do not</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">    need to be recalculated frequently. This routine calls a function that you</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">    supply to calculate the apparent coordinates of a celestial object, its</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">    distance, and the Equation of the Equinoxes, as derived from nutation</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">    calculations. This routine calls that function</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">        1.  for the time specified by \a mjdUtc,</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">        2.  for time \a tStartUtc_d + \a fullRecalcalcInterval_mins, and</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">        3.  for time \a tStartUtc_d + 2 x \a fullRecalcalcInterval_mins.</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">        .</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">    For example, to track the Sun, specify the function sun_nrelApparent() when</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">    calling this routine. To track the Moon, specify the function </span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">    moon_nrelApparent(). </span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">    The routine skyfast_getApprox() can then be called</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">    (at a high frequency if required) to calculate the current position of the</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">    object, using these values to do it.</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment"> \param[in]  tStartUtc_d  Time for first full calculation using function</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">                          \a getApparent(). UTC time in &quot;J2KD&quot; form - i.e days</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">                          since J2000.0 (= JD - 2 451 545.0)</span></div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment"> \param[in]  fullRecalcInterval_mins</span></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">                          Interval of time between full recalculation of the</span></div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">                          object&#39;s position using the function supplied to</span></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">                          \a getApparent (minutes). This value must be greater</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">                          than zero. (Otherwise you will get a precondition</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">                          failure.)</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment"> \param[in]  deltas       Delta T values, as set by the sky_initTime() (or </span></div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">                          sky_initTimeSimple() or sky_initTimeDetailed())</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">                          routines</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment"> \param      getApparent  Function to get the position of a celestial object in</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">                          apparent coordinates (i.e. referred to the true</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">                          equinox and equator at the time), in rectangular form.</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment"> \par When to call this function</span></div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">    At program initialisation time.</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment"> \note</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">    Although the parameter name \a getApparent suggests that you must supply a</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">    function which calculates an object&#39;s position in apparent coordinates, it</span></div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">    is also possible to supply a function which returns the position in</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">    Celestial Intermediate coordinates (i.e. referred to the true equator and</span></div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">    the Celestial Intermediate Origin (CIO) at time \a t_cy) instead. If so,</span></div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">    the function does not need to fill in the \a eqEq_rad field of struct</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">    Sky_TrueEquatorial.</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;{</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <a class="code" href="struct_sky___times.html">Sky_Times</a>   atime;              <span class="comment">// time, in various timescales</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keywordtype">double</span>      calcTimeTT_cy;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="preprocessor">#ifdef POSIX_THREADS</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keywordtype">int</span>         ret;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    REQUIRE_NOT_NULL(deltas);</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    REQUIRE_NOT_NULL(getApparent);</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    REQUIRE(fullRecalcInterval_mins &gt; 0);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"> * Local variables (not accessed by other modules)</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;LOCAL <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a>  lfiA, lfiB, lfiC;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;LOCAL <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a>  *last = &amp;lfiA;      <span class="comment">// items calculated for time in past</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;LOCAL <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a>  *next = &amp;lfiB;      <span class="comment">// items calculated for time ahead</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;LOCAL <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a>  *oneAfter = &amp;lfiC;  <span class="comment">// items calculated for time after next</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;LOCAL <span class="keyword">volatile</span> <span class="keywordtype">bool</span>       oneAfterIsValid = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;LOCAL void (*callback)(<span class="keywordtype">double</span> j2kTT_cy, <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a> *pos);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;LOCAL <span class="keywordtype">double</span>        recalcInterval_cy = 0.0; <span class="comment">// time between full recalculations</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#ifdef POSIX_THREADS</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;LOCAL pthread_mutex_t mutex;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment"> *==============================================================================</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"> * Implementation</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment"> *==============================================================================</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment"> * Global functions callable by other modules</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="skyfast_8h.html#ac22205943c218e19d4313fc71dda43d4">  111</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="skyfast_8h.html#ac22205943c218e19d4313fc71dda43d4">skyfast_init</a>(<span class="keywordtype">double</span>            tStartUtc_d,</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                         <span class="keywordtype">int</span>               fullRecalcInterval_mins,</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                         <span class="keyword">const</span> <a class="code" href="struct_sky___delta_ts.html">Sky_DeltaTs</a> *deltas,</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                         <span class="keywordtype">void</span> (*getApparent)(<span class="keywordtype">double</span> j2kTT_cy,</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                                             <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a> *pos)</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                         )<span class="comment"></span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">/*! Initialise those items that take a long time to calculate, but which do not</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">    need to be recalculated frequently. This routine calls a function that you</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">    supply to calculate the apparent coordinates of a celestial object, its</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">    distance, and the Equation of the Equinoxes, as derived from nutation</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">    calculations. This routine calls that function</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">        1.  for the time specified by \a mjdUtc,</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">        2.  for time \a tStartUtc_d + \a fullRecalcalcInterval_mins, and</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">        3.  for time \a tStartUtc_d + 2 x \a fullRecalcalcInterval_mins.</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">        .</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">    For example, to track the Sun, specify the function sun_nrelApparent() when</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">    calling this routine. To track the Moon, specify the function </span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">    moon_nrelApparent(). </span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">    The routine skyfast_getApprox() can then be called</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">    (at a high frequency if required) to calculate the current position of the</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">    object, using these values to do it.</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment"> \param[in]  tStartUtc_d  Time for first full calculation using function</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">                          \a getApparent(). UTC time in &quot;J2KD&quot; form - i.e days</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">                          since J2000.0 (= JD - 2 451 545.0)</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment"> \param[in]  fullRecalcInterval_mins</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">                          Interval of time between full recalculation of the</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">                          object&#39;s position using the function supplied to</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">                          \a getApparent (minutes). This value must be greater</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">                          than zero. (Otherwise you will get a precondition</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">                          failure.)</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment"> \param[in]  deltas       Delta T values, as set by the sky_initTime() (or </span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">                          sky_initTimeSimple() or sky_initTimeDetailed())</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">                          routines</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment"> \param      getApparent  Function to get the position of a celestial object in</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">                          apparent coordinates (i.e. referred to the true</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">                          equinox and equator at the time), in rectangular form.</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment"> \par When to call this function</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">    At program initialisation time.</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment"> \note</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">    Although the parameter name \a getApparent suggests that you must supply a</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">    function which calculates an object&#39;s position in apparent coordinates, it</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">    is also possible to supply a function which returns the position in</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">    Celestial Intermediate coordinates (i.e. referred to the true equator and</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">    the Celestial Intermediate Origin (CIO) at time \a t_cy) instead. If so,</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">    the function does not need to fill in the \a eqEq_rad field of struct</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">    Sky_TrueEquatorial.</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;{</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <a class="code" href="struct_sky___times.html">Sky_Times</a>   atime;              <span class="comment">// time, in various timescales</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keywordtype">double</span>      calcTimeTT_cy;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="preprocessor">#ifdef POSIX_THREADS</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordtype">int</span>         ret;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    REQUIRE_NOT_NULL(deltas);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    REQUIRE_NOT_NULL(getApparent);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    REQUIRE(fullRecalcInterval_mins &gt; 0);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="preprocessor">#ifdef POSIX_THREADS</span></div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    ret = pthread_mutex_init(&amp;mutex, NULL);</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    ASSERT(ret == 0);   <span class="comment">// There is no possible recovery from an error here.</span></div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="comment">/* Save the function address for later call by skyfast_backgroundUpdate() */</span></div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    callback = getApparent;</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    </div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <a class="code" href="sky_8h.html#a03279243991e42a3edbeaac243ae2dc7">sky_updateTimes</a>(tStartUtc_d, deltas, &amp;atime);</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="comment">/* Save the recalculation rate, converted from minutes to centuries. */</span></div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    recalcInterval_cy = fullRecalcInterval_mins / (1440.0 * JUL_CENT);</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    calcTimeTT_cy = atime.<a class="code" href="struct_sky___times.html#a3c9436d4d73659b99d777051b8b095e5">j2kTT_cy</a>;</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    getApparent(calcTimeTT_cy, last);</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    </div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <span class="comment">/* Now do the same for the next time (e.g. next hour) */</span></div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    calcTimeTT_cy += recalcInterval_cy;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    getApparent(calcTimeTT_cy, next);</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="comment">/* And again for the time after */</span></div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    calcTimeTT_cy += recalcInterval_cy;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    getApparent(calcTimeTT_cy, oneAfter);</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    oneAfterIsValid = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;}</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="preprocessor">#ifdef POSIX_THREADS</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    ret = pthread_mutex_init(&amp;mutex, NULL);</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    ASSERT(ret == 0);   <span class="comment">// There is no possible recovery from an error here.</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="comment">/* Save the function address for later call by skyfast_backgroundUpdate() */</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    callback = getApparent;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <a class="code" href="sky_8h.html#a03279243991e42a3edbeaac243ae2dc7">sky_updateTimes</a>(tStartUtc_d, deltas, &amp;atime);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="comment">/* Save the recalculation rate, converted from minutes to centuries. */</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    recalcInterval_cy = fullRecalcInterval_mins / (1440.0 * JUL_CENT);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    calcTimeTT_cy = atime.<a class="code" href="struct_sky___times.html#a3c9436d4d73659b99d777051b8b095e5">j2kTT_cy</a>;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    getApparent(calcTimeTT_cy, last);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="comment">/* Now do the same for the next time (e.g. next hour) */</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    calcTimeTT_cy += recalcInterval_cy;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    getApparent(calcTimeTT_cy, next);</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="comment">/* And again for the time after */</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    calcTimeTT_cy += recalcInterval_cy;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    getApparent(calcTimeTT_cy, oneAfter);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    oneAfterIsValid = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;}</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
-<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="skyfast_8h.html#a3e351824c719ae6e465c1886a20a1a9c">  200</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="skyfast_8h.html#a3e351824c719ae6e465c1886a20a1a9c">skyfast_backgroundUpdate</a>(<span class="keywordtype">void</span>)<span class="comment"></span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">/*! Recalculation of the low frequency quantities.</span></div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">    Checks whether the calculations of the celestial object&#39;s apparent</span></div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment">    coordinates and the equation of the equinoxes have been performed for the</span></div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">    time called &quot;oneAfter&quot; (i.e. the time after the time called &quot;next&quot;). If they</span></div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">    have not, this function performs those calculations.</span></div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">    This function calls the function that you previously supplied to function</span></div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">    skyfast_init() (parameter \a getApparent).</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment">   </span></div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment"> \par When to call this function</span></div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment">    This function is designed to be called in a low priority loop, or at</span></div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">    background level, using any available leftover processor time to slowly</span></div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">    precalculate values for the &quot;time after next&quot;. It needs to have been called</span></div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">    before the high frequency routine skyfast_getApprox() (which is</span></div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">    interpolating between time &quot;last&quot; and time &quot;next&quot;) arrives at time &quot;next&quot;</span></div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">    and therefore needs to access the data for time &quot;oneAfter&quot;.</span></div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;{</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keywordtype">double</span>  t_cy;</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    REQUIRE(recalcInterval_cy &gt; 0.0);   <span class="comment">/* skyfast_init() must be called before now */</span></div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="keywordflow">if</span> (!oneAfterIsValid) {</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        t_cy = next-&gt;<a class="code" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">timestamp_cy</a> + recalcInterval_cy;</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        callback(t_cy, oneAfter);</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        startCriticalSection();</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        oneAfterIsValid = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        endCriticalSection();</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    }</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;}</div>
+<div class="line"><a name="l00199"></a><span class="lineno"><a class="line" href="skyfast_8h.html#a3e351824c719ae6e465c1886a20a1a9c">  199</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="skyfast_8h.html#a3e351824c719ae6e465c1886a20a1a9c">skyfast_backgroundUpdate</a>(<span class="keywordtype">void</span>)<span class="comment"></span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">/*! Recalculation of the low frequency quantities.</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">    Checks whether the calculations of the celestial object&#39;s apparent</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">    coordinates and the equation of the equinoxes have been performed for the</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment">    time called &quot;oneAfter&quot; (i.e. the time after the time called &quot;next&quot;). If they</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">    have not, this function performs those calculations.</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">    This function calls the function that you previously supplied to function</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">    skyfast_init() (parameter \a getApparent).</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">   </span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment"> \par When to call this function</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">    This function is designed to be called in a low priority loop, or at</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment">    background level, using any available leftover processor time to slowly</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">    precalculate values for the &quot;time after next&quot;. It needs to have been called</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">    before the high frequency routine skyfast_getApprox() (which is</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">    interpolating between time &quot;last&quot; and time &quot;next&quot;) arrives at time &quot;next&quot;</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">    and therefore needs to access the data for time &quot;oneAfter&quot;.</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;{</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordtype">double</span>  t_cy;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    REQUIRE(recalcInterval_cy &gt; 0.0);   <span class="comment">/* skyfast_init() must be called before now */</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keywordflow">if</span> (!oneAfterIsValid) {</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        t_cy = next-&gt;<a class="code" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">timestamp_cy</a> + recalcInterval_cy;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        callback(t_cy, oneAfter);</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        startCriticalSection();</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        oneAfterIsValid = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        endCriticalSection();</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    }</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;}</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
-<div class="line"><a name="l00235"></a><span class="lineno"><a class="line" href="skyfast_8h.html#afb9144e153624a3bf899af40eca07ac0">  235</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="skyfast_8h.html#afb9144e153624a3bf899af40eca07ac0">skyfast_getApprox</a>(<span class="keywordtype">double</span> t_cy,</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                              <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a> *approx)<span class="comment"></span></div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">/*! Get the best approximation to the celestial object&#39;s apparent coordinates</span></div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">    and distance, and the equation of the equinoxes, based on an interpolation</span></div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">    between two sets of such data that we have previously calculated.</span></div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment"> \param[in]  t_cy     Julian centuries since J2000.0, TT timescale. This must</span></div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">                      specify a time no earlier than the time specified in</span></div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">                      argument \a tStartUtc_d in the call to skyfast_init().</span></div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment"> \param[out] approx   position vector, distance, etc, obtained by interpolation</span></div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">    Although the position is described as approximate, the position returned can</span></div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">    be very accurate, as shown in \ref page-interpolation, depending on the</span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">    interpolation interval that was specified to routine skyfast_init().</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment"> \note</span></div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">    This function will return an approximate position in apparent coordinates</span></div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">    (i.e. referred to the true equator and equinox at time \a t_cy) if the</span></div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">    function that you passed to the skyfast_init() function returned apparent</span></div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">    coordinates. This function will return an approximate position in</span></div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">    Celestial Intermediate coordinates (i.e. referred to the true equator and</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">    the Celestial Intermediate Origin (CIO)) at time \a t_cy) if the</span></div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">    function that you passed to the skyfast_init() function returned CIRS</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">    coordinates.</span></div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;{</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a> *temp;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordtype">double</span> a;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordtype">double</span> b;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keywordflow">if</span> (t_cy &gt; next-&gt;<a class="code" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">timestamp_cy</a>) {</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        <span class="comment">/* Time t_cy is no longer between last and next, so we need to make next</span></div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">           and oneAfter become the new last and next respectively. But this</span></div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">           requires that our low frequency/low priority routine has completed</span></div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">           filling in all the data for oneAfter. */</span></div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        REQUIRE(oneAfterIsValid);</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        </div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        startCriticalSection();</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        temp = last;</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        last = next;</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        next = oneAfter;</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        oneAfter = temp;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        oneAfterIsValid = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        endCriticalSection();</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    }</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    <span class="comment">/* It is a programming error if time t_cy is not between last and next */</span></div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    REQUIRE(t_cy &gt;= last-&gt;<a class="code" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">timestamp_cy</a>);</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    REQUIRE(next-&gt;<a class="code" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">timestamp_cy</a> &gt;= t_cy);</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="keywordflow">if</span> ((next-&gt;<a class="code" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">timestamp_cy</a> - last-&gt;<a class="code" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">timestamp_cy</a>) &lt; SFA) {</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        a = 0.0;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        b = 1.0;</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        a = (t_cy - last-&gt;<a class="code" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">timestamp_cy</a>)</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;            / (next-&gt;<a class="code" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">timestamp_cy</a> - last-&gt;<a class="code" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">timestamp_cy</a>);</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        b = 1.0 - a;</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    }</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    <span class="comment">/* Do a simple linear interpolation between the two appCirsV position</span></div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">     * vectors last and next. Unlike the two appCirsV vectors, the resulting</span></div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">     * vector will not be exactly of unit magnitude. But if the two appCirsV</span></div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">     * vectors are less than one degree apart, the resulting position error is</span></div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">     * very small (&lt; 0.3′). If the two appCirsV are a few arcminutes</span></div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">     * apart, the magnitude error of the resulting vector is negligible.  */</span></div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    approx-&gt;<a class="code" href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">appCirsV</a>.a[0] =  a * next-&gt;<a class="code" href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">appCirsV</a>.a[0] + b * last-&gt;<a class="code" href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">appCirsV</a>.a[0];</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    approx-&gt;<a class="code" href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">appCirsV</a>.a[1] =  a * next-&gt;<a class="code" href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">appCirsV</a>.a[1] + b * last-&gt;<a class="code" href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">appCirsV</a>.a[1];</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    approx-&gt;<a class="code" href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">appCirsV</a>.a[2] =  a * next-&gt;<a class="code" href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">appCirsV</a>.a[2] + b * last-&gt;<a class="code" href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">appCirsV</a>.a[2];</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    <span class="comment">/* And a linear interpolation of the other two quantities also. */</span></div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    approx-&gt;<a class="code" href="struct_sky___true_equatorial.html#a1eaa585fcc5e1c69290dc1daea7e48af">distance_au</a> = a * next-&gt;<a class="code" href="struct_sky___true_equatorial.html#a1eaa585fcc5e1c69290dc1daea7e48af">distance_au</a> + b * last-&gt;<a class="code" href="struct_sky___true_equatorial.html#a1eaa585fcc5e1c69290dc1daea7e48af">distance_au</a>;</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    approx-&gt;<a class="code" href="struct_sky___true_equatorial.html#a9c13083bb211839f27757fb90210af55">eqEq_rad</a>    = a * next-&gt;<a class="code" href="struct_sky___true_equatorial.html#a9c13083bb211839f27757fb90210af55">eqEq_rad</a> + b * last-&gt;<a class="code" href="struct_sky___true_equatorial.html#a9c13083bb211839f27757fb90210af55">eqEq_rad</a>;</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;}</div>
+<div class="line"><a name="l00234"></a><span class="lineno"><a class="line" href="skyfast_8h.html#afb9144e153624a3bf899af40eca07ac0">  234</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="skyfast_8h.html#afb9144e153624a3bf899af40eca07ac0">skyfast_getApprox</a>(<span class="keywordtype">double</span> t_cy,</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                              <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a> *approx)<span class="comment"></span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">/*! Get the best approximation to the celestial object&#39;s apparent coordinates</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">    and distance, and the equation of the equinoxes, based on an interpolation</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">    between two sets of such data that we have previously calculated.</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment"> \param[in]  t_cy     Julian centuries since J2000.0, TT timescale. This must</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">                      specify a time no earlier than the time specified in</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">                      argument \a tStartUtc_d in the call to skyfast_init().</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment"> \param[out] approx   position vector, distance, etc, obtained by interpolation</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">    Although the position is described as approximate, the position returned can</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">    be very accurate, as shown in \ref page-interpolation, depending on the</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">    interpolation interval that was specified to routine skyfast_init().</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment"> \note</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">    This function will return an approximate position in apparent coordinates</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">    (i.e. referred to the true equator and equinox at time \a t_cy) if the</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">    function that you passed to the skyfast_init() function returned apparent</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">    coordinates. This function will return an approximate position in</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">    Celestial Intermediate coordinates (i.e. referred to the true equator and</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">    the Celestial Intermediate Origin (CIO)) at time \a t_cy) if the</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">    function that you passed to the skyfast_init() function returned CIRS</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">    coordinates.</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;{</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a> *temp;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="keywordtype">double</span> a;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordtype">double</span> b;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="keywordflow">if</span> (t_cy &gt; next-&gt;<a class="code" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">timestamp_cy</a>) {</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        <span class="comment">/* Time t_cy is no longer between last and next, so we need to make next</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">           and oneAfter become the new last and next respectively. But this</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">           requires that our low frequency/low priority routine has completed</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">           filling in all the data for oneAfter. */</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        REQUIRE(oneAfterIsValid);</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        startCriticalSection();</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        temp = last;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        last = next;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        next = oneAfter;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        oneAfter = temp;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        oneAfterIsValid = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        endCriticalSection();</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    }</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="comment">/* It is a programming error if time t_cy is not between last and next */</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    REQUIRE(t_cy &gt;= last-&gt;<a class="code" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">timestamp_cy</a>);</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    REQUIRE(next-&gt;<a class="code" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">timestamp_cy</a> &gt;= t_cy);</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <span class="keywordflow">if</span> ((next-&gt;<a class="code" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">timestamp_cy</a> - last-&gt;<a class="code" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">timestamp_cy</a>) &lt; SFA) {</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        a = 0.0;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        b = 1.0;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        a = (t_cy - last-&gt;<a class="code" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">timestamp_cy</a>)</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;            / (next-&gt;<a class="code" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">timestamp_cy</a> - last-&gt;<a class="code" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">timestamp_cy</a>);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        b = 1.0 - a;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    }</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    <span class="comment">/* Do a simple linear interpolation between the two appCirsV position</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment">     * vectors last and next. Unlike the two appCirsV vectors, the resulting</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">     * vector will not be exactly of unit magnitude. But if the two appCirsV</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">     * vectors are less than one degree apart, the resulting position error is</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">     * very small (&lt; 0.3′). If the two appCirsV are a few arcminutes</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">     * apart, the magnitude error of the resulting vector is negligible.  */</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    approx-&gt;<a class="code" href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">appCirsV</a>.a[0] =  a * next-&gt;<a class="code" href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">appCirsV</a>.a[0] + b * last-&gt;<a class="code" href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">appCirsV</a>.a[0];</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    approx-&gt;<a class="code" href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">appCirsV</a>.a[1] =  a * next-&gt;<a class="code" href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">appCirsV</a>.a[1] + b * last-&gt;<a class="code" href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">appCirsV</a>.a[1];</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    approx-&gt;<a class="code" href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">appCirsV</a>.a[2] =  a * next-&gt;<a class="code" href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">appCirsV</a>.a[2] + b * last-&gt;<a class="code" href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">appCirsV</a>.a[2];</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <span class="comment">/* And a linear interpolation of the other two quantities also. */</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    approx-&gt;<a class="code" href="struct_sky___true_equatorial.html#a1eaa585fcc5e1c69290dc1daea7e48af">distance_au</a> = a * next-&gt;<a class="code" href="struct_sky___true_equatorial.html#a1eaa585fcc5e1c69290dc1daea7e48af">distance_au</a> + b * last-&gt;<a class="code" href="struct_sky___true_equatorial.html#a1eaa585fcc5e1c69290dc1daea7e48af">distance_au</a>;</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    approx-&gt;<a class="code" href="struct_sky___true_equatorial.html#a9c13083bb211839f27757fb90210af55">eqEq_rad</a>    = a * next-&gt;<a class="code" href="struct_sky___true_equatorial.html#a9c13083bb211839f27757fb90210af55">eqEq_rad</a> + b * last-&gt;<a class="code" href="struct_sky___true_equatorial.html#a9c13083bb211839f27757fb90210af55">eqEq_rad</a>;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;}</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
 <div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment"> * Local functions (not called from other modules)</span></div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="comment"> * Local functions (not called from other modules)</span></div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
 <div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="astruct_sky___true_equatorial_html_adef22951bb0a838e98406ee8fa36e641"><div class="ttname"><a href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">Sky_TrueEquatorial::appCirsV</a></div><div class="ttdeci">V3D_Vector appCirsV</div><div class="ttdoc">Direction of object in apparent or CIRS coordinates (effectively a unit vector).</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00107">sky.h:107</a></div></div>
-<div class="ttc" id="astruct_sky___delta_ts_html"><div class="ttname"><a href="struct_sky___delta_ts.html">Sky_DeltaTs</a></div><div class="ttdoc">This structure contains relatively constant data, and is set up by one of the three functions sky_ini...</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00158">sky.h:158</a></div></div>
+<div class="ttc" id="astruct_sky___true_equatorial_html_adef22951bb0a838e98406ee8fa36e641"><div class="ttname"><a href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">Sky_TrueEquatorial::appCirsV</a></div><div class="ttdeci">V3D_Vector appCirsV</div><div class="ttdoc">Direction of object in apparent or CIRS coordinates (effectively a unit vector).</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00109">sky.h:109</a></div></div>
+<div class="ttc" id="astruct_sky___delta_ts_html"><div class="ttname"><a href="struct_sky___delta_ts.html">Sky_DeltaTs</a></div><div class="ttdoc">This structure contains relatively constant data, and is set up by one of the three functions sky_ini...</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00160">sky.h:160</a></div></div>
 <div class="ttc" id="aastron_8h_html"><div class="ttname"><a href="astron_8h.html">astron.h</a></div><div class="ttdoc">astron.h - assorted definitions useful for astronomy</div></div>
-<div class="ttc" id="asky_8h_html_a03279243991e42a3edbeaac243ae2dc7"><div class="ttname"><a href="sky_8h.html#a03279243991e42a3edbeaac243ae2dc7">sky_updateTimes</a></div><div class="ttdeci">void sky_updateTimes(double j2kUtc_d, const Sky_DeltaTs *d, Sky_Times *t)</div><div class="ttdoc">Convert the given &quot;J2KD&quot; in the UTC timescale to the other timescales, and pre-calculate some other q...</div><div class="ttdef"><b>Definition:</b> <a href="sky-time_8c_source.html#l00198">sky-time.c:198</a></div></div>
-<div class="ttc" id="astruct_sky___true_equatorial_html"><div class="ttname"><a href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a></div><div class="ttdoc">Struct used for holding an object's coordinates in equatorial apparent or Intermediate coordinates.</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00103">sky.h:103</a></div></div>
-<div class="ttc" id="askyfast_8h_html_afb9144e153624a3bf899af40eca07ac0"><div class="ttname"><a href="skyfast_8h.html#afb9144e153624a3bf899af40eca07ac0">skyfast_getApprox</a></div><div class="ttdeci">void skyfast_getApprox(double t_cy, Sky_TrueEquatorial *approx)</div><div class="ttdoc">Get the best approximation to the celestial object's apparent coordinates and distance,...</div><div class="ttdef"><b>Definition:</b> <a href="skyfast_8c_source.html#l00235">skyfast.c:235</a></div></div>
-<div class="ttc" id="astruct_sky___times_html_a3c9436d4d73659b99d777051b8b095e5"><div class="ttname"><a href="struct_sky___times.html#a3c9436d4d73659b99d777051b8b095e5">Sky_Times::j2kTT_cy</a></div><div class="ttdeci">double j2kTT_cy</div><div class="ttdoc">Julian centuries since J2000.0, TT timescale [T].</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00180">sky.h:180</a></div></div>
-<div class="ttc" id="astruct_sky___times_html"><div class="ttname"><a href="struct_sky___times.html">Sky_Times</a></div><div class="ttdoc">This structure contains the continuously varying time (and earth rotation) data, in various forms tha...</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00176">sky.h:176</a></div></div>
-<div class="ttc" id="astruct_sky___true_equatorial_html_a9c13083bb211839f27757fb90210af55"><div class="ttname"><a href="struct_sky___true_equatorial.html#a9c13083bb211839f27757fb90210af55">Sky_TrueEquatorial::eqEq_rad</a></div><div class="ttdeci">double eqEq_rad</div><div class="ttdoc">Equation of the Equinoxes (radian).</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00112">sky.h:112</a></div></div>
-<div class="ttc" id="askyfast_8h_html_a3e351824c719ae6e465c1886a20a1a9c"><div class="ttname"><a href="skyfast_8h.html#a3e351824c719ae6e465c1886a20a1a9c">skyfast_backgroundUpdate</a></div><div class="ttdeci">void skyfast_backgroundUpdate(void)</div><div class="ttdoc">Recalculation of the low frequency quantities.</div><div class="ttdef"><b>Definition:</b> <a href="skyfast_8c_source.html#l00200">skyfast.c:200</a></div></div>
-<div class="ttc" id="askyfast_8h_html_ac22205943c218e19d4313fc71dda43d4"><div class="ttname"><a href="skyfast_8h.html#ac22205943c218e19d4313fc71dda43d4">skyfast_init</a></div><div class="ttdeci">void skyfast_init(double tStartUtc_d, int fullRecalcInterval_mins, const Sky_DeltaTs *deltas, void(*getApparent)(double j2kTT_cy, Sky_TrueEquatorial *pos))</div><div class="ttdoc">Initialise those items that take a long time to calculate, but which do not need to be recalculated f...</div><div class="ttdef"><b>Definition:</b> <a href="skyfast_8c_source.html#l00112">skyfast.c:112</a></div></div>
-<div class="ttc" id="astruct_sky___true_equatorial_html_a0f919185f0cb457f8ef18530392eaa00"><div class="ttname"><a href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">Sky_TrueEquatorial::timestamp_cy</a></div><div class="ttdeci">double timestamp_cy</div><div class="ttdoc">Time applying to the other figures in this struct (centuries since J2000.0, TT timescale)</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00104">sky.h:104</a></div></div>
-<div class="ttc" id="astruct_sky___true_equatorial_html_a1eaa585fcc5e1c69290dc1daea7e48af"><div class="ttname"><a href="struct_sky___true_equatorial.html#a1eaa585fcc5e1c69290dc1daea7e48af">Sky_TrueEquatorial::distance_au</a></div><div class="ttdeci">double distance_au</div><div class="ttdoc">Distance to object (Astronomical Units) or 0.0 for far distant objects (that is, those with negligibl...</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00109">sky.h:109</a></div></div>
+<div class="ttc" id="asky_8h_html_a03279243991e42a3edbeaac243ae2dc7"><div class="ttname"><a href="sky_8h.html#a03279243991e42a3edbeaac243ae2dc7">sky_updateTimes</a></div><div class="ttdeci">void sky_updateTimes(double j2kUtc_d, const Sky_DeltaTs *d, Sky_Times *t)</div><div class="ttdoc">Convert the given &quot;J2KD&quot; in the UTC timescale to the other timescales, and pre-calculate some other q...</div><div class="ttdef"><b>Definition:</b> <a href="sky-time_8c_source.html#l00197">sky-time.c:197</a></div></div>
+<div class="ttc" id="astruct_sky___true_equatorial_html"><div class="ttname"><a href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a></div><div class="ttdoc">Struct used for holding an object's coordinates in equatorial apparent or Intermediate coordinates.</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00105">sky.h:105</a></div></div>
+<div class="ttc" id="askyfast_8h_html_afb9144e153624a3bf899af40eca07ac0"><div class="ttname"><a href="skyfast_8h.html#afb9144e153624a3bf899af40eca07ac0">skyfast_getApprox</a></div><div class="ttdeci">void skyfast_getApprox(double t_cy, Sky_TrueEquatorial *approx)</div><div class="ttdoc">Get the best approximation to the celestial object's apparent coordinates and distance,...</div><div class="ttdef"><b>Definition:</b> <a href="skyfast_8c_source.html#l00234">skyfast.c:234</a></div></div>
+<div class="ttc" id="astruct_sky___times_html_a3c9436d4d73659b99d777051b8b095e5"><div class="ttname"><a href="struct_sky___times.html#a3c9436d4d73659b99d777051b8b095e5">Sky_Times::j2kTT_cy</a></div><div class="ttdeci">double j2kTT_cy</div><div class="ttdoc">Julian centuries since J2000.0, TT timescale [T].</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00182">sky.h:182</a></div></div>
+<div class="ttc" id="astruct_sky___times_html"><div class="ttname"><a href="struct_sky___times.html">Sky_Times</a></div><div class="ttdoc">This structure contains the continuously varying time (and earth rotation) data, in various forms tha...</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00178">sky.h:178</a></div></div>
+<div class="ttc" id="astruct_sky___true_equatorial_html_a9c13083bb211839f27757fb90210af55"><div class="ttname"><a href="struct_sky___true_equatorial.html#a9c13083bb211839f27757fb90210af55">Sky_TrueEquatorial::eqEq_rad</a></div><div class="ttdeci">double eqEq_rad</div><div class="ttdoc">Equation of the Equinoxes (radian).</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00114">sky.h:114</a></div></div>
+<div class="ttc" id="askyfast_8h_html_a3e351824c719ae6e465c1886a20a1a9c"><div class="ttname"><a href="skyfast_8h.html#a3e351824c719ae6e465c1886a20a1a9c">skyfast_backgroundUpdate</a></div><div class="ttdeci">void skyfast_backgroundUpdate(void)</div><div class="ttdoc">Recalculation of the low frequency quantities.</div><div class="ttdef"><b>Definition:</b> <a href="skyfast_8c_source.html#l00199">skyfast.c:199</a></div></div>
+<div class="ttc" id="askyfast_8h_html_ac22205943c218e19d4313fc71dda43d4"><div class="ttname"><a href="skyfast_8h.html#ac22205943c218e19d4313fc71dda43d4">skyfast_init</a></div><div class="ttdeci">void skyfast_init(double tStartUtc_d, int fullRecalcInterval_mins, const Sky_DeltaTs *deltas, void(*getApparent)(double j2kTT_cy, Sky_TrueEquatorial *pos))</div><div class="ttdoc">Initialise those items that take a long time to calculate, but which do not need to be recalculated f...</div><div class="ttdef"><b>Definition:</b> <a href="skyfast_8c_source.html#l00111">skyfast.c:111</a></div></div>
+<div class="ttc" id="astruct_sky___true_equatorial_html_a0f919185f0cb457f8ef18530392eaa00"><div class="ttname"><a href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">Sky_TrueEquatorial::timestamp_cy</a></div><div class="ttdeci">double timestamp_cy</div><div class="ttdoc">Time applying to the other figures in this struct (centuries since J2000.0, TT timescale)</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00106">sky.h:106</a></div></div>
+<div class="ttc" id="astruct_sky___true_equatorial_html_a1eaa585fcc5e1c69290dc1daea7e48af"><div class="ttname"><a href="struct_sky___true_equatorial.html#a1eaa585fcc5e1c69290dc1daea7e48af">Sky_TrueEquatorial::distance_au</a></div><div class="ttdeci">double distance_au</div><div class="ttdoc">Distance to object (Astronomical Units) or 0.0 for far distant objects (that is, those with negligibl...</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00111">sky.h:111</a></div></div>
 <div class="ttc" id="askyfast_8h_html"><div class="ttname"><a href="skyfast_8h.html">skyfast.h</a></div><div class="ttdoc">skyfast.h - set up and use interpolation for rapid calculation of a celestial object's apparent coord...</div></div>
 <div class="ttc" id="asun_8h_html"><div class="ttname"><a href="sun_8h.html">sun.h</a></div><div class="ttdoc">sun.h - routines to calculate the Sun's position</div></div>
 <div class="ttc" id="asky0_8h_html"><div class="ttname"><a href="sky0_8h.html">sky0.h</a></div><div class="ttdoc">sky0.h - astronomical coordinate conversion for NREL Sun Position Algorithm</div></div>

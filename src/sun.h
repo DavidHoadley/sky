@@ -24,8 +24,9 @@
  *  National Renewable Energy Laboratory publication no. NREL/TP-560-34302,
  *  June 2003, revised 2008.
  *
- * \copyright
- * \parblock
+ *==============================================================================
+ */
+/*
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
  * All rights reserved.
  *
@@ -49,9 +50,6 @@
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
- * \endparblock
- *
- *==============================================================================
  */
 #include "sky.h"
 #include "sky0.h"
@@ -107,4 +105,3 @@ double sun_riseSet(int                year,
 #endif
 
 #endif /*SUN_H*/
-

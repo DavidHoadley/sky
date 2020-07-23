@@ -4,7 +4,7 @@
 /*!\file
  * \brief skyio.h - output and formatting routines and a read routine
  *
- * \author  David Hoadley <vcrumble@westnet.com.au>
+ * \author  David Hoadley
  *
  * \details
  *          Routines for reading and writing out assorted astronomical things,
@@ -21,9 +21,9 @@
  * 
  *          These routines were mainly developed for debugging.
  *
- *
- * \copyright
- * \parblock
+ *==============================================================================
+ */
+/*
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
  * All rights reserved.
  *
@@ -47,9 +47,6 @@
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
- * \endparblock
- *
- *==============================================================================
  */
 /*------------------------------------------------------------------------------
  * Notes:
@@ -65,6 +62,10 @@
 #define NO_ANGLE                (-1)
 #define INVALID_ANGLE           (-2)
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /*
  * Global functions available to be called by other modules
@@ -144,9 +145,9 @@ static inline char *skyio_radToDmsStr(char destStr[],
 #if defined (PREDEF_STANDARD_C_1999)
 /*          Compiler supports inline functions */
 static inline char *skyio_radToHmsStr(char destStr[],
-                                int destStrLen,
-                                double angle_rad,
-                                int decimals)
+                                      int destStrLen,
+                                      double angle_rad,
+                                      int decimals)
 {
    return skyio_hrsToHmsStr(destStr, destStrLen, radToHrs(angle_rad), decimals);
 }
@@ -163,10 +164,6 @@ void skyio_printJ2kd(double j2kd);
 /*
  * Global variables accessible by other modules
  */
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 
 #ifdef __cplusplus

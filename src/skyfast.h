@@ -6,7 +6,7 @@
  * skyfast.h - set up and use interpolation for rapid calculation of a celestial
  *             object's apparent coordinates.
  *
- * \author  David Hoadley <vcrumble@westnet.com.au>
+ * \author  David Hoadley
  *
  * \details
  *          Routines to set up interpolation for celestial tracking, get the
@@ -16,8 +16,9 @@
  *          can be very small - see \ref page-interpolation (the end of this
  *          source file)
  * 
- * \copyright
- * \parblock
+ *==============================================================================
+ */
+/*
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
  * All rights reserved.
  *
@@ -41,9 +42,6 @@
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
- * \endparblock
- *
- *==============================================================================
  */
 #include "sky.h"
 
@@ -103,4 +101,3 @@ void skyfast_getApprox(double t_cy, Sky_TrueEquatorial *approx);
  */
 
 #endif /* SKYFAST_H */
-

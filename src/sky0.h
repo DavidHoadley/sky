@@ -32,8 +32,9 @@
  *          routine uses only the largest 63 terms of the IAU 1980 nutation
  *          algorithm. 
  *
- * \copyright
- * \parblock
+ *==============================================================================
+ */
+/*
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
  * All rights reserved.
  *
@@ -57,9 +58,6 @@
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
- * \endparblock
- *
- *==============================================================================
  */
 /*------------------------------------------------------------------------------
  * Notes:
@@ -73,7 +71,7 @@
  */
 /*!      Nutation angles and obliquity */
 typedef struct {
-    double  dPsi_rad;       //!< Nutation in longitude (ΔΨ) (radian)
+    double  dPsi_rad;       //!< Nutation in longitude (Δψ) (radian)
     double  dEps_rad;       //!< Nutation in obliquity (Δε) (radian)
     double  eps0_rad;       //!< Mean obliquity of ecliptic at date (ε0)(radian)
     double  eqEq_rad;       //!< Equation of the Equinoxes (radian)

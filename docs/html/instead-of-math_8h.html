@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sun position: src/instead-of-math.h File Reference</title>
+<title>Sun position: instead-of-math.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.0.10-1</span>
+   &#160;<span id="projectnumber">0.1.0-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -84,7 +84,7 @@ $(document).ready(function(){initNavTree('instead-of-math_8h.html',''); initResi
 
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">instead-of-math.h File Reference</div>  </div>
 </div><!--header-->
@@ -95,23 +95,24 @@ $(document).ready(function(){initNavTree('instead-of-math_8h.html',''); initResi
 
 <p><a href="instead-of-math_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a21d4b1c6da61f0c343a8c3790f970416"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>sincos</b>(angle_rad_,  sinA_,  cosA_)</td></tr>
-<tr class="separator:a21d4b1c6da61f0c343a8c3790f970416"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d60cec10ffd2a404e95b69346033416"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="instead-of-math_8h.html#a4d60cec10ffd2a404e95b69346033416">normalize</a>(x__,  range__)&#160;&#160;&#160;((x__) - floor((x__) / (range__)) * (range__))</td></tr>
-<tr class="memdesc:a4d60cec10ffd2a404e95b69346033416"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalizes a cyclic double precision floating point variable <em>x</em> to the interval [0, range), assuming <em>range</em> is &gt; 0.  <a href="instead-of-math_8h.html#a4d60cec10ffd2a404e95b69346033416">More...</a><br /></td></tr>
-<tr class="separator:a4d60cec10ffd2a404e95b69346033416"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aca4a8517bc9ee41c78a0365018315d4d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="instead-of-math_8h.html#aca4a8517bc9ee41c78a0365018315d4d">sincos</a> (double angle_rad, double *sinA, double *cosA)</td></tr>
+<tr class="memdesc:aca4a8517bc9ee41c78a0365018315d4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates sine and cosine of an angle.  <a href="instead-of-math_8h.html#aca4a8517bc9ee41c78a0365018315d4d">More...</a><br /></td></tr>
+<tr class="separator:aca4a8517bc9ee41c78a0365018315d4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06e957a5e5c08a30b4ea3c02f2664405"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="instead-of-math_8h.html#a06e957a5e5c08a30b4ea3c02f2664405">normalize</a> (double x, double range)</td></tr>
+<tr class="memdesc:a06e957a5e5c08a30b4ea3c02f2664405"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalizes a cyclic double precision floating point variable <em>x</em> to the interval [0, range), assuming <em>range</em> is &gt; 0.  <a href="instead-of-math_8h.html#a06e957a5e5c08a30b4ea3c02f2664405">More...</a><br /></td></tr>
+<tr class="separator:a06e957a5e5c08a30b4ea3c02f2664405"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="instead-of-math_8h.html" title="instead-of-math.h - header to be included instead of math.h">instead-of-math.h</a> - header to be included instead of math.h </p>
 <dl class="section author"><dt>Author</dt><dd>David Hoadley <a href="#" onclick="location.href='mai'+'lto:'+'vcr'+'um'+'ble'+'@w'+'est'+'ne'+'t.c'+'om'+'.au'; return false;">vcrum<span style="display: none;">.nosp@m.</span>ble@<span style="display: none;">.nosp@m.</span>westn<span style="display: none;">.nosp@m.</span>et.c<span style="display: none;">.nosp@m.</span>om.au</a></dd></dl>
 <p>This header needs to be included instead of the standard C library header math.h, in order to provide some routines that are missing or possibly missing from math.h. This header will include math.h for you.</p>
-<p>The reason it must be included instead of math.h is a little obscure. One of the routines we want is the sincos() routine. Two versions of math.h actually do have it: The GNU C library does, and the Apple Clang library also has it, but under a different name.</p>
+<p>The reason it must be included instead of math.h is a little obscure. One of the routines we want is the <a class="el" href="instead-of-math_8h.html#aca4a8517bc9ee41c78a0365018315d4d" title="Calculates sine and cosine of an angle.">sincos()</a> routine. Two versions of math.h actually do have it: The GNU C library does, and the Apple Clang library also has it, but under a different name.</p>
 <p>The problem is, to gain access to the function, we need to include the appropriate incantation BEFORE including math.h if we are using the GNU C library, but we need to add definitions AFTER including math.h if we are using the Apple Clang library.</p>
 <p>So use this header instead of math.h to look after this problem.</p>
 <p>This header also provides the following missing function:</p><ul>
-<li><a class="el" href="instead-of-math_8h.html#a4d60cec10ffd2a404e95b69346033416" title="Normalizes a cyclic double precision floating point variable x to the interval [0,...">normalize()</a> <br  />
+<li><a class="el" href="instead-of-math_8h.html#a06e957a5e5c08a30b4ea3c02f2664405" title="Normalizes a cyclic double precision floating point variable x to the interval [0,...">normalize()</a> <br  />
  A proper modulo function. Unlike fmod(), result is always positive. Used to to normalize a cyclic variable to a range, e.g. an angle in radian to the range [0, 2Pi), or an angle in degrees to the range [0, 360.0)</li>
 </ul>
 <dl class="section copyright"><dt>Copyright</dt><dd><p class="startdd">Copyright (c) 2020, David Hoadley <a href="#" onclick="location.href='mai'+'lto:'+'vcr'+'um'+'ble'+'@w'+'est'+'ne'+'t.c'+'om'+'.au'; return false;">vcrum<span style="display: none;">.nosp@m.</span>ble@<span style="display: none;">.nosp@m.</span>westn<span style="display: none;">.nosp@m.</span>et.c<span style="display: none;">.nosp@m.</span>om.au</a> All rights reserved.</p>
@@ -125,30 +126,33 @@ Macros</h2></td></tr>
 <hr  />
  
 <p class="definition">Definition in file <a class="el" href="instead-of-math_8h_source.html">instead-of-math.h</a>.</p>
-</div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a21d4b1c6da61f0c343a8c3790f970416"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21d4b1c6da61f0c343a8c3790f970416">&#9670;&nbsp;</a></span>sincos</h2>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="aca4a8517bc9ee41c78a0365018315d4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca4a8517bc9ee41c78a0365018315d4d">&#9670;&nbsp;</a></span>sincos()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">#define sincos</td>
+          <td class="memname">static void sincos </td>
           <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">angle_rad_, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>angle_rad</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">sinA_, </td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>sinA</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">cosA_&#160;</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>cosA</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -156,38 +160,60 @@ Macros</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">            { *sinA_ = sin(angle_rad_);      \</div>
-<div class="line">              *cosA_ = cos(angle_rad_); }</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="instead-of-math_8h_source.html#l00115">115</a> of file <a class="el" href="instead-of-math_8h_source.html">instead-of-math.h</a>.</p>
+
+<p>Calculates sine and cosine of an angle. </p>
+<p>Where the math library supports it, this is more efficient than calling <code>sin()</code> and <code>cos()</code> separately. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">angle_rad</td><td>Angle whose sine and cosine is wanted (radian) </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">sinA</td><td>sine of angle <em>angle_rad</em> </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cosA</td><td>cosine of angle <em>angle_rad</em> </td></tr>
+  </table>
+  </dd>
+</dl>
+<hr  />
+ 
+<p class="definition">Definition at line <a class="el" href="instead-of-math_8h_source.html#l00114">114</a> of file <a class="el" href="instead-of-math_8h_source.html">instead-of-math.h</a>.</p>
 
 </div>
 </div>
-<a id="a4d60cec10ffd2a404e95b69346033416"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4d60cec10ffd2a404e95b69346033416">&#9670;&nbsp;</a></span>normalize</h2>
+<a id="a06e957a5e5c08a30b4ea3c02f2664405"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06e957a5e5c08a30b4ea3c02f2664405">&#9670;&nbsp;</a></span>normalize()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">#define normalize</td>
+          <td class="memname">static double normalize </td>
           <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">x__, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">range__&#160;</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>range</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;((x__) - floor((x__) / (range__)) * (range__))</td>
+          <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Normalizes a cyclic double precision floating point variable <em>x</em> to the interval [0, range), assuming <em>range</em> is &gt; 0. </p>

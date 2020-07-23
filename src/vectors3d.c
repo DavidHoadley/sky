@@ -33,7 +33,7 @@
  */
 /*------------------------------------------------------------------------------
  * Notes:
- *      Character set: UTF-8. (Non ASCII characters appear in this file)
+ *      Character set: UTF-8. (Non-ASCII characters appear in this file)
  *----------------------------------------------------------------------------*/
 
 /* ANSI includes etc. */

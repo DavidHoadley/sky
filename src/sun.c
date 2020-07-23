@@ -33,7 +33,7 @@
  */
 /*------------------------------------------------------------------------------
  * Notes:
- *      Character set: UTF-8. (Non -ASCII characters appear in this file)
+ *      Character set: UTF-8. (Non-ASCII characters appear in this file)
  *----------------------------------------------------------------------------*/
 
 /* ANSI includes etc. */
@@ -288,9 +288,9 @@ GLOBAL void sun_nrelTopocentric(double             j2kUtc_d,
     sky0_appToTirs() and sky_siteTirsToTopo() instead.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
-    Sky_Times   atime;      // time, in various timescales
-    Sky_TrueEquatorial   pos;        // geocentric position of the Sun and distance
-    V3D_Vector  terInterV;  // unit vector in Terrestrial Intermed Ref System
+    Sky_Times          atime;   // time, in various timescales
+    Sky_TrueEquatorial pos;     // geocentric position of the Sun and distance
+    V3D_Vector         terInterV; // unit vector in Terrestrial Intermed Ref Sys
 
     REQUIRE_NOT_NULL(deltas);
     REQUIRE_NOT_NULL(site);

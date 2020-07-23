@@ -5,7 +5,6 @@
  *
  * Description: (see the "Time routines" sections of sky.h)
  * 
- *
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
  * All rights reserved.
  *

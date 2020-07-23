@@ -1,11 +1,10 @@
 /*==============================================================================
  * skyio.c - output and formatting routines and a read routine
  *
- * Author:  David Hoadley <vcrumble@westnet.com.au>
+ * Author:  David Hoadley
  *
  * Description: (see skyio.h)
  * 
- *
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
  * All rights reserved.
  *

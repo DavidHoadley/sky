@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sun position: src/astron.h File Reference</title>
+<title>Sun position: astron.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.0.10-1</span>
+   &#160;<span id="projectnumber">0.1.0-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -84,7 +84,8 @@ $(document).ready(function(){initNavTree('astron_8h.html',''); initResizable(); 
 
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a>  </div>
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">astron.h File Reference</div>  </div>
 </div><!--header-->
@@ -130,24 +131,27 @@ Macros</h2></td></tr>
 <tr class="memitem:a1ccc7faed835bff176ec759f08d06423"><td class="memItemLeft" align="right" valign="top"><a id="a1ccc7faed835bff176ec759f08d06423"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>RAD2HRS</b>&#160;&#160;&#160;(12.0 / PI)         /* radians to hours */</td></tr>
 <tr class="separator:a1ccc7faed835bff176ec759f08d06423"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaec9cc00bb76583e19226377103e2bed"><td class="memItemLeft" align="right" valign="top"><a id="aaec9cc00bb76583e19226377103e2bed"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>arcsecToRad</b>(angle_arcsec__)&#160;&#160;&#160;((angle_arcsec__) * ARCSEC2RAD)</td></tr>
-<tr class="separator:aaec9cc00bb76583e19226377103e2bed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08403a764f876a89e8b9aaa6976866a1"><td class="memItemLeft" align="right" valign="top"><a id="a08403a764f876a89e8b9aaa6976866a1"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>radToArcsec</b>(angle_rad__)&#160;&#160;&#160;((angle_rad__) * RAD2ARCSEC)</td></tr>
-<tr class="separator:a08403a764f876a89e8b9aaa6976866a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac528aa36dff892e205fe40051dc7dcb9"><td class="memItemLeft" align="right" valign="top"><a id="ac528aa36dff892e205fe40051dc7dcb9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>secToRad</b>(angle_s__)&#160;&#160;&#160;((angle_s__) * SEC2RAD)</td></tr>
-<tr class="separator:ac528aa36dff892e205fe40051dc7dcb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5361365e819bfc1b187cac56d425cf6"><td class="memItemLeft" align="right" valign="top"><a id="ac5361365e819bfc1b187cac56d425cf6"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>radToSec</b>(angle_rad__)&#160;&#160;&#160;((angle_rad__) * RAD2SEC)</td></tr>
-<tr class="separator:ac5361365e819bfc1b187cac56d425cf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5641d3a004ec0021e559d082572a9a3"><td class="memItemLeft" align="right" valign="top"><a id="ad5641d3a004ec0021e559d082572a9a3"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>hrsToRad</b>(angle_h__)&#160;&#160;&#160;((angle_h__) * HRS2RAD)</td></tr>
-<tr class="separator:ad5641d3a004ec0021e559d082572a9a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1a987a2ee3b5cf8c4df2877a6eb46d9"><td class="memItemLeft" align="right" valign="top"><a id="ac1a987a2ee3b5cf8c4df2877a6eb46d9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>radToHrs</b>(angle_rad__)&#160;&#160;&#160;((angle_rad__) * RAD2HRS)</td></tr>
-<tr class="separator:ac1a987a2ee3b5cf8c4df2877a6eb46d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a5c7e07cf666372a70fa2704045bb38a8"><td class="memItemLeft" align="right" valign="top"><a id="a5c7e07cf666372a70fa2704045bb38a8"></a>
+static double&#160;</td><td class="memItemRight" valign="bottom"><b>arcsecToRad</b> (double angle_arcsec)</td></tr>
+<tr class="separator:a5c7e07cf666372a70fa2704045bb38a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97257b7f1c68e80019970c4e2c3a178d"><td class="memItemLeft" align="right" valign="top"><a id="a97257b7f1c68e80019970c4e2c3a178d"></a>
+static double&#160;</td><td class="memItemRight" valign="bottom"><b>radToArcsec</b> (double angle_rad)</td></tr>
+<tr class="separator:a97257b7f1c68e80019970c4e2c3a178d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2a095363bb5c6b889227d513d0c1d88"><td class="memItemLeft" align="right" valign="top"><a id="ac2a095363bb5c6b889227d513d0c1d88"></a>
+static double&#160;</td><td class="memItemRight" valign="bottom"><b>secToRad</b> (double angle_s)</td></tr>
+<tr class="separator:ac2a095363bb5c6b889227d513d0c1d88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a256c817a5e0b30295fb3248d1b7efef5"><td class="memItemLeft" align="right" valign="top"><a id="a256c817a5e0b30295fb3248d1b7efef5"></a>
+static double&#160;</td><td class="memItemRight" valign="bottom"><b>radToSec</b> (double angle_rad)</td></tr>
+<tr class="separator:a256c817a5e0b30295fb3248d1b7efef5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd11de1e170dfacdc8baa23f5c836dd2"><td class="memItemLeft" align="right" valign="top"><a id="afd11de1e170dfacdc8baa23f5c836dd2"></a>
+static double&#160;</td><td class="memItemRight" valign="bottom"><b>hrsToRad</b> (double angle_h)</td></tr>
+<tr class="separator:afd11de1e170dfacdc8baa23f5c836dd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bcab1295a9373fef4c7db68b62deae9"><td class="memItemLeft" align="right" valign="top"><a id="a6bcab1295a9373fef4c7db68b62deae9"></a>
+static double&#160;</td><td class="memItemRight" valign="bottom"><b>radToHrs</b> (double angle_rad)</td></tr>
+<tr class="separator:a6bcab1295a9373fef4c7db68b62deae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="astron_8h.html" title="astron.h - assorted definitions useful for astronomy">astron.h</a> - assorted definitions useful for astronomy </p>

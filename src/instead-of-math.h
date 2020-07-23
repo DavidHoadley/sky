@@ -76,6 +76,12 @@ extern "C" {
 #endif
 
 /* -------------- The possible missing sincos() function -------------- */
+/*! Calculates sine and cosine of an angle. Where the math library supports it,
+    this is more efficient than calling \c sin() and \c cos() separately.
+ \param[in]  angle_rad  Angle whose sine and cosine is wanted (radian)
+ \param[out] sinA       sine of angle \a angle_rad
+ \param[out] cosA       cosine of angle \a angle_rad
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 #if defined(__APPLE__)
     /* This is the CLANG compiler on an Apple computer (probably a mac). There
        is a sincos() function available, but it is called __sincos() instead.

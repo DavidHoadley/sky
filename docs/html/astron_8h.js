@@ -11,10 +11,10 @@ var astron_8h =
     [ "RAD2SEC", "astron_8h.html#ad571838c4e83c54efc21c8a1d3f9e8e1", null ],
     [ "HRS2RAD", "astron_8h.html#a2bf493f26ea238410b8a3fa9840e4546", null ],
     [ "RAD2HRS", "astron_8h.html#a1ccc7faed835bff176ec759f08d06423", null ],
-    [ "arcsecToRad", "astron_8h.html#aaec9cc00bb76583e19226377103e2bed", null ],
-    [ "radToArcsec", "astron_8h.html#a08403a764f876a89e8b9aaa6976866a1", null ],
-    [ "secToRad", "astron_8h.html#ac528aa36dff892e205fe40051dc7dcb9", null ],
-    [ "radToSec", "astron_8h.html#ac5361365e819bfc1b187cac56d425cf6", null ],
-    [ "hrsToRad", "astron_8h.html#ad5641d3a004ec0021e559d082572a9a3", null ],
-    [ "radToHrs", "astron_8h.html#ac1a987a2ee3b5cf8c4df2877a6eb46d9", null ]
+    [ "arcsecToRad", "astron_8h.html#a5c7e07cf666372a70fa2704045bb38a8", null ],
+    [ "radToArcsec", "astron_8h.html#a97257b7f1c68e80019970c4e2c3a178d", null ],
+    [ "secToRad", "astron_8h.html#ac2a095363bb5c6b889227d513d0c1d88", null ],
+    [ "radToSec", "astron_8h.html#a256c817a5e0b30295fb3248d1b7efef5", null ],
+    [ "hrsToRad", "astron_8h.html#afd11de1e170dfacdc8baa23f5c836dd2", null ],
+    [ "radToHrs", "astron_8h.html#a6bcab1295a9373fef4c7db68b62deae9", null ]
 ];

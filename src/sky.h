@@ -4,7 +4,7 @@
 /*!\file    
  * \brief sky.h - structures and routines for astronomical observing & tracking
  *
- * \author  David Hoadley <vcrumble@westnet.com.au>
+ * \author  David Hoadley
  *
  * \details
  *      This collection is in two parts:
@@ -22,7 +22,7 @@
  *      the necessary calculations. When combined with the routines in the
  *      skyfast.h and skyfast.c module, they enable accurate tracking with
  *      even a small processor.
- * 
+ *
  *      Other modules required:
  *          - sun.h (and sun.c) if you want to track the Sun, using either the
  *            NREL Solar Position Algorithm, or a simplified approximate one.
@@ -30,7 +30,12 @@
  *            NREL Moon Position Algorithm
  *          - (future) a module for tracking other planets
  *          - (future) a module for tracking stars
- * 
+ *          - skyio.h (and skyio.c) for input-output routines: conversions of
+ *            angles to and from strings in sexagesimal (e.g. degrees, minutes
+ *            and seconds) form; writing out a day number as a date & time.
+ *          - vectors3d.h (and vectors3d.c) which implements the rectangular
+ *            matrix and vector operations used by these algorithms,
+ *
  *      You will need to separately include one of the following modules:
  *          - sky0.h (and sky0.c) for nutation routines and sidereal time
  *            routines suitable for tracking the Sun or the Moon using the
@@ -40,9 +45,9 @@
  *          - (future) sky2.h (and sky2.c) for IAU 2000 precession, nutation and
  *            sidereal time routines, suitable for tracking stars
  *
- *
- * \copyright
- * \parblock
+ *==============================================================================
+ */
+/*
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
  * All rights reserved.
  *
@@ -66,9 +71,6 @@
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
- * \endparblock
- *
- *==============================================================================
  */
 /*------------------------------------------------------------------------------
  * Notes:
@@ -367,9 +369,6 @@ void sky_siteAzElToHaDec(const V3D_Vector   *topoV,
 double sky_siteIncidence_rad(const V3D_Vector *topoV,
                              const V3D_Vector *surfaceV);
 
-/*
- * Global functions available to be called by other modules
- */
 
 /*
  * Global variables accessible by other modules

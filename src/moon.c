@@ -2,8 +2,6 @@
  * moon.c - routines to calculate the Moon's position
  *
  * Author:  David Hoadley
- *          Loco2Gen
- *          ABN 22 957 381 638
  *
  * Description: (see moon.h)
  * 

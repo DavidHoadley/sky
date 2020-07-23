@@ -1,11 +1,10 @@
 /*==============================================================================
  * sky-site.c - astronomical routines related to an observing site
  *
- * Author:  David Hoadley <vcrumble@westnet.com.au>
+ * Author:  David Hoadley
  *
  * Description: (see the "Site routines" sections of sky.h)
  * 
- *
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
  * All rights reserved.
  *
@@ -35,6 +34,7 @@
 /*------------------------------------------------------------------------------
  * Notes:
  *      Character set: UTF-8. (Non ASCII characters appear in this file)
+ *      Things you might want to edit: definition of macro SPA_COMPARISONS
  *----------------------------------------------------------------------------*/
 
 

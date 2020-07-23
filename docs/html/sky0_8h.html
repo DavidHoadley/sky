@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sun position: src/sky0.h File Reference</title>
+<title>Sun position: sky0.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.0.10-1</span>
+   &#160;<span id="projectnumber">0.1.0-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -126,14 +126,6 @@ Functions</h2></td></tr>
 <li>sky2.h / sky2.c: precession, nutation and their associated rotation matrices, obliquity and sidereal time. These are the newer IAU 2000 precession and nutation theory.</li>
 </ul>
 <p>This module (<a class="el" href="sky0_8h.html" title="sky0.h - astronomical coordinate conversion for NREL Sun Position Algorithm">sky0.h</a> / <a class="el" href="sky0_8c_source.html">sky0.c</a>) contains only those routines necessary for supporting the NREL Solar Position Algorithm and Moon Position algorithms. Basically this is a subset of the routines in the sky1.h / sky1.c module. Precession is omitted, and the nutation routine uses only the largest 63 terms of the IAU 1980 nutation algorithm.</p>
-<dl class="section copyright"><dt>Copyright</dt><dd><p class="startdd">Copyright (c) 2020, David Hoadley <a href="#" onclick="location.href='mai'+'lto:'+'vcr'+'um'+'ble'+'@w'+'est'+'ne'+'t.c'+'om'+'.au'; return false;">vcrum<span style="display: none;">.nosp@m.</span>ble@<span style="display: none;">.nosp@m.</span>westn<span style="display: none;">.nosp@m.</span>et.c<span style="display: none;">.nosp@m.</span>om.au</a> All rights reserved.</p>
-<p class="interdd">Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p>
-<ul>
-<li>Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.</li>
-<li>Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.</li>
-</ul>
-<p class="enddd">THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </p>
-</dd></dl>
 <hr  />
  
 <p class="definition">Definition in file <a class="el" href="sky0_8h_source.html">sky0.h</a>.</p>
@@ -168,7 +160,7 @@ Functions</h2></td></tr>
 <p>This is a simplified version of the IAU 1980 Nutation Theory. Calculates first the fundamental nutation arguments, and then a series of terms. There are 106 terms in the full series, but this routine uses only the largest 63 of those terms. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">t_cy</td><td>centuries since J2000.0, TT timescale </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">nut</td><td>field <em>nut-&gt;dPsi_rad</em> - Nutation in longitude ΔΨ (radian)<br  />
+    <tr><td class="paramdir">[out]</td><td class="paramname">nut</td><td>field <em>nut-&gt;dPsi_rad</em> - Nutation in longitude Δψ (radian)<br  />
  field <em>nut-&gt;dEps_rad</em> - Nutation in obliquity Δε (radian)</td></tr>
   </table>
   </dd>
@@ -215,10 +207,10 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">t_cy</td><td>centuries since J2000.0, TT timescale </td></tr>
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">nut</td><td>[in] field <em>nut-&gt;dPsi_rad</em> - Nutation in longitude ΔΨ, as returned by function <a class="el" href="sky0_8h.html#a7a264cd6849a45a5edc1c660c8b76aa6" title="Calculates the nutation in longitude and obliquity, according to the algorithm set out in the NREL SP...">sky0_nutationSpa()</a> (radian)<br  />
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">nut</td><td>[in] field <em>nut-&gt;dPsi_rad</em> - Nutation in longitude Δψ, as returned by function <a class="el" href="sky0_8h.html#a7a264cd6849a45a5edc1c660c8b76aa6" title="Calculates the nutation in longitude and obliquity, according to the algorithm set out in the NREL SP...">sky0_nutationSpa()</a> (radian)<br  />
  [in] field <em>nut-&gt;dEps_rad</em> - Nutation in obliquity Δε, as returned by function <a class="el" href="sky0_8h.html#a7a264cd6849a45a5edc1c660c8b76aa6" title="Calculates the nutation in longitude and obliquity, according to the algorithm set out in the NREL SP...">sky0_nutationSpa()</a> (radian)<br  />
  [out] field <em>nut-&gt;eps0_rad</em> - Mean obliquity of the ecliptic ε0 (radian)<br  />
- [out] field <em>nut-&gt;eqEq_rad</em> - Equation of the equinoxes = ΔΨ * cos(ε0) (radian) Note: not seconds</td></tr>
+ [out] field <em>nut-&gt;eqEq_rad</em> - Equation of the equinoxes = Δψ * cos(ε0) (radian) Note: not seconds</td></tr>
   </table>
   </dd>
 </dl>

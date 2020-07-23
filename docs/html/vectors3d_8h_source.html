@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sun position: src/vectors3d.h Source File</title>
+<title>Sun position: vectors3d.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.0.10-1</span>
+   &#160;<span id="projectnumber">0.1.0-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -100,143 +100,140 @@ $(document).ready(function(){initNavTree('vectors3d_8h_source.html',''); initRes
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> *          and performing operations upon them, such as adding or subtracting</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> *          vectors, coordinate rotation, conversion to and from polar coords.</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> * \copyright</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> * \parblock</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> * Copyright (c) 2020, David Hoadley &lt;vcrumble@westnet.com.au&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> * All rights reserved.</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"> * Redistribution and use in source and binary forms, with or without</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"> * modification, are permitted provided that the following conditions are met:</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"> * * Redistributions of source code must retain the above copyright notice, this</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"> *   list of conditions and the following disclaimer.</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"> * * Redistributions in binary form must reproduce the above copyright notice,</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"> *   this list of conditions and the following disclaimer in the documentation</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"> *   and/or other materials provided with the distribution.</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"> * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> * POSSIBILITY OF SUCH DAMAGE.</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> * \endparblock</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> *==============================================================================</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> * Global #defines and typedefs</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> */</span><span class="comment"></span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/*! 3x3 matrix. See the note \ref page-why-struct-array (at the end of file </span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"> *  vectors3.c) for the reason that this has been implemented in this fashion */</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="struct_v3_d___matrix.html">   53</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">double</span>  a[3][3];</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;} <a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">/*! 3x1 vector.  See the note \ref page-why-struct-array (at the end of file </span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"> *  vectors3.c) for the reason that this has been implemented in this fashion */</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="struct_v3_d___vector.html">   59</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">double</span>  a[3];</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;} <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a>;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">/*! Enumeration to be used by the v3d_createRotationMatrix() function */</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="vectors3d_8h.html#a60bdd1223c75d5de4352cdc94464666c">   64</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> <span class="comment">/* V3D_AxisNames_tag */</span> {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    Xaxis,</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    Yaxis,</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    Zaxis</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;} <a class="code" href="vectors3d_8h.html#a60bdd1223c75d5de4352cdc94464666c">V3D_AxisNames</a>;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"> * Global functions available to be called by other modules</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">/*      Most of the functions below return vector or matrix results in their</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">        first argument, but also return a pointer to that same variable as the</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">        function result. */</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">/*          Vector arithmetic */</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#a0699590adb927e3afe71490ac861d597">v3d_addV</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *destV,</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                     <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV1,</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                     <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV2);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#a66675e1159530d62a93269a6c1b4dc77">v3d_addToV</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *modV1, <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV2);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#ace5721d7d06db312841fee096d7a403d">v3d_subtractV</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *destV,</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                          <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV1,</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                          <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV2);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#ac8c92c7ea1b0df21bfbd097d24d3d591">v3d_subFromV</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *modV1, <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV2);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keywordtype">double</span>      <a class="code" href="vectors3d_8h.html#aba2139d0a343e8ad73631daa686b791d">v3d_dotProductV</a>(<span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV1, <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV2);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#ae4b4a927a140ac4ffa146f07b54381c6">v3d_crossProductV</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *destV,</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                              <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV1,</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                              <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV2);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">/*          Two special versions of v3d_addToV() for unit vectors */</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#aa2557ca34ddae80a9b6c85e3747428bd">v3d_addToUV</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *modV1, <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV2);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#a69ffaedc53f0fab83ec4a5077ad9f79c">v3d_addToUVfast</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *modV1, <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV2);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keywordtype">double</span> <a class="code" href="vectors3d_8h.html#a466c347ccb8d5664a77217ba8dff2adf">v3d_magVSq</a>(<span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keywordtype">double</span> <a class="code" href="vectors3d_8h.html#a7e19a671b00e0a2eb3a4d1a62ae4d70c">v3d_magV</a>(<span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">/*          Polar &lt;==&gt; Rectangular coordinate conversions */</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#ab9c960dd291b2aabcc56ac188b15dcb7">v3d_polarToRect</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *destV,</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                            <span class="keywordtype">double</span> alpha_rad,</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                            <span class="keywordtype">double</span> delta_rad);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keywordtype">void</span> <a class="code" href="vectors3d_8h.html#ac466df06b542786b39581a61253f608e">v3d_rectToPolar</a>(<span class="keywordtype">double</span> *alpha_rad, </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                     <span class="keywordtype">double</span> *delta_rad,</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                     <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="preprocessor">#if 0</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">/*              deprecated older versions */</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keywordtype">void</span> v3d_polar2Rect(<span class="keywordtype">double</span> alpha_rad, <span class="keywordtype">double</span> delta_rad, <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *R);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keywordtype">void</span> v3d_rect2Polar(<span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *R, </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                    <span class="keywordtype">bool</span>  alphaNonNegative,</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                    <span class="keywordtype">double</span> *alpha_rad, </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                    <span class="keywordtype">double</span> *delta_rad);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">/*          Matrices for coordinate rotation, and matrix operations */</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a> *<a class="code" href="vectors3d_8h.html#af4f8f0d21389bf84d1321e6c7739c513">v3d_createRotationMatrix</a>(<a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a> *destM,</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                                     <a class="code" href="vectors3d_8h.html#a60bdd1223c75d5de4352cdc94464666c">V3D_AxisNames</a> axis, </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                                     <span class="keywordtype">double</span>        angle_rad);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#a930a88294d68f9b66901b8eaf44305a5">v3d_multMxV</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *destV,</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                        <span class="keyword">const</span> <a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a> *srcM,</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                        <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV);</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#a931dfa6007e3f3868a7ca7f525f20093">v3d_multMtransxV</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *destV,</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                             <span class="keyword">const</span> <a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a> *srcM,</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                             <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV);</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a> *<a class="code" href="vectors3d_8h.html#a87f7944947c8c442bea214be3936dfc7">v3d_multMxM</a>(<a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a> *destM,</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                        <span class="keyword">const</span> <a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a> *srcM1,</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                        <span class="keyword">const</span> <a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a> *srcM2);</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;}</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/*VECTORS3D_H*/</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> *==============================================================================</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> * Copyright (c) 2020, David Hoadley &lt;vcrumble@westnet.com.au&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> * All rights reserved.</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"> * Redistribution and use in source and binary forms, with or without</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"> * modification, are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"> * * Redistributions of source code must retain the above copyright notice, this</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"> *   list of conditions and the following disclaimer.</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"> * * Redistributions in binary form must reproduce the above copyright notice,</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"> *   this list of conditions and the following disclaimer in the documentation</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"> *   and/or other materials provided with the distribution.</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> * POSSIBILITY OF SUCH DAMAGE.</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"> * Global #defines and typedefs</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"> */</span><span class="comment"></span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/*! 3x3 matrix. See the note \ref page-why-struct-array (at the end of file </span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> *  vectors3.c) for the reason that this has been implemented in this fashion */</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="struct_v3_d___matrix.html">   51</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">double</span>  a[3][3];</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;} <a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">/*! 3x1 vector.  See the note \ref page-why-struct-array (at the end of file </span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"> *  vectors3.c) for the reason that this has been implemented in this fashion */</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="struct_v3_d___vector.html">   57</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">double</span>  a[3];</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;} <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">/*! Enumeration to be used by the v3d_createRotationMatrix() function */</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="vectors3d_8h.html#a60bdd1223c75d5de4352cdc94464666c">   62</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> <span class="comment">/* V3D_AxisNames_tag */</span> {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    Xaxis,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    Yaxis,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    Zaxis</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;} <a class="code" href="vectors3d_8h.html#a60bdd1223c75d5de4352cdc94464666c">V3D_AxisNames</a>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"> * Global functions available to be called by other modules</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">/*      Most of the functions below return vector or matrix results in their</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">        first argument, but also return a pointer to that same variable as the</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">        function result. */</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">/*          Vector arithmetic */</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#a0699590adb927e3afe71490ac861d597">v3d_addV</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *destV,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                     <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV1,</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                     <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV2);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#a66675e1159530d62a93269a6c1b4dc77">v3d_addToV</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *modV1, <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV2);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#ace5721d7d06db312841fee096d7a403d">v3d_subtractV</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *destV,</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                          <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV1,</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                          <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV2);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#ac8c92c7ea1b0df21bfbd097d24d3d591">v3d_subFromV</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *modV1, <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV2);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keywordtype">double</span>      <a class="code" href="vectors3d_8h.html#aba2139d0a343e8ad73631daa686b791d">v3d_dotProductV</a>(<span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV1, <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV2);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#ae4b4a927a140ac4ffa146f07b54381c6">v3d_crossProductV</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *destV,</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                              <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV1,</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                              <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV2);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">/*          Two special versions of v3d_addToV() for unit vectors */</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#aa2557ca34ddae80a9b6c85e3747428bd">v3d_addToUV</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *modV1, <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV2);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#a69ffaedc53f0fab83ec4a5077ad9f79c">v3d_addToUVfast</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *modV1, <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV2);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keywordtype">double</span> <a class="code" href="vectors3d_8h.html#a466c347ccb8d5664a77217ba8dff2adf">v3d_magVSq</a>(<span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keywordtype">double</span> <a class="code" href="vectors3d_8h.html#a7e19a671b00e0a2eb3a4d1a62ae4d70c">v3d_magV</a>(<span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">/*          Polar &lt;==&gt; Rectangular coordinate conversions */</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#ab9c960dd291b2aabcc56ac188b15dcb7">v3d_polarToRect</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *destV,</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                            <span class="keywordtype">double</span> alpha_rad,</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                            <span class="keywordtype">double</span> delta_rad);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keywordtype">void</span> <a class="code" href="vectors3d_8h.html#ac466df06b542786b39581a61253f608e">v3d_rectToPolar</a>(<span class="keywordtype">double</span> *alpha_rad, </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                     <span class="keywordtype">double</span> *delta_rad,</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                     <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#if 0</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">/*              deprecated older versions */</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keywordtype">void</span> v3d_polar2Rect(<span class="keywordtype">double</span> alpha_rad, <span class="keywordtype">double</span> delta_rad, <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *R);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keywordtype">void</span> v3d_rect2Polar(<span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *R, </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                    <span class="keywordtype">bool</span>  alphaNonNegative,</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                    <span class="keywordtype">double</span> *alpha_rad, </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                    <span class="keywordtype">double</span> *delta_rad);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">/*          Matrices for coordinate rotation, and matrix operations */</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a> *<a class="code" href="vectors3d_8h.html#af4f8f0d21389bf84d1321e6c7739c513">v3d_createRotationMatrix</a>(<a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a> *destM,</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                                     <a class="code" href="vectors3d_8h.html#a60bdd1223c75d5de4352cdc94464666c">V3D_AxisNames</a> axis, </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                                     <span class="keywordtype">double</span>        angle_rad);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#a930a88294d68f9b66901b8eaf44305a5">v3d_multMxV</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *destV,</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                        <span class="keyword">const</span> <a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a> *srcM,</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                        <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *<a class="code" href="vectors3d_8h.html#a931dfa6007e3f3868a7ca7f525f20093">v3d_multMtransxV</a>(<a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *destV,</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                             <span class="keyword">const</span> <a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a> *srcM,</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                             <span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *srcV);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a> *<a class="code" href="vectors3d_8h.html#a87f7944947c8c442bea214be3936dfc7">v3d_multMxM</a>(<a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a> *destM,</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                        <span class="keyword">const</span> <a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a> *srcM1,</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                        <span class="keyword">const</span> <a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a> *srcM2);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/*VECTORS3D_H*/</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="avectors3d_8h_html_a466c347ccb8d5664a77217ba8dff2adf"><div class="ttname"><a href="vectors3d_8h.html#a466c347ccb8d5664a77217ba8dff2adf">v3d_magVSq</a></div><div class="ttdeci">double v3d_magVSq(const V3D_Vector *srcV)</div><div class="ttdoc">Return the square of the magnitude of the specified vector.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00253">vectors3d.c:253</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_a87f7944947c8c442bea214be3936dfc7"><div class="ttname"><a href="vectors3d_8h.html#a87f7944947c8c442bea214be3936dfc7">v3d_multMxM</a></div><div class="ttdeci">V3D_Matrix * v3d_multMxM(V3D_Matrix *destM, const V3D_Matrix *srcM1, const V3D_Matrix *srcM2)</div><div class="ttdoc">Multiply 3x3 matrix by 3x3 matrix to give a new 3x3 matrix, as per [destM] = [srcM1]*[srcM2].</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00496">vectors3d.c:496</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_ab9c960dd291b2aabcc56ac188b15dcb7"><div class="ttname"><a href="vectors3d_8h.html#ab9c960dd291b2aabcc56ac188b15dcb7">v3d_polarToRect</a></div><div class="ttdeci">V3D_Vector * v3d_polarToRect(V3D_Vector *destV, double alpha_rad, double delta_rad)</div><div class="ttdoc">Converts polar (curvilinear) coordinates to equivalent rectangular (Cartesian) coordinates.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00275">vectors3d.c:275</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_a7e19a671b00e0a2eb3a4d1a62ae4d70c"><div class="ttname"><a href="vectors3d_8h.html#a7e19a671b00e0a2eb3a4d1a62ae4d70c">v3d_magV</a></div><div class="ttdeci">double v3d_magV(const V3D_Vector *srcV)</div><div class="ttdoc">Return the magnitude of the specified vector.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00266">vectors3d.c:266</a></div></div>
-<div class="ttc" id="avectors3d_8h_html_a60bdd1223c75d5de4352cdc94464666c"><div class="ttname"><a href="vectors3d_8h.html#a60bdd1223c75d5de4352cdc94464666c">V3D_AxisNames</a></div><div class="ttdeci">V3D_AxisNames</div><div class="ttdoc">Enumeration to be used by the v3d_createRotationMatrix() function.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8h_source.html#l00064">vectors3d.h:64</a></div></div>
+<div class="ttc" id="avectors3d_8h_html_a60bdd1223c75d5de4352cdc94464666c"><div class="ttname"><a href="vectors3d_8h.html#a60bdd1223c75d5de4352cdc94464666c">V3D_AxisNames</a></div><div class="ttdeci">V3D_AxisNames</div><div class="ttdoc">Enumeration to be used by the v3d_createRotationMatrix() function.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8h_source.html#l00062">vectors3d.h:62</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_ac466df06b542786b39581a61253f608e"><div class="ttname"><a href="vectors3d_8h.html#ac466df06b542786b39581a61253f608e">v3d_rectToPolar</a></div><div class="ttdeci">void v3d_rectToPolar(double *alpha_rad, double *delta_rad, const V3D_Vector *srcV)</div><div class="ttdoc">Converts rectangular (Cartesian) coordinates to the equivalent polar (curvilinear) ones.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00306">vectors3d.c:306</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_aa2557ca34ddae80a9b6c85e3747428bd"><div class="ttname"><a href="vectors3d_8h.html#aa2557ca34ddae80a9b6c85e3747428bd">v3d_addToUV</a></div><div class="ttdeci">V3D_Vector * v3d_addToUV(V3D_Vector *modV1, const V3D_Vector *srcV2)</div><div class="ttdoc">Modify a unit length rectangular position vector modV1 by adding a correction vector srcV2 to it and ...</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00190">vectors3d.c:190</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_a931dfa6007e3f3868a7ca7f525f20093"><div class="ttname"><a href="vectors3d_8h.html#a931dfa6007e3f3868a7ca7f525f20093">v3d_multMtransxV</a></div><div class="ttdeci">V3D_Vector * v3d_multMtransxV(V3D_Vector *destV, const V3D_Matrix *srcM, const V3D_Vector *srcV)</div><div class="ttdoc">Multiply 3x1 vector by the transpose of the 3x3 matrix to give a new 3x1 vector, as per equation [des...</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00462">vectors3d.c:462</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_ae4b4a927a140ac4ffa146f07b54381c6"><div class="ttname"><a href="vectors3d_8h.html#ae4b4a927a140ac4ffa146f07b54381c6">v3d_crossProductV</a></div><div class="ttdeci">V3D_Vector * v3d_crossProductV(V3D_Vector *destV, const V3D_Vector *srcV1, const V3D_Vector *srcV2)</div><div class="ttdoc">Return the cross product of the two vectors: [destV] = [srcV1] x [srcV2].</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00167">vectors3d.c:167</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_ac8c92c7ea1b0df21bfbd097d24d3d591"><div class="ttname"><a href="vectors3d_8h.html#ac8c92c7ea1b0df21bfbd097d24d3d591">v3d_subFromV</a></div><div class="ttdeci">V3D_Vector * v3d_subFromV(V3D_Vector *modV1, const V3D_Vector *srcV2)</div><div class="ttdoc">Modify first vector by subtracting a second one: [modV1] -= [srcV2].</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00129">vectors3d.c:129</a></div></div>
-<div class="ttc" id="astruct_v3_d___matrix_html"><div class="ttname"><a href="struct_v3_d___matrix.html">V3D_Matrix</a></div><div class="ttdoc">3x3 matrix.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8h_source.html#l00053">vectors3d.h:53</a></div></div>
+<div class="ttc" id="astruct_v3_d___matrix_html"><div class="ttname"><a href="struct_v3_d___matrix.html">V3D_Matrix</a></div><div class="ttdoc">3x3 matrix.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8h_source.html#l00051">vectors3d.h:51</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_a66675e1159530d62a93269a6c1b4dc77"><div class="ttname"><a href="vectors3d_8h.html#a66675e1159530d62a93269a6c1b4dc77">v3d_addToV</a></div><div class="ttdeci">V3D_Vector * v3d_addToV(V3D_Vector *modV1, const V3D_Vector *srcV2)</div><div class="ttdoc">Modify first vector by adding a second one: [modV1] += [srcV2].</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00087">vectors3d.c:87</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_ace5721d7d06db312841fee096d7a403d"><div class="ttname"><a href="vectors3d_8h.html#ace5721d7d06db312841fee096d7a403d">v3d_subtractV</a></div><div class="ttdeci">V3D_Vector * v3d_subtractV(V3D_Vector *destV, const V3D_Vector *srcV1, const V3D_Vector *srcV2)</div><div class="ttdoc">Vector subtraction: [destV] = [srcV1] - [srcV2].</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00106">vectors3d.c:106</a></div></div>
-<div class="ttc" id="astruct_v3_d___vector_html"><div class="ttname"><a href="struct_v3_d___vector.html">V3D_Vector</a></div><div class="ttdoc">3x1 vector.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8h_source.html#l00059">vectors3d.h:59</a></div></div>
+<div class="ttc" id="astruct_v3_d___vector_html"><div class="ttname"><a href="struct_v3_d___vector.html">V3D_Vector</a></div><div class="ttdoc">3x1 vector.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8h_source.html#l00057">vectors3d.h:57</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_aba2139d0a343e8ad73631daa686b791d"><div class="ttname"><a href="vectors3d_8h.html#aba2139d0a343e8ad73631daa686b791d">v3d_dotProductV</a></div><div class="ttdeci">double v3d_dotProductV(const V3D_Vector *srcV1, const V3D_Vector *srcV2)</div><div class="ttdoc">Return the dot product of the two vectors: res = [srcV1] · [srcV2] or res = ||srcV1|| * ||srcV2|| * c...</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00148">vectors3d.c:148</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_a0699590adb927e3afe71490ac861d597"><div class="ttname"><a href="vectors3d_8h.html#a0699590adb927e3afe71490ac861d597">v3d_addV</a></div><div class="ttdeci">V3D_Vector * v3d_addV(V3D_Vector *destV, const V3D_Vector *srcV1, const V3D_Vector *srcV2)</div><div class="ttdoc">Add two vectors: [destV] = [srcV1] + [srcV2].</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00064">vectors3d.c:64</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_af4f8f0d21389bf84d1321e6c7739c513"><div class="ttname"><a href="vectors3d_8h.html#af4f8f0d21389bf84d1321e6c7739c513">v3d_createRotationMatrix</a></div><div class="ttdeci">V3D_Matrix * v3d_createRotationMatrix(V3D_Matrix *destM, V3D_AxisNames axis, double angle_rad)</div><div class="ttdoc">Creates a matrix to rotate a coordinate system about an axis.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00372">vectors3d.c:372</a></div></div>

@@ -6,7 +6,6 @@
  *
  * Description: (see skyfast.h)
  * 
- *
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
  * All rights reserved.
  *

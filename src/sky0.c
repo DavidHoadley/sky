@@ -226,7 +226,7 @@ GLOBAL void sky0_nutationSpa(double t_cy, Sky0_Nut1980 *nut)
     arguments, and then a series of terms. There are 106 terms in the full
     series, but this routine uses only the largest 63 of those terms.
  \param[in]  t_cy   centuries since J2000.0, TT timescale
- \param[out] nut    field \a nut->dPsi_rad - Nutation in longitude ΔΨ (radian)\n
+ \param[out] nut    field \a nut->dPsi_rad - Nutation in longitude Δψ (radian)\n
                     field \a nut->dEps_rad - Nutation in obliquity Δε (radian)
 
  \par References:
@@ -326,7 +326,7 @@ GLOBAL void sky0_nutationSpa(double t_cy, Sky0_Nut1980 *nut)
 GLOBAL void sky0_epsilonSpa(double t_cy, Sky0_Nut1980 *nut)
 /*! Calculate the obliquity of the ecliptic and the equation of the equinoxes
  \param[in]     t_cy    centuries since J2000.0, TT timescale
- \param[in,out] nut     [in]  field \a nut->dPsi_rad - Nutation in longitude ΔΨ,
+ \param[in,out] nut     [in]  field \a nut->dPsi_rad - Nutation in longitude Δψ,
                               as returned by function sky0_nutationSpa()
                               (radian)\n
                         [in]  field \a nut->dEps_rad - Nutation in obliquity Δε,
@@ -335,7 +335,7 @@ GLOBAL void sky0_epsilonSpa(double t_cy, Sky0_Nut1980 *nut)
                         [out] field \a nut->eps0_rad - Mean obliquity of the
                               ecliptic ε0 (radian)\n
                         [out] field \a nut->eqEq_rad - Equation of the equinoxes
-                              = ΔΨ * cos(ε0) (radian) Note: not seconds
+                              = Δψ * cos(ε0) (radian) Note: not seconds
 
  \par Reference
     Reda, I. and Andreas, A. (2003), "Solar Position Algorithm

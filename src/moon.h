@@ -5,8 +5,6 @@
  * \brief moon.h - routines to calculate the Moon's position
  *
  * \author  David Hoadley
- *          Loco2Gen
- *          ABN 22 957 381 638
  *
  * \details
  *      An implementation of the SAMPA (Moon Position Algorithm) from the
@@ -19,8 +17,9 @@
  *          Using the Solar and Moon Position Algorithms_. National Renewable
  *          Energy Laboratory Technical Report NREL/TP-3B0-47681, March 2010
  *
- * \copyright
- * \parblock
+ *==============================================================================
+ */
+/*
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
  * All rights reserved.
  *
@@ -44,9 +43,6 @@
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
- * \endparblock
- *
- *==============================================================================
  */
 #include "sky.h"
 #include "sky0.h"
