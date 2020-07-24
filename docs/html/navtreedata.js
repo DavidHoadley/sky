@@ -23,11 +23,19 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "Sun position", "index.html", [
+    [ "Files", "files.html", [
+      [ "File List", "files.html", "files_dup" ],
+      [ "Globals", "globals.html", [
+        [ "All", "globals.html", null ],
+        [ "Functions", "globals_func.html", null ],
+        [ "Enumerations", "globals_enum.html", null ],
+        [ "Macros", "globals_defs.html", null ]
+      ] ]
+    ] ],
     [ "Conventions used in this code", "page-conventions.html", "page-conventions" ],
     [ "About time", "page-time.html", "page-time" ],
-    [ "Vernal equinox", "page-vernal-equinox.html", null ],
+    [ "Miscellaneous", "page-misc.html", "page-misc" ],
     [ "Interpolation and its errors", "page-interpolation.html", null ],
-    [ "Why define vector and matrix arrays as structs?", "page-why-struct-array.html", null ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Fields", "functions.html", [
@@ -35,14 +43,7 @@ var NAVTREE =
         [ "Variables", "functions_vars.html", null ]
       ] ]
     ] ],
-    [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ],
-      [ "Globals", "globals.html", [
-        [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ],
-        [ "Enumerations", "globals_enum.html", null ]
-      ] ]
-    ] ]
+    [ "Examples", "examples.html", "examples" ]
   ] ]
 ];
 

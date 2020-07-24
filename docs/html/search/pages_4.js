@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['time_20variables_220',['Time variables',['../page-time-variables.html',1,'page-time']]],
-  ['timescales_2c_20and_20converting_20between_20them_221',['Timescales, and converting between them',['../page-timescales.html',1,'page-time']]]
+  ['seconds_20versus_20arcseconds_231',['Seconds versus arcseconds',['../page-sec-arcsec.html',1,'page-conventions']]],
+  ['sign_20and_20direction_20conventions_232',['Sign and direction conventions',['../page-sign-conventions.html',1,'page-conventions']]],
+  ['suffixes_20on_20variable_20and_20parameter_20names_233',['Suffixes on variable and parameter names',['../page-var-suffixes.html',1,'page-conventions']]]
 ];

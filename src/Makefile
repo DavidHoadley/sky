@@ -4,7 +4,15 @@
 # source files (rather than say, its parent directory), mainly so that assertion
 # error messages within C code that use the __FILE__ string contain the file's
 # name without any path string attached.
-#    Object and executable files are put in separate directories
+#    Object and executable files are put in separate directories. These
+# directories are created within the parent directory of this directory, if they
+# do not already exist.
+#    This version of the makefile assumes that your compiler has command-line
+# options to create dependency files automatically (which are specified in the
+# variable $(DEPFLAGS). If not, you may need to drop back to a quick and dirty
+# solution, and create a variable C_HDRS := $(wildcard *.h), and replace the
+# dependency for .c files with $(C_OBJS): $(BLD_DIR)/%.o: %.c $(C_HDRS)
+# (i.e. making each .c file dependent on every .h file).
 
 # where to put object (.o), dependency (.d), executable and documentation files
 BLD_DIR := ../build

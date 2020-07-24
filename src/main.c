@@ -53,12 +53,12 @@
 #include "skyfast.h"
 #include "vectors3d.h"
 
-#define SITE_LATITUDE_deg      -37.8236        /* Richmond, Melbourne */
-#define SITE_LONGITUDE_deg     144.9913
-#define SITE_HEIGHT_m          10.0
-#define SITE_PRESSURE_hPa      1013.0
-#define SITE_TEMPERATURE_degC  15.0
-#define SITE_TIMEZONE_h        10.0
+#define SITE_LATITUDE_deg      -37.8236 /*!< North lats +ve, south -ve (deg)  */
+#define SITE_LONGITUDE_deg     144.9913 /*!< East lons +ve, west -ve (degrees)*/
+#define SITE_HEIGHT_m          30.0     /*!< Height above sea level (metres)  */
+#define SITE_PRESSURE_hPa      1013.0   /*!< Atmospheric pressure (hPa = mbar)*/
+#define SITE_TEMPERATURE_degC  15.0     /*!< Temperature (degrees Celsius)    */
+#define SITE_TIMEZONE_h        10.0     /*!< East zones +ve, west -ve (hours) */
 
 
 void demo1(void);
@@ -240,4 +240,9 @@ void demo2(void)
  *          _Solar Position Algorithm for Solar Radiation Applications._
  *          National Renewable Energy Laboratory, publication no.
  *          NREL/TP-560-34302, June 2003, revised January 2008
+ */
+/*! \example demo1.c    Single calculation of the Sun's position
+ *  \example demo2.c    Repeated calculation (tracking) of the Sun using
+ *                      interpolation
+ *  \example demo3.c    Single calculation of the Moon's position
  */

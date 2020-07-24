@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.0-1</span>
+   &#160;<span id="projectnumber">0.1.1-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -263,7 +263,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 </dl>
 <dl class="section user"><dt>When to call this function</dt><dd>Call at program startup time. Use this routine if you have opted for option 3A, 3B or 3D in the note at the bottom of this file (see <a class="el" href="page-timescales.html">Timescales, and converting between them</a>). (Use <a class="el" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902" title="Set up the various delta time values for use in ongoing calculations.">sky_initTimeDetailed()</a> if you have opted for option 3C.)</dd></dl>
 <hr  />
- 
+ <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_8c-example.html#a4">demo1.c</a>, <a class="el" href="demo2_8c-example.html#a4">demo2.c</a>, and <a class="el" href="demo3_8c-example.html#a3">demo3.c</a>.</dd>
+</dl>
+
 <p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00096">96</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
@@ -475,7 +477,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 </dl>
 <dl class="section note"><dt>Note</dt><dd>This routine has no better resolution than one second. Use routine sky_unixTimespecToMjd() or sky_calTimeToMjd() instead, if you need sub-second resolution</dd></dl>
 <hr  />
- 
+ <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_8c-example.html#a14">demo1.c</a>, <a class="el" href="demo2_8c-example.html#a14">demo2.c</a>, and <a class="el" href="demo3_8c-example.html#a13">demo3.c</a>.</dd>
+</dl>
+
 <p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00255">255</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
@@ -744,7 +748,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 <p>The <em>site-&gt;timezone_d</em> field is initialised to 0, assuming that the site time zone is UTC. If another value is required, follow this call by a call to <a class="el" href="sky_8h.html#a982a0d853512a67d9e2177845e605dc4" title="Set the time zone offset for this site.">sky_setSiteTimeZone()</a>.</p>
 <dl class="section user"><dt>When to call this function</dt><dd>At program initialisation time only</dd></dl>
 <hr  />
- 
+ <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_8c-example.html#a5">demo1.c</a>, <a class="el" href="demo2_8c-example.html#a5">demo2.c</a>, and <a class="el" href="demo3_8c-example.html#a4">demo3.c</a>.</dd>
+</dl>
+
 <p class="definition">Definition at line <a class="el" href="sky-site_8c_source.html#l00105">105</a> of file <a class="el" href="sky-site_8c_source.html">sky-site.c</a>.</p>
 
 </div>
@@ -871,7 +877,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 </ol>
 </dd></dl>
 <hr  />
- 
+ <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_8c-example.html#a9">demo1.c</a>, <a class="el" href="demo2_8c-example.html#a9">demo2.c</a>, and <a class="el" href="demo3_8c-example.html#a8">demo3.c</a>.</dd>
+</dl>
+
 <p class="definition">Definition at line <a class="el" href="sky-site_8c_source.html#l00261">261</a> of file <a class="el" href="sky-site_8c_source.html">sky-site.c</a>.</p>
 
 </div>
@@ -916,7 +924,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 </ol>
 </dd></dl>
 <hr  />
- 
+ <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_8c-example.html#a12">demo1.c</a>, <a class="el" href="demo2_8c-example.html#a12">demo2.c</a>, and <a class="el" href="demo3_8c-example.html#a11">demo3.c</a>.</dd>
+</dl>
+
 <p class="definition">Definition at line <a class="el" href="sky-site_8c_source.html#l00293">293</a> of file <a class="el" href="sky-site_8c_source.html">sky-site.c</a>.</p>
 
 </div>

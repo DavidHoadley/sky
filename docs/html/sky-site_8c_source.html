@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.0-1</span>
+   &#160;<span id="projectnumber">0.1.1-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -741,158 +741,163 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;<span class="comment"> *      - \subpage page-time-variables</span></div>
 <div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;<span class="comment"> *  */</span></div>
 <div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;<span class="comment">/*! \page page-var-suffixes Suffixes on variable and parameter names</span></div>
-<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;<span class="comment"> * </span></div>
-<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;<span class="comment"> *  In accordance with the naming convention spelt out in the</span></div>
-<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;<span class="comment"> *  style guide, many variables and constants have a suffix indicating their</span></div>
-<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;<span class="comment"> *  units. Mostly these are SI units, for example</span></div>
-<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;<span class="comment"> *      -  _d (days), _h (hours) _s (seconds) _ns (nanoseconds)</span></div>
-<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;<span class="comment"> *      -  _m (metres), _km (kilometres), _kmps (kilometres/second)</span></div>
-<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;<span class="comment"> *      -  _rad (radian), _deg (degrees), _radps (radian/second)</span></div>
-<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;<span class="comment"> *      -  _degC (degrees Celsius)</span></div>
-<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;<span class="comment"> * </span></div>
-<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;<span class="comment"> *  But we also have units for astronomical quantities as recommended by the</span></div>
-<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;<span class="comment"> *  International Astronomical Union (IAU) style manual</span></div>
-<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;<span class="comment"> *  (https://www.iau.org/publications/proceedings_rules/units/), for example</span></div>
-<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;<span class="comment"> *      -  _as (arcseconds) _mas (milliarcseconds), (see \ref page-sec-arcsec)</span></div>
-<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;<span class="comment"> *      -  _au (Astronomical Unit (of distance))</span></div>
-<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;<span class="comment"> *      -  _a (Julian year)</span></div>
-<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;<span class="comment"> * </span></div>
-<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;<span class="comment"> *  This last unit implies that we could use &quot;ka&quot; for millennia, and we do. But</span></div>
-<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;<span class="comment"> *  we also have quantities measured in Julian centuries. The IAU guidelines</span></div>
-<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;<span class="comment"> *  specifically rule out using &quot;ha&quot; for this (quite right: &quot;ha&quot; means</span></div>
-<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;<span class="comment"> *  hectares), and they oppose &quot;cy&quot;, but they make no recommendation of an</span></div>
-<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;<span class="comment"> *  alternative. But the _Astronomical Almanac_ does use &quot;cy&quot; for a Julian</span></div>
-<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;<span class="comment"> *  century, so I will use suffix _cy.</span></div>
-<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;<span class="comment"> *      -  _ka (Julian millennium), _cy (Julian century)</span></div>
-<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;<span class="comment"> * </span></div>
-<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;<span class="comment"> *  Another convention that applies here: Objects whose name ends in a capital V</span></div>
-<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;<span class="comment"> *  are 3-dimensional vectors (often unit position vectors, or direction</span></div>
-<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;<span class="comment"> *  cosines) but not exclusively so. Objects whose name ends in a capital M are</span></div>
-<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;<span class="comment"> *  matrices, typically 3x3 rotation matrices. Occasionally, this is combined</span></div>
-<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;<span class="comment"> *  with a suffix. So a name like \c earthV_au means a vector whose components</span></div>
-<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;<span class="comment"> *  are scaled in Astronomical Units.</span></div>
-<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;<span class="comment">/*! \page page-sec-arcsec Seconds versus arcseconds</span></div>
-<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;<span class="comment"> *  The fact that time in hours is subdivided into minutes and seconds, and</span></div>
-<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;<span class="comment"> *  angles in degrees are also subdivided into minutes and seconds, normally</span></div>
-<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;<span class="comment"> *  does not cause confusion. But astronomers measure angles on the celestial</span></div>
-<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;<span class="comment"> *  sphere using both units of time (for Right Ascension and Hour Angles) and</span></div>
-<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;<span class="comment"> *  units of degrees (for many other angles). So if we talk about an angle of</span></div>
-<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;<span class="comment"> *  n minutes, or n seconds, do we mean a fraction of an hour, or a degree?</span></div>
-<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;<span class="comment"> * </span></div>
-<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;<span class="comment"> *  For this reason, astronomers refer to the fractions of a degree as</span></div>
-<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;<span class="comment"> *  arcminutes, and reserve the term &quot;minutes&quot; for fractions of an hour. And</span></div>
-<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;<span class="comment"> *  fractions of an arcminute are called arcseconds rather than seconds. This</span></div>
-<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;<span class="comment"> *  program follows that convention, particularly in the use of suffixes on</span></div>
-<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;<span class="comment"> *  variable names (see page \ref page-var-suffixes). Variables in units of</span></div>
-<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;<span class="comment"> *  seconds of time have the suffix _s, those in units of arcseconds have the</span></div>
-<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;<span class="comment"> *  suffix _as.</span></div>
-<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;<span class="comment"> * </span></div>
-<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;<span class="comment"> *  In general, within this program most angles are stored in units of radians,</span></div>
-<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;<span class="comment"> *  and only converted to degrees-arcminutes-arcseconds, or</span></div>
-<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;<span class="comment"> *  hours-minutes-seconds when being written out in text form.</span></div>
-<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;<span class="comment"> *  The symbol ′ is used for arcminutes only, never for minutes of time.</span></div>
-<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;<span class="comment"> *  The symbol ″ is used for arcseconds only, never for seconds of time.</span></div>
-<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;<span class="comment">/*! \page page-interval-notation Interval notation</span></div>
-<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;<span class="comment"> *  Frequently throughout the documentation and comments, valid ranges of</span></div>
-<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;<span class="comment"> *  function parameters are expressed in interval notation. This is a pair of</span></div>
-<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;<span class="comment"> *  numbers representing the two ends of the range, separated by a comma. The</span></div>
-<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;<span class="comment"> *  the pair of numbers is surrounded by brackets. Square brackets</span></div>
-<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;<span class="comment"> *  indicate an inclusive end-of-range, and round brackets (parentheses)</span></div>
-<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;<span class="comment"> *  indicate an exclusive end-of range.</span></div>
-<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;<span class="comment"> * </span></div>
-<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;<span class="comment"> *  Examples:</span></div>
-<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;<span class="comment"> *  - [0,10] means all values from 0 to 10 inclusive</span></div>
-<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;<span class="comment"> *  - [0.0, 360.0) means all values from 0.0 up to but not including 360.0</span></div>
-<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;<span class="comment"> *      itself.</span></div>
-<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;<span class="comment"> *  - (-π, +π] means all values from -π, but not including -π itself, up to and</span></div>
-<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;<span class="comment"> *      including +π.</span></div>
-<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;<span class="comment">/*! \page page-sign-conventions Sign and direction conventions</span></div>
-<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;<span class="comment"> *  The following conventions apply throughout this software.</span></div>
-<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;<span class="comment"> *      - Terrestrial coordinates (latitude and longitude).</span></div>
-<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;<span class="comment"> *          - Polar form\n</span></div>
-<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;<span class="comment"> *            Longitudes east of Greenwich are positive, those west are </span></div>
-<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;<span class="comment"> *            negative.</span></div>
-<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;<span class="comment"> *            Latitudes north of the equator are positive, those south are </span></div>
-<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;<span class="comment"> *            negative. When the Earth is viewed from above the north pole</span></div>
-<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;<span class="comment"> *            looking towards the centre of the earth, longitude increases in an</span></div>
-<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;<span class="comment"> *            anticlockwise direction. </span></div>
-<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;<span class="comment"> *          - Rectangular form\n</span></div>
-<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;<span class="comment"> *            The position is indicated by a vector, whose components are as</span></div>
-<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;<span class="comment"> *            follows:</span></div>
-<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;<span class="comment"> *              - the x axis points from the centre of the earth towards the </span></div>
-<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;<span class="comment"> *                equator at 0° longitude,</span></div>
-<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;<span class="comment"> *              - the y axis points to 90° longitude, and</span></div>
-<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;<span class="comment"> *              -  the z axis points to the north pole.</span></div>
-<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;<span class="comment"> *              .</span></div>
-<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;<span class="comment"> *            This is a right-handed set.</span></div>
-<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;<span class="comment"> *      - Equatorial coordinates (Right Ascension and declination).</span></div>
-<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;<span class="comment"> *          - Polar form\n</span></div>
-<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;<span class="comment"> *            The equator is the projection of the Earth&#39;s equator out into</span></div>
-<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;<span class="comment"> *            space, and the north celestial pole is the projection of the north</span></div>
-<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;<span class="comment"> *            pole out into space. When viewed from north celestial pole looking</span></div>
-<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;<span class="comment"> *            down towards the origin, Right Ascension increases in an</span></div>
-<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;<span class="comment"> *            anticlockwise direction (i.e. eastwards, like longitude), and</span></div>
-<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;<span class="comment"> *            north declinations are positive, south are negative.</span></div>
-<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;<span class="comment"> *          - Rectangular form\n</span></div>
-<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;<span class="comment"> *              - x points to the March Equinox (0° RA),</span></div>
-<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;<span class="comment"> *                  (\ref page-vernal-equinox &quot;unfortunately&quot; known as the</span></div>
-<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;<span class="comment"> *                  vernal equinox).</span></div>
-<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;<span class="comment"> *              - y points to 90° RA, and</span></div>
-<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;<span class="comment"> *              - z points to the north celestial pole.</span></div>
-<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;<span class="comment"> *              .</span></div>
-<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;<span class="comment"> *            (This is also a right-handed set.)</span></div>
-<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;<span class="comment"> *      - Ecliptic coordinates. (Ecliptic latitude and longitude).\n</span></div>
-<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;<span class="comment"> *        These are exactly analogous to terrestrial coordinates, in that</span></div>
-<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;<span class="comment"> *        longitude increases anticlockwise, and the rectangular coordinate</span></div>
-<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;<span class="comment"> *        vector is a right-handed set.</span></div>
+<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;<span class="comment">/*! \page page-misc Miscellaneous</span></div>
+<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;<span class="comment"> *      - \subpage page-vernal-equinox</span></div>
+<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;<span class="comment"> *      - \subpage page-why-struct-array</span></div>
+<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;<span class="comment"> *  */</span></div>
+<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;<span class="comment">/*! \page page-var-suffixes Suffixes on variable and parameter names</span></div>
+<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;<span class="comment"> * </span></div>
+<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;<span class="comment"> *  In accordance with the naming convention spelt out in the</span></div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;<span class="comment"> *  style guide, many variables and constants have a suffix indicating their</span></div>
+<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;<span class="comment"> *  units. Mostly these are SI units, for example</span></div>
+<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;<span class="comment"> *      -  _d (days), _h (hours) _s (seconds) _ns (nanoseconds)</span></div>
+<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;<span class="comment"> *      -  _m (metres), _km (kilometres), _kmps (kilometres/second)</span></div>
+<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;<span class="comment"> *      -  _rad (radian), _deg (degrees), _radps (radian/second)</span></div>
+<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;<span class="comment"> *      -  _degC (degrees Celsius)</span></div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;<span class="comment"> * </span></div>
+<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;<span class="comment"> *  But we also have units for astronomical quantities as recommended by the</span></div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;<span class="comment"> *  International Astronomical Union (IAU) style manual</span></div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;<span class="comment"> *  (https://www.iau.org/publications/proceedings_rules/units/), for example</span></div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;<span class="comment"> *      -  _as (arcseconds) _mas (milliarcseconds), (see \ref page-sec-arcsec)</span></div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;<span class="comment"> *      -  _au (Astronomical Unit (of distance))</span></div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;<span class="comment"> *      -  _a (Julian year)</span></div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;<span class="comment"> * </span></div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;<span class="comment"> *  This last unit implies that we could use &quot;ka&quot; for millennia, and we do. But</span></div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;<span class="comment"> *  we also have quantities measured in Julian centuries. The IAU guidelines</span></div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;<span class="comment"> *  specifically rule out using &quot;ha&quot; for this (quite right: &quot;ha&quot; means</span></div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;<span class="comment"> *  hectares), and they oppose &quot;cy&quot;, but they make no recommendation of an</span></div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;<span class="comment"> *  alternative. But the _Astronomical Almanac_ does use &quot;cy&quot; for a Julian</span></div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;<span class="comment"> *  century, so I will use suffix _cy.</span></div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;<span class="comment"> *      -  _ka (Julian millennium), _cy (Julian century)</span></div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;<span class="comment"> * </span></div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;<span class="comment"> *  Another convention that applies here: Objects whose name ends in a capital V</span></div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;<span class="comment"> *  are 3-dimensional vectors (often unit position vectors, or direction</span></div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;<span class="comment"> *  cosines) but not exclusively so. Objects whose name ends in a capital M are</span></div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;<span class="comment"> *  matrices, typically 3x3 rotation matrices. Occasionally, this is combined</span></div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;<span class="comment"> *  with a suffix. So a name like \c earthV_au means a vector whose components</span></div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;<span class="comment"> *  are scaled in Astronomical Units.</span></div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;<span class="comment">/*! \page page-sec-arcsec Seconds versus arcseconds</span></div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;<span class="comment"> *  The fact that time in hours is subdivided into minutes and seconds, and</span></div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;<span class="comment"> *  angles in degrees are also subdivided into minutes and seconds, normally</span></div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;<span class="comment"> *  does not cause confusion. But astronomers measure angles on the celestial</span></div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;<span class="comment"> *  sphere using both units of time (for Right Ascension and Hour Angles) and</span></div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;<span class="comment"> *  units of degrees (for many other angles). So if we talk about an angle of</span></div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;<span class="comment"> *  n minutes, or n seconds, do we mean a fraction of an hour, or a degree?</span></div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;<span class="comment"> * </span></div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;<span class="comment"> *  For this reason, astronomers refer to the fractions of a degree as</span></div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;<span class="comment"> *  arcminutes, and reserve the term &quot;minutes&quot; for fractions of an hour. And</span></div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;<span class="comment"> *  fractions of an arcminute are called arcseconds rather than seconds. This</span></div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;<span class="comment"> *  program follows that convention, particularly in the use of suffixes on</span></div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;<span class="comment"> *  variable names (see page \ref page-var-suffixes). Variables in units of</span></div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;<span class="comment"> *  seconds of time have the suffix _s, those in units of arcseconds have the</span></div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;<span class="comment"> *  suffix _as.</span></div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;<span class="comment"> * </span></div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;<span class="comment"> *  In general, within this program most angles are stored in units of radians,</span></div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;<span class="comment"> *  and only converted to degrees-arcminutes-arcseconds, or</span></div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;<span class="comment"> *  hours-minutes-seconds when being written out in text form.</span></div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;<span class="comment"> *  The symbol ′ is used for arcminutes only, never for minutes of time.</span></div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;<span class="comment"> *  The symbol ″ is used for arcseconds only, never for seconds of time.</span></div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;<span class="comment">/*! \page page-interval-notation Interval notation</span></div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;<span class="comment"> *  Frequently throughout the documentation and comments, valid ranges of</span></div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;<span class="comment"> *  function parameters are expressed in interval notation. This is a pair of</span></div>
+<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;<span class="comment"> *  numbers representing the two ends of the range, separated by a comma. The</span></div>
+<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;<span class="comment"> *  the pair of numbers is surrounded by brackets. Square brackets</span></div>
+<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;<span class="comment"> *  indicate an inclusive end-of-range, and round brackets (parentheses)</span></div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;<span class="comment"> *  indicate an exclusive end-of range.</span></div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;<span class="comment"> * </span></div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;<span class="comment"> *  Examples:</span></div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;<span class="comment"> *  - [0,10] means all values from 0 to 10 inclusive</span></div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;<span class="comment"> *  - [0.0, 360.0) means all values from 0.0 up to but not including 360.0</span></div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;<span class="comment"> *      itself.</span></div>
+<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;<span class="comment"> *  - (-π, +π] means all values from -π, but not including -π itself, up to and</span></div>
+<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;<span class="comment"> *      including +π.</span></div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;<span class="comment">/*! \page page-sign-conventions Sign and direction conventions</span></div>
+<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;<span class="comment"> *  The following conventions apply throughout this software.</span></div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;<span class="comment"> *      - Terrestrial coordinates (latitude and longitude).</span></div>
+<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;<span class="comment"> *          - Polar form\n</span></div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;<span class="comment"> *            Longitudes east of Greenwich are positive, those west are </span></div>
+<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;<span class="comment"> *            negative.</span></div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;<span class="comment"> *            Latitudes north of the equator are positive, those south are </span></div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;<span class="comment"> *            negative. When the Earth is viewed from above the north pole</span></div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;<span class="comment"> *            looking towards the centre of the earth, longitude increases in an</span></div>
+<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;<span class="comment"> *            anticlockwise direction. </span></div>
+<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;<span class="comment"> *          - Rectangular form\n</span></div>
+<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;<span class="comment"> *            The position is indicated by a vector, whose components are as</span></div>
+<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;<span class="comment"> *            follows:</span></div>
+<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;<span class="comment"> *              - the x axis points from the centre of the earth towards the </span></div>
+<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;<span class="comment"> *                equator at 0° longitude,</span></div>
+<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;<span class="comment"> *              - the y axis points to 90° longitude, and</span></div>
+<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;<span class="comment"> *              -  the z axis points to the north pole.</span></div>
+<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;<span class="comment"> *              .</span></div>
+<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;<span class="comment"> *            This is a right-handed set.</span></div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;<span class="comment"> *      - Equatorial coordinates (Right Ascension and declination).</span></div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;<span class="comment"> *          - Polar form\n</span></div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;<span class="comment"> *            The equator is the projection of the Earth&#39;s equator out into</span></div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;<span class="comment"> *            space, and the north celestial pole is the projection of the north</span></div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;<span class="comment"> *            pole out into space. When viewed from north celestial pole looking</span></div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;<span class="comment"> *            down towards the origin, Right Ascension increases in an</span></div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;<span class="comment"> *            anticlockwise direction (i.e. eastwards, like longitude), and</span></div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;<span class="comment"> *            north declinations are positive, south are negative.</span></div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;<span class="comment"> *          - Rectangular form\n</span></div>
+<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;<span class="comment"> *              - x points to the March Equinox (0° RA),</span></div>
+<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;<span class="comment"> *                  (\ref page-vernal-equinox &quot;unfortunately&quot; known as the</span></div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;<span class="comment"> *                  vernal equinox).</span></div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;<span class="comment"> *              - y points to 90° RA, and</span></div>
+<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;<span class="comment"> *              - z points to the north celestial pole.</span></div>
+<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;<span class="comment"> *              .</span></div>
+<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;<span class="comment"> *            (This is also a right-handed set.)</span></div>
 <div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;<span class="comment"> *      - Horizon coordinates (azimuth and elevation (or altitude)).</span></div>
-<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;<span class="comment"> *          - Polar form\n</span></div>
-<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;<span class="comment"> *            Azimuth increases in a clockwise direction from True North (just</span></div>
-<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;<span class="comment"> *            like a compass bearing).</span></div>
-<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;<span class="comment"> *          - Rectangular form\n</span></div>
-<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;<span class="comment"> *              - x points to the True North horizon,</span></div>
-<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;<span class="comment"> *              - y  points the East horizon, and</span></div>
-<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;<span class="comment"> *              - z points to the zenith.</span></div>
-<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;<span class="comment"> *              .</span></div>
-<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;<span class="comment"> *            This is a left-handed set. (Compared to a right-handed set, the x</span></div>
-<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;<span class="comment"> *            and y axes are swapped.)</span></div>
-<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;<span class="comment"> *      - (Hour angle and declination).</span></div>
-<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;<span class="comment"> *          - Polar form\n</span></div>
-<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;<span class="comment"> *            Hour angles are measured positive westward. This means it</span></div>
-<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;<span class="comment"> *            increases clockwise, unlike Right Ascension.</span></div>
-<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;<span class="comment"> *          - Rectangular form\n</span></div>
-<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;<span class="comment"> *              - x points to the intersection of the local meridian and the</span></div>
-<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;<span class="comment"> *                celestial equator,</span></div>
-<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;<span class="comment"> *              - y points to HA = 90°, and</span></div>
-<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;<span class="comment"> *              - z points to the north celestial pole.</span></div>
-<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;<span class="comment"> *              .</span></div>
-<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;<span class="comment"> *            Like Horizon coordinates, this is a left-handed set.</span></div>
-<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;<span class="comment">/*! \page page-vernal-equinox Vernal equinox</span></div>
-<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;<span class="comment"> *  The equinox that occurs in March is normally referred to as the vernal</span></div>
-<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;<span class="comment"> *  equinox. This is unfortunate, because of the meaning of the word vernal:</span></div>
-<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;<span class="comment"> * \par</span></div>
-<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;<span class="comment"> *      \b ver′nal \em adj. of or occurring in spring.\n</span></div>
-<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;<span class="comment"> *      -- The Collins Concise Dictionary, 4th edn. 1999</span></div>
-<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;<span class="comment"> * </span></div>
-<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;<span class="comment"> *  Obviously it never occurred to the person who coined this term for the</span></div>
-<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;<span class="comment"> *  equinox that the Southern Hemisphere exists. Because \em everybody in the</span></div>
-<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;<span class="comment"> *  Southern Hemisphere knows that the spring equinox occurs in September, not</span></div>
-<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;<span class="comment"> *  March.</span></div>
-<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160; </div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;<span class="comment"> *      - Ecliptic coordinates. (Ecliptic latitude and longitude).\n</span></div>
+<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;<span class="comment"> *        These are exactly analogous to terrestrial coordinates, in that</span></div>
+<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;<span class="comment"> *        longitude increases anticlockwise, and the rectangular coordinate</span></div>
+<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;<span class="comment"> *        vector is a right-handed set.</span></div>
+<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;<span class="comment"> *      - Horizon coordinates (azimuth and elevation (or altitude)).</span></div>
+<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;<span class="comment"> *          - Polar form\n</span></div>
+<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;<span class="comment"> *            Azimuth increases in a clockwise direction from True North (just</span></div>
+<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;<span class="comment"> *            like a compass bearing).</span></div>
+<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;<span class="comment"> *          - Rectangular form\n</span></div>
+<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;<span class="comment"> *              - x points to the True North horizon,</span></div>
+<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;<span class="comment"> *              - y  points the East horizon, and</span></div>
+<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;<span class="comment"> *              - z points to the zenith.</span></div>
+<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;<span class="comment"> *              .</span></div>
+<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;<span class="comment"> *            This is a left-handed set. (Compared to a right-handed set, the x</span></div>
+<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;<span class="comment"> *            and y axes are swapped.)</span></div>
+<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;<span class="comment"> *      - (Hour angle and declination).</span></div>
+<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;<span class="comment"> *          - Polar form\n</span></div>
+<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;<span class="comment"> *            Hour angles are measured positive westward. This means it</span></div>
+<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;<span class="comment"> *            increases clockwise, unlike Right Ascension.</span></div>
+<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;<span class="comment"> *          - Rectangular form\n</span></div>
+<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;<span class="comment"> *              - x points to the intersection of the local meridian and the</span></div>
+<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;<span class="comment"> *                celestial equator,</span></div>
+<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;<span class="comment"> *              - y points to HA = 90°, and</span></div>
+<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;<span class="comment"> *              - z points to the north celestial pole.</span></div>
+<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;<span class="comment"> *              .</span></div>
+<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;<span class="comment"> *            Like Horizon coordinates, this is a left-handed set.</span></div>
+<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;<span class="comment">/*! \page page-vernal-equinox Vernal equinox</span></div>
+<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;<span class="comment"> *  The equinox that occurs in March is normally referred to as the vernal</span></div>
+<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;<span class="comment"> *  equinox. This is unfortunate, because of the meaning of the word vernal:</span></div>
+<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;<span class="comment"> * \par</span></div>
+<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;<span class="comment"> *      \b ver′nal \em adj. of or occurring in spring.\n</span></div>
+<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;<span class="comment"> *      -- The Collins Concise Dictionary, 4th edn. 1999</span></div>
+<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;<span class="comment"> * </span></div>
+<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;<span class="comment"> *  Obviously it never occurred to the person who coined this term for the</span></div>
+<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;<span class="comment"> *  equinox that the Southern Hemisphere exists. Because \em everybody in the</span></div>
+<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;<span class="comment"> *  Southern Hemisphere knows that the spring equinox occurs in September, not</span></div>
+<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;<span class="comment"> *  March.</span></div>
+<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="avectors3d_8h_html_a466c347ccb8d5664a77217ba8dff2adf"><div class="ttname"><a href="vectors3d_8h.html#a466c347ccb8d5664a77217ba8dff2adf">v3d_magVSq</a></div><div class="ttdeci">double v3d_magVSq(const V3D_Vector *srcV)</div><div class="ttdoc">Return the square of the magnitude of the specified vector.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00253">vectors3d.c:253</a></div></div>

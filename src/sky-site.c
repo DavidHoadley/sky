@@ -652,6 +652,11 @@ LOCAL void createAzElBaseM(Sky_SiteProp *site)
  *      - \subpage page-time-variables
  *  */
 
+/*! \page page-misc Miscellaneous
+ *      - \subpage page-vernal-equinox
+ *      - \subpage page-why-struct-array
+ *  */
+
 /*! \page page-var-suffixes Suffixes on variable and parameter names
  * 
  *  In accordance with the naming convention spelt out in the
