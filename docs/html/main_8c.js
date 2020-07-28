@@ -8,6 +8,7 @@ var main_8c =
     [ "SITE_TIMEZONE_h", "main_8c.html#a894182ebbad2c9ccd77ab206aab45401", null ],
     [ "demo1", "main_8c.html#a1e4ce4fefd4fcee5ddf10b3e7b2b9ea5", null ],
     [ "demo2", "main_8c.html#ae916f1bc9b0d73b4e1221d325c364e4b", null ],
+    [ "demo4", "main_8c.html#a88607797700fa6fd0127026142a2139e", null ],
     [ "sunTopocentricFast", "main_8c.html#a554921ba34b2560dab6eb9df3d317b5d", null ],
     [ "main", "main_8c.html#a840291bc02cba5474a4cb46a9b9566fe", null ]
 ];

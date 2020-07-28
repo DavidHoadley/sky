@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.1-1</span>
+   &#160;<span id="projectnumber">0.1.2-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('page-timescales.html',''); initResizab
 <li><b>A</b>. Ignore it altogether, and assume it is equal to zero. This will have no effect on the calculation of celestial coordinates, but could introduce an error of up to 0.00375° in the direction from the ground, if you are unlucky. For most purposes, this is good enough. Initialise your code with the function <a class="el" href="sky_8h.html#a15ad9a782e54212cb22bd0658b6541a0" title="Initialise delta times with simple default values.">sky_initTimeSimple()</a>, or call <a class="el" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a" title="Set up the various delta time values for use in ongoing calculations.">sky_initTime()</a> with <em>deltaUT_s</em> set to 0.0</li>
 <li><b>B</b>. Check Bulletin A every few months, and call <a class="el" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a" title="Set up the various delta time values for use in ongoing calculations.">sky_initTime()</a> with <em>deltaUT_s</em> set to the value of DUT1 given near the top of the file, described as "transmitted with time signals". This will give a better approximation.</li>
 <li><p class="startli"><b>C</b>. Check Bulletin A every few months, and find the PREDICTIONS section, and look for a line that looks like the following: </p><pre class="fragment">UT1-UTC = -0.1733 - 0.00056 (MJD - 58725) - (UT2-UT1)
-          ^^^^^^^   ^^^^^^^        ^^^^^
+          ^^^^^^^ ^^^^^^^^^        ^^^^^
          CoeffC11  CoeffC12       MJDbase
 </pre><p class="startli">Take the three numbers and pass them to the function <a class="el" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902" title="Set up the various delta time values for use in ongoing calculations.">sky_initTimeDetailed()</a> which will use this formula to predict the value. This method is good enough be used by large astronomical telescopes.</p>
 </li>

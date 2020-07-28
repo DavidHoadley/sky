@@ -83,12 +83,14 @@ void skyfast_getApprox(double t_cy, Sky_TrueEquatorial *approx);
  *      sqrt((azimuth_error * cos(elevation))^2 + elevation_error^2)
  *
  *  The interpolation interval (in hours) is the time between the two previously
- *  fully calculated vectors. It is the value supplied to parameter \a 
+ *  fully calculated vectors. This value (multiplied by 60) is supplied to
+ *  parameter \a fullRecalcInterval_mins of function skyfast_init().
  *  
  *  ###Maximum absolute position error (arcseconds) for different interpolation intervals (hours)
  * hours|1      |2     |3     |4     |5     |6     |8     |10    |12    |15    |16    |18    |20    |22    |24    |
  * :----|------:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
  * Sun  |0.0005 |0.002 |0.005 |0.008 |0.013 |0.018 |0.033 |0.051 |0.074 |0.115 |0.131 |0.166 |0.205 |0.248 |0.296 |
+ * Moon |0.338  |1.354 |3.046 |5.408 |8.344 |12.07 |21.39 |34.22 |49.55 |77.74 |85.21 |112.1 |138.4 |154.5 |185.4 |
  *
  *  As can be seen, the errors are very small for the Sun even with 24 hours
  *  between full calculations (i.e. a value of 1440 minutes supplied to
@@ -97,7 +99,10 @@ void skyfast_getApprox(double t_cy, Sky_TrueEquatorial *approx);
  *  supplying 720 minutes to this parameter, without ever having to call the
  *  function skyfast_backgroundUpdate(). This is because skyfast_init()
  *  calculates three apparent positions, not just two.
- * 
+ *
+ *  Errors for the Moon are larger. The position algorithm itself is accurate
+ *  to about 5 arcseconds, it seems, so this suggests that an interpolation
+ *  interval of no more than about 2 hours should be used for the Moon.
  */
 
 #endif /* SKYFAST_H */

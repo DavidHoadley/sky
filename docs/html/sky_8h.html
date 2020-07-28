@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.1-1</span>
+   &#160;<span id="projectnumber">0.1.2-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -263,7 +263,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 </dl>
 <dl class="section user"><dt>When to call this function</dt><dd>Call at program startup time. Use this routine if you have opted for option 3A, 3B or 3D in the note at the bottom of this file (see <a class="el" href="page-timescales.html">Timescales, and converting between them</a>). (Use <a class="el" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902" title="Set up the various delta time values for use in ongoing calculations.">sky_initTimeDetailed()</a> if you have opted for option 3C.)</dd></dl>
 <hr  />
- <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_8c-example.html#a4">demo1.c</a>, <a class="el" href="demo2_8c-example.html#a4">demo2.c</a>, and <a class="el" href="demo3_8c-example.html#a3">demo3.c</a>.</dd>
+ <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_sun_8c-example.html#a4">demo1_sun.c</a>, <a class="el" href="demo2_sun_tracking_8c-example.html#a4">demo2_sun_tracking.c</a>, and <a class="el" href="demo3_moon_8c-example.html#a3">demo3_moon.c</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00096">96</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
@@ -372,7 +372,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 </dl>
 <dl class="section user"><dt>When to call this function</dt><dd>Call this function at program startup time. Use this routine if you have opted for option 3C in the note at the bottom of this file (see <a class="el" href="page-timescales.html">Timescales, and converting between them</a>). (Use <a class="el" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a" title="Set up the various delta time values for use in ongoing calculations.">sky_initTime()</a> instead, if you have opted for option 3A, 3B or 3D.) If your program runs uninterrupted for many days, you may wish to call this function once per day with an updated value for <em>mjdUtc</em>.</dd></dl>
 <hr  />
- 
+ <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo4_multiple_sites_8c-example.html#a7">demo4_multiple_sites.c</a>.</dd>
+</dl>
+
 <p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00131">131</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
@@ -477,7 +479,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 </dl>
 <dl class="section note"><dt>Note</dt><dd>This routine has no better resolution than one second. Use routine sky_unixTimespecToMjd() or sky_calTimeToMjd() instead, if you need sub-second resolution</dd></dl>
 <hr  />
- <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_8c-example.html#a14">demo1.c</a>, <a class="el" href="demo2_8c-example.html#a14">demo2.c</a>, and <a class="el" href="demo3_8c-example.html#a13">demo3.c</a>.</dd>
+ <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_sun_8c-example.html#a14">demo1_sun.c</a>, <a class="el" href="demo2_sun_tracking_8c-example.html#a14">demo2_sun_tracking.c</a>, <a class="el" href="demo3_moon_8c-example.html#a13">demo3_moon.c</a>, and <a class="el" href="demo4_multiple_sites_8c-example.html#a6">demo4_multiple_sites.c</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00255">255</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
@@ -557,7 +559,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 </dl>
 <dl class="section user"><dt>Reference</dt><dd><em>Astronomical Almanac</em> 2007, page B9 (for Earth Rotation Angle)</dd></dl>
 <hr  />
- 
+ <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo4_multiple_sites_8c-example.html#a13">demo4_multiple_sites.c</a>.</dd>
+</dl>
+
 <p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00197">197</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
@@ -748,7 +752,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 <p>The <em>site-&gt;timezone_d</em> field is initialised to 0, assuming that the site time zone is UTC. If another value is required, follow this call by a call to <a class="el" href="sky_8h.html#a982a0d853512a67d9e2177845e605dc4" title="Set the time zone offset for this site.">sky_setSiteTimeZone()</a>.</p>
 <dl class="section user"><dt>When to call this function</dt><dd>At program initialisation time only</dd></dl>
 <hr  />
- <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_8c-example.html#a5">demo1.c</a>, <a class="el" href="demo2_8c-example.html#a5">demo2.c</a>, and <a class="el" href="demo3_8c-example.html#a4">demo3.c</a>.</dd>
+ <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_sun_8c-example.html#a5">demo1_sun.c</a>, <a class="el" href="demo2_sun_tracking_8c-example.html#a5">demo2_sun_tracking.c</a>, <a class="el" href="demo3_moon_8c-example.html#a4">demo3_moon.c</a>, and <a class="el" href="demo4_multiple_sites_8c-example.html#a8">demo4_multiple_sites.c</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="sky-site_8c_source.html#l00105">105</a> of file <a class="el" href="sky-site_8c_source.html">sky-site.c</a>.</p>
@@ -877,7 +881,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 </ol>
 </dd></dl>
 <hr  />
- <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_8c-example.html#a9">demo1.c</a>, <a class="el" href="demo2_8c-example.html#a9">demo2.c</a>, and <a class="el" href="demo3_8c-example.html#a8">demo3.c</a>.</dd>
+ <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_sun_8c-example.html#a9">demo1_sun.c</a>, <a class="el" href="demo2_sun_tracking_8c-example.html#a9">demo2_sun_tracking.c</a>, <a class="el" href="demo3_moon_8c-example.html#a8">demo3_moon.c</a>, and <a class="el" href="demo4_multiple_sites_8c-example.html#a9">demo4_multiple_sites.c</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="sky-site_8c_source.html#l00261">261</a> of file <a class="el" href="sky-site_8c_source.html">sky-site.c</a>.</p>
@@ -924,7 +928,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 </ol>
 </dd></dl>
 <hr  />
- <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_8c-example.html#a12">demo1.c</a>, <a class="el" href="demo2_8c-example.html#a12">demo2.c</a>, and <a class="el" href="demo3_8c-example.html#a11">demo3.c</a>.</dd>
+ <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_sun_8c-example.html#a12">demo1_sun.c</a>, <a class="el" href="demo2_sun_tracking_8c-example.html#a12">demo2_sun_tracking.c</a>, <a class="el" href="demo3_moon_8c-example.html#a11">demo3_moon.c</a>, and <a class="el" href="demo4_multiple_sites_8c-example.html#a10">demo4_multiple_sites.c</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="sky-site_8c_source.html#l00293">293</a> of file <a class="el" href="sky-site_8c_source.html">sky-site.c</a>.</p>
@@ -1075,7 +1079,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 <dl class="section user"><dt>When to call this function</dt><dd>When you have the position of a celestial object expressed in the Terrestrial Intermediate Reference System, use this function to convert it to topocentric coordinates (the coordinates as seen from a particular observing location on the Earth's surface). If you are running a control loop to enable continuous tracking of this object, you will need to call this function every time around your control loop. </dd></dl>
 <dl class="section user"><dt></dt><dd>If you wish to calculate the position of the object as seen from multiple sites simultaneously, you need to call this function once for each of those sites, passing the relevant <em>site</em> data block to each call.</dd></dl>
 <hr  />
- 
+ <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo4_multiple_sites_8c-example.html#a20">demo4_multiple_sites.c</a>.</dd>
+</dl>
+
 <p class="definition">Definition at line <a class="el" href="sky-site_8c_source.html#l00378">378</a> of file <a class="el" href="sky-site_8c_source.html">sky-site.c</a>.</p>
 
 </div>

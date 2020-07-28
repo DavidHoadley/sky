@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.1-1</span>
+   &#160;<span id="projectnumber">0.1.2-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -281,7 +281,7 @@ Functions</h2></td></tr>
 </ul>
 </dd></dl>
 <hr  />
- <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo2_8c-example.html#a16">demo2.c</a>.</dd>
+ <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo2_sun_tracking_8c-example.html#a16">demo2_sun_tracking.c</a>, and <a class="el" href="demo4_multiple_sites_8c-example.html#a12">demo4_multiple_sites.c</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="sun_8c_source.html#l00211">211</a> of file <a class="el" href="sun_8c_source.html">sun.c</a>.</p>
@@ -338,7 +338,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section user"><dt>When to call this function</dt><dd>Use this function if you are calculating the Sun topocentric position once, for a single site. But if you are going to be calculating it repeatedly, or for multiple sites, use of this function will cause you to perform a great many needless recalculations. Use <a class="el" href="skyfast_8h.html#afb9144e153624a3bf899af40eca07ac0" title="Get the best approximation to the celestial object&#39;s apparent coordinates and distance,...">skyfast_getApprox()</a>, followed by <a class="el" href="sky0_8h.html#a420b9af8dd92d7151d5ccc253c417954" title="Convert a position in geocentric apparent coordinates to geocentric coordinates in the Terrestrial In...">sky0_appToTirs()</a> and <a class="el" href="sky_8h.html#a0797b1e268ac7cc5b052c0623883eb74" title="Transform a coordinate vector from the Terrestrial Intermediate Reference System to topocentric Az/El...">sky_siteTirsToTopo()</a> instead.</dd></dl>
 <hr  />
- <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_8c-example.html#a15">demo1.c</a>.</dd>
+ <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_sun_8c-example.html#a15">demo1_sun.c</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="sun_8c_source.html#l00266">266</a> of file <a class="el" href="sun_8c_source.html">sun.c</a>.</p>

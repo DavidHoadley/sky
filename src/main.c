@@ -63,6 +63,7 @@
 
 void demo1(void);
 void demo2(void);
+void demo4(void);
 void sunTopocentricFast(double             j2kUtc_d,
                         const Sky_DeltaTs  *dTs,
                         const Sky_SiteProp *site,
@@ -232,17 +233,21 @@ void demo2(void)
  *      This demo shows some of the use of the routines in sky.h and sun.h,
  *      and for interpolation, skyfast.h.
  *
- *      To view the source code of these demos, go to main.c and click on the
- *      link "Go to the source code of this file"
- *
  * \par Reference:
  *          Reda, Ibrahim and Andreas, Afshin.
  *          _Solar Position Algorithm for Solar Radiation Applications._
  *          National Renewable Energy Laboratory, publication no.
  *          NREL/TP-560-34302, June 2003, revised January 2008
  */
-/*! \example demo1.c    Single calculation of the Sun's position
- *  \example demo2.c    Repeated calculation (tracking) of the Sun using
+/*! \example demo1_sun.c Single calculation of the Sun's position
+ *  \example demo2_sun_tracking.c
+ *                      Repeated calculation (tracking) of the Sun using
  *                      interpolation
- *  \example demo3.c    Single calculation of the Moon's position
+ *  \example demo3_moon.c
+ *                      Single calculation of the Moon's position
+ *  \example demo4_multiple_sites.c
+ *                      Repeated calculation of the Sun's position for three
+ *                      European sites simultaneously. This demo also shows the
+ *                      use of the sky_initTimeDetailed() function.
  */
+ 

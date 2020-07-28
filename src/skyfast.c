@@ -119,7 +119,7 @@ GLOBAL void skyfast_init(double            tStartUtc_d,
     supply to calculate the apparent coordinates of a celestial object, its
     distance, and the Equation of the Equinoxes, as derived from nutation
     calculations. This routine calls that function
-        1.  for the time specified by \a mjdUtc,
+        1.  for the time specified by \a tStartUtc_d,
         2.  for time \a tStartUtc_d + \a fullRecalcalcInterval_mins, and
         3.  for time \a tStartUtc_d + 2 x \a fullRecalcalcInterval_mins.
         .

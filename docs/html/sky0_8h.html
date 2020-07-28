@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.1-1</span>
+   &#160;<span id="projectnumber">0.1.2-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -307,7 +307,9 @@ Functions</h2></td></tr>
 <dl class="section user"><dt>When to call this function</dt><dd>When you have the position of a celestial object expressed in Apparent coordinates, use this function to convert it to Terrestrial coordinates at the relevant rotational position of the earth. (Effectively you are converting from Right Ascension and Declination to the negative of the Greenwich Hour Angle and Declination.) If you are running a control loop to enable continuous tracking of this object, you will need to call this function (once) every time around your control loop. </dd></dl>
 <dl class="section user"><dt></dt><dd>Follow this function with a call to <a class="el" href="sky_8h.html#a0797b1e268ac7cc5b052c0623883eb74" title="Transform a coordinate vector from the Terrestrial Intermediate Reference System to topocentric Az/El...">sky_siteTirsToTopo()</a> to obtain the object's position in topocentric coordinates at the observing site.</dd></dl>
 <hr  />
- 
+ <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo4_multiple_sites_8c-example.html#a16">demo4_multiple_sites.c</a>.</dd>
+</dl>
+
 <p class="definition">Definition at line <a class="el" href="sky0_8c_source.html#l00416">416</a> of file <a class="el" href="sky0_8c_source.html">sky0.c</a>.</p>
 
 </div>

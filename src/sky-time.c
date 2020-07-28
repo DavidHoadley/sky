@@ -730,7 +730,7 @@ LOCAL double calendarToJ2kd(int year, int month, int day)
                 section, and look for a line that looks like the following:
 
                     UT1-UTC = -0.1733 - 0.00056 (MJD - 58725) - (UT2-UT1)
-                              ^^^^^^^   ^^^^^^^        ^^^^^
+                              ^^^^^^^ ^^^^^^^^^        ^^^^^
                              CoeffC11  CoeffC12       MJDbase
 
                 Take the three numbers and pass them to the function

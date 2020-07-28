@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.1-1</span>
+   &#160;<span id="projectnumber">0.1.2-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -116,6 +116,8 @@ double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="st
 <div class="textblock"><p>Struct used for holding an object's coordinates in equatorial apparent or Intermediate coordinates. </p>
 <p>Apparent coordinates are those referred to the true equator and equinox of the time indicated in field <a class="el" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00" title="Time applying to the other figures in this struct (centuries since J2000.0, TT timescale)">timestamp_cy</a>. Intermediate coordinates are in the Celestial Intermediate Reference System (CIRS), referred to the true equator of time <a class="el" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00" title="Time applying to the other figures in this struct (centuries since J2000.0, TT timescale)">timestamp_cy</a> and to the Celestial Intermediate Origin (CIO) instead of the equinox. If the object is in Apparent coordinates, the Equation of the Equinoxes (<a class="el" href="struct_sky___true_equatorial.html#a9c13083bb211839f27757fb90210af55" title="Equation of the Equinoxes (radian).">eqEq_rad</a>) field is required as part of converting to topocentric coordinates. If the object is in CIRS coordinates, field <a class="el" href="struct_sky___true_equatorial.html#a9c13083bb211839f27757fb90210af55" title="Equation of the Equinoxes (radian).">eqEq_rad</a> can be ignored.</p>
 <p>This structure is returned by the <a class="el" href="sun_8h.html#a257ebc73aa83eef26448d451eeb086da" title="Calculate the Sun&#39;s position as a unit vector and a distance, in apparent coordinates.">sun_nrelApparent()</a>, <a class="el" href="moon_8h.html#ae26dfd26ce7ba3a93eaa9ac24982016d" title="Calculate the Moon&#39;s position as a unit vector and a distance, in apparent coordinates.">moon_nrelApparent()</a>, (future)planet_getApparent() and (future)star_getApparent() functions, and importantly for tracking, the <a class="el" href="skyfast_8h.html#afb9144e153624a3bf899af40eca07ac0" title="Get the best approximation to the celestial object&#39;s apparent coordinates and distance,...">skyfast_getApprox()</a> function. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo4_multiple_sites_8c-example.html#_a4">demo4_multiple_sites.c</a>.</dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="sky_8h_source.html#l00105">105</a> of file <a class="el" href="sky_8h_source.html">sky.h</a>.</p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
