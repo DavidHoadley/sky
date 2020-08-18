@@ -4,7 +4,7 @@
  * Author:  David Hoadley
  *
  * Description: (see sky0.h)
- * 
+ *
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
  * All rights reserved.
  *
@@ -243,10 +243,18 @@ GLOBAL void sky0_nutationSpa(double t_cy, Sky0_Nut1980 *nut)
         _Supplement to the Astronomical Almanac_ 1984.
 
  \par When to call this function
-    The values calculated by this routine change only slowly. If using this
-    routine as part of tracking a celestial object, using values that were
-    calculated for the nearest hour will introduce almost imperceptible errors.
-    So it need be called only once per hour. 
+    It is quite likely that you will not need to call this function directly. It
+    is used in the Solar Position Algorithm and the Moon Position Algorithm, so
+    if you call sun_nrelApparent() or sun_nrelTopocentric(), or
+    call moon_nrelApparent() or moon_nrelTopocentric(), those routines will call
+    this routine for you. Likewise, if you are tracking the Sun or Moon using
+    the skyfast module, the call to skyfast_init() will call either
+    sun_nrelApparent() or moon_nrelApparent(), and therefore call this routine
+    for you.
+ \par
+    The values calculated by this routine change only slowly. So if you are
+    calling it yourself, you can call it infrequently. Intervals of up to an
+    hour between calls will not introduce much error.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     /* Fundamental Nutation arguments at date */
@@ -258,12 +266,12 @@ GLOBAL void sky0_nutationSpa(double t_cy, Sky0_Nut1980 *nut)
     double d;   // D  - mean elongation of the Moon from the Sun (radian)
     double f;   // F  - Mean longitude of the Moon (L) minus mean longitude of
                 //      the Moon's node (radian), = L - Ω
-    
+
     double psiSum_masx10;       // Nutation in longitude (units - 0.1 mas)
     double epsSum_masx10;       // Nutation in obliquity (units - 0.1 mas)
     int i;
     double a_rad;               // angle - summation of args (radian)
-    
+
     REQUIRE_NOT_NULL(nut);
 
     // Calculate FUNDAMENTAL ARGUMENTS in the FK5 reference system
@@ -272,7 +280,7 @@ GLOBAL void sky0_nutationSpa(double t_cy, Sky0_Nut1980 *nut)
     d = degToRad(297.85036 + t_cy * (445267.11148
                                      + t_cy * (-0.0019142
                                                + t_cy * (1.0/189474.0))));
-    
+
     // Solar Mean Anomaly = Mean longitude of the sun minus mean longitude of
     // the sun's perigee (called X1 in NREL SPA)
     lp = degToRad(357.52772 + t_cy * (35999.05034
@@ -286,7 +294,7 @@ GLOBAL void sky0_nutationSpa(double t_cy, Sky0_Nut1980 *nut)
                                                + t_cy * (1.0/56250.0))));
 
     // Mean longitude of the moon minus mean longitude of the moon's node
-    // (called X3 in NREL SPA and (mistakenly, I think) called the Moon's 
+    // (called X3 in NREL SPA and (mistakenly, I think) called the Moon's
     // Argument of Latitude)
     f = degToRad(93.27191 + t_cy * (483202.017538
                                     + t_cy * (-0.0036825
@@ -299,10 +307,10 @@ GLOBAL void sky0_nutationSpa(double t_cy, Sky0_Nut1980 *nut)
                                                + t_cy * (1.0/450000.0))));
 #if 0
     printf("Nutation Args: d (X0) = %f°, lp (X1) = %f°, l (X2) = %f°\n"
-           "               f (X3) = %f°, om (X4) = %f°\n", 
+           "               f (X3) = %f°, om (X4) = %f°\n",
            radToDeg(d), radToDeg(lp), radToDeg(l), radToDeg(f), radToDeg(om));
 #endif
-    
+
     // Multiply through the table of nutation co-efficients and add up all the
     // terms.
     psiSum_masx10 = 0.0;
@@ -335,7 +343,7 @@ GLOBAL void sky0_epsilonSpa(double t_cy, Sky0_Nut1980 *nut)
                         [out] field \a nut->eps0_rad - Mean obliquity of the
                               ecliptic ε0 (radian)\n
                         [out] field \a nut->eqEq_rad - Equation of the equinoxes
-                              = Δψ * cos(ε0) (radian) Note: not seconds
+                              = Δψ * cos(ε0 + Δε) (radian) Note: not seconds
 
  \par Reference
     Reda, I. and Andreas, A. (2003), "Solar Position Algorithm
@@ -343,10 +351,18 @@ GLOBAL void sky0_epsilonSpa(double t_cy, Sky0_Nut1980 *nut)
     NREL publication no. NREL/TP-560-34302, section 3.5.1
 
  \par When to call this function
-    The values calculated by this routine change only slowly. If using this
-    routine as part of tracking a celestial object, using values that were
-    calculated for the nearest hour will introduce almost imperceptible errors.
-    So it need be called only once per hour. 
+    It is quite likely that you will not need to call this function directly. It
+    is used in the Solar Position Algorithm and the Moon Position Algorithm, so
+    if you call sun_nrelApparent() or sun_nrelTopocentric(), or
+    call moon_nrelApparent() or moon_nrelTopocentric(), those routines will call
+    this routine for you. Likewise, if you are tracking the Sun or Moon using
+    the skyfast module, the call to skyfast_init() will call either
+    sun_nrelApparent() or moon_nrelApparent(), and therefore call this routine
+    for you.
+ \par
+    The values calculated by this routine change only slowly. So if you are
+    calling it yourself, you can call it infrequently. Intervals of up to an
+    hour between calls will not introduce much error.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     double eps0_as;
@@ -404,9 +420,9 @@ GLOBAL double sky0_gmSiderealTimeSpa(double du)
 
     double gmst_rad;        // Greenwich Mean Sidereal Time (radian)
     double tu;              // Julian centuries since J2000.0, UT1 timescale
-    
+
     tu = du / JUL_CENT;
-    gmst_rad = B0 + B1 * du + (tu * tu * (B2 + (tu * B3))); 
+    gmst_rad = B0 + B1 * du + (tu * tu * (B2 + (tu * B3)));
 
     return normalize(gmst_rad, TWOPI);
 }
@@ -418,7 +434,7 @@ GLOBAL void sky0_appToTirs(const V3D_Vector *appV,
                            double           eqEq_rad,
                            V3D_Vector *terInterV)
 /*! Convert a position in geocentric apparent coordinates to geocentric
-    coordinates in the Terrestrial Intermediate Reference System. This is the 
+    coordinates in the Terrestrial Intermediate Reference System. This is the
     first stage of converting apparent coordinates to topocentric coordinates.
     The resulting vector depends upon the current rotational position of the
     Earth. (For the second stage, to obtain topocentric coordinates, call
@@ -431,9 +447,9 @@ GLOBAL void sky0_appToTirs(const V3D_Vector *appV,
  \param[in] eqEq_rad Equation of the equinoxes (radian), as returned by function
                      sky0_epsilonSpa() in the \a eqEq_rad field of the
                      Sky0_Nut1980 struct.
-   
+
  \param[out] terInterV  Position vector in Terrestrial Intermediate Ref System
-   
+
  \par When to call this function
     When you have the position of a celestial object expressed in Apparent
     coordinates, use this function to convert it to Terrestrial coordinates at

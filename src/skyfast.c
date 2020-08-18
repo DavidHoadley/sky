@@ -5,7 +5,7 @@
  * Author:  David Hoadley
  *
  * Description: (see skyfast.h)
- * 
+ *
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
  * All rights reserved.
  *
@@ -85,9 +85,9 @@ DEFINE_THIS_FILE;                       // For use by REQUIRE() - assertions.
  * Local variables (not accessed by other modules)
  */
 LOCAL Sky_TrueEquatorial  lfiA, lfiB, lfiC;
-LOCAL Sky_TrueEquatorial  *last = &lfiA;      // items calculated for time in past
-LOCAL Sky_TrueEquatorial  *next = &lfiB;      // items calculated for time ahead
-LOCAL Sky_TrueEquatorial  *oneAfter = &lfiC;  // items calculated for time after next
+LOCAL Sky_TrueEquatorial  *last = &lfiA;    // items calculated for time in past
+LOCAL Sky_TrueEquatorial  *next = &lfiB;    // items calculated for time ahead
+LOCAL Sky_TrueEquatorial  *oneAfter = &lfiC;// ditto for time after next
 LOCAL volatile bool       oneAfterIsValid = false;
 
 LOCAL void (*callback)(double j2kTT_cy, Sky_TrueEquatorial *pos);
@@ -124,8 +124,8 @@ GLOBAL void skyfast_init(double            tStartUtc_d,
         3.  for time \a tStartUtc_d + 2 x \a fullRecalcalcInterval_mins.
         .
     For example, to track the Sun, specify the function sun_nrelApparent() when
-    calling this routine. To track the Moon, specify the function 
-    moon_nrelApparent(). 
+    calling this routine. To track the Moon, specify the function
+    moon_nrelApparent().
 
     The routine skyfast_getApprox() can then be called
     (at a high frequency if required) to calculate the current position of the
@@ -139,7 +139,7 @@ GLOBAL void skyfast_init(double            tStartUtc_d,
                           \a getApparent (minutes). This value must be greater
                           than zero. (Otherwise you will get a precondition
                           failure.)
- \param[in]  deltas       Delta T values, as set by the sky_initTime() (or 
+ \param[in]  deltas       Delta T values, as set by the sky_initTime() (or
                           sky_initTimeSimple() or sky_initTimeDetailed())
                           routines
  \param      getApparent  Function to get the position of a celestial object in
@@ -175,7 +175,7 @@ GLOBAL void skyfast_init(double            tStartUtc_d,
 #endif
     /* Save the function address for later call by skyfast_backgroundUpdate() */
     callback = getApparent;
-    
+
     sky_updateTimes(tStartUtc_d, deltas, &atime);
 
     /* Save the recalculation rate, converted from minutes to centuries. */
@@ -183,7 +183,7 @@ GLOBAL void skyfast_init(double            tStartUtc_d,
 
     calcTimeTT_cy = atime.j2kTT_cy;
     getApparent(calcTimeTT_cy, last);
-    
+
     /* Now do the same for the next time (e.g. next hour) */
     calcTimeTT_cy += recalcInterval_cy;
     getApparent(calcTimeTT_cy, next);
@@ -202,10 +202,10 @@ GLOBAL void skyfast_backgroundUpdate(void)
     coordinates and the equation of the equinoxes have been performed for the
     time called "oneAfter" (i.e. the time after the time called "next"). If they
     have not, this function performs those calculations.
- 
+
     This function calls the function that you previously supplied to function
     skyfast_init() (parameter \a getApparent).
-   
+
  \par When to call this function
     This function is designed to be called in a low priority loop, or at
     background level, using any available leftover processor time to slowly
@@ -217,7 +217,7 @@ GLOBAL void skyfast_backgroundUpdate(void)
 {
     double  t_cy;
 
-    REQUIRE(recalcInterval_cy > 0.0);   /* skyfast_init() must be called before now */
+    REQUIRE(recalcInterval_cy > 0.0);  // skyfast_init() not called before now?
 
     if (!oneAfterIsValid) {
         t_cy = next->timestamp_cy + recalcInterval_cy;
@@ -266,7 +266,7 @@ GLOBAL void skyfast_getApprox(double t_cy,
            requires that our low frequency/low priority routine has completed
            filling in all the data for oneAfter. */
         REQUIRE(oneAfterIsValid);
-        
+
         startCriticalSection();
         temp = last;
         last = next;
@@ -311,5 +311,51 @@ GLOBAL void skyfast_getApprox(double t_cy,
  *------------------------------------------------------------------------------
  */
 
-
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+/*! \page page-skyfast-c Edits you may want to make to skyfast.c
+ *
+ *  There are four different ways that you might want to use the skyfast
+ *  module. It can be configured to run in two threads or one. To
+ *  control this, define one or none of the following three macros. (Don't
+ *  define more than one.) They are BARE_METAL_THREADS, POSIX_THREADS or
+ *  NO_THREADS.
+ *
+ *  The four different approaches are:
+ *      1. The simplest approach is to define NO_THREADS (or not to define any
+ *          macro at all), and not to call the skyfast_backgroundUpdate()
+ *          routine at all. The limitation is that you will only be able to
+ *          track your object for a period that is twice as long as the number
+ *          that you pass to the \a fullRecalcInterval_mins parameter of routine
+ *          skyfast_init(), in minutes. If you try to track longer than this,
+ *          the program will abort.
+ *      2. The next simplest is once again to define NO_THREADS (or not to
+ *          define any macro at all), and to put calls to
+ *          skyfast_backgroundUpdate() in the same loop as your calls to
+ *          skyfast_getApprox(). You will benefit from the faster execution of
+ *          skyfast_getApprox(), but every \a fullRecalcInterval_mins minutes,
+ *          a full recalculation will take place. That is, the loop will take
+ *          much longer to execute than it does all the rest of the time.
+ *      3. If the occasional long loop execution time is not acceptable to you,
+ *          (say, it might upset your tracking control loop), consider using two
+ *          threads. In this approach, you set up a high-frequency,
+ *          high-priority task to drive the control calculations. This task
+ *          calls skyfast_getApprox(). A background task calls
+ *          skyfast_backgroundUpdate() to perform the slow calculations at very
+ *          low priority. To use this approach, define either BARE_METAL_THREADS
+ *          or POSIX_THREADS.
+ *
+ *          BARE_METAL_THREADS is intended for small embedded processors without
+ *          an operating system. You set your high-priority task to be triggered
+ *          by a timer interrupt. To control access to shared data, this makes
+ *          use of two other macros, which you will need to define for your
+ *          processor. They are called \c disableInterrupts() and
+ *          \c enableInterrupts(), and it should be obvious from those names
+ *          what it is that you need to make them do.
+ *      4. The fourth approach is basically the same as the third, but it
+ *          enables implementation on processors running a POSIX-compliant
+ *          operating system (such as Linux). You will need to define the
+ *          POSIX_THREADS macro, and then create the posix
+ *          threads yourself; this macro simply causes this module to use the
+ *          pthreads Mutex mechanism to control access to shared data.
+ */

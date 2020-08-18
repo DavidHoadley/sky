@@ -83,7 +83,6 @@ char *skyio_hrsToHmsStr(char destStr[],
 
 /*      Convert from a sexagesimal text string to an angle */
 double skyio_sxStrToAng(const char angleStr[],
-                        int strSize,
                         const char **endPtr,
                         int *error);
 
@@ -120,7 +119,7 @@ static inline char *skyio_radToDmsStr(char destStr[],
  /*          C89/C90 compiler - no inline functions. Need macros instead */
  #define skyio_radToDmsStr(destStr__, destStrLen__, angle_rad__, decimals__)  \
     skyio_degToDmsStr(destStr__, destStrLen__,                                \
-                      radToDeg(angle_rad__), decimals__);
+                      radToDeg(angle_rad__), decimals__)
 #endif
 
 
@@ -155,7 +154,7 @@ static inline char *skyio_radToHmsStr(char destStr[],
  /*          C89/C90 compiler - no inline functions. Need macros instead */
  #define skyio_radToHmsStr(destStr__, destStrLen__, angle_rad__, decimals__)  \
     skyio_hrsToHmsStr(destStr__, destStrLen__,                                \
-                      radToHrs(angle_rad__), decimals__);
+                      radToHrs(angle_rad__), decimals__)
 #endif
 
 

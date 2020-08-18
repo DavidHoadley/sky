@@ -4,7 +4,7 @@
  * Author:  David Hoadley
  *
  * Description: (see the "Time routines" sections of sky.h)
- * 
+ *
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
  * All rights reserved.
  *
@@ -47,7 +47,7 @@
 #include "general.h"
 
 /*
- * Local #defines and typedefs 
+ * Local #defines and typedefs
  */
 DEFINE_THIS_FILE;                       // For use by REQUIRE() - assertions.
 
@@ -74,7 +74,7 @@ LOCAL double getDeltaUT1_s(double mjdUtc,
 LOCAL double calendarToJ2kd(int year, int month, int day);
 
 /*
- * Global variables accessible by other modules 
+ * Global variables accessible by other modules
  */
 
 
@@ -89,20 +89,23 @@ LOCAL double calendarToJ2kd(int year, int month, int day);
  *
  *==============================================================================
  *
- * Global functions callable by other modules 
+ * Global functions callable by other modules
  *
  *------------------------------------------------------------------------------
  */
 GLOBAL void sky_initTime(int deltaAT_s, double deltaUT_s, Sky_DeltaTs *d)
-/*! Set up the various delta time values for use in ongoing calculations.
+/*! This is one of three alternative routines for setting up the various delta
+    time values for use in ongoing calculations. (The other two are
+    sky_initTimeDetailed() and sky_initTimeSimple()). For an explanation of
+    these delta times, see \ref page-timescales.
  \param[in]  deltaAT_s  (= TAI - UTC). Cumulative number of leap seconds
                          (seconds)
  \param[in]  deltaUT_s  (= UT1 - UTC) (seconds). Valid range [-0.9,+0.9]
  \param[out] d          Fields initialised as follows:
                         - \a d->deltaUT_d initialised to \a deltaUT_s / 86400
-                        - \a d->deltaT_d  initialised to 
+                        - \a d->deltaT_d  initialised to
                             (\a deltaAT_s + 32.184 - \a deltaUT_s) / 86400
-                        - \a d->deltaTT_d initialised to 
+                        - \a d->deltaTT_d initialised to
                             (\a deltaAT_s + 32.184) / 86400
 
  \par When to call this function
@@ -134,9 +137,11 @@ GLOBAL void sky_initTimeDetailed(double mjdUtc,
                                  double usnoCoeffC12,
                                  int    deltaAT_s,
                                  Sky_DeltaTs *d)
-/*! Set up the various delta time values for use in ongoing calculations. This
-    version of the function uses a prediction formula to calculate the value
-    of delta_UT, rather than having it specified directly.
+/*! This is one of three alternative routines for setting up the various delta
+    time values for use in ongoing calculations. (The other two are
+    sky_initTime() and sky_initTimeSimple()). This routine uses a prediction
+    formula to calculate the value of delta_UT, rather than having it specified
+    directly. For an explanation of these delta times, see \ref page-timescales.
  \param[in]  mjdUtc    Modified Julian Date (= JD - 2 400 000.5), UTC timescale
  \param[in]  usnoMjdBase,
              usnoCoeffC11,
@@ -150,10 +155,10 @@ GLOBAL void sky_initTimeDetailed(double mjdUtc,
                         (seconds)
  \param[out] d         Fields initialised as follows:
                         - \a d->deltaUT_d initialised using USNO prediction
-                          formula 
-                        - \a d->deltaT_d  initialised to 
+                          formula
+                        - \a d->deltaT_d  initialised to
                             (\a deltaAT_s + 32.184) / 86400 - \a d->deltaUT_d
-                        - \a d->deltaTT_d initialised to 
+                        - \a d->deltaTT_d initialised to
                             (\a deltaAT_s + 32.184) / 86400
 
  \par When to call this function
@@ -166,7 +171,7 @@ GLOBAL void sky_initTimeDetailed(double mjdUtc,
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     double deltaUT_s;                   // UT1 - UTC (seconds)
-    
+
     deltaUT_s = getDeltaUT1_s(mjdUtc, usnoMjdBase, usnoCoeffC11, usnoCoeffC12);
     sky_initTime(deltaAT_s, deltaUT_s, d);
 }
@@ -174,7 +179,11 @@ GLOBAL void sky_initTimeDetailed(double mjdUtc,
 
 
 GLOBAL void sky_initTimeSimple(Sky_DeltaTs *d)
-/*! Initialise delta times with simple default values.
+/*! This is one of three alternative routines for setting up the various delta
+    time values for use in ongoing calculations. (The other two are
+    sky_initTime() and sky_initTimeDetailed()). This function initialises the
+    delta times with simnple default values. For an explanation of
+    these delta times, see \ref page-timescales.
  \param[out] d    Fields initialised as follows:
                         - \a d->deltaUT_d initialised to 0.0
                         - \a d->deltaT_d  initialised to (37 + 32.184) / 86400
@@ -200,7 +209,9 @@ GLOBAL void sky_updateTimes(double            j2kUtc_d,
 /*! Convert the given "J2KD" in the UTC timescale to the other timescales, and
     pre-calculate some other quantities
  \param[in]  j2kUtc_d  Date in "J2KD" form - i.e. the number of days elapsed
-                       since 2000 Jan 1.5 (= JD - 2 451 545.0), UTC timescale
+                       since 2000 Jan 1.5 (= JD - 2 451 545.0), UTC timescale,
+                       as returned by sky_calTimeToJ2kd(), sky_unixTimeToJ2kd()
+                       or sky_unixTimespecToJ2kd().
  \param[in]  d         The various delta T values as set by one of
                        sky_initTime(), sky_initTimeDetailed() or
                        sky_initTimeSimple()
@@ -208,6 +219,10 @@ GLOBAL void sky_updateTimes(double            j2kUtc_d,
 
  \par Reference
     _Astronomical Almanac_ 2007, page B9 (for Earth Rotation Angle)
+
+ \par When to call this function
+    Call this routine before calling any routine that calculates a celestial
+    position.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     REQUIRE_NOT_NULL(d);
@@ -227,7 +242,9 @@ GLOBAL double sky_calTimeToJ2kd(int year, int month, int day,
                                 int hour, int minute, double second,
                                 double tz_h)
 /*! Return the number of days (and fraction of a day) since noon 2000 Jan 1
- *  (UTC) of the given calendar date and time.
+ *  (UTC) of the given calendar date and time. This is one of three alternative
+ *  routines that return a J2KD - the other two are sky_unixTimeToJ2kd() and
+ *  sky_unixTimespecToJ2kd().
  \returns days since Julian date 2 451 545.0, UTC timescale
  \param[in] year, month, day calendar date
  \param[in] hour             valid range [0, 23]
@@ -235,16 +252,19 @@ GLOBAL double sky_calTimeToJ2kd(int year, int month, int day,
  \param[in] second           valid range [0.0, 60.0)
  \param[in] tz_h             time zone offset (hours), positive for zones
                              east of Greenwich (e.g. Australian time zones
-                             AEST = +10.0, ACST = +9.5, AEDT = +11.0; 
+                             AEST = +10.0, ACST = +9.5, AEDT = +11.0;
                              UTC = 0.0;
                              USA time zones are negative)
+ \par When to call this routine
+    Call this (or one of the alternative routines) before each call to
+    sky_updateTimes().
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     double jd2k;
     double timeOfDay_d;
 
     jd2k = calendarToJ2kd(year, month, day);
-    
+
     timeOfDay_d = (second + 60.0 * (minute + 60.0 * (hour - tz_h))) / 86400.0;
     jd2k += timeOfDay_d;
     return jd2k;
@@ -253,14 +273,20 @@ GLOBAL double sky_calTimeToJ2kd(int year, int month, int day,
 
 
 GLOBAL double sky_unixTimeToJ2kd(time_t unixTime)
-/*! Convert a time in Unix system time format to days since 2000 Jan 1, noon UTC
+/*! Convert a time in Unix system time format to days since 2000 Jan 1, noon
+    UTC. This is one of three alternative
+    routines that return a J2KD - the other two are sky_calTimeToJ2kd() and
+    sky_unixTimespecToJ2kd().
  \returns  days since Julian Date 2 451 545.0, UTC timescale
  \param[in] unixTime - time in C standard \c time_t (or unix) format
                         ((sort of) seconds since 1-Jan-1970 UTC)
 
  \note This routine has no better resolution than one second. Use routine
    sky_unixTimespecToMjd() or sky_calTimeToMjd() instead, if you need
-   sub-second resolution
+   sub-second resolution.
+ \par When to call this routine
+    Call this (or one of the alternative routines) before each call to
+    sky_updateTimes().
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     return (double)(unixTime - TIME_T_J2000) / 86400.0;
@@ -268,18 +294,27 @@ GLOBAL double sky_unixTimeToJ2kd(time_t unixTime)
 
 
 
+#ifdef POSIX_SYSTEM
 GLOBAL double sky_unixTimespecToJ2kd(struct timespec uTs)
-/*! Convert a time in Unix timespec format to days since 2000 Jan 1, noon UTC
+/*! Convert a time in Unix timespec format to days since 2000 Jan 1, noon UTC.
+    This is one of three alternative routines that return a J2KD - the other two
+    are sky_calTimeToJ2kd() and sky_unixTimeToJ2kd().
  \returns  days since Julian Date 2 451 545.0, UTC timescale
  \param[in] uTs - time in "timespec" format, a combination of (sort of) seconds
                   since 1-Jan-1970 UTC, and nanoseconds of the current second.
                   This is the form returned by the POSIX \c clock_gettime()
                   function.
+ \note
+    The macro POSIX_SYSTEM must be defined at compile time to use this function.
+ \par When to call this routine
+    Call this (or one of the alternative routines) before each call to
+    sky_updateTimes().
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     return ((double)(uTs.tv_sec - TIME_T_J2000) + (double)uTs.tv_nsec / 1e9)
             / 86400.0;
 }
+#endif
 
 
 
@@ -296,15 +331,15 @@ GLOBAL void sky_j2kdToCalTime(double j2k_d,
     If the returned date is 1582-10-04 or earlier, it is a Julian calendar date.
  \param[in] j2k_d   Days since J2000.0 (= Julian Date - 2 451 545.0)
                     Valid range: j2k_d >= -2447065, otherwise incorrect results
- 
+
  \param[out] year, month, day      calendar date
  \param[out] hour, minute, second  time of day
- 
+
  \par Reference
     The algorithm is based on a method of D A Hatcher, _Quarterly Journal of the
     Royal Astronomical Society_ 1984, Vol 25, pp 53-55. It is valid for dates
     after JD = 4480 (7 April 4701 BC, Julian calendar).
- 
+
  \note To obtain calendar date and time for any timezone other than UTC, add
     the time zone offset (in units of fraction of a day) to \a mjd before
     calling this routine. The \a timezone_d field of the site properties struct
@@ -313,7 +348,7 @@ GLOBAL void sky_j2kdToCalTime(double j2k_d,
     If \a second turns out to be within half a millisecond of the next round
     minute, this routine rounds time upwards.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-{    
+{
     int32_t j;
     int32_t n4;
     int32_t n10;
@@ -342,7 +377,7 @@ GLOBAL void sky_j2kdToCalTime(double j2k_d,
         }
     }
 
-    
+
     j = (int32_t)j2kdate + 2451545;
 
     if (j <= START_GREGORIAN) {
@@ -373,16 +408,19 @@ GLOBAL double sky_calTimeToMjd(int year, int month, int day,
  \param[in] second           valid range [0.0, 60.0)
  \param[in] tz_h             time zone offset (hours), positive for zones
                              east of Greenwich (e.g. Australian time zones
-                             AEST = +10.0, ACST = +9.5, AEDT = +11.0; 
+                             AEST = +10.0, ACST = +9.5, AEDT = +11.0;
                              UTC = 0.0;
                              USA time zones are negative)
+ \note
+    The macro INCLUDE_MJD_ROUTINES must be defined at compile time to use this
+    function.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     double mjd;
     double timeOfDay_d;
 
     mjd = calendarToJ2kd(year,month, day) + MJD_J2000;
-    
+
     timeOfDay_d = (second + 60.0 * (minute + 60.0 * (hour - tz_h))) / 86400.0;
     mjd += timeOfDay_d;
     return mjd;
@@ -399,6 +437,9 @@ GLOBAL double sky_unixTimeToMjd(time_t unixTime)
  \note This routine has no better resolution than one second. Use routine
    sky_unixTimespecToMjd() or sky_calTimeToMjd() instead, if you need
    sub-second resolution
+ \note
+    The macro INCLUDE_MJD_ROUTINES must be defined at compile time to use this
+    function.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     return (double)unixTime / 86400.0 + MJD_1JAN1970;
@@ -406,6 +447,7 @@ GLOBAL double sky_unixTimeToMjd(time_t unixTime)
 
 
 
+#ifdef POSIX_SYSTEM
 GLOBAL double sky_unixTimespecToMjd(struct timespec uTs)
 /*! Convert a time in Unix timespec format to Modified Julian Date
  \returns  the Modified Julian Date (= Julian Date - 2 400 000.5), UTC timescale
@@ -413,11 +455,15 @@ GLOBAL double sky_unixTimespecToMjd(struct timespec uTs)
                   since 1-Jan-1970 UTC, and nanoseconds of the current second.
                   This is the form returned by the POSIX \c clock_gettime()
                   function.
+ \note
+    The macros INCLUDE_MJD_ROUTINES and POSIX_SYSTEM must be defined at compile
+    time to use this function.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     return ((double)uTs.tv_sec + (double)uTs.tv_nsec / 1e9) / 86400.0
             + MJD_1JAN1970;
 }
+#endif
 
 
 
@@ -435,6 +481,9 @@ GLOBAL void sky_updateTimesFromMjd(double mjdUtc,
 
  \par Reference
     _Astronomical Almanac_ 2007, page B9 (for Earth Rotation Angle)
+ \note
+    The macro INCLUDE_MJD_ROUTINES must be defined at compile time to use this
+    function.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     double mjdUT1;  // Modified Julian Date (= JD - 2 400 000.5), UT1 timescale
@@ -451,11 +500,6 @@ GLOBAL void sky_updateTimesFromMjd(double mjdUtc,
     t->j2kTT_d  = mjdTT - MJD_J2000;
     t->j2kTT_cy = t->j2kTT_d / JUL_CENT;
     t->era_rad = (0.7790572732640 + 1.00273781191135488 * t->j2kUT1_d) * TWOPI;
-    ///+
-    ///printf("diff in ΔT = %f\n", d->deltaT_d * 86400.0 - spa.delta_t);
-    ///printf("SPA jd = %16.7f, MJDutc = %16.7f\n", spa.jd, t->mjdUtc);
-    ///printf("Diffs = %f\n", (spa.jd - MJD_BASE - t->mjdUtc) * 360.0 * 3600.0);
-    ///-
 }
 
 
@@ -476,24 +520,28 @@ GLOBAL void sky_mjdToCalTime(double mjd,
 
  \param[out] year, month, day     - calendar date
  \param[out] hour, minute, second - time of day
- 
+
  \par Reference
     The algorithm is based on a method of D A Hatcher, _Quarterly Journal of the
     Royal Astronomical Society_ 1984, Vol 25, pp 53-55. It is valid for dates
     after MJD = -2395520 (1st March 4701 BC).
- 
+
  \note To obtain calendar date and time for any timezone other than UTC, add
     the time zone offset (in units of fraction of a day) to \a mjd before
     calling this routine. The \a timezone_d field of the site properties struct
     (type Sky_SiteProp) provides this value.
+
+ \note
+    The macro INCLUDE_MJD_ROUTINES must be defined at compile time to use this
+    function.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-{    
+{
     int32_t j;
     int32_t n4;
     int32_t n10;
     double  timeOfDay;
     double  mjdate;
-    
+
     mjdate = floor(mjd);
     timeOfDay = (mjd - mjdate) * 24.0;
     *hour = (int)timeOfDay;
@@ -536,9 +584,9 @@ GLOBAL void sky_setPolarMotion(double xPolar_as,
  \par When to call this function
     This routine needs to be called only when polar motion parameters
     change - which is no more frequently than once per day. This effect is so
-    small that it can be ignored altogether with only a tiny loss of accuracy. 
+    small that it can be ignored altogether with only a tiny loss of accuracy.
 
- \note Every time this routine is called, the routine 
+ \note Every time this routine is called, the routine
     sky_adjustSiteForPolarMotion() must be called for every site. (Typically
     this will be only one site.)
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -654,7 +702,7 @@ LOCAL double calendarToJ2kd(int year, int month, int day)
     int32_t month32 = month - 3;
     int32_t day32 = day;
     int32_t j2kdi_d;        // Integer part of the J2KD date.
-    
+
 
     if (month32 < 0) {
         month32 += 12;
@@ -674,7 +722,7 @@ LOCAL double calendarToJ2kd(int year, int month, int day)
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*! \page page-timescales   Timescales, and converting between them
-   
+
     There are five timescales of interest:
     - TAI - International Atomic Time, as maintained by a network of atomic
             clocks
@@ -684,7 +732,7 @@ LOCAL double calendarToJ2kd(int year, int month, int day)
             relationship
               TT = TAI + 32.184 seconds
     - UT1 - Universal Time. This is the timescale that essentially represents
-            the rotation of the earth, and therefore is subject to the 
+            the rotation of the earth, and therefore is subject to the
             fluctuations that occur in that rotation. (Also called simply UT)
     - UTC - Coordinated Universal Time. This is the time we all use. It is
             based on TAI, but occasionally a leap second is inserted (or, in
@@ -703,7 +751,7 @@ LOCAL double calendarToJ2kd(int year, int month, int day)
     2. ΔAT = TAI - UTC.  This is the number of leap seconds that have been
             added in the past. This figure is available from the International
             Earth Rotation Service (IERS) at the Observatoire de Paris, via
-            its regular Bulletin C, available at 
+            its regular Bulletin C, available at
             https://hpiers.obspm.fr/iers/bul/bulc/bulletinc.dat
             When accessed in August 2019, this value was 37 seconds. (Note that
             Bulletin C expresses the relation as UTC - TAI, so it said -37 s.)
@@ -800,11 +848,16 @@ must be deltaTT (or deltaAT) which is wrong by some number of whole seconds.
  *
  *  Typically the two above will be used for times in the TT timescale.
  *      .
- *      - Julian epoch. J[2000.0 + J2KD / 365.25], TT timescale. This is used
+ *      - Julian epoch (e.g. J2000.0 or J2020.5). Calculated from
+ *        J[2000.0 + J2KD / 365.25], TT timescale. This is used
  *        for star catalogue positions. For example, J2000.0 is JD 2 451 545.0.
  *        And 2-Jul-2020 3:00:00 (TT) is J2020.5
- *      - There is also the Besselian epoch (e.g. B1950.0). Not used here.
- * 
+ *      - Besselian epoch (e.g. B1950.0). This is calculated from
+ *        B[1900.0 + JD - (2 415 020.313 52) / 365.242 198 781].
+ *        So B1950.0 is JD 2 433 282.423. Besselian epochs are often associated
+ *        with FK4 catalogue positions. These are not supported by this
+ *        software (yet).
+ *
  *  Many astronomical algorithms use one of the forms based on time since
  *  J2000.0 (i.e. either J2KD, J2KC or J2KM) as their time variable.
  *  For this reason, the conversion routines from calendar date/time

@@ -79,7 +79,7 @@ void skyfast_getApprox(double t_cy, Sky_TrueEquatorial *approx);
  *  of error introduced by this process depends of course on how much the
  *  position changed between the two previously calculated times. Here is a
  *  table of the errors when this process is used to obtain the position of the
- *  Sun. The errors are calculated from
+ *  Sun, Moon, planets and a star. The errors are calculated from
  *      sqrt((azimuth_error * cos(elevation))^2 + elevation_error^2)
  *
  *  The interpolation interval (in hours) is the time between the two previously
@@ -87,11 +87,23 @@ void skyfast_getApprox(double t_cy, Sky_TrueEquatorial *approx);
  *  parameter \a fullRecalcInterval_mins of function skyfast_init().
  *  
  *  ###Maximum absolute position error (arcseconds) for different interpolation intervals (hours)
- * hours|1      |2     |3     |4     |5     |6     |8     |10    |12    |15    |16    |18    |20    |22    |24    |
- * :----|------:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
- * Sun  |0.0005 |0.002 |0.005 |0.008 |0.013 |0.018 |0.033 |0.051 |0.074 |0.115 |0.131 |0.166 |0.205 |0.248 |0.296 |
- * Moon |0.338  |1.354 |3.046 |5.408 |8.344 |12.07 |21.39 |34.22 |49.55 |77.74 |85.21 |112.1 |138.4 |154.5 |185.4 |
- *
+
+    hours   |1      |2      |3      |6      |9      |12     |15     |18     |24    |
+    :-------|------:|------:|------:|------:|------:|------:|------:|------:|-----:|
+    Sun     |0.0005 |0.0020 |0.0046 |0.0184 |0.0413 |0.0736 |0.1151 |0.1658 |0.2957|
+    -       |       |       |       |       |       |       |       |       |      |
+    Moon    |0.3381 |1.3536 |3.0455 |12.07  |27.62  |49.55  |77.74  |112.1  |185.4 |
+    -       |       |       |       |       |       |       |       |       |      |
+    Mercury |0.1533 |0.6132 |1.3797 |5.5177 |12.42  |22.07  |34.44  |49.64  |88.17 |
+    Venus   |0.0324 |0.1295 |0.2914 |1.1656 |3.2375 |4.6621 |7.2847 |10.49  |18.64 |
+    Mars    |0.0115 |0.0459 |0.1032 |0.4127 |0.9287 |1.6510 |2.5796 |3.7146 |6.6035|
+    Jupiter |0.0025 |0.0101 |0.0227 |0.0907 |0.2040 |0.3627 |0.5667 |0.8161 |1.4508|
+    Saturn  |0.0013 |0.0052 |0.0117 |0.0468 |0.1054 |0.1874 |0.2927 |0.4216 |0.7494|
+    Uranus  |0.0007 |0.0027 |0.0062 |0.0247 |0.0556 |0.0988 |0.1544 |0.2223 |0.3951|
+    Neptune |0.0005 |0.0018 |0.0041 |0.0163 |0.0366 |0.0651 |0.1017 |0.1465 |0.2604|
+    -       |       |       |       |       |       |       |       |       |      |
+    Antares |<0.0001|<0.0001|<0.0001|0.0001 |0.0003 |0.0005 |0.0007 |0.0010 |0.0019|
+
  *  As can be seen, the errors are very small for the Sun even with 24 hours
  *  between full calculations (i.e. a value of 1440 minutes supplied to
  *  parameter \a fullRecalcInterval_mins of function skyfast_init()).
@@ -103,6 +115,15 @@ void skyfast_getApprox(double t_cy, Sky_TrueEquatorial *approx);
  *  Errors for the Moon are larger. The position algorithm itself is accurate
  *  to about 5 arcseconds, it seems, so this suggests that an interpolation
  *  interval of no more than about 2 hours should be used for the Moon.
+ *
+ *  The maximum errors tracking planets are larger than for the Sun. These
+ *  maximum errors seem to occur around the time the planet enters or leaves
+ *  apparent retrograde motion.
+ *
+ *  The errors when tracking a star are almost negligible.
+ *
+ *  In all cases, the error appears to approximately quadruple for every
+ *  doubling of the interpolation interval.
  */
 
 #endif /* SKYFAST_H */

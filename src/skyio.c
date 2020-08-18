@@ -286,7 +286,6 @@ GLOBAL char *skyio_hrsToHmsStr(char destStr[],
 
 
 GLOBAL double skyio_sxStrToAng(const char angleStr[],
-                               int strSize,
                                const char **endPtr,
                                int *error)
 /*! Convert a string containing an angle (or a time) in sexagesimal format to
@@ -309,9 +308,6 @@ GLOBAL double skyio_sxStrToAng(const char angleStr[],
     These are ignored and are not checked for whether they make sense or not.
  \returns    The angle or time
  \param[in]  angleStr  The string of text containing the angle
- \param[in]  strSize   The size of the array \a angleStr (i.e. the maximum
-                       possible length of the string. Fewer characters may
-                       actually be in use.)
  \param[out] endPtr    A pointer to the end of that part of \a angleStr that was
                        read to obtain the number. This may be pointing to some
                        white space between the number just decoded and further
@@ -345,7 +341,7 @@ GLOBAL double skyio_sxStrToAng(const char angleStr[],
         stSeparator2,   stSecs,     stEnding
     } decodeState = stStarting;     // state variable - stage of decoding
 
-    for (ch = angleStr; ch < (angleStr + strSize) && *ch != '\0'; ch++) {
+    for (ch = angleStr; *ch != '\0'; ch++) {
         switch (decodeState) {
         case stStarting:
             if (*ch == '-') { isNegative = true; }

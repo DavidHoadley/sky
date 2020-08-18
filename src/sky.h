@@ -76,6 +76,7 @@
  * Notes:
  *      Character set: UTF-8. (Non ASCII characters appear in this file)
  *      Things you might want to edit: definition of macro INCLUDE_MJD_ROUTINES
+ *                                     definition of macro POSIX_SYSTEM
  *----------------------------------------------------------------------------*/
 
 #include <time.h>
@@ -150,6 +151,11 @@ extern "C" {
         MJD = JD - 2 400 000.5).  */
 /*--- #define INCLUDE_MJD_ROUTINES ---*/
 
+/*      Un-comment the following line if you want to use either of the routines
+        that use the struct timespec data type (available on POSIX-compliant
+        systems). These are sky_unixTimespecToJ2kd() & sky_unixTimespecToMjd()*/
+/*--- #define POSIX_SYSTEM ---*/
+
 /*!     This structure contains relatively constant data, and is set up by one
         of the three functions sky_initTime(), sky_initTimeSimple() or
         sky_initTimeDetailed(). The data which can vary
@@ -212,7 +218,9 @@ double sky_calTimeToJ2kd(int year, int month, int day,
                          int hour, int minute, double second,
                          double tz_h);
 double sky_unixTimeToJ2kd(time_t unixTime);
+#ifdef POSIX_SYSTEM
 double sky_unixTimespecToJ2kd(struct timespec uTs);
+#endif
 
 #ifdef INCLUDE_MJD_ROUTINES
 /*      2b. Alternatively get time in MJD form from one of the following fns */
@@ -220,7 +228,9 @@ double sky_calTimeToMjd(int year, int month, int day,
                         int hour, int minute, double second,
                         double tz_h);
 double sky_unixTimeToMjd(time_t unixTime);
+#ifdef POSIX_SYSTEM
 double sky_unixTimespecToMjd(struct timespec uTs);
+#endif
 #endif
 
 
@@ -303,18 +313,18 @@ void sky_mjdToCalTime(double mjd,
         to access any of the individual fields here (except possibly
         #timeZone_d) */
 typedef struct {
-    double     astLat_rad;    // Astronomical latitude of site (phiA) (radian)
-    double     astLong_rad;   // Astronomical longitude of site (radian)
-    double     geocRadius_km; // Approx geocentric radius of site (≈ ae*rho)(km)
-    double     rhoSin_au;     // ae*rho*sin(phi-phi') geocentre-to-site x (AU)
-    double     rhoCos_au;     // -ae*rho*cos(phi-phi') geocentre-to-site z (AU)
-    double     diurnalAberr;  // Diurnal aberration - caused by earth rotation
-    double     refracPT;      // Refraction correction - pressure & temperature
+    double     astLat_rad;    //!< Astronomical latitude of site (ϕA) (radian)
+    double     astLong_rad;   //!< Astronomical longitude of site (radian)
+    double     geocRadius_km; //!< Approx geocentric radius of site (≈ ae*ρ)(km)
+    double     rhoSin_au;     //!< ae*ρ*sin(ϕ - ϕ′) geocentre-to-site x (AU)
+    double     rhoCos_au;     //!< -ae*ρ*cos(ϕ - ϕ′) geocentre-to-site z (AU)
+    double     diurnalAberr;  //!< Diurnal aberration: caused by earth rotation
+    double     refracPT;      //!< Refraction correction: pressure & temperature
     double     timeZone_d;    //!< time zone offset from UTC (fraction of a day)
-    V3D_Matrix *azElM;        // points to either azElPolM or azElBaseM
-    V3D_Matrix azElPolM;      // rotation matrix from TIRS to Az/El coords
-    V3D_Matrix azElBaseM;     // as above, but excluding polar motion correction
-    V3D_Matrix haDecM;        // rotation matrix from Az/El to HA/Dec coords
+    V3D_Matrix *azElM;        //!< points to either azElPolM or azElBaseM
+    V3D_Matrix azElPolM;      //!< rotation matrix from TIRS to Az/El coords
+    V3D_Matrix azElBaseM;     //!< as above, but excluding polar motion correctn
+    V3D_Matrix haDecM;        //!< rotation matrix from Az/El to HA/Dec coords
 } Sky_SiteProp;
 
 
@@ -377,6 +387,18 @@ double sky_siteIncidence_rad(const V3D_Vector *topoV,
 #ifdef __cplusplus
 }
 #endif
+
+/*! \page page-sky-h Edits you may want to make to sky.h
+ *
+ *  Define the macro INCLUDE_MJD_ROUTINES if you have use for any of the
+ *  routines sky_calTimeToMjd(), sky_unixTimeToMjd(), sky_unixTimespecToMjd(),
+ *  sky_updateTimesFromMjd(), or sky_mjdToCalTime(). None of these routines are
+ *  essential for tracking celestial objects.
+ * 
+ *  Define the macro POSIX_SYSTEM if you are using a system that supports the
+ *  POSIX standard (a common Unix standard) and you have a use for either of the
+ *  routines sky_unixTimespecToJ2kd() or sky_unixTimespecToMjd()
+ */
 
 #endif /* SKY_H */
 

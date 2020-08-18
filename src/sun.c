@@ -3,7 +3,7 @@
  *
  * Author:  David Hoadley
  *
- * Description: (see sunpos.h)
+ * Description: (see sun.h)
  *  
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
  * All rights reserved.

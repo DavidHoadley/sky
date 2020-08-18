@@ -4,7 +4,7 @@
  * Author:  David Hoadley
  *
  * Description: (see the "Site routines" sections of sky.h)
- * 
+ *
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
  * All rights reserved.
  *
@@ -33,7 +33,7 @@
  */
 /*------------------------------------------------------------------------------
  * Notes:
- *      Character set: UTF-8. (Non ASCII characters appear in this file)
+ *      Character set: UTF-8. (Non-ASCII characters appear in this file)
  *      Things you might want to edit: definition of macro SPA_COMPARISONS
  *----------------------------------------------------------------------------*/
 
@@ -47,7 +47,7 @@
 #include "general.h"
 
 /*
- * Local #defines and typedefs 
+ * Local #defines and typedefs
  */
 DEFINE_THIS_FILE;                       /* For use by REQUIRE() - assertions */
 
@@ -65,7 +65,7 @@ DEFINE_THIS_FILE;                       /* For use by REQUIRE() - assertions */
 LOCAL void createAzElBaseM(Sky_SiteProp *site);
 
 /*
- * Global variables accessible by other modules 
+ * Global variables accessible by other modules
  */
 
 
@@ -98,7 +98,7 @@ LOCAL const double esq = f + f - f * f;      // square of eccentricity of geoid
  *
  *==============================================================================
  *
- * Global functions callable by other modules 
+ * Global functions callable by other modules
  *
  *------------------------------------------------------------------------------
  */
@@ -121,7 +121,7 @@ GLOBAL void sky_setSiteLocation(double latitude_deg,
     geocentric coordinates to topocentric ones. This involves calculating the
     position of the site relative to the centre of the earth, and calculating
     constants that will be used for diurnal parallax and aberration corrections.
-   
+
     This is complicated by the fact that the earth is elliptical rather than
     perfectly spherical. See section K of The Astronomical Almanac (pages K11
     & K12 in the 2007 edition) for details of the geometry. This function
@@ -223,7 +223,7 @@ GLOBAL void sky_setSiteLoc2(double astLat_deg,
     createAzElBaseM(site);
 
     /* 3. Calculate the geocentric radius of the observatory and the two
-       geocentric parallax quantities 
+       geocentric parallax quantities
        ae*rho*sin(Phi-Phi') and -ae*rho*cos(Phi-Phi')
         (The geodetic latitude is phi, the geocentric latitude is phi'.
          The angle (phi - phi') is known as the "angle of the vertical".) */
@@ -232,7 +232,7 @@ GLOBAL void sky_setSiteLoc2(double astLat_deg,
     aeC_km = ae_km / invC;
     Kc = sqrt(1.0 - esq * (2.0 - esq) * (sinPhi * sinPhi));
     site->geocRadius_km = aeC_km * Kc + height_m / 1000.0;
-    
+
     //  Parallax corrections are offsets in x (north) and z (zenith) directions
     site->rhoSin_au = aeC_km * esq * sinPhi * cosPhi / au_km;      // x (north)
     site->rhoCos_au = -(ae_km * invC + height_m / 1000.0) / au_km; // z (zenith)
@@ -299,7 +299,7 @@ GLOBAL void sky_setSiteTimeZone(double timeZone_h,
                            are negative (e.g. US Pacific Daylight Time is -7.0)
 
  \param[out] site        field \a timeZone_d, time zone scaled to fractions of
-                           a day 
+                           a day
 
  \par When to call this function
     1. At program initialisation time, after calling sky_setSiteLocation() (or
@@ -356,7 +356,7 @@ GLOBAL void sky_adjustSiteForPolarMotion(const Sky_PolarMot *polar,
     Polar motion is such a tiny effect that you may well decide not to bother
     with it. So you only need to call this routine if:
         1. you are bothering about polar motion at all, and
-        2. changes were made to the \a polar structure by a recent call to 
+        2. changes were made to the \a polar structure by a recent call to
             function sky_setPolarMotion(). This routine is only ever to be
             called after that routine has run. This is expected to be very
             infrequently - once per day is more than enough.
@@ -385,7 +385,7 @@ GLOBAL void sky_siteTirsToTopo(const V3D_Vector   *terInterV,
     vectors in right-handed and left-handed coordinate systems here
  \param[in]  terInterV  Position vector in Terrestrial Intermediate Reference
                         System. (This will have been obtained by calling either
-                        routine astsite_appToTirs() or routine 
+                        routine astsite_appToTirs() or routine
                         astsite_intermedToTopo().)
  \param[in]  dist_au    Geocentric Distance to object (astronomical units).
                         Note: for far distant objects outside of the solar
@@ -454,15 +454,15 @@ GLOBAL void sky_siteTirsToTopo(const V3D_Vector   *terInterV,
 
 #if 0
     /* Correct for atmospheric refraction. Use the simpler NREL SPA calculation
-       instead of the more detailed atmospheric model used by Stromlo. 
+       instead of the more detailed atmospheric model used by Stromlo.
        Unfortunately, this formula is expressed in degrees, so we have to
        convert back and forth. */
     {
         double e0_deg;      // Elevation (not corrected for refraction, degrees)
-        
+
         e0_deg = radToDeg(topo->elevation_rad);
         if (e0_deg > -2.0) {
-            dEl_rad = degToRad(1.02 / (60.0 * tan(degToRad(e0_deg + 10.3 
+            dEl_rad = degToRad(1.02 / (60.0 * tan(degToRad(e0_deg + 10.3
                                                            / (e0_deg + 5.11)))))
                       * site->refracPT;
         } else {
@@ -490,9 +490,9 @@ GLOBAL void sky_siteTirsToTopo(const V3D_Vector   *terInterV,
 
     } else if (topo->elevation_rad > (-2.0 * DEG2RAD)) {
         /* Low elevation, use this approx formula instead */
-        dEl_rad =  (8.3323e-3 + 3.1786e-2 * topo->elevation_rad 
+        dEl_rad =  (8.3323e-3 + 3.1786e-2 * topo->elevation_rad
                     + 2.0746e-2 * topo->elevation_rad * topo->elevation_rad)
-                 / (1 + 20.995 * topo->elevation_rad 
+                 / (1 + 20.995 * topo->elevation_rad
                     + 160.31 * topo->elevation_rad * topo->elevation_rad)
                  * site->refracPT;
 
@@ -501,7 +501,7 @@ GLOBAL void sky_siteTirsToTopo(const V3D_Vector   *terInterV,
     }
 #endif
     topo->elevation_rad += dEl_rad;
-    
+
     /* Convert back to rectangular coords */
     v3d_polarToRect(&topo->rectV, topo->azimuth_rad, topo->elevation_rad);
 }
@@ -527,7 +527,7 @@ GLOBAL void sky_siteAzElToHaDec(const V3D_Vector   *topoV,
 
  \par When to call this function
     After each call to sky_siteTirsToTopo(), but only if you want hour angle and
-    declination. 
+    declination.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     V3D_Vector haDecV;  // topocentric posn vector in Hour Angle/Decl. frame
@@ -561,7 +561,7 @@ GLOBAL double sky_siteIncidence_rad(const V3D_Vector *topoV,
 
  \par When to call this function
     After each call to sky_siteTirsToTopo(), but only if you have a surface that
-    you want the incidence angle for. 
+    you want the incidence angle for.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     // This function assumes that both input vectors are unit vectors.
@@ -623,7 +623,7 @@ LOCAL void createAzElBaseM(Sky_SiteProp *site)
 {
     double sinLon, cosLon;
     double sinLat, cosLat;
-       
+
     sincos(site->astLong_rad, &sinLon, &cosLon);
     sincos(site->astLat_rad, &sinLat, &cosLat);
     site->azElBaseM.a[0][0] = -sinLat * cosLon;
@@ -636,10 +636,51 @@ LOCAL void createAzElBaseM(Sky_SiteProp *site)
 
     site->azElBaseM.a[2][0] = cosLat * cosLon;
     site->azElBaseM.a[2][1] = cosLat * sinLon;
-    site->azElBaseM.a[2][2] = sinLat;    
+    site->azElBaseM.a[2][2] = sinLat;
 }
 
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/*! \page page-about About this code, and how to use it
+ *
+ *  This code has been written with the aim of providing astronomical routines
+ *  for tracking the Sun, Moon, planets and stars using a small processor. It
+ *  started as a project to implement accurate tracking of the Sun for solar
+ *  heliostat applications. What was required was code that would execute more
+ *  quickly than the traditional Solar Position Algorithm (see reference), but
+ *  without the compromises in accuracy that many simpler algorithms suffer
+ *  from.
+ *
+ *  Some of the principles of that implementation, in particular the use of
+ *  rectangular coordinates for converting from geocentric apparent coordinates
+ *  to site-specific topocentric coordinates, and the use of interpolation
+ *  between apparent position vectors, are just as applicable to the tracking of
+ *  any other celestial object. So gradually code to support tracking the Moon,
+ *  planets and stars has been added.
+ *
+ *  There are a couple of use cases for this code. One could be a field of
+ *  heliostats which need accurate solar tracking but are each controlled by a
+ *  small cheap processor.
+ *  Another could be a home project to automate a home telescope.
+ *
+ *  This code is intended to handle all the intricacies of accurate celestial
+ *  calculations, leaving you free to concentrate on the code to actually drive
+ *  your device to the desired position.
+ *  The code is designed to provide accurate conversion of astronomical
+ *  coordinate systems, such as is used on quite large telescopes. Tracking
+ *  accuracy of better than one arcsecond can be expected, (although the
+ *  positions of the Moon and other planets are not calculated to that level of
+ *  accuracy).
+ *      - \subpage page-design-choices
+ *      - \subpage page-how-to-use
+ *      - \subpage page-licensing
+ *
+ * \par Reference:
+ *          Reda, Ibrahim and Andreas, Afshin.
+ *          _Solar Position Algorithm for Solar Radiation Applications._
+ *          National Renewable Energy Laboratory, publication no.
+ *          NREL/TP-560-34302, June 2003, revised January 2008
+ */
+
 /*! \page page-conventions Conventions used in this code
  *      - \subpage page-var-suffixes
  *      - \subpage page-sec-arcsec
@@ -657,8 +698,258 @@ LOCAL void createAzElBaseM(Sky_SiteProp *site)
  *      - \subpage page-why-struct-array
  *  */
 
+/*! \page page-design-choices Design choices
+ *  To make the code suitable for a small processor, the following choices have
+ *  been made.
+ *      - The code can be compiled with a C89/C90 compliant compiler. (Some
+ *        embedded systems still use compilers of this vintage.) But if a C99
+ *        or later compiler is being used, the code will use a few inline
+ *        functions in place of function-like macros.
+ *      - Does not use any heap storage (dynamic memory). That is, there are no
+ *        \c malloc() calls.
+ *      - Does not use any variable-length arrays. Thus stack usage is
+ *        predictable.
+ *      - Uses an interpolation process to dramatically reduce the calling of
+ *        trigonometric functions during tracking, with a very small loss of
+ *        accuracy (see \ref page-interpolation).
+ */
+
+/*! \page page-how-to-use How to use this code
+ *  The code has been provided as a set of separate files for you to include in
+ *  your project. It has not been configured as a monolithic library, because
+ *  there are likely to be parts that you don't want to include. But
+ *  importantly, it is assumed that you will want to make some choices, and you
+ *  will need to do that by making some simple edits to the source code of
+ *  various modules. Here are some guidelines.
+ *
+ *  ###Required files
+ *      - For all applications:
+ *          + The basic sky routines - sky.h & sky-time.c & sky-site.c
+ *          + Low level support routines and definitions -
+ *            general.h, astron.h, instead-of-math.h, vectors3d.h & vectors3d.c.
+ *      - For solar position calculations: the "all applications" set above,
+ *        plus sky0.h & sky0.c, and sun.h & sun.c
+ *      - For Sun tracking: the above, plus skyfast.h & skyfast.c
+ *      - For Moon position calculations: the "all applications" set above, plus
+ *        sky0.h & sky0.c, and moon.h & moon.c
+ *      - For Moon tracking: the above, plus skyfast.h & skyfast.c
+ *      - For planet position calculations: the "all applications" set above,
+ *        plus sky1.h & sky1.c, and planet.h & planet.c
+ *      - For tracking a planet: the above, plus skyfast.h & skyfast.c
+ *      - For a star: the "all applications" set above, plus
+ *        sky1.h & sky1.c, sky2.h & sky2.c, star.h & star.c, and
+ *        skyio.h & skyio.c
+ *      - For tracking a star: the above, plus skyfast.h & skyfast.c
+ *
+ *  You may also want to use skyio.h and skyio.c to format the output angles for
+ *  display for the Sun, Moon or planets.
+ *
+ *  ###Editing the code
+ *  You are likely to want to make some basic edits to the code, as listed
+ *  below. But before you do, make sure your editor can handle files in UTF-8
+ *  format. MacOS and Linux systems certainly will do this without you needing
+ *  to think about it. Only Windows systems still using old 8-bit code pages
+ *  like the Windows-1252 page are likely to have any issues. (You should move
+ *  away from them to UTF-8 in any case. UTF-8 can handle any character; those
+ *  old code pages don't.)
+ *      - \subpage page-general-h
+ *      - \subpage page-sky-h
+ *      - \subpage page-skyfast-c
+ */
+
+/*! \page page-general-h Edits you may want to make to general.h
+ *
+ *  ####Integer types with a C89/C90 compiler.
+ *  If you are compiling your code using a C89/C90 compiler, you will need to
+ *  check that the following lines are correct for your target processor. (If
+ *  you have a C99 or later compiler, you can skip this section.)
+ \verbatim
+    typedef signed short int    int16_t;
+    typedef unsigned short int  uint16_t;
+    typedef int                 int32_t;
+    typedef unsigned int        uint32_t;
+ \endverbatim
+ *  If, for example, your processor defines an int as being 16 bits wide, you
+ *  will get some strange warning messages. One possibility I have seen is
+ *  "general.h:105:1: warning: division by zero [-Wdiv-by-zero]".
+ *  Another possibility is
+ *  "general.h:105:1: error: expression is not an integer constant expression".
+ *  The important thing to do is to look at the line number where the error
+ *  was detected, where you will see a line like
+ \verbatim
+    static_assert(sizeof(int16_t) == 2,  "typedef of int16_t is wrong");
+ \endverbatim
+ *  To fix the problem, don't change the line containing the static_assert(),
+ *  go back and change the line(s) containing the typedef(s), so that these four
+ *  types (\c int16_t, \c uint16_t, \c int32_t & \c uint32_t) are correctly
+ *  defined for your processor.
+ *
+ *  ####Assertion checking
+ *  Many routines in this collection use assertions to check their parameters.
+ *  In particular, parameters which are passed by address are checked to make
+ *  sure that a NULL pointer has not been passed to them. You can control this
+ *  checking by defining three macros within this file. They are:
+ *      - ASSERTION_LEVEL. Use this to set how much checking is done. While you
+ *        are still writing and testing your own code which uses this code, you
+ *        are strongly recommended to keep this defined at a non-zero value.
+ *      - ENABLE_NULL_CHECKING. So long as ASSERTION_LEVEL is not set to zero,
+ *        this macro enables the checking of parameters which are passed by
+ *        reference, to make sure they are not NULL. (There is the occasional
+ *        parameter which is allowed to be NULL - such a parameter is of course
+ *        not subject to this check.) Once again, while you
+ *        are still writing and testing your own code which uses this code, you
+ *        are strongly recommended to keep this macro defined.
+ *      - USE_STANDARD_ASSERT. The code is designed to be run on an embedded
+ *        processor, where the traditional assert() behaviour -- write a message
+ *        and exit the program -- does not make any sense. On an embedded system
+ *        you need to write your own assertion handling routine onAssert__(),
+ *        which handles the information in a way that helps you debug the
+ *        problem. But if you are running this code on a processor which has an
+ *        operating system (say, like a Raspberry Pi runs Linux), you don't need
+ *        to go to this extra trouble. You can use the traditional assert()
+ *        behaviour quite happily. Define this macro to enable this behaviour.
+ */
+
+
+/*! \page page-licensing Licensing
+ *
+ * All code here except for the routines planet_getHeliocentric() and
+ * sky2_nutationIAU2000B() are covered by the MIT license, as follows:
+ *
+ * \copyright
+ * \parblock
+ * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * * Redistributions of source code must retain the above copyright notice, this
+ *   list of conditions and the following disclaimer.
+ * * Redistributions in binary form must reproduce the above copyright notice,
+ *   this list of conditions and the following disclaimer in the documentation
+ *   and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ * \endparblock
+ *
+**  =====================
+ *
+ *  The routines planet_getHeliocentric() and sky2_nutationIAU2000B() are
+ *  covered by the SOFA license, as follows.
+ *  See the description of each of those functions, which contains the necessary
+ *  text to comply with section 3 of the license below:
+ *
+ * \copyright
+ * \verbatim
+**
+**  Copyright (C) 2017
+**  Standards Of Fundamental Astronomy Board
+**  of the International Astronomical Union.
+**
+**  =====================
+**  SOFA Software License
+**  =====================
+**
+**  NOTICE TO USER:
+**
+**  BY USING THIS SOFTWARE YOU ACCEPT THE FOLLOWING SIX TERMS AND
+**  CONDITIONS WHICH APPLY TO ITS USE.
+**
+**  1. The Software is owned by the IAU SOFA Board ("SOFA").
+**
+**  2. Permission is granted to anyone to use the SOFA software for any
+**     purpose, including commercial applications, free of charge and
+**     without payment of royalties, subject to the conditions and
+**     restrictions listed below.
+**
+**  3. You (the user) may copy and distribute SOFA source code to others,
+**     and use and adapt its code and algorithms in your own software,
+**     on a world-wide, royalty-free basis.  That portion of your
+**     distribution that does not consist of intact and unchanged copies
+**     of SOFA source code files is a "derived work" that must comply
+**     with the following requirements:
+**
+**     a) Your work shall be marked or carry a statement that it
+**        (i) uses routines and computations derived by you from
+**        software provided by SOFA under license to you; and
+**        (ii) does not itself constitute software provided by and/or
+**        endorsed by SOFA.
+**
+**     b) The source code of your derived work must contain descriptions
+**        of how the derived work is based upon, contains and/or differs
+**        from the original SOFA software.
+**
+**     c) The names of all routines in your derived work shall not
+**        include the prefix "iau" or "sofa" or trivial modifications
+**        thereof such as changes of case.
+**
+**     d) The origin of the SOFA components of your derived work must
+**        not be misrepresented;  you must not claim that you wrote the
+**        original software, nor file a patent application for SOFA
+**        software or algorithms embedded in the SOFA software.
+**
+**     e) These requirements must be reproduced intact in any source
+**        distribution and shall apply to anyone to whom you have
+**        granted a further right to modify the source code of your
+**        derived work.
+**
+**     Note that, as originally distributed, the SOFA software is
+**     intended to be a definitive implementation of the IAU standards,
+**     and consequently third-party modifications are discouraged.  All
+**     variations, no matter how minor, must be explicitly marked as
+**     such, as explained above.
+**
+**  4. You shall not cause the SOFA software to be brought into
+**     disrepute, either by misuse, or use for inappropriate tasks, or
+**     by inappropriate modification.
+**
+**  5. The SOFA software is provided "as is" and SOFA makes no warranty
+**     as to its use or performance.   SOFA does not and cannot warrant
+**     the performance or results which the user may obtain by using the
+**     SOFA software.  SOFA makes no warranties, express or implied, as
+**     to non-infringement of third party rights, merchantability, or
+**     fitness for any particular purpose.  In no event will SOFA be
+**     liable to the user for any consequential, incidental, or special
+**     damages, including any lost profits or lost savings, even if a
+**     SOFA representative has been advised of such damages, or for any
+**     claim by any third party.
+**
+**  6. The provision of any version of the SOFA software under the terms
+**     and conditions specified herein does not imply that future
+**     versions will also be made available under the same terms and
+**     conditions.
+*
+**  In any published work or commercial product which uses the SOFA
+**  software directly, acknowledgement (see www.iausofa.org) is
+**  appreciated.
+**
+**  Correspondence concerning SOFA software should be addressed as
+**  follows:
+**
+**      By email:  sofa@ukho.gov.uk
+**      By post:   IAU SOFA Center
+**                 HM Nautical Almanac Office
+**                 UK Hydrographic Office
+**                 Admiralty Way, Taunton
+**                 Somerset, TA1 2DN
+**                 United Kingdom
+**
+ * \endverbatim
+ */
+
 /*! \page page-var-suffixes Suffixes on variable and parameter names
- * 
+ *
  *  In accordance with the naming convention spelt out in the
  *  style guide, many variables and constants have a suffix indicating their
  *  units. Mostly these are SI units, for example
@@ -666,14 +957,14 @@ LOCAL void createAzElBaseM(Sky_SiteProp *site)
  *      -  _m (metres), _km (kilometres), _kmps (kilometres/second)
  *      -  _rad (radian), _deg (degrees), _radps (radian/second)
  *      -  _degC (degrees Celsius)
- * 
+ *
  *  But we also have units for astronomical quantities as recommended by the
  *  International Astronomical Union (IAU) style manual
  *  (https://www.iau.org/publications/proceedings_rules/units/), for example
  *      -  _as (arcseconds) _mas (milliarcseconds), (see \ref page-sec-arcsec)
  *      -  _au (Astronomical Unit (of distance))
  *      -  _a (Julian year)
- * 
+ *
  *  This last unit implies that we could use "ka" for millennia, and we do. But
  *  we also have quantities measured in Julian centuries. The IAU guidelines
  *  specifically rule out using "ha" for this (quite right: "ha" means
@@ -681,7 +972,7 @@ LOCAL void createAzElBaseM(Sky_SiteProp *site)
  *  alternative. But the _Astronomical Almanac_ does use "cy" for a Julian
  *  century, so I will use suffix _cy.
  *      -  _ka (Julian millennium), _cy (Julian century)
- * 
+ *
  *  Another convention that applies here: Objects whose name ends in a capital V
  *  are 3-dimensional vectors (often unit position vectors, or direction
  *  cosines) but not exclusively so. Objects whose name ends in a capital M are
@@ -697,7 +988,7 @@ LOCAL void createAzElBaseM(Sky_SiteProp *site)
  *  sphere using both units of time (for Right Ascension and Hour Angles) and
  *  units of degrees (for many other angles). So if we talk about an angle of
  *  n minutes, or n seconds, do we mean a fraction of an hour, or a degree?
- * 
+ *
  *  For this reason, astronomers refer to the fractions of a degree as
  *  arcminutes, and reserve the term "minutes" for fractions of an hour. And
  *  fractions of an arcminute are called arcseconds rather than seconds. This
@@ -705,7 +996,7 @@ LOCAL void createAzElBaseM(Sky_SiteProp *site)
  *  variable names (see page \ref page-var-suffixes). Variables in units of
  *  seconds of time have the suffix _s, those in units of arcseconds have the
  *  suffix _as.
- * 
+ *
  *  In general, within this program most angles are stored in units of radians,
  *  and only converted to degrees-arcminutes-arcseconds, or
  *  hours-minutes-seconds when being written out in text form.
@@ -720,7 +1011,7 @@ LOCAL void createAzElBaseM(Sky_SiteProp *site)
  *  the pair of numbers is surrounded by brackets. Square brackets
  *  indicate an inclusive end-of-range, and round brackets (parentheses)
  *  indicate an exclusive end-of range.
- * 
+ *
  *  Examples:
  *  - [0,10] means all values from 0 to 10 inclusive
  *  - [0.0, 360.0) means all values from 0.0 up to but not including 360.0
@@ -733,16 +1024,16 @@ LOCAL void createAzElBaseM(Sky_SiteProp *site)
  *  The following conventions apply throughout this software.
  *      - Terrestrial coordinates (latitude and longitude).
  *          - Polar form\n
- *            Longitudes east of Greenwich are positive, those west are 
+ *            Longitudes east of Greenwich are positive, those west are
  *            negative.
- *            Latitudes north of the equator are positive, those south are 
+ *            Latitudes north of the equator are positive, those south are
  *            negative. When the Earth is viewed from above the north pole
  *            looking towards the centre of the earth, longitude increases in an
- *            anticlockwise direction. 
+ *            anticlockwise direction.
  *          - Rectangular form\n
  *            The position is indicated by a vector, whose components are as
  *            follows:
- *              - the x axis points from the centre of the earth towards the 
+ *              - the x axis points from the centre of the earth towards the
  *                equator at 0° longitude,
  *              - the y axis points to 90° longitude, and
  *              -  the z axis points to the north pole.
@@ -802,7 +1093,7 @@ LOCAL void createAzElBaseM(Sky_SiteProp *site)
  * \par
  *      \b ver′nal \em adj. of or occurring in spring.\n
  *      -- The Collins Concise Dictionary, 4th edn. 1999
- * 
+ *
  *  Obviously it never occurred to the person who coined this term for the
  *  equinox that the Southern Hemisphere exists. Because \em everybody in the
  *  Southern Hemisphere knows that the spring equinox occurs in September, not
