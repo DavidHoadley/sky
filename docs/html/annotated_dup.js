@@ -1,6 +1,8 @@
 var annotated_dup =
 [
     [ "Sky0_Nut1980", "struct_sky0___nut1980.html", "struct_sky0___nut1980" ],
+    [ "Sky1_Nut1980", "struct_sky1___nut1980.html", "struct_sky1___nut1980" ],
+    [ "Sky1_Prec1976", "struct_sky1___prec1976.html", "struct_sky1___prec1976" ],
     [ "Sky_DeltaTs", "struct_sky___delta_ts.html", "struct_sky___delta_ts" ],
     [ "Sky_PolarMot", "struct_sky___polar_mot.html", "struct_sky___polar_mot" ],
     [ "Sky_SiteHorizon", "struct_sky___site_horizon.html", "struct_sky___site_horizon" ],

@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.2-1</span>
+   &#160;<span id="projectnumber">0.1.4-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -113,9 +113,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a0c57865e99d030403725d97f36bf8f49"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="skyio_8h.html#a0c57865e99d030403725d97f36bf8f49">skyio_hrsToHmsStr</a> (char destStr[], int destStrLen, double angle_h, int decimals)</td></tr>
 <tr class="memdesc:a0c57865e99d030403725d97f36bf8f49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to take an angle in hours and return a string in hours, minutes and seconds form - "±HH:MM:SS.sss" - correctly rounding according to the number of decimal places to be shown.  <a href="skyio_8h.html#a0c57865e99d030403725d97f36bf8f49">More...</a><br /></td></tr>
 <tr class="separator:a0c57865e99d030403725d97f36bf8f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3f5e7cfd07c85c622839d61d757a3eb"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="skyio_8h.html#aa3f5e7cfd07c85c622839d61d757a3eb">skyio_sxStrToAng</a> (const char angleStr[], int strSize, const char **endPtr, int *error)</td></tr>
-<tr class="memdesc:aa3f5e7cfd07c85c622839d61d757a3eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a string containing an angle (or a time) in sexagesimal format to the angle's value.  <a href="skyio_8h.html#aa3f5e7cfd07c85c622839d61d757a3eb">More...</a><br /></td></tr>
-<tr class="separator:aa3f5e7cfd07c85c622839d61d757a3eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10370b9c3f00f0abeedf1fc26135ac12"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="skyio_8h.html#a10370b9c3f00f0abeedf1fc26135ac12">skyio_sxStrToAng</a> (const char angleStr[], const char **endPtr, int *error)</td></tr>
+<tr class="memdesc:a10370b9c3f00f0abeedf1fc26135ac12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a string containing an angle (or a time) in sexagesimal format to the angle's value.  <a href="skyio_8h.html#a10370b9c3f00f0abeedf1fc26135ac12">More...</a><br /></td></tr>
+<tr class="separator:a10370b9c3f00f0abeedf1fc26135ac12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23323b59082541dd33e90f58bd7b5c6d"><td class="memItemLeft" align="right" valign="top">static char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="skyio_8h.html#a23323b59082541dd33e90f58bd7b5c6d">skyio_radToDmsStr</a> (char destStr[], int destStrLen, double angle_rad, int decimals)</td></tr>
 <tr class="memdesc:a23323b59082541dd33e90f58bd7b5c6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to take an angle in radian and return a string in degrees, arcminutes and arcseconds form - [±]DDD°MM′SS.sss″ - correctly rounding according to the number of decimal places to be shown.  <a href="skyio_8h.html#a23323b59082541dd33e90f58bd7b5c6d">More...</a><br /></td></tr>
 <tr class="separator:a23323b59082541dd33e90f58bd7b5c6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -250,8 +250,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa3f5e7cfd07c85c622839d61d757a3eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3f5e7cfd07c85c622839d61d757a3eb">&#9670;&nbsp;</a></span>skyio_sxStrToAng()</h2>
+<a id="a10370b9c3f00f0abeedf1fc26135ac12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10370b9c3f00f0abeedf1fc26135ac12">&#9670;&nbsp;</a></span>skyio_sxStrToAng()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -261,12 +261,6 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">const char&#160;</td>
           <td class="paramname"><em>angleStr</em>[], </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>strSize</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -299,7 +293,6 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">angleStr</td><td>The string of text containing the angle </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">strSize</td><td>The size of the array <em>angleStr</em> (i.e. the maximum possible length of the string. Fewer characters may actually be in use.) </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">endPtr</td><td>A pointer to the end of that part of <em>angleStr</em> that was read to obtain the number. This may be pointing to some white space between the number just decoded and further data, or it may be the end of the string. A NULL pointer may be passed to this parameter if you do not need this value. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">error</td><td>What errors were detected during decoding? This is set to NO_ANGLE (-1) if no value was found in the string. It is set to INVALID_ANGLE (-2) if the minutes or seconds fields are outside the range [0.0, 60.0). A NULL pointer may be passed to this parameter if you do not care about the conversion status.</td></tr>
   </table>
@@ -372,7 +365,7 @@ Functions</h2></td></tr>
  <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_sun_8c-example.html#a18">demo1_sun.c</a>, <a class="el" href="demo2_sun_tracking_8c-example.html#a20">demo2_sun_tracking.c</a>, <a class="el" href="demo3_moon_8c-example.html#a17">demo3_moon.c</a>, and <a class="el" href="demo4_multiple_sites_8c-example.html#a24">demo4_multiple_sites.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="skyio_8h_source.html#l00112">112</a> of file <a class="el" href="skyio_8h_source.html">skyio.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="skyio_8h_source.html#l00111">111</a> of file <a class="el" href="skyio_8h_source.html">skyio.h</a>.</p>
 
 </div>
 </div>
@@ -435,7 +428,7 @@ Functions</h2></td></tr>
 </dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="skyio_8h_source.html#l00147">147</a> of file <a class="el" href="skyio_8h_source.html">skyio.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="skyio_8h_source.html#l00146">146</a> of file <a class="el" href="skyio_8h_source.html">skyio.h</a>.</p>
 
 </div>
 </div>
@@ -466,7 +459,7 @@ Functions</h2></td></tr>
  <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_sun_8c-example.html#a16">demo1_sun.c</a>, <a class="el" href="demo2_sun_tracking_8c-example.html#a18">demo2_sun_tracking.c</a>, <a class="el" href="demo3_moon_8c-example.html#a15">demo3_moon.c</a>, and <a class="el" href="demo4_multiple_sites_8c-example.html#a22">demo4_multiple_sites.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="skyio_8c_source.html#l00430">430</a> of file <a class="el" href="skyio_8c_source.html">skyio.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="skyio_8c_source.html#l00426">426</a> of file <a class="el" href="skyio_8c_source.html">skyio.c</a>.</p>
 
 </div>
 </div>

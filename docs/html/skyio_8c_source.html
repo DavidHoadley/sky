@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.2-1</span>
+   &#160;<span id="projectnumber">0.1.4-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -374,183 +374,179 @@ $(document).ready(function(){initNavTree('skyio_8c_source.html',''); initResizab
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
-<div class="line"><a name="l00288"></a><span class="lineno"><a class="line" href="skyio_8h.html#aa3f5e7cfd07c85c622839d61d757a3eb">  288</a></span>&#160;GLOBAL <span class="keywordtype">double</span> <a class="code" href="skyio_8h.html#aa3f5e7cfd07c85c622839d61d757a3eb">skyio_sxStrToAng</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> angleStr[],</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                               <span class="keywordtype">int</span> strSize,</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                               <span class="keyword">const</span> <span class="keywordtype">char</span> **endPtr,</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                               <span class="keywordtype">int</span> *error)<span class="comment"></span></div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment">/*! Convert a string containing an angle (or a time) in sexagesimal format to</span></div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">    the angle&#39;s value. The field containing the angle consists of either one</span></div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">    subfield (decimal degrees or hours), two subfields (degrees and arcminutes</span></div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">    or hours and minutes) three subfields (degrees, arcminutes and arcseconds or</span></div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">    hours minutes and seconds). The location of the decimal point (if any) is</span></div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">    what determines how many subfields are present. The following are all</span></div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment">    examples of valid angles (or times):</span></div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment">        - 21.625 or +21.625°</span></div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment">        - -21 37.5 or 21:37.5 or -21°37.5′ or 21h37.5m</span></div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment">        - +21 37 30 or 21:37:30.0 or -21°37′30.0″</span></div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment">    If the string contains degrees, minutes and seconds, the result will be in</span></div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment">    degrees. If the string contains hours, minutes and seconds, the result will</span></div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment">    be in hours.</span></div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment">    The routine will accept almost anything appearing between the numbers,</span></div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment">    such as °, ′, &amp; ″; or d, &#39; &amp; &quot;; or h, m, &amp; s; or colons or spaces or tabs.</span></div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="comment">    These are ignored and are not checked for whether they make sense or not.</span></div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment"> \returns    The angle or time</span></div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment"> \param[in]  angleStr  The string of text containing the angle</span></div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment"> \param[in]  strSize   The size of the array \a angleStr (i.e. the maximum</span></div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment">                       possible length of the string. Fewer characters may</span></div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">                       actually be in use.)</span></div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment"> \param[out] endPtr    A pointer to the end of that part of \a angleStr that was</span></div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">                       read to obtain the number. This may be pointing to some</span></div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment">                       white space between the number just decoded and further</span></div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment">                       data, or it may be the end of the string. A NULL</span></div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment">                       pointer may be passed to this parameter if you do not</span></div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment">                       need this value.</span></div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="comment"> \param[out] error     What errors were detected during decoding?</span></div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment">                       This is set to NO_ANGLE (-1) if no value was found in the</span></div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment">                       string.</span></div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment">                       It is set to INVALID_ANGLE (-2) if the minutes or</span></div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment">                       seconds fields are outside the range [0.0, 60.0).</span></div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="comment">                       A NULL pointer may be passed to this parameter if you</span></div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment">                       do not care about the conversion status.</span></div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;{</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>  *ch;                <span class="comment">// Step through the string</span></div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="keywordtype">bool</span>        isNegative = <span class="keyword">false</span>; <span class="comment">// Have we encountered a -ve sign?</span></div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keywordtype">bool</span>        pointFound = <span class="keyword">false</span>; <span class="comment">// Have we encountered a decimal point?</span></div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="keywordtype">bool</span>        done = <span class="keyword">false</span>;       <span class="comment">// Have we finished decoding the string?</span></div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    <span class="keywordtype">double</span>      divideBy;</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="keywordtype">double</span>      frac;               <span class="comment">// value of digits that follow decimal point</span></div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    <span class="keywordtype">int</span>         status;             <span class="comment">// error code</span></div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="comment">// Hold the results of decoding in separate array members for degrees/hours,</span></div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    <span class="comment">// minutes and seconds. Put an invalid value into one of them, so that we</span></div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    <span class="comment">// can later detect the case when angleStr contains no decodable value.</span></div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    <span class="keywordtype">double</span>      results[4] = {0.0, -1.0, 0.0, 0.0};</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    <span class="keywordtype">double</span>      *res = results;     <span class="comment">// point to relevant member of results[]</span></div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keyword">enum</span> {</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        stStarting,     stDegHr,    stSeparator1,   stMins,</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        stSeparator2,   stSecs,     stEnding</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    } decodeState = stStarting;     <span class="comment">// state variable - stage of decoding</span></div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160; </div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    <span class="keywordflow">for</span> (ch = angleStr; ch &lt; (angleStr + strSize) &amp;&amp; *ch != <span class="charliteral">&#39;\0&#39;</span>; ch++) {</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        <span class="keywordflow">switch</span> (decodeState) {</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        <span class="keywordflow">case</span> stStarting:</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;            <span class="keywordflow">if</span> (*ch == <span class="charliteral">&#39;-&#39;</span>) { isNegative = <span class="keyword">true</span>; }</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;            NOBREAK;</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        <span class="keywordflow">case</span> stSeparator1:</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        <span class="keywordflow">case</span> stSeparator2:</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;            <span class="keywordflow">if</span> (isdigit(*ch)) {</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;                *(++res) = (<span class="keywordtype">double</span>)(*ch - <span class="charliteral">&#39;0&#39;</span>);</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;                decodeState++;</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;            }</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; </div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        <span class="keywordflow">case</span> stDegHr:</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        <span class="keywordflow">case</span> stMins:</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        <span class="keywordflow">case</span> stSecs:</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;            <span class="keywordflow">if</span> (*ch == decimalChar) {</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;                pointFound = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;                divideBy = 1.0;</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (isdigit(*ch)) {</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;                <span class="keywordflow">if</span> (pointFound) {</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;                    divideBy *= 10.0;</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;                    frac = (double)(*ch - <span class="charliteral">&#39;0&#39;</span>) / divideBy;</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;                    *res += frac;</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;                } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;                    *res = (10.0 * *res) + (<span class="keywordtype">double</span>)(*ch - <span class="charliteral">&#39;0&#39;</span>);</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;                }</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;                <span class="comment">// Not a digit or point, so we have reached the end of the field</span></div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;                <span class="keywordflow">if</span> ((pointFound) || (decodeState == stSecs)) {</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;                    <span class="comment">// This must be the last field we will decode</span></div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;                    <span class="keywordflow">if</span> (isblank(*ch)) {</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;                        done = <span class="keyword">true</span>;            <span class="comment">// exit now</span></div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;                    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (*ch == fieldSeparator) {</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;                        ch++;                   <span class="comment">// if a separator, move to char</span></div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;                        done = <span class="keyword">true</span>;            <span class="comment">//  after the separator and exit</span></div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;                    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;                        decodeState = stEnding; <span class="comment">// skip non-blanks, then exit</span></div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;                    }</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;                } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;                    decodeState++;</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;                }</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;            }</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160; </div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        <span class="keywordflow">case</span> stEnding:</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;            <span class="comment">// Skip over any trailing non-blank chars.</span></div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;            <span class="comment">// Stop when we find white space</span></div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;            <span class="keywordflow">if</span> (isblank(*ch)) {</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;                done = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;            }</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160; </div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;        }</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;        </div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;        <span class="keywordflow">if</span> (done) {</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;            <span class="comment">// exit the loop without incrementing our character pointer ch</span></div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        }</div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    }</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;    status = 0;</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    <span class="keywordflow">if</span> (results[1] &lt; 0.0) {</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;        <span class="comment">// There was no number in angleStr. Return zero and an error code.</span></div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;        results[1] = 0.0;</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;        status = NO_ANGLE;</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;    }</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;    <span class="keywordflow">if</span> (results[3] &gt;= 60.0) { status = INVALID_ANGLE; }</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;    <span class="keywordflow">if</span> (results[2] &gt;= 60.0) { status = INVALID_ANGLE; }</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    <span class="keywordflow">if</span> (error != NULL) { *error = status; }</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;    <span class="keywordflow">if</span> (endPtr != NULL) { *endPtr = ch; }</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160; </div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;    results[0] = results[1] + results[2] / 60.0 + results[3] / 3600.0;</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    <span class="keywordflow">if</span> (isNegative) { results[0] = -results[0]; }</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;    <span class="keywordflow">return</span> results[0];</div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;}</div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160; </div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160; </div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160; </div>
-<div class="line"><a name="l00430"></a><span class="lineno"><a class="line" href="skyio_8h.html#a8dd7e21b6c506c2c296e299bbeb3ade7">  430</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="skyio_8h.html#a8dd7e21b6c506c2c296e299bbeb3ade7">skyio_printJ2kd</a>(<span class="keywordtype">double</span> j2kd)<span class="comment"></span></div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="comment">/*! Write out a J2KD as a calendar date and time. The date and time are written</span></div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment">    in ISO format, separated by a space. Time is written to three decimal places</span></div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="comment">    of seconds. No newline is written at the end.</span></div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="comment"> \param[in]  j2kd  The date/time in J2KD format.</span></div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;{</div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;    <span class="keywordtype">int</span> y, m, d, h, mins;</div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;    <span class="keywordtype">double</span> s;</div>
+<div class="line"><a name="l00288"></a><span class="lineno"><a class="line" href="skyio_8h.html#a10370b9c3f00f0abeedf1fc26135ac12">  288</a></span>&#160;GLOBAL <span class="keywordtype">double</span> <a class="code" href="skyio_8h.html#a10370b9c3f00f0abeedf1fc26135ac12">skyio_sxStrToAng</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> angleStr[],</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                               <span class="keyword">const</span> <span class="keywordtype">char</span> **endPtr,</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                               <span class="keywordtype">int</span> *error)<span class="comment"></span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">/*! Convert a string containing an angle (or a time) in sexagesimal format to</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment">    the angle&#39;s value. The field containing the angle consists of either one</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">    subfield (decimal degrees or hours), two subfields (degrees and arcminutes</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">    or hours and minutes) three subfields (degrees, arcminutes and arcseconds or</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">    hours minutes and seconds). The location of the decimal point (if any) is</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">    what determines how many subfields are present. The following are all</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">    examples of valid angles (or times):</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment">        - 21.625 or +21.625°</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment">        - -21 37.5 or 21:37.5 or -21°37.5′ or 21h37.5m</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment">        - +21 37 30 or 21:37:30.0 or -21°37′30.0″</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment">    If the string contains degrees, minutes and seconds, the result will be in</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment">    degrees. If the string contains hours, minutes and seconds, the result will</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment">    be in hours.</span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment">    The routine will accept almost anything appearing between the numbers,</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment">    such as °, ′, &amp; ″; or d, &#39; &amp; &quot;; or h, m, &amp; s; or colons or spaces or tabs.</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment">    These are ignored and are not checked for whether they make sense or not.</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="comment"> \returns    The angle or time</span></div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment"> \param[in]  angleStr  The string of text containing the angle</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment"> \param[out] endPtr    A pointer to the end of that part of \a angleStr that was</span></div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment">                       read to obtain the number. This may be pointing to some</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment">                       white space between the number just decoded and further</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">                       data, or it may be the end of the string. A NULL</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">                       pointer may be passed to this parameter if you do not</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">                       need this value.</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment"> \param[out] error     What errors were detected during decoding?</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment">                       This is set to NO_ANGLE (-1) if no value was found in the</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment">                       string.</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment">                       It is set to INVALID_ANGLE (-2) if the minutes or</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="comment">                       seconds fields are outside the range [0.0, 60.0).</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment">                       A NULL pointer may be passed to this parameter if you</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment">                       do not care about the conversion status.</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;{</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>  *ch;                <span class="comment">// Step through the string</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <span class="keywordtype">bool</span>        isNegative = <span class="keyword">false</span>; <span class="comment">// Have we encountered a -ve sign?</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    <span class="keywordtype">bool</span>        pointFound = <span class="keyword">false</span>; <span class="comment">// Have we encountered a decimal point?</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    <span class="keywordtype">bool</span>        done = <span class="keyword">false</span>;       <span class="comment">// Have we finished decoding the string?</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <span class="keywordtype">double</span>      divideBy;</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="keywordtype">double</span>      frac;               <span class="comment">// value of digits that follow decimal point</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keywordtype">int</span>         status;             <span class="comment">// error code</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="comment">// Hold the results of decoding in separate array members for degrees/hours,</span></div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    <span class="comment">// minutes and seconds. Put an invalid value into one of them, so that we</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="comment">// can later detect the case when angleStr contains no decodable value.</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    <span class="keywordtype">double</span>      results[4] = {0.0, -1.0, 0.0, 0.0};</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keywordtype">double</span>      *res = results;     <span class="comment">// point to relevant member of results[]</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    <span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        stStarting,     stDegHr,    stSeparator1,   stMins,</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        stSeparator2,   stSecs,     stEnding</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    } decodeState = stStarting;     <span class="comment">// state variable - stage of decoding</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    <span class="keywordflow">for</span> (ch = angleStr; *ch != <span class="charliteral">&#39;\0&#39;</span>; ch++) {</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        <span class="keywordflow">switch</span> (decodeState) {</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        <span class="keywordflow">case</span> stStarting:</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            <span class="keywordflow">if</span> (*ch == <span class="charliteral">&#39;-&#39;</span>) { isNegative = <span class="keyword">true</span>; }</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            NOBREAK;</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        <span class="keywordflow">case</span> stSeparator1:</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        <span class="keywordflow">case</span> stSeparator2:</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;            <span class="keywordflow">if</span> (isdigit(*ch)) {</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                *(++res) = (<span class="keywordtype">double</span>)(*ch - <span class="charliteral">&#39;0&#39;</span>);</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                decodeState++;</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;            }</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        <span class="keywordflow">case</span> stDegHr:</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        <span class="keywordflow">case</span> stMins:</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        <span class="keywordflow">case</span> stSecs:</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;            <span class="keywordflow">if</span> (*ch == decimalChar) {</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;                pointFound = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;                divideBy = 1.0;</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160; </div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (isdigit(*ch)) {</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;                <span class="keywordflow">if</span> (pointFound) {</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;                    divideBy *= 10.0;</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;                    frac = (double)(*ch - <span class="charliteral">&#39;0&#39;</span>) / divideBy;</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;                    *res += frac;</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;                    *res = (10.0 * *res) + (<span class="keywordtype">double</span>)(*ch - <span class="charliteral">&#39;0&#39;</span>);</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;                }</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; </div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;                <span class="comment">// Not a digit or point, so we have reached the end of the field</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;                <span class="keywordflow">if</span> ((pointFound) || (decodeState == stSecs)) {</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;                    <span class="comment">// This must be the last field we will decode</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;                    <span class="keywordflow">if</span> (isblank(*ch)) {</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;                        done = <span class="keyword">true</span>;            <span class="comment">// exit now</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;                    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (*ch == fieldSeparator) {</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;                        ch++;                   <span class="comment">// if a separator, move to char</span></div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;                        done = <span class="keyword">true</span>;            <span class="comment">//  after the separator and exit</span></div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;                    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;                        decodeState = stEnding; <span class="comment">// skip non-blanks, then exit</span></div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;                    }</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;                    decodeState++;</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;                }</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;            }</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160; </div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        <span class="keywordflow">case</span> stEnding:</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;            <span class="comment">// Skip over any trailing non-blank chars.</span></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;            <span class="comment">// Stop when we find white space</span></div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;            <span class="keywordflow">if</span> (isblank(*ch)) {</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;                done = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;            }</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160; </div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        }</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;        </div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        <span class="keywordflow">if</span> (done) {</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;            <span class="comment">// exit the loop without incrementing our character pointer ch</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;        }</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    }</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    status = 0;</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    <span class="keywordflow">if</span> (results[1] &lt; 0.0) {</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        <span class="comment">// There was no number in angleStr. Return zero and an error code.</span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;        results[1] = 0.0;</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;        status = NO_ANGLE;</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    }</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;    <span class="keywordflow">if</span> (results[3] &gt;= 60.0) { status = INVALID_ANGLE; }</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;    <span class="keywordflow">if</span> (results[2] &gt;= 60.0) { status = INVALID_ANGLE; }</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;    <span class="keywordflow">if</span> (error != NULL) { *error = status; }</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;    <span class="keywordflow">if</span> (endPtr != NULL) { *endPtr = ch; }</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160; </div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;    results[0] = results[1] + results[2] / 60.0 + results[3] / 3600.0;</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    <span class="keywordflow">if</span> (isNegative) { results[0] = -results[0]; }</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;    <span class="keywordflow">return</span> results[0];</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;}</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160; </div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160; </div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160; </div>
+<div class="line"><a name="l00426"></a><span class="lineno"><a class="line" href="skyio_8h.html#a8dd7e21b6c506c2c296e299bbeb3ade7">  426</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="skyio_8h.html#a8dd7e21b6c506c2c296e299bbeb3ade7">skyio_printJ2kd</a>(<span class="keywordtype">double</span> j2kd)<span class="comment"></span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="comment">/*! Write out a J2KD as a calendar date and time. The date and time are written</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="comment">    in ISO format, separated by a space. Time is written to three decimal places</span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="comment">    of seconds. No newline is written at the end.</span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="comment"> \param[in]  j2kd  The date/time in J2KD format.</span></div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;{</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;    <span class="keywordtype">int</span> y, m, d, h, mins;</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    <span class="keywordtype">double</span> s;</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160; </div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;    <a class="code" href="sky_8h.html#a6afa64839aaee5925d90c013e8eaa0b2">sky_j2kdToCalTime</a>(j2kd, &amp;y, &amp;m, &amp;d, &amp;h, &amp;mins, &amp;s);</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;    printf(<span class="stringliteral">&quot;%04d-%02d-%02d %02d:%02d:%06.3f&quot;</span>, y, m, d, h, mins, s);</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;}</div>
 <div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160; </div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;    <a class="code" href="sky_8h.html#a6afa64839aaee5925d90c013e8eaa0b2">sky_j2kdToCalTime</a>(j2kd, &amp;y, &amp;m, &amp;d, &amp;h, &amp;mins, &amp;s);</div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    printf(<span class="stringliteral">&quot;%04d-%02d-%02d %02d:%02d:%06.3f&quot;</span>, y, m, d, h, mins, s);</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;}</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160; </div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160; </div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160; </div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment"> * Local functions (not called from other modules)</span></div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment"> * Local functions (not called from other modules)</span></div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="comment">/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160; </div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160; </div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160; </div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160; </div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment">/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160; </div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160; </div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160; </div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="asky_8h_html_a6afa64839aaee5925d90c013e8eaa0b2"><div class="ttname"><a href="sky_8h.html#a6afa64839aaee5925d90c013e8eaa0b2">sky_j2kdToCalTime</a></div><div class="ttdeci">void sky_j2kdToCalTime(double j2k_d, int *year, int *month, int *day, int *hour, int *minute, double *second)</div><div class="ttdoc">This procedure converts the integral part of the date in &quot;J2KD&quot; form to a calendar date and the fract...</div><div class="ttdef"><b>Definition:</b> <a href="sky-time_8c_source.html#l00286">sky-time.c:286</a></div></div>
+<div class="ttc" id="asky_8h_html_a6afa64839aaee5925d90c013e8eaa0b2"><div class="ttname"><a href="sky_8h.html#a6afa64839aaee5925d90c013e8eaa0b2">sky_j2kdToCalTime</a></div><div class="ttdeci">void sky_j2kdToCalTime(double j2k_d, int *year, int *month, int *day, int *hour, int *minute, double *second)</div><div class="ttdoc">This procedure converts the integral part of the date in &quot;J2KD&quot; form to a calendar date and the fract...</div><div class="ttdef"><b>Definition:</b> <a href="sky-time_8c_source.html#l00321">sky-time.c:321</a></div></div>
 <div class="ttc" id="askyio_8h_html"><div class="ttname"><a href="skyio_8h.html">skyio.h</a></div><div class="ttdoc">skyio.h - output and formatting routines and a read routine</div></div>
-<div class="ttc" id="askyio_8h_html_aa3f5e7cfd07c85c622839d61d757a3eb"><div class="ttname"><a href="skyio_8h.html#aa3f5e7cfd07c85c622839d61d757a3eb">skyio_sxStrToAng</a></div><div class="ttdeci">double skyio_sxStrToAng(const char angleStr[], int strSize, const char **endPtr, int *error)</div><div class="ttdoc">Convert a string containing an angle (or a time) in sexagesimal format to the angle's value.</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8c_source.html#l00288">skyio.c:288</a></div></div>
+<div class="ttc" id="askyio_8h_html_a10370b9c3f00f0abeedf1fc26135ac12"><div class="ttname"><a href="skyio_8h.html#a10370b9c3f00f0abeedf1fc26135ac12">skyio_sxStrToAng</a></div><div class="ttdeci">double skyio_sxStrToAng(const char angleStr[], const char **endPtr, int *error)</div><div class="ttdoc">Convert a string containing an angle (or a time) in sexagesimal format to the angle's value.</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8c_source.html#l00288">skyio.c:288</a></div></div>
 <div class="ttc" id="askyio_8h_html_a0c57865e99d030403725d97f36bf8f49"><div class="ttname"><a href="skyio_8h.html#a0c57865e99d030403725d97f36bf8f49">skyio_hrsToHmsStr</a></div><div class="ttdeci">char * skyio_hrsToHmsStr(char destStr[], int destStrLen, double angle_h, int decimals)</div><div class="ttdoc">Routine to take an angle in hours and return a string in hours, minutes and seconds form - &quot;±HH:MM:SS...</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8c_source.html#l00193">skyio.c:193</a></div></div>
 <div class="ttc" id="asky_8h_html"><div class="ttname"><a href="sky_8h.html">sky.h</a></div><div class="ttdoc">sky.h - structures and routines for astronomical observing &amp; tracking</div></div>
-<div class="ttc" id="askyio_8h_html_a8dd7e21b6c506c2c296e299bbeb3ade7"><div class="ttname"><a href="skyio_8h.html#a8dd7e21b6c506c2c296e299bbeb3ade7">skyio_printJ2kd</a></div><div class="ttdeci">void skyio_printJ2kd(double j2kd)</div><div class="ttdoc">Write out a J2KD as a calendar date and time.</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8c_source.html#l00430">skyio.c:430</a></div></div>
+<div class="ttc" id="askyio_8h_html_a8dd7e21b6c506c2c296e299bbeb3ade7"><div class="ttname"><a href="skyio_8h.html#a8dd7e21b6c506c2c296e299bbeb3ade7">skyio_printJ2kd</a></div><div class="ttdeci">void skyio_printJ2kd(double j2kd)</div><div class="ttdoc">Write out a J2KD as a calendar date and time.</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8c_source.html#l00426">skyio.c:426</a></div></div>
 <div class="ttc" id="askyio_8h_html_a361432e10e6f4e24dae1143780bb4978"><div class="ttname"><a href="skyio_8h.html#a361432e10e6f4e24dae1143780bb4978">skyio_degToDmsStr</a></div><div class="ttdeci">char * skyio_degToDmsStr(char destStr[], int destStrLen, double angle_deg, int decimals)</div><div class="ttdoc">Routine to take an angle in degrees and return a string of the form [±]DDD°MM′SS.sss″ correctly round...</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8c_source.html#l00088">skyio.c:88</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

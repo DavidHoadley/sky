@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.2-1</span>
+   &#160;<span id="projectnumber">0.1.4-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:  David Hoadley</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * Description: (see the &quot;Site routines&quot; sections of sky.h)</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * </span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * Copyright (c) 2020, David Hoadley &lt;vcrumble@westnet.com.au&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * All rights reserved.</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> *</span></div>
@@ -122,7 +122,7 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/*------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> * Notes:</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> *      Character set: UTF-8. (Non ASCII characters appear in this file)</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> *      Character set: UTF-8. (Non-ASCII characters appear in this file)</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> *      Things you might want to edit: definition of macro SPA_COMPARISONS</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> *----------------------------------------------------------------------------*/</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
@@ -136,7 +136,7 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#include &quot;general.h&quot;</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> * Local #defines and typedefs </span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> * Local #defines and typedefs</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;DEFINE_THIS_FILE;                       <span class="comment">/* For use by REQUIRE() - assertions */</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
@@ -154,7 +154,7 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;LOCAL <span class="keywordtype">void</span> createAzElBaseM(<a class="code" href="struct_sky___site_prop.html">Sky_SiteProp</a> *site);</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"> * Global variables accessible by other modules </span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"> * Global variables accessible by other modules</span></div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
@@ -187,7 +187,7 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment"> *==============================================================================</span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment"> * Global functions callable by other modules </span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment"> * Global functions callable by other modules</span></div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"> */</span></div>
@@ -210,7 +210,7 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">    geocentric coordinates to topocentric ones. This involves calculating the</span></div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">    position of the site relative to the centre of the earth, and calculating</span></div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">    constants that will be used for diurnal parallax and aberration corrections.</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">   </span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">    This is complicated by the fact that the earth is elliptical rather than</span></div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">    perfectly spherical. See section K of The Astronomical Almanac (pages K11</span></div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">    &amp; K12 in the 2007 edition) for details of the geometry. This function</span></div>
@@ -302,8 +302,8 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    REQUIRE_NOT_NULL(site);</div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    <span class="comment">/* 1. Calculate radian values of some of the site constants */</span></div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    site-&gt;astLat_rad = degToRad(astLat_deg);</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    site-&gt;astLong_rad = degToRad(astLong_deg);</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    site-&gt;<a class="code" href="struct_sky___site_prop.html#afd4d4d35cba5c790f2d6b1d6beff5cd2">astLat_rad</a> = degToRad(astLat_deg);</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    site-&gt;<a class="code" href="struct_sky___site_prop.html#add90d383aac929b7ded5e8ca768a5ec6">astLong_rad</a> = degToRad(astLong_deg);</div>
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    geodLat_rad = degToRad(geodLat_deg);</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    geodLong_rad = degToRad(geodLong_deg);</div>
@@ -312,7 +312,7 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    createAzElBaseM(site);</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="comment">/* 3. Calculate the geocentric radius of the observatory and the two</span></div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">       geocentric parallax quantities </span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">       geocentric parallax quantities</span></div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment">       ae*rho*sin(Phi-Phi&#39;) and -ae*rho*cos(Phi-Phi&#39;)</span></div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">        (The geodetic latitude is phi, the geocentric latitude is phi&#39;.</span></div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">         The angle (phi - phi&#39;) is known as the &quot;angle of the vertical&quot;.) */</span></div>
@@ -320,29 +320,29 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    invC = sqrt(1.0 - esq * (sinPhi * sinPhi));</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    aeC_km = ae_km / invC;</div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    Kc = sqrt(1.0 - esq * (2.0 - esq) * (sinPhi * sinPhi));</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    site-&gt;geocRadius_km = aeC_km * Kc + height_m / 1000.0;</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    site-&gt;<a class="code" href="struct_sky___site_prop.html#aab696090a4382fe21fe21820e72777f8">geocRadius_km</a> = aeC_km * Kc + height_m / 1000.0;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="comment">//  Parallax corrections are offsets in x (north) and z (zenith) directions</span></div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    site-&gt;rhoSin_au = aeC_km * esq * sinPhi * cosPhi / au_km;      <span class="comment">// x (north)</span></div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    site-&gt;rhoCos_au = -(ae_km * invC + height_m / 1000.0) / au_km; <span class="comment">// z (zenith)</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    site-&gt;<a class="code" href="struct_sky___site_prop.html#a04104394e3aea04ce74e30ad576fa6bb">rhoSin_au</a> = aeC_km * esq * sinPhi * cosPhi / au_km;      <span class="comment">// x (north)</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    site-&gt;<a class="code" href="struct_sky___site_prop.html#a95ce729a3ce149654b6d3630b97a265f">rhoCos_au</a> = -(ae_km * invC + height_m / 1000.0) / au_km; <span class="comment">// z (zenith)</span></div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="comment">/* 4. Calculate the diurnal aberration correction */</span></div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    rhoCosPhiP_km = (aeC_km + height_m / 1000.0) * cosPhi;</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    site-&gt;diurnalAberr = omega_radps * rhoCosPhiP_km / c_kmps;     <span class="comment">// y (east)</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    site-&gt;<a class="code" href="struct_sky___site_prop.html#ab1ccfeec950b988ad21f1977fbbf6f7c">diurnalAberr</a> = omega_radps * rhoCosPhiP_km / c_kmps;     <span class="comment">// y (east)</span></div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="comment">/* 5. Might want to convert from Az-El frame to HA-Dec frame. Create</span></div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">       rotation matrix to do this. Matrix must first rotate around Y axis by</span></div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">       Pi/2 - Latitude. Second rotation is around Z&#39; axis by Pi. */</span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <a class="code" href="vectors3d_8h.html#af4f8f0d21389bf84d1321e6c7739c513">v3d_createRotationMatrix</a>(&amp;mat1, Yaxis, HALFPI - site-&gt;astLat_rad);</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <a class="code" href="vectors3d_8h.html#af4f8f0d21389bf84d1321e6c7739c513">v3d_createRotationMatrix</a>(&amp;mat1, Yaxis, HALFPI - site-&gt;<a class="code" href="struct_sky___site_prop.html#afd4d4d35cba5c790f2d6b1d6beff5cd2">astLat_rad</a>);</div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <a class="code" href="vectors3d_8h.html#af4f8f0d21389bf84d1321e6c7739c513">v3d_createRotationMatrix</a>(&amp;mat2, Zaxis, PI);</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <a class="code" href="vectors3d_8h.html#a87f7944947c8c442bea214be3936dfc7">v3d_multMxM</a>(&amp;site-&gt;haDecM, &amp;mat2, &amp;mat1);</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <a class="code" href="vectors3d_8h.html#a87f7944947c8c442bea214be3936dfc7">v3d_multMxM</a>(&amp;site-&gt;<a class="code" href="struct_sky___site_prop.html#a82258ed693d26f4d9f7bc22c7d378f48">haDecM</a>, &amp;mat2, &amp;mat1);</div>
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="comment">/* 6. Other initialisations, in case sky_setSiteTempPressure() or</span></div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">       sky_setSiteTimeZone() don&#39;t get called. */</span></div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    site-&gt;refracPT = 1.0;               <span class="comment">// Default to 10 °C and 1010 hPa</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    site-&gt;<a class="code" href="struct_sky___site_prop.html#a73064d4f6a9a519a0dd08c80e1c9b3a0">refracPT</a> = 1.0;               <span class="comment">// Default to 10 °C and 1010 hPa</span></div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    site-&gt;<a class="code" href="struct_sky___site_prop.html#a8b1fd161b9450f8945ac3bb8d8a8bc09">timeZone_d</a> = 0.0;             <span class="comment">// Default to UTC.</span></div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    site-&gt;azElM = &amp;site-&gt;azElBaseM;     <span class="comment">// Assume no polar motion correction</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    site-&gt;<a class="code" href="struct_sky___site_prop.html#a4202f89b64eb38639ff18c1c7661ea92">azElM</a> = &amp;site-&gt;<a class="code" href="struct_sky___site_prop.html#a40b368f9a23b00be068970193fb94775">azElBaseM</a>;     <span class="comment">// Assume no polar motion correction</span></div>
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;}</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
@@ -374,7 +374,7 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    t = 283.0 / (273.0 + temperature_degC);</div>
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    p = pressure_hPa / 1010.0;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    site-&gt;refracPT = p * t;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    site-&gt;<a class="code" href="struct_sky___site_prop.html#a73064d4f6a9a519a0dd08c80e1c9b3a0">refracPT</a> = p * t;</div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;}</div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160; </div>
@@ -388,7 +388,7 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment">                           are negative (e.g. US Pacific Daylight Time is -7.0)</span></div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment"> \param[out] site        field \a timeZone_d, time zone scaled to fractions of</span></div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment">                           a day </span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment">                           a day</span></div>
 <div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment"> \par When to call this function</span></div>
 <div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment">    1. At program initialisation time, after calling sky_setSiteLocation() (or</span></div>
@@ -445,7 +445,7 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment">    Polar motion is such a tiny effect that you may well decide not to bother</span></div>
 <div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment">    with it. So you only need to call this routine if:</span></div>
 <div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">        1. you are bothering about polar motion at all, and</span></div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment">        2. changes were made to the \a polar structure by a recent call to </span></div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment">        2. changes were made to the \a polar structure by a recent call to</span></div>
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment">            function sky_setPolarMotion(). This routine is only ever to be</span></div>
 <div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment">            called after that routine has run. This is expected to be very</span></div>
 <div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="comment">            infrequently - once per day is more than enough.</span></div>
@@ -455,10 +455,10 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    REQUIRE_NOT_NULL(site);</div>
 <div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
 <div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    <span class="keywordflow">if</span> (polar-&gt;correctionInUse) {</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        <a class="code" href="vectors3d_8h.html#a87f7944947c8c442bea214be3936dfc7">v3d_multMxM</a>(&amp;site-&gt;azElPolM, &amp;site-&gt;azElBaseM, &amp;polar-&gt;corrM);</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        site-&gt;azElM = &amp;site-&gt;azElPolM;  <span class="comment">// Use combined matrix from now on</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        <a class="code" href="vectors3d_8h.html#a87f7944947c8c442bea214be3936dfc7">v3d_multMxM</a>(&amp;site-&gt;<a class="code" href="struct_sky___site_prop.html#a247a7f60778413de593949f7e38a7d3b">azElPolM</a>, &amp;site-&gt;<a class="code" href="struct_sky___site_prop.html#a40b368f9a23b00be068970193fb94775">azElBaseM</a>, &amp;polar-&gt;corrM);</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        site-&gt;<a class="code" href="struct_sky___site_prop.html#a4202f89b64eb38639ff18c1c7661ea92">azElM</a> = &amp;site-&gt;<a class="code" href="struct_sky___site_prop.html#a247a7f60778413de593949f7e38a7d3b">azElPolM</a>;  <span class="comment">// Use combined matrix from now on</span></div>
 <div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        site-&gt;azElM = &amp;site-&gt;azElBaseM; <span class="comment">// Use matrix without polar motion</span></div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        site-&gt;<a class="code" href="struct_sky___site_prop.html#a4202f89b64eb38639ff18c1c7661ea92">azElM</a> = &amp;site-&gt;<a class="code" href="struct_sky___site_prop.html#a40b368f9a23b00be068970193fb94775">azElBaseM</a>; <span class="comment">// Use matrix without polar motion</span></div>
 <div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    }</div>
 <div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;}</div>
 <div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160; </div>
@@ -474,7 +474,7 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment">    vectors in right-handed and left-handed coordinate systems here</span></div>
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="comment"> \param[in]  terInterV  Position vector in Terrestrial Intermediate Reference</span></div>
 <div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="comment">                        System. (This will have been obtained by calling either</span></div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment">                        routine astsite_appToTirs() or routine </span></div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment">                        routine astsite_appToTirs() or routine</span></div>
 <div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment">                        astsite_intermedToTopo().)</span></div>
 <div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment"> \param[in]  dist_au    Geocentric Distance to object (astronomical units).</span></div>
 <div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment">                        Note: for far distant objects outside of the solar</span></div>
@@ -512,7 +512,7 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="comment">       resultant position vector, referred to North, East and Zenith, is in a</span></div>
 <div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="comment">       left-handed system, like the Azimuth &amp; Elevation angle system to which it</span></div>
 <div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="comment">       will eventually be converted. */</span></div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;    <a class="code" href="vectors3d_8h.html#a930a88294d68f9b66901b8eaf44305a5">v3d_multMxV</a>(&amp;topo-&gt;<a class="code" href="struct_sky___site_horizon.html#ace117bb5b44490a867fa5cf25902984e">rectV</a>, site-&gt;azElM, terInterV);</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;    <a class="code" href="vectors3d_8h.html#a930a88294d68f9b66901b8eaf44305a5">v3d_multMxV</a>(&amp;topo-&gt;<a class="code" href="struct_sky___site_horizon.html#ace117bb5b44490a867fa5cf25902984e">rectV</a>, site-&gt;<a class="code" href="struct_sky___site_prop.html#a4202f89b64eb38639ff18c1c7661ea92">azElM</a>, terInterV);</div>
 <div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;    <span class="comment">/* Note, at this point topoV is not actually topocentric yet - it is still</span></div>
 <div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="comment">       a geocentric point-of-view, even though the coordinate system is now</span></div>
 <div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="comment">       specific to our particular site. */</span></div>
@@ -527,13 +527,13 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="comment">       the same coordinate system] is minuscule, since the &quot;deflection of the</span></div>
 <div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="comment">       vertical&quot; is so small - almost certainly &lt; 20 arcseconds.) */</span></div>
 <div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="preprocessor">#ifndef SPA_COMPARISONS</span></div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    topo-&gt;<a class="code" href="struct_sky___site_horizon.html#ace117bb5b44490a867fa5cf25902984e">rectV</a>.a[1] += site-&gt;diurnalAberr;</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    topo-&gt;<a class="code" href="struct_sky___site_horizon.html#ace117bb5b44490a867fa5cf25902984e">rectV</a>.a[1] += site-&gt;<a class="code" href="struct_sky___site_prop.html#ab1ccfeec950b988ad21f1977fbbf6f7c">diurnalAberr</a>;</div>
 <div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="preprocessor">#else</span></div>
 <div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="preprocessor">#warning &quot;Correction for diurnal aberration is not being applied&quot;</span></div>
 <div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;    <span class="keywordflow">if</span> (dist_au &gt; 0.0) {</div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;        topo-&gt;<a class="code" href="struct_sky___site_horizon.html#ace117bb5b44490a867fa5cf25902984e">rectV</a>.a[0] += site-&gt;rhoSin_au / dist_au;</div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;        topo-&gt;<a class="code" href="struct_sky___site_horizon.html#ace117bb5b44490a867fa5cf25902984e">rectV</a>.a[2] += site-&gt;rhoCos_au / dist_au;</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;        topo-&gt;<a class="code" href="struct_sky___site_horizon.html#ace117bb5b44490a867fa5cf25902984e">rectV</a>.a[0] += site-&gt;<a class="code" href="struct_sky___site_prop.html#a04104394e3aea04ce74e30ad576fa6bb">rhoSin_au</a> / dist_au;</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;        topo-&gt;<a class="code" href="struct_sky___site_horizon.html#ace117bb5b44490a867fa5cf25902984e">rectV</a>.a[2] += site-&gt;<a class="code" href="struct_sky___site_prop.html#a95ce729a3ce149654b6d3630b97a265f">rhoCos_au</a> / dist_au;</div>
 <div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;    }</div>
 <div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;    <span class="comment">// else</span></div>
 <div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;    <span class="comment">//      We treat 0.0 (or -ve values) as meaning &quot;infinitely far away&quot;.</span></div>
@@ -543,17 +543,17 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160; </div>
 <div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="preprocessor">#if 0</span></div>
 <div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;    <span class="comment">/* Correct for atmospheric refraction. Use the simpler NREL SPA calculation</span></div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="comment">       instead of the more detailed atmospheric model used by Stromlo. </span></div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="comment">       instead of the more detailed atmospheric model used by Stromlo.</span></div>
 <div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="comment">       Unfortunately, this formula is expressed in degrees, so we have to</span></div>
 <div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="comment">       convert back and forth. */</span></div>
 <div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;    {</div>
 <div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;        <span class="keywordtype">double</span> e0_deg;      <span class="comment">// Elevation (not corrected for refraction, degrees)</span></div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;        </div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160; </div>
 <div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;        e0_deg = radToDeg(topo-&gt;<a class="code" href="struct_sky___site_horizon.html#ae425fbe0a9c704a2baac80803f22c0e1">elevation_rad</a>);</div>
 <div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;        <span class="keywordflow">if</span> (e0_deg &gt; -2.0) {</div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;            dEl_rad = degToRad(1.02 / (60.0 * tan(degToRad(e0_deg + 10.3 </div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;            dEl_rad = degToRad(1.02 / (60.0 * tan(degToRad(e0_deg + 10.3</div>
 <div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;                                                           / (e0_deg + 5.11)))))</div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;                      * site-&gt;refracPT;</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;                      * site-&gt;<a class="code" href="struct_sky___site_prop.html#a73064d4f6a9a519a0dd08c80e1c9b3a0">refracPT</a>;</div>
 <div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;        } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;            dEl_rad = 0.0;</div>
 <div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;        }</div>
@@ -579,9 +579,9 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160; </div>
 <div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;    } <span class="keywordflow">else</span> if (topo-&gt;<a class="code" href="struct_sky___site_horizon.html#ae425fbe0a9c704a2baac80803f22c0e1">elevation_rad</a> &gt; (-2.0 * DEG2RAD)) {</div>
 <div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;        <span class="comment">/* Low elevation, use this approx formula instead */</span></div>
-<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;        dEl_rad =  (8.3323e-3 + 3.1786e-2 * topo-&gt;elevation_rad </div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;        dEl_rad =  (8.3323e-3 + 3.1786e-2 * topo-&gt;elevation_rad</div>
 <div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;                    + 2.0746e-2 * topo-&gt;elevation_rad * topo-&gt;elevation_rad)</div>
-<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;                 / (1 + 20.995 * topo-&gt;elevation_rad </div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;                 / (1 + 20.995 * topo-&gt;elevation_rad</div>
 <div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;                    + 160.31 * topo-&gt;elevation_rad * topo-&gt;elevation_rad)</div>
 <div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;                 * site-&gt;refracPT;</div>
 <div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160; </div>
@@ -590,7 +590,7 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;    }</div>
 <div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;#endif</div>
 <div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;    topo-&gt;<a class="code" href="struct_sky___site_horizon.html#ae425fbe0a9c704a2baac80803f22c0e1">elevation_rad</a> += dEl_rad;</div>
-<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;    </div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160; </div>
 <div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;    <span class="comment">/* Convert back to rectangular coords */</span></div>
 <div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;    <a class="code" href="vectors3d_8h.html#ab9c960dd291b2aabcc56ac188b15dcb7">v3d_polarToRect</a>(&amp;topo-&gt;<a class="code" href="struct_sky___site_horizon.html#ace117bb5b44490a867fa5cf25902984e">rectV</a>, topo-&gt;<a class="code" href="struct_sky___site_horizon.html#af3e53b572114255a5a5afda8deabc495">azimuth_rad</a>, topo-&gt;<a class="code" href="struct_sky___site_horizon.html#ae425fbe0a9c704a2baac80803f22c0e1">elevation_rad</a>);</div>
 <div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;}</div>
@@ -616,7 +616,7 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;<span class="comment"> \par When to call this function</span></div>
 <div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;<span class="comment">    After each call to sky_siteTirsToTopo(), but only if you want hour angle and</span></div>
-<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;<span class="comment">    declination. </span></div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;<span class="comment">    declination.</span></div>
 <div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
 <div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;{</div>
 <div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;    <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> haDecV;  <span class="comment">// topocentric posn vector in Hour Angle/Decl. frame</span></div>
@@ -627,7 +627,7 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;    REQUIRE_NOT_NULL(hourAngle_rad);</div>
 <div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;    REQUIRE_NOT_NULL(declination_rad);</div>
 <div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160; </div>
-<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;    <a class="code" href="vectors3d_8h.html#a930a88294d68f9b66901b8eaf44305a5">v3d_multMxV</a>(&amp;haDecV, &amp;site-&gt;haDecM, topoV);</div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;    <a class="code" href="vectors3d_8h.html#a930a88294d68f9b66901b8eaf44305a5">v3d_multMxV</a>(&amp;haDecV, &amp;site-&gt;<a class="code" href="struct_sky___site_prop.html#a82258ed693d26f4d9f7bc22c7d378f48">haDecM</a>, topoV);</div>
 <div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;    <a class="code" href="vectors3d_8h.html#ac466df06b542786b39581a61253f608e">v3d_rectToPolar</a>(hourAngle_rad, declination_rad, &amp;haDecV);</div>
 <div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;}</div>
 <div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160; </div>
@@ -650,7 +650,7 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;<span class="comment"> \par When to call this function</span></div>
 <div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;<span class="comment">    After each call to sky_siteTirsToTopo(), but only if you have a surface that</span></div>
-<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;<span class="comment">    you want the incidence angle for. </span></div>
+<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;<span class="comment">    you want the incidence angle for.</span></div>
 <div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
 <div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;{</div>
 <div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;    <span class="comment">// This function assumes that both input vectors are unit vectors.</span></div>
@@ -712,222 +712,524 @@ $(document).ready(function(){initNavTree('sky-site_8c_source.html',''); initResi
 <div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;{</div>
 <div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;    <span class="keywordtype">double</span> sinLon, cosLon;</div>
 <div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;    <span class="keywordtype">double</span> sinLat, cosLat;</div>
-<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;       </div>
-<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;    <a class="code" href="instead-of-math_8h.html#aca4a8517bc9ee41c78a0365018315d4d">sincos</a>(site-&gt;astLong_rad, &amp;sinLon, &amp;cosLon);</div>
-<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;    <a class="code" href="instead-of-math_8h.html#aca4a8517bc9ee41c78a0365018315d4d">sincos</a>(site-&gt;astLat_rad, &amp;sinLat, &amp;cosLat);</div>
-<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;    site-&gt;azElBaseM.a[0][0] = -sinLat * cosLon;</div>
-<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;    site-&gt;azElBaseM.a[0][1] = -sinLat * sinLon;</div>
-<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;    site-&gt;azElBaseM.a[0][2] = cosLat;</div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160; </div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;    <a class="code" href="instead-of-math_8h.html#aca4a8517bc9ee41c78a0365018315d4d">sincos</a>(site-&gt;<a class="code" href="struct_sky___site_prop.html#add90d383aac929b7ded5e8ca768a5ec6">astLong_rad</a>, &amp;sinLon, &amp;cosLon);</div>
+<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;    <a class="code" href="instead-of-math_8h.html#aca4a8517bc9ee41c78a0365018315d4d">sincos</a>(site-&gt;<a class="code" href="struct_sky___site_prop.html#afd4d4d35cba5c790f2d6b1d6beff5cd2">astLat_rad</a>, &amp;sinLat, &amp;cosLat);</div>
+<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;    site-&gt;<a class="code" href="struct_sky___site_prop.html#a40b368f9a23b00be068970193fb94775">azElBaseM</a>.a[0][0] = -sinLat * cosLon;</div>
+<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;    site-&gt;<a class="code" href="struct_sky___site_prop.html#a40b368f9a23b00be068970193fb94775">azElBaseM</a>.a[0][1] = -sinLat * sinLon;</div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;    site-&gt;<a class="code" href="struct_sky___site_prop.html#a40b368f9a23b00be068970193fb94775">azElBaseM</a>.a[0][2] = cosLat;</div>
 <div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160; </div>
-<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;    site-&gt;azElBaseM.a[1][0] = -sinLon;</div>
-<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;    site-&gt;azElBaseM.a[1][1] = cosLon;</div>
-<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;    site-&gt;azElBaseM.a[1][2] = 0.0;</div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;    site-&gt;<a class="code" href="struct_sky___site_prop.html#a40b368f9a23b00be068970193fb94775">azElBaseM</a>.a[1][0] = -sinLon;</div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;    site-&gt;<a class="code" href="struct_sky___site_prop.html#a40b368f9a23b00be068970193fb94775">azElBaseM</a>.a[1][1] = cosLon;</div>
+<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;    site-&gt;<a class="code" href="struct_sky___site_prop.html#a40b368f9a23b00be068970193fb94775">azElBaseM</a>.a[1][2] = 0.0;</div>
 <div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160; </div>
-<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;    site-&gt;azElBaseM.a[2][0] = cosLat * cosLon;</div>
-<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;    site-&gt;azElBaseM.a[2][1] = cosLat * sinLon;</div>
-<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;    site-&gt;azElBaseM.a[2][2] = sinLat;    </div>
+<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;    site-&gt;<a class="code" href="struct_sky___site_prop.html#a40b368f9a23b00be068970193fb94775">azElBaseM</a>.a[2][0] = cosLat * cosLon;</div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;    site-&gt;<a class="code" href="struct_sky___site_prop.html#a40b368f9a23b00be068970193fb94775">azElBaseM</a>.a[2][1] = cosLat * sinLon;</div>
+<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;    site-&gt;<a class="code" href="struct_sky___site_prop.html#a40b368f9a23b00be068970193fb94775">azElBaseM</a>.a[2][2] = sinLat;</div>
 <div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;}</div>
 <div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160; </div>
 <div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;<span class="comment">/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span><span class="comment"></span></div>
-<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;<span class="comment">/*! \page page-conventions Conventions used in this code</span></div>
-<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;<span class="comment"> *      - \subpage page-var-suffixes</span></div>
-<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;<span class="comment"> *      - \subpage page-sec-arcsec</span></div>
-<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;<span class="comment"> *      - \subpage page-sign-conventions</span></div>
-<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;<span class="comment"> *      - \subpage page-interval-notation</span></div>
-<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;<span class="comment"> *  */</span></div>
-<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;<span class="comment">/*! \page page-time About time</span></div>
-<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;<span class="comment"> *      - \subpage page-timescales</span></div>
-<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;<span class="comment"> *      - \subpage page-time-variables</span></div>
-<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;<span class="comment"> *  */</span></div>
-<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;<span class="comment">/*! \page page-misc Miscellaneous</span></div>
-<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;<span class="comment"> *      - \subpage page-vernal-equinox</span></div>
-<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;<span class="comment"> *      - \subpage page-why-struct-array</span></div>
-<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;<span class="comment"> *  */</span></div>
-<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;<span class="comment">/*! \page page-var-suffixes Suffixes on variable and parameter names</span></div>
-<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;<span class="comment"> * </span></div>
-<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;<span class="comment"> *  In accordance with the naming convention spelt out in the</span></div>
-<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;<span class="comment"> *  style guide, many variables and constants have a suffix indicating their</span></div>
-<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;<span class="comment"> *  units. Mostly these are SI units, for example</span></div>
-<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;<span class="comment"> *      -  _d (days), _h (hours) _s (seconds) _ns (nanoseconds)</span></div>
-<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;<span class="comment"> *      -  _m (metres), _km (kilometres), _kmps (kilometres/second)</span></div>
-<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;<span class="comment"> *      -  _rad (radian), _deg (degrees), _radps (radian/second)</span></div>
-<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;<span class="comment"> *      -  _degC (degrees Celsius)</span></div>
-<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;<span class="comment"> * </span></div>
-<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;<span class="comment"> *  But we also have units for astronomical quantities as recommended by the</span></div>
-<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;<span class="comment"> *  International Astronomical Union (IAU) style manual</span></div>
-<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;<span class="comment"> *  (https://www.iau.org/publications/proceedings_rules/units/), for example</span></div>
-<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;<span class="comment"> *      -  _as (arcseconds) _mas (milliarcseconds), (see \ref page-sec-arcsec)</span></div>
-<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;<span class="comment"> *      -  _au (Astronomical Unit (of distance))</span></div>
-<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;<span class="comment"> *      -  _a (Julian year)</span></div>
-<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;<span class="comment"> * </span></div>
-<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;<span class="comment"> *  This last unit implies that we could use &quot;ka&quot; for millennia, and we do. But</span></div>
-<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;<span class="comment"> *  we also have quantities measured in Julian centuries. The IAU guidelines</span></div>
-<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;<span class="comment"> *  specifically rule out using &quot;ha&quot; for this (quite right: &quot;ha&quot; means</span></div>
-<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;<span class="comment"> *  hectares), and they oppose &quot;cy&quot;, but they make no recommendation of an</span></div>
-<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;<span class="comment"> *  alternative. But the _Astronomical Almanac_ does use &quot;cy&quot; for a Julian</span></div>
-<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;<span class="comment"> *  century, so I will use suffix _cy.</span></div>
-<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;<span class="comment"> *      -  _ka (Julian millennium), _cy (Julian century)</span></div>
-<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;<span class="comment"> * </span></div>
-<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;<span class="comment"> *  Another convention that applies here: Objects whose name ends in a capital V</span></div>
-<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;<span class="comment"> *  are 3-dimensional vectors (often unit position vectors, or direction</span></div>
-<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;<span class="comment"> *  cosines) but not exclusively so. Objects whose name ends in a capital M are</span></div>
-<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;<span class="comment"> *  matrices, typically 3x3 rotation matrices. Occasionally, this is combined</span></div>
-<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;<span class="comment"> *  with a suffix. So a name like \c earthV_au means a vector whose components</span></div>
-<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;<span class="comment"> *  are scaled in Astronomical Units.</span></div>
-<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;<span class="comment">/*! \page page-sec-arcsec Seconds versus arcseconds</span></div>
-<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;<span class="comment"> *  The fact that time in hours is subdivided into minutes and seconds, and</span></div>
-<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;<span class="comment"> *  angles in degrees are also subdivided into minutes and seconds, normally</span></div>
-<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;<span class="comment"> *  does not cause confusion. But astronomers measure angles on the celestial</span></div>
-<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;<span class="comment"> *  sphere using both units of time (for Right Ascension and Hour Angles) and</span></div>
-<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;<span class="comment"> *  units of degrees (for many other angles). So if we talk about an angle of</span></div>
-<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;<span class="comment"> *  n minutes, or n seconds, do we mean a fraction of an hour, or a degree?</span></div>
-<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;<span class="comment"> * </span></div>
-<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;<span class="comment"> *  For this reason, astronomers refer to the fractions of a degree as</span></div>
-<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;<span class="comment"> *  arcminutes, and reserve the term &quot;minutes&quot; for fractions of an hour. And</span></div>
-<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;<span class="comment"> *  fractions of an arcminute are called arcseconds rather than seconds. This</span></div>
-<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;<span class="comment"> *  program follows that convention, particularly in the use of suffixes on</span></div>
-<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;<span class="comment"> *  variable names (see page \ref page-var-suffixes). Variables in units of</span></div>
-<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;<span class="comment"> *  seconds of time have the suffix _s, those in units of arcseconds have the</span></div>
-<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;<span class="comment"> *  suffix _as.</span></div>
-<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;<span class="comment"> * </span></div>
-<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;<span class="comment"> *  In general, within this program most angles are stored in units of radians,</span></div>
-<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;<span class="comment"> *  and only converted to degrees-arcminutes-arcseconds, or</span></div>
-<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;<span class="comment"> *  hours-minutes-seconds when being written out in text form.</span></div>
-<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;<span class="comment"> *  The symbol ′ is used for arcminutes only, never for minutes of time.</span></div>
-<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;<span class="comment"> *  The symbol ″ is used for arcseconds only, never for seconds of time.</span></div>
-<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;<span class="comment">/*! \page page-interval-notation Interval notation</span></div>
-<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;<span class="comment"> *  Frequently throughout the documentation and comments, valid ranges of</span></div>
-<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;<span class="comment"> *  function parameters are expressed in interval notation. This is a pair of</span></div>
-<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;<span class="comment"> *  numbers representing the two ends of the range, separated by a comma. The</span></div>
-<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;<span class="comment"> *  the pair of numbers is surrounded by brackets. Square brackets</span></div>
-<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;<span class="comment"> *  indicate an inclusive end-of-range, and round brackets (parentheses)</span></div>
-<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;<span class="comment"> *  indicate an exclusive end-of range.</span></div>
-<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;<span class="comment"> * </span></div>
-<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;<span class="comment"> *  Examples:</span></div>
-<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;<span class="comment"> *  - [0,10] means all values from 0 to 10 inclusive</span></div>
-<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;<span class="comment"> *  - [0.0, 360.0) means all values from 0.0 up to but not including 360.0</span></div>
-<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;<span class="comment"> *      itself.</span></div>
-<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;<span class="comment"> *  - (-π, +π] means all values from -π, but not including -π itself, up to and</span></div>
-<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;<span class="comment"> *      including +π.</span></div>
-<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;<span class="comment">/*! \page page-sign-conventions Sign and direction conventions</span></div>
-<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;<span class="comment"> *  The following conventions apply throughout this software.</span></div>
-<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;<span class="comment"> *      - Terrestrial coordinates (latitude and longitude).</span></div>
-<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;<span class="comment"> *          - Polar form\n</span></div>
-<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;<span class="comment"> *            Longitudes east of Greenwich are positive, those west are </span></div>
-<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;<span class="comment"> *            negative.</span></div>
-<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;<span class="comment"> *            Latitudes north of the equator are positive, those south are </span></div>
-<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;<span class="comment"> *            negative. When the Earth is viewed from above the north pole</span></div>
-<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;<span class="comment"> *            looking towards the centre of the earth, longitude increases in an</span></div>
-<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;<span class="comment"> *            anticlockwise direction. </span></div>
-<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;<span class="comment"> *          - Rectangular form\n</span></div>
-<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;<span class="comment"> *            The position is indicated by a vector, whose components are as</span></div>
-<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;<span class="comment"> *            follows:</span></div>
-<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;<span class="comment"> *              - the x axis points from the centre of the earth towards the </span></div>
-<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;<span class="comment"> *                equator at 0° longitude,</span></div>
-<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;<span class="comment"> *              - the y axis points to 90° longitude, and</span></div>
-<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;<span class="comment"> *              -  the z axis points to the north pole.</span></div>
-<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;<span class="comment"> *              .</span></div>
-<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;<span class="comment"> *            This is a right-handed set.</span></div>
-<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;<span class="comment"> *      - Equatorial coordinates (Right Ascension and declination).</span></div>
-<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;<span class="comment"> *          - Polar form\n</span></div>
-<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;<span class="comment"> *            The equator is the projection of the Earth&#39;s equator out into</span></div>
-<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;<span class="comment"> *            space, and the north celestial pole is the projection of the north</span></div>
-<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;<span class="comment"> *            pole out into space. When viewed from north celestial pole looking</span></div>
-<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;<span class="comment"> *            down towards the origin, Right Ascension increases in an</span></div>
-<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;<span class="comment"> *            anticlockwise direction (i.e. eastwards, like longitude), and</span></div>
-<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;<span class="comment"> *            north declinations are positive, south are negative.</span></div>
-<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;<span class="comment"> *          - Rectangular form\n</span></div>
-<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;<span class="comment"> *              - x points to the March Equinox (0° RA),</span></div>
-<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;<span class="comment"> *                  (\ref page-vernal-equinox &quot;unfortunately&quot; known as the</span></div>
-<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;<span class="comment"> *                  vernal equinox).</span></div>
-<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;<span class="comment"> *              - y points to 90° RA, and</span></div>
-<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;<span class="comment"> *              - z points to the north celestial pole.</span></div>
-<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;<span class="comment"> *              .</span></div>
-<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;<span class="comment"> *            (This is also a right-handed set.)</span></div>
-<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;<span class="comment"> *      - Ecliptic coordinates. (Ecliptic latitude and longitude).\n</span></div>
-<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;<span class="comment"> *        These are exactly analogous to terrestrial coordinates, in that</span></div>
-<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;<span class="comment"> *        longitude increases anticlockwise, and the rectangular coordinate</span></div>
-<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;<span class="comment"> *        vector is a right-handed set.</span></div>
-<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;<span class="comment"> *      - Horizon coordinates (azimuth and elevation (or altitude)).</span></div>
-<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;<span class="comment"> *          - Polar form\n</span></div>
-<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;<span class="comment"> *            Azimuth increases in a clockwise direction from True North (just</span></div>
-<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;<span class="comment"> *            like a compass bearing).</span></div>
-<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;<span class="comment"> *          - Rectangular form\n</span></div>
-<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;<span class="comment"> *              - x points to the True North horizon,</span></div>
-<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;<span class="comment"> *              - y  points the East horizon, and</span></div>
-<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;<span class="comment"> *              - z points to the zenith.</span></div>
-<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;<span class="comment"> *              .</span></div>
-<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;<span class="comment"> *            This is a left-handed set. (Compared to a right-handed set, the x</span></div>
-<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;<span class="comment"> *            and y axes are swapped.)</span></div>
-<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;<span class="comment"> *      - (Hour angle and declination).</span></div>
-<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;<span class="comment"> *          - Polar form\n</span></div>
-<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;<span class="comment"> *            Hour angles are measured positive westward. This means it</span></div>
-<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;<span class="comment"> *            increases clockwise, unlike Right Ascension.</span></div>
-<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;<span class="comment"> *          - Rectangular form\n</span></div>
-<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;<span class="comment"> *              - x points to the intersection of the local meridian and the</span></div>
-<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;<span class="comment"> *                celestial equator,</span></div>
-<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;<span class="comment"> *              - y points to HA = 90°, and</span></div>
-<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;<span class="comment"> *              - z points to the north celestial pole.</span></div>
-<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;<span class="comment"> *              .</span></div>
-<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;<span class="comment"> *            Like Horizon coordinates, this is a left-handed set.</span></div>
-<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;<span class="comment">/*! \page page-vernal-equinox Vernal equinox</span></div>
-<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;<span class="comment"> *  The equinox that occurs in March is normally referred to as the vernal</span></div>
-<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;<span class="comment"> *  equinox. This is unfortunate, because of the meaning of the word vernal:</span></div>
-<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;<span class="comment"> * \par</span></div>
-<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;<span class="comment"> *      \b ver′nal \em adj. of or occurring in spring.\n</span></div>
-<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;<span class="comment"> *      -- The Collins Concise Dictionary, 4th edn. 1999</span></div>
-<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;<span class="comment"> * </span></div>
-<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;<span class="comment"> *  Obviously it never occurred to the person who coined this term for the</span></div>
-<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;<span class="comment"> *  equinox that the Southern Hemisphere exists. Because \em everybody in the</span></div>
-<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;<span class="comment"> *  Southern Hemisphere knows that the spring equinox occurs in September, not</span></div>
-<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;<span class="comment"> *  March.</span></div>
-<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160; </div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;<span class="comment">/*! \page page-about About this code, and how to use it</span></div>
+<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;<span class="comment"> *  This code has been written with the aim of providing astronomical routines</span></div>
+<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;<span class="comment"> *  for tracking the Sun, Moon, planets and stars using a small processor. It</span></div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;<span class="comment"> *  started as a project to implement accurate tracking of the Sun for solar</span></div>
+<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;<span class="comment"> *  heliostat applications. What was required was code that would execute more</span></div>
+<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;<span class="comment"> *  quickly than the traditional Solar Position Algorithm (see reference), but</span></div>
+<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;<span class="comment"> *  without the compromises in accuracy that many simpler algorithms suffer</span></div>
+<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;<span class="comment"> *  from.</span></div>
+<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;<span class="comment"> *  Some of the principles of that implementation, in particular the use of</span></div>
+<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;<span class="comment"> *  rectangular coordinates for converting from geocentric apparent coordinates</span></div>
+<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;<span class="comment"> *  to site-specific topocentric coordinates, and the use of interpolation</span></div>
+<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;<span class="comment"> *  between apparent position vectors, are just as applicable to the tracking of</span></div>
+<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;<span class="comment"> *  any other celestial object. So gradually code to support tracking the Moon,</span></div>
+<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;<span class="comment"> *  planets and stars has been added.</span></div>
+<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;<span class="comment"> *  There are a couple of use cases for this code. One could be a field of</span></div>
+<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;<span class="comment"> *  heliostats which need accurate solar tracking but are each controlled by a</span></div>
+<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;<span class="comment"> *  small cheap processor.</span></div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;<span class="comment"> *  Another could be a home project to automate a home telescope.</span></div>
+<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;<span class="comment"> *  This code is intended to handle all the intricacies of accurate celestial</span></div>
+<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;<span class="comment"> *  calculations, leaving you free to concentrate on the code to actually drive</span></div>
+<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;<span class="comment"> *  your device to the desired position.</span></div>
+<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;<span class="comment"> *  The code is designed to provide accurate conversion of astronomical</span></div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;<span class="comment"> *  coordinate systems, such as is used on quite large telescopes. Tracking</span></div>
+<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;<span class="comment"> *  accuracy of better than one arcsecond can be expected, (although the</span></div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;<span class="comment"> *  positions of the Moon and other planets are not calculated to that level of</span></div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;<span class="comment"> *  accuracy).</span></div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;<span class="comment"> *      - \subpage page-design-choices</span></div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;<span class="comment"> *      - \subpage page-how-to-use</span></div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;<span class="comment"> *      - \subpage page-licensing</span></div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;<span class="comment"> * \par Reference:</span></div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;<span class="comment"> *          Reda, Ibrahim and Andreas, Afshin.</span></div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;<span class="comment"> *          _Solar Position Algorithm for Solar Radiation Applications._</span></div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;<span class="comment"> *          National Renewable Energy Laboratory, publication no.</span></div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;<span class="comment"> *          NREL/TP-560-34302, June 2003, revised January 2008</span></div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;<span class="comment">/*! \page page-conventions Conventions used in this code</span></div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;<span class="comment"> *      - \subpage page-var-suffixes</span></div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;<span class="comment"> *      - \subpage page-sec-arcsec</span></div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;<span class="comment"> *      - \subpage page-sign-conventions</span></div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;<span class="comment"> *      - \subpage page-interval-notation</span></div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;<span class="comment"> *  */</span></div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;<span class="comment">/*! \page page-time About time</span></div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;<span class="comment"> *      - \subpage page-timescales</span></div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;<span class="comment"> *      - \subpage page-time-variables</span></div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;<span class="comment"> *  */</span></div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;<span class="comment">/*! \page page-misc Miscellaneous</span></div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;<span class="comment"> *      - \subpage page-vernal-equinox</span></div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;<span class="comment"> *      - \subpage page-why-struct-array</span></div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;<span class="comment"> *  */</span></div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;<span class="comment">/*! \page page-design-choices Design choices</span></div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;<span class="comment"> *  To make the code suitable for a small processor, the following choices have</span></div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;<span class="comment"> *  been made.</span></div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;<span class="comment"> *      - The code can be compiled with a C89/C90 compliant compiler. (Some</span></div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;<span class="comment"> *        embedded systems still use compilers of this vintage.) But if a C99</span></div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;<span class="comment"> *        or later compiler is being used, the code will use a few inline</span></div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;<span class="comment"> *        functions in place of function-like macros.</span></div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;<span class="comment"> *      - Does not use any heap storage (dynamic memory). That is, there are no</span></div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;<span class="comment"> *        \c malloc() calls.</span></div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;<span class="comment"> *      - Does not use any variable-length arrays. Thus stack usage is</span></div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;<span class="comment"> *        predictable.</span></div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;<span class="comment"> *      - Uses an interpolation process to dramatically reduce the calling of</span></div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;<span class="comment"> *        trigonometric functions during tracking, with a very small loss of</span></div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;<span class="comment"> *        accuracy (see \ref page-interpolation).</span></div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;<span class="comment">/*! \page page-how-to-use How to use this code</span></div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;<span class="comment"> *  The code has been provided as a set of separate files for you to include in</span></div>
+<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;<span class="comment"> *  your project. It has not been configured as a monolithic library, because</span></div>
+<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;<span class="comment"> *  there are likely to be parts that you don&#39;t want to include. But</span></div>
+<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;<span class="comment"> *  importantly, it is assumed that you will want to make some choices, and you</span></div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;<span class="comment"> *  will need to do that by making some simple edits to the source code of</span></div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;<span class="comment"> *  various modules. Here are some guidelines.</span></div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;<span class="comment"> *  ###Required files</span></div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;<span class="comment"> *      - For all applications:</span></div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;<span class="comment"> *          + The basic sky routines - sky.h &amp; sky-time.c &amp; sky-site.c</span></div>
+<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;<span class="comment"> *          + Low level support routines and definitions -</span></div>
+<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;<span class="comment"> *            general.h, astron.h, instead-of-math.h, vectors3d.h &amp; vectors3d.c.</span></div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;<span class="comment"> *      - For solar position calculations: the &quot;all applications&quot; set above,</span></div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;<span class="comment"> *        plus sky0.h &amp; sky0.c, and sun.h &amp; sun.c</span></div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;<span class="comment"> *      - For Sun tracking: the above, plus skyfast.h &amp; skyfast.c</span></div>
+<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;<span class="comment"> *      - For Moon position calculations: the &quot;all applications&quot; set above, plus</span></div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;<span class="comment"> *        sky0.h &amp; sky0.c, and moon.h &amp; moon.c</span></div>
+<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;<span class="comment"> *      - For Moon tracking: the above, plus skyfast.h &amp; skyfast.c</span></div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;<span class="comment"> *      - For planet position calculations: the &quot;all applications&quot; set above,</span></div>
+<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;<span class="comment"> *        plus sky1.h &amp; sky1.c, and planet.h &amp; planet.c</span></div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;<span class="comment"> *      - For tracking a planet: the above, plus skyfast.h &amp; skyfast.c</span></div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;<span class="comment"> *      - For a star: the &quot;all applications&quot; set above, plus</span></div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;<span class="comment"> *        sky1.h &amp; sky1.c, sky2.h &amp; sky2.c, star.h &amp; star.c, and</span></div>
+<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;<span class="comment"> *        skyio.h &amp; skyio.c</span></div>
+<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;<span class="comment"> *      - For tracking a star: the above, plus skyfast.h &amp; skyfast.c</span></div>
+<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;<span class="comment"> *  You may also want to use skyio.h and skyio.c to format the output angles for</span></div>
+<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;<span class="comment"> *  display for the Sun, Moon or planets.</span></div>
+<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;<span class="comment"> *  ###Editing the code</span></div>
+<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;<span class="comment"> *  You are likely to want to make some basic edits to the code, as listed</span></div>
+<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;<span class="comment"> *  below. But before you do, make sure your editor can handle files in UTF-8</span></div>
+<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;<span class="comment"> *  format. MacOS and Linux systems certainly will do this without you needing</span></div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;<span class="comment"> *  to think about it. Only Windows systems still using old 8-bit code pages</span></div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;<span class="comment"> *  like the Windows-1252 page are likely to have any issues. (You should move</span></div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;<span class="comment"> *  away from them to UTF-8 in any case. UTF-8 can handle any character; those</span></div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;<span class="comment"> *  old code pages don&#39;t.)</span></div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;<span class="comment"> *      - \subpage page-general-h</span></div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;<span class="comment"> *      - \subpage page-sky-h</span></div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;<span class="comment"> *      - \subpage page-skyfast-c</span></div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;<span class="comment">/*! \page page-general-h Edits you may want to make to general.h</span></div>
+<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;<span class="comment"> *  ####Integer types with a C89/C90 compiler.</span></div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;<span class="comment"> *  If you are compiling your code using a C89/C90 compiler, you will need to</span></div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;<span class="comment"> *  check that the following lines are correct for your target processor. (If</span></div>
+<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;<span class="comment"> *  you have a C99 or later compiler, you can skip this section.)</span></div>
+<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;<span class="comment"> \verbatim</span></div>
+<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;<span class="comment">    typedef signed short int    int16_t;</span></div>
+<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;<span class="comment">    typedef unsigned short int  uint16_t;</span></div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;<span class="comment">    typedef int                 int32_t;</span></div>
+<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;<span class="comment">    typedef unsigned int        uint32_t;</span></div>
+<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;<span class="comment"> \endverbatim</span></div>
+<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;<span class="comment"> *  If, for example, your processor defines an int as being 16 bits wide, you</span></div>
+<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;<span class="comment"> *  will get some strange warning messages. One possibility I have seen is</span></div>
+<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;<span class="comment"> *  &quot;general.h:105:1: warning: division by zero [-Wdiv-by-zero]&quot;.</span></div>
+<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;<span class="comment"> *  Another possibility is</span></div>
+<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;<span class="comment"> *  &quot;general.h:105:1: error: expression is not an integer constant expression&quot;.</span></div>
+<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;<span class="comment"> *  The important thing to do is to look at the line number where the error</span></div>
+<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;<span class="comment"> *  was detected, where you will see a line like</span></div>
+<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;<span class="comment"> \verbatim</span></div>
+<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;<span class="comment">    static_assert(sizeof(int16_t) == 2,  &quot;typedef of int16_t is wrong&quot;);</span></div>
+<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;<span class="comment"> \endverbatim</span></div>
+<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;<span class="comment"> *  To fix the problem, don&#39;t change the line containing the static_assert(),</span></div>
+<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;<span class="comment"> *  go back and change the line(s) containing the typedef(s), so that these four</span></div>
+<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;<span class="comment"> *  types (\c int16_t, \c uint16_t, \c int32_t &amp; \c uint32_t) are correctly</span></div>
+<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;<span class="comment"> *  defined for your processor.</span></div>
+<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;<span class="comment"> *  ####Assertion checking</span></div>
+<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;<span class="comment"> *  Many routines in this collection use assertions to check their parameters.</span></div>
+<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;<span class="comment"> *  In particular, parameters which are passed by address are checked to make</span></div>
+<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;<span class="comment"> *  sure that a NULL pointer has not been passed to them. You can control this</span></div>
+<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;<span class="comment"> *  checking by defining three macros within this file. They are:</span></div>
+<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;<span class="comment"> *      - ASSERTION_LEVEL. Use this to set how much checking is done. While you</span></div>
+<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;<span class="comment"> *        are still writing and testing your own code which uses this code, you</span></div>
+<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;<span class="comment"> *        are strongly recommended to keep this defined at a non-zero value.</span></div>
+<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;<span class="comment"> *      - ENABLE_NULL_CHECKING. So long as ASSERTION_LEVEL is not set to zero,</span></div>
+<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;<span class="comment"> *        this macro enables the checking of parameters which are passed by</span></div>
+<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;<span class="comment"> *        reference, to make sure they are not NULL. (There is the occasional</span></div>
+<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;<span class="comment"> *        parameter which is allowed to be NULL - such a parameter is of course</span></div>
+<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;<span class="comment"> *        not subject to this check.) Once again, while you</span></div>
+<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;<span class="comment"> *        are still writing and testing your own code which uses this code, you</span></div>
+<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;<span class="comment"> *        are strongly recommended to keep this macro defined.</span></div>
+<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;<span class="comment"> *      - USE_STANDARD_ASSERT. The code is designed to be run on an embedded</span></div>
+<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;<span class="comment"> *        processor, where the traditional assert() behaviour -- write a message</span></div>
+<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;<span class="comment"> *        and exit the program -- does not make any sense. On an embedded system</span></div>
+<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;<span class="comment"> *        you need to write your own assertion handling routine onAssert__(),</span></div>
+<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;<span class="comment"> *        which handles the information in a way that helps you debug the</span></div>
+<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;<span class="comment"> *        problem. But if you are running this code on a processor which has an</span></div>
+<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;<span class="comment"> *        operating system (say, like a Raspberry Pi runs Linux), you don&#39;t need</span></div>
+<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;<span class="comment"> *        to go to this extra trouble. You can use the traditional assert()</span></div>
+<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;<span class="comment"> *        behaviour quite happily. Define this macro to enable this behaviour.</span></div>
+<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160; </div>
+<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;<span class="comment">/*! \page page-licensing Licensing</span></div>
+<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;<span class="comment"> * All code here except for the routines planet_getHeliocentric() and</span></div>
+<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;<span class="comment"> * sky2_nutationIAU2000B() are covered by the MIT license, as follows:</span></div>
+<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;<span class="comment"> * \copyright</span></div>
+<div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;<span class="comment"> * \parblock</span></div>
+<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;<span class="comment"> * Copyright (c) 2020, David Hoadley &lt;vcrumble@westnet.com.au&gt;</span></div>
+<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;<span class="comment"> * All rights reserved.</span></div>
+<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160;<span class="comment"> * Redistribution and use in source and binary forms, with or without</span></div>
+<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;<span class="comment"> * modification, are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;<span class="comment"> * * Redistributions of source code must retain the above copyright notice, this</span></div>
+<div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160;<span class="comment"> *   list of conditions and the following disclaimer.</span></div>
+<div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;<span class="comment"> * * Redistributions in binary form must reproduce the above copyright notice,</span></div>
+<div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160;<span class="comment"> *   this list of conditions and the following disclaimer in the documentation</span></div>
+<div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160;<span class="comment"> *   and/or other materials provided with the distribution.</span></div>
+<div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00833"></a><span class="lineno">  833</span>&#160;<span class="comment"> * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;</span></div>
+<div class="line"><a name="l00834"></a><span class="lineno">  834</span>&#160;<span class="comment"> * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span></div>
+<div class="line"><a name="l00835"></a><span class="lineno">  835</span>&#160;<span class="comment"> * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</span></div>
+<div class="line"><a name="l00836"></a><span class="lineno">  836</span>&#160;<span class="comment"> * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE</span></div>
+<div class="line"><a name="l00837"></a><span class="lineno">  837</span>&#160;<span class="comment"> * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR</span></div>
+<div class="line"><a name="l00838"></a><span class="lineno">  838</span>&#160;<span class="comment"> * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF</span></div>
+<div class="line"><a name="l00839"></a><span class="lineno">  839</span>&#160;<span class="comment"> * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS</span></div>
+<div class="line"><a name="l00840"></a><span class="lineno">  840</span>&#160;<span class="comment"> * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN</span></div>
+<div class="line"><a name="l00841"></a><span class="lineno">  841</span>&#160;<span class="comment"> * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)</span></div>
+<div class="line"><a name="l00842"></a><span class="lineno">  842</span>&#160;<span class="comment"> * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span></div>
+<div class="line"><a name="l00843"></a><span class="lineno">  843</span>&#160;<span class="comment"> * POSSIBILITY OF SUCH DAMAGE.</span></div>
+<div class="line"><a name="l00844"></a><span class="lineno">  844</span>&#160;<span class="comment"> * \endparblock</span></div>
+<div class="line"><a name="l00845"></a><span class="lineno">  845</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00846"></a><span class="lineno">  846</span>&#160;<span class="comment">**  =====================</span></div>
+<div class="line"><a name="l00847"></a><span class="lineno">  847</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00848"></a><span class="lineno">  848</span>&#160;<span class="comment"> *  The routines planet_getHeliocentric() and sky2_nutationIAU2000B() are</span></div>
+<div class="line"><a name="l00849"></a><span class="lineno">  849</span>&#160;<span class="comment"> *  covered by the SOFA license, as follows.</span></div>
+<div class="line"><a name="l00850"></a><span class="lineno">  850</span>&#160;<span class="comment"> *  See the description of each of those functions, which contains the necessary</span></div>
+<div class="line"><a name="l00851"></a><span class="lineno">  851</span>&#160;<span class="comment"> *  text to comply with section 3 of the license below:</span></div>
+<div class="line"><a name="l00852"></a><span class="lineno">  852</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00853"></a><span class="lineno">  853</span>&#160;<span class="comment"> * \copyright</span></div>
+<div class="line"><a name="l00854"></a><span class="lineno">  854</span>&#160;<span class="comment"> * \verbatim</span></div>
+<div class="line"><a name="l00855"></a><span class="lineno">  855</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160;<span class="comment">**  Copyright (C) 2017</span></div>
+<div class="line"><a name="l00857"></a><span class="lineno">  857</span>&#160;<span class="comment">**  Standards Of Fundamental Astronomy Board</span></div>
+<div class="line"><a name="l00858"></a><span class="lineno">  858</span>&#160;<span class="comment">**  of the International Astronomical Union.</span></div>
+<div class="line"><a name="l00859"></a><span class="lineno">  859</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00860"></a><span class="lineno">  860</span>&#160;<span class="comment">**  =====================</span></div>
+<div class="line"><a name="l00861"></a><span class="lineno">  861</span>&#160;<span class="comment">**  SOFA Software License</span></div>
+<div class="line"><a name="l00862"></a><span class="lineno">  862</span>&#160;<span class="comment">**  =====================</span></div>
+<div class="line"><a name="l00863"></a><span class="lineno">  863</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00864"></a><span class="lineno">  864</span>&#160;<span class="comment">**  NOTICE TO USER:</span></div>
+<div class="line"><a name="l00865"></a><span class="lineno">  865</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00866"></a><span class="lineno">  866</span>&#160;<span class="comment">**  BY USING THIS SOFTWARE YOU ACCEPT THE FOLLOWING SIX TERMS AND</span></div>
+<div class="line"><a name="l00867"></a><span class="lineno">  867</span>&#160;<span class="comment">**  CONDITIONS WHICH APPLY TO ITS USE.</span></div>
+<div class="line"><a name="l00868"></a><span class="lineno">  868</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00869"></a><span class="lineno">  869</span>&#160;<span class="comment">**  1. The Software is owned by the IAU SOFA Board (&quot;SOFA&quot;).</span></div>
+<div class="line"><a name="l00870"></a><span class="lineno">  870</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00871"></a><span class="lineno">  871</span>&#160;<span class="comment">**  2. Permission is granted to anyone to use the SOFA software for any</span></div>
+<div class="line"><a name="l00872"></a><span class="lineno">  872</span>&#160;<span class="comment">**     purpose, including commercial applications, free of charge and</span></div>
+<div class="line"><a name="l00873"></a><span class="lineno">  873</span>&#160;<span class="comment">**     without payment of royalties, subject to the conditions and</span></div>
+<div class="line"><a name="l00874"></a><span class="lineno">  874</span>&#160;<span class="comment">**     restrictions listed below.</span></div>
+<div class="line"><a name="l00875"></a><span class="lineno">  875</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00876"></a><span class="lineno">  876</span>&#160;<span class="comment">**  3. You (the user) may copy and distribute SOFA source code to others,</span></div>
+<div class="line"><a name="l00877"></a><span class="lineno">  877</span>&#160;<span class="comment">**     and use and adapt its code and algorithms in your own software,</span></div>
+<div class="line"><a name="l00878"></a><span class="lineno">  878</span>&#160;<span class="comment">**     on a world-wide, royalty-free basis.  That portion of your</span></div>
+<div class="line"><a name="l00879"></a><span class="lineno">  879</span>&#160;<span class="comment">**     distribution that does not consist of intact and unchanged copies</span></div>
+<div class="line"><a name="l00880"></a><span class="lineno">  880</span>&#160;<span class="comment">**     of SOFA source code files is a &quot;derived work&quot; that must comply</span></div>
+<div class="line"><a name="l00881"></a><span class="lineno">  881</span>&#160;<span class="comment">**     with the following requirements:</span></div>
+<div class="line"><a name="l00882"></a><span class="lineno">  882</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00883"></a><span class="lineno">  883</span>&#160;<span class="comment">**     a) Your work shall be marked or carry a statement that it</span></div>
+<div class="line"><a name="l00884"></a><span class="lineno">  884</span>&#160;<span class="comment">**        (i) uses routines and computations derived by you from</span></div>
+<div class="line"><a name="l00885"></a><span class="lineno">  885</span>&#160;<span class="comment">**        software provided by SOFA under license to you; and</span></div>
+<div class="line"><a name="l00886"></a><span class="lineno">  886</span>&#160;<span class="comment">**        (ii) does not itself constitute software provided by and/or</span></div>
+<div class="line"><a name="l00887"></a><span class="lineno">  887</span>&#160;<span class="comment">**        endorsed by SOFA.</span></div>
+<div class="line"><a name="l00888"></a><span class="lineno">  888</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00889"></a><span class="lineno">  889</span>&#160;<span class="comment">**     b) The source code of your derived work must contain descriptions</span></div>
+<div class="line"><a name="l00890"></a><span class="lineno">  890</span>&#160;<span class="comment">**        of how the derived work is based upon, contains and/or differs</span></div>
+<div class="line"><a name="l00891"></a><span class="lineno">  891</span>&#160;<span class="comment">**        from the original SOFA software.</span></div>
+<div class="line"><a name="l00892"></a><span class="lineno">  892</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00893"></a><span class="lineno">  893</span>&#160;<span class="comment">**     c) The names of all routines in your derived work shall not</span></div>
+<div class="line"><a name="l00894"></a><span class="lineno">  894</span>&#160;<span class="comment">**        include the prefix &quot;iau&quot; or &quot;sofa&quot; or trivial modifications</span></div>
+<div class="line"><a name="l00895"></a><span class="lineno">  895</span>&#160;<span class="comment">**        thereof such as changes of case.</span></div>
+<div class="line"><a name="l00896"></a><span class="lineno">  896</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00897"></a><span class="lineno">  897</span>&#160;<span class="comment">**     d) The origin of the SOFA components of your derived work must</span></div>
+<div class="line"><a name="l00898"></a><span class="lineno">  898</span>&#160;<span class="comment">**        not be misrepresented;  you must not claim that you wrote the</span></div>
+<div class="line"><a name="l00899"></a><span class="lineno">  899</span>&#160;<span class="comment">**        original software, nor file a patent application for SOFA</span></div>
+<div class="line"><a name="l00900"></a><span class="lineno">  900</span>&#160;<span class="comment">**        software or algorithms embedded in the SOFA software.</span></div>
+<div class="line"><a name="l00901"></a><span class="lineno">  901</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00902"></a><span class="lineno">  902</span>&#160;<span class="comment">**     e) These requirements must be reproduced intact in any source</span></div>
+<div class="line"><a name="l00903"></a><span class="lineno">  903</span>&#160;<span class="comment">**        distribution and shall apply to anyone to whom you have</span></div>
+<div class="line"><a name="l00904"></a><span class="lineno">  904</span>&#160;<span class="comment">**        granted a further right to modify the source code of your</span></div>
+<div class="line"><a name="l00905"></a><span class="lineno">  905</span>&#160;<span class="comment">**        derived work.</span></div>
+<div class="line"><a name="l00906"></a><span class="lineno">  906</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00907"></a><span class="lineno">  907</span>&#160;<span class="comment">**     Note that, as originally distributed, the SOFA software is</span></div>
+<div class="line"><a name="l00908"></a><span class="lineno">  908</span>&#160;<span class="comment">**     intended to be a definitive implementation of the IAU standards,</span></div>
+<div class="line"><a name="l00909"></a><span class="lineno">  909</span>&#160;<span class="comment">**     and consequently third-party modifications are discouraged.  All</span></div>
+<div class="line"><a name="l00910"></a><span class="lineno">  910</span>&#160;<span class="comment">**     variations, no matter how minor, must be explicitly marked as</span></div>
+<div class="line"><a name="l00911"></a><span class="lineno">  911</span>&#160;<span class="comment">**     such, as explained above.</span></div>
+<div class="line"><a name="l00912"></a><span class="lineno">  912</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00913"></a><span class="lineno">  913</span>&#160;<span class="comment">**  4. You shall not cause the SOFA software to be brought into</span></div>
+<div class="line"><a name="l00914"></a><span class="lineno">  914</span>&#160;<span class="comment">**     disrepute, either by misuse, or use for inappropriate tasks, or</span></div>
+<div class="line"><a name="l00915"></a><span class="lineno">  915</span>&#160;<span class="comment">**     by inappropriate modification.</span></div>
+<div class="line"><a name="l00916"></a><span class="lineno">  916</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00917"></a><span class="lineno">  917</span>&#160;<span class="comment">**  5. The SOFA software is provided &quot;as is&quot; and SOFA makes no warranty</span></div>
+<div class="line"><a name="l00918"></a><span class="lineno">  918</span>&#160;<span class="comment">**     as to its use or performance.   SOFA does not and cannot warrant</span></div>
+<div class="line"><a name="l00919"></a><span class="lineno">  919</span>&#160;<span class="comment">**     the performance or results which the user may obtain by using the</span></div>
+<div class="line"><a name="l00920"></a><span class="lineno">  920</span>&#160;<span class="comment">**     SOFA software.  SOFA makes no warranties, express or implied, as</span></div>
+<div class="line"><a name="l00921"></a><span class="lineno">  921</span>&#160;<span class="comment">**     to non-infringement of third party rights, merchantability, or</span></div>
+<div class="line"><a name="l00922"></a><span class="lineno">  922</span>&#160;<span class="comment">**     fitness for any particular purpose.  In no event will SOFA be</span></div>
+<div class="line"><a name="l00923"></a><span class="lineno">  923</span>&#160;<span class="comment">**     liable to the user for any consequential, incidental, or special</span></div>
+<div class="line"><a name="l00924"></a><span class="lineno">  924</span>&#160;<span class="comment">**     damages, including any lost profits or lost savings, even if a</span></div>
+<div class="line"><a name="l00925"></a><span class="lineno">  925</span>&#160;<span class="comment">**     SOFA representative has been advised of such damages, or for any</span></div>
+<div class="line"><a name="l00926"></a><span class="lineno">  926</span>&#160;<span class="comment">**     claim by any third party.</span></div>
+<div class="line"><a name="l00927"></a><span class="lineno">  927</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00928"></a><span class="lineno">  928</span>&#160;<span class="comment">**  6. The provision of any version of the SOFA software under the terms</span></div>
+<div class="line"><a name="l00929"></a><span class="lineno">  929</span>&#160;<span class="comment">**     and conditions specified herein does not imply that future</span></div>
+<div class="line"><a name="l00930"></a><span class="lineno">  930</span>&#160;<span class="comment">**     versions will also be made available under the same terms and</span></div>
+<div class="line"><a name="l00931"></a><span class="lineno">  931</span>&#160;<span class="comment">**     conditions.</span></div>
+<div class="line"><a name="l00932"></a><span class="lineno">  932</span>&#160;<span class="comment">*</span></div>
+<div class="line"><a name="l00933"></a><span class="lineno">  933</span>&#160;<span class="comment">**  In any published work or commercial product which uses the SOFA</span></div>
+<div class="line"><a name="l00934"></a><span class="lineno">  934</span>&#160;<span class="comment">**  software directly, acknowledgement (see www.iausofa.org) is</span></div>
+<div class="line"><a name="l00935"></a><span class="lineno">  935</span>&#160;<span class="comment">**  appreciated.</span></div>
+<div class="line"><a name="l00936"></a><span class="lineno">  936</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00937"></a><span class="lineno">  937</span>&#160;<span class="comment">**  Correspondence concerning SOFA software should be addressed as</span></div>
+<div class="line"><a name="l00938"></a><span class="lineno">  938</span>&#160;<span class="comment">**  follows:</span></div>
+<div class="line"><a name="l00939"></a><span class="lineno">  939</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00940"></a><span class="lineno">  940</span>&#160;<span class="comment">**      By email:  sofa@ukho.gov.uk</span></div>
+<div class="line"><a name="l00941"></a><span class="lineno">  941</span>&#160;<span class="comment">**      By post:   IAU SOFA Center</span></div>
+<div class="line"><a name="l00942"></a><span class="lineno">  942</span>&#160;<span class="comment">**                 HM Nautical Almanac Office</span></div>
+<div class="line"><a name="l00943"></a><span class="lineno">  943</span>&#160;<span class="comment">**                 UK Hydrographic Office</span></div>
+<div class="line"><a name="l00944"></a><span class="lineno">  944</span>&#160;<span class="comment">**                 Admiralty Way, Taunton</span></div>
+<div class="line"><a name="l00945"></a><span class="lineno">  945</span>&#160;<span class="comment">**                 Somerset, TA1 2DN</span></div>
+<div class="line"><a name="l00946"></a><span class="lineno">  946</span>&#160;<span class="comment">**                 United Kingdom</span></div>
+<div class="line"><a name="l00947"></a><span class="lineno">  947</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00948"></a><span class="lineno">  948</span>&#160;<span class="comment"> * \endverbatim</span></div>
+<div class="line"><a name="l00949"></a><span class="lineno">  949</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00950"></a><span class="lineno">  950</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00951"></a><span class="lineno">  951</span>&#160;<span class="comment">/*! \page page-var-suffixes Suffixes on variable and parameter names</span></div>
+<div class="line"><a name="l00952"></a><span class="lineno">  952</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00953"></a><span class="lineno">  953</span>&#160;<span class="comment"> *  In accordance with the naming convention spelt out in the</span></div>
+<div class="line"><a name="l00954"></a><span class="lineno">  954</span>&#160;<span class="comment"> *  style guide, many variables and constants have a suffix indicating their</span></div>
+<div class="line"><a name="l00955"></a><span class="lineno">  955</span>&#160;<span class="comment"> *  units. Mostly these are SI units, for example</span></div>
+<div class="line"><a name="l00956"></a><span class="lineno">  956</span>&#160;<span class="comment"> *      -  _d (days), _h (hours) _s (seconds) _ns (nanoseconds)</span></div>
+<div class="line"><a name="l00957"></a><span class="lineno">  957</span>&#160;<span class="comment"> *      -  _m (metres), _km (kilometres), _kmps (kilometres/second)</span></div>
+<div class="line"><a name="l00958"></a><span class="lineno">  958</span>&#160;<span class="comment"> *      -  _rad (radian), _deg (degrees), _radps (radian/second)</span></div>
+<div class="line"><a name="l00959"></a><span class="lineno">  959</span>&#160;<span class="comment"> *      -  _degC (degrees Celsius)</span></div>
+<div class="line"><a name="l00960"></a><span class="lineno">  960</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00961"></a><span class="lineno">  961</span>&#160;<span class="comment"> *  But we also have units for astronomical quantities as recommended by the</span></div>
+<div class="line"><a name="l00962"></a><span class="lineno">  962</span>&#160;<span class="comment"> *  International Astronomical Union (IAU) style manual</span></div>
+<div class="line"><a name="l00963"></a><span class="lineno">  963</span>&#160;<span class="comment"> *  (https://www.iau.org/publications/proceedings_rules/units/), for example</span></div>
+<div class="line"><a name="l00964"></a><span class="lineno">  964</span>&#160;<span class="comment"> *      -  _as (arcseconds) _mas (milliarcseconds), (see \ref page-sec-arcsec)</span></div>
+<div class="line"><a name="l00965"></a><span class="lineno">  965</span>&#160;<span class="comment"> *      -  _au (Astronomical Unit (of distance))</span></div>
+<div class="line"><a name="l00966"></a><span class="lineno">  966</span>&#160;<span class="comment"> *      -  _a (Julian year)</span></div>
+<div class="line"><a name="l00967"></a><span class="lineno">  967</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00968"></a><span class="lineno">  968</span>&#160;<span class="comment"> *  This last unit implies that we could use &quot;ka&quot; for millennia, and we do. But</span></div>
+<div class="line"><a name="l00969"></a><span class="lineno">  969</span>&#160;<span class="comment"> *  we also have quantities measured in Julian centuries. The IAU guidelines</span></div>
+<div class="line"><a name="l00970"></a><span class="lineno">  970</span>&#160;<span class="comment"> *  specifically rule out using &quot;ha&quot; for this (quite right: &quot;ha&quot; means</span></div>
+<div class="line"><a name="l00971"></a><span class="lineno">  971</span>&#160;<span class="comment"> *  hectares), and they oppose &quot;cy&quot;, but they make no recommendation of an</span></div>
+<div class="line"><a name="l00972"></a><span class="lineno">  972</span>&#160;<span class="comment"> *  alternative. But the _Astronomical Almanac_ does use &quot;cy&quot; for a Julian</span></div>
+<div class="line"><a name="l00973"></a><span class="lineno">  973</span>&#160;<span class="comment"> *  century, so I will use suffix _cy.</span></div>
+<div class="line"><a name="l00974"></a><span class="lineno">  974</span>&#160;<span class="comment"> *      -  _ka (Julian millennium), _cy (Julian century)</span></div>
+<div class="line"><a name="l00975"></a><span class="lineno">  975</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00976"></a><span class="lineno">  976</span>&#160;<span class="comment"> *  Another convention that applies here: Objects whose name ends in a capital V</span></div>
+<div class="line"><a name="l00977"></a><span class="lineno">  977</span>&#160;<span class="comment"> *  are 3-dimensional vectors (often unit position vectors, or direction</span></div>
+<div class="line"><a name="l00978"></a><span class="lineno">  978</span>&#160;<span class="comment"> *  cosines) but not exclusively so. Objects whose name ends in a capital M are</span></div>
+<div class="line"><a name="l00979"></a><span class="lineno">  979</span>&#160;<span class="comment"> *  matrices, typically 3x3 rotation matrices. Occasionally, this is combined</span></div>
+<div class="line"><a name="l00980"></a><span class="lineno">  980</span>&#160;<span class="comment"> *  with a suffix. So a name like \c earthV_au means a vector whose components</span></div>
+<div class="line"><a name="l00981"></a><span class="lineno">  981</span>&#160;<span class="comment"> *  are scaled in Astronomical Units.</span></div>
+<div class="line"><a name="l00982"></a><span class="lineno">  982</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00983"></a><span class="lineno">  983</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00984"></a><span class="lineno">  984</span>&#160;<span class="comment">/*! \page page-sec-arcsec Seconds versus arcseconds</span></div>
+<div class="line"><a name="l00985"></a><span class="lineno">  985</span>&#160;<span class="comment"> *  The fact that time in hours is subdivided into minutes and seconds, and</span></div>
+<div class="line"><a name="l00986"></a><span class="lineno">  986</span>&#160;<span class="comment"> *  angles in degrees are also subdivided into minutes and seconds, normally</span></div>
+<div class="line"><a name="l00987"></a><span class="lineno">  987</span>&#160;<span class="comment"> *  does not cause confusion. But astronomers measure angles on the celestial</span></div>
+<div class="line"><a name="l00988"></a><span class="lineno">  988</span>&#160;<span class="comment"> *  sphere using both units of time (for Right Ascension and Hour Angles) and</span></div>
+<div class="line"><a name="l00989"></a><span class="lineno">  989</span>&#160;<span class="comment"> *  units of degrees (for many other angles). So if we talk about an angle of</span></div>
+<div class="line"><a name="l00990"></a><span class="lineno">  990</span>&#160;<span class="comment"> *  n minutes, or n seconds, do we mean a fraction of an hour, or a degree?</span></div>
+<div class="line"><a name="l00991"></a><span class="lineno">  991</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00992"></a><span class="lineno">  992</span>&#160;<span class="comment"> *  For this reason, astronomers refer to the fractions of a degree as</span></div>
+<div class="line"><a name="l00993"></a><span class="lineno">  993</span>&#160;<span class="comment"> *  arcminutes, and reserve the term &quot;minutes&quot; for fractions of an hour. And</span></div>
+<div class="line"><a name="l00994"></a><span class="lineno">  994</span>&#160;<span class="comment"> *  fractions of an arcminute are called arcseconds rather than seconds. This</span></div>
+<div class="line"><a name="l00995"></a><span class="lineno">  995</span>&#160;<span class="comment"> *  program follows that convention, particularly in the use of suffixes on</span></div>
+<div class="line"><a name="l00996"></a><span class="lineno">  996</span>&#160;<span class="comment"> *  variable names (see page \ref page-var-suffixes). Variables in units of</span></div>
+<div class="line"><a name="l00997"></a><span class="lineno">  997</span>&#160;<span class="comment"> *  seconds of time have the suffix _s, those in units of arcseconds have the</span></div>
+<div class="line"><a name="l00998"></a><span class="lineno">  998</span>&#160;<span class="comment"> *  suffix _as.</span></div>
+<div class="line"><a name="l00999"></a><span class="lineno">  999</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l01000"></a><span class="lineno"> 1000</span>&#160;<span class="comment"> *  In general, within this program most angles are stored in units of radians,</span></div>
+<div class="line"><a name="l01001"></a><span class="lineno"> 1001</span>&#160;<span class="comment"> *  and only converted to degrees-arcminutes-arcseconds, or</span></div>
+<div class="line"><a name="l01002"></a><span class="lineno"> 1002</span>&#160;<span class="comment"> *  hours-minutes-seconds when being written out in text form.</span></div>
+<div class="line"><a name="l01003"></a><span class="lineno"> 1003</span>&#160;<span class="comment"> *  The symbol ′ is used for arcminutes only, never for minutes of time.</span></div>
+<div class="line"><a name="l01004"></a><span class="lineno"> 1004</span>&#160;<span class="comment"> *  The symbol ″ is used for arcseconds only, never for seconds of time.</span></div>
+<div class="line"><a name="l01005"></a><span class="lineno"> 1005</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l01006"></a><span class="lineno"> 1006</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l01007"></a><span class="lineno"> 1007</span>&#160;<span class="comment">/*! \page page-interval-notation Interval notation</span></div>
+<div class="line"><a name="l01008"></a><span class="lineno"> 1008</span>&#160;<span class="comment"> *  Frequently throughout the documentation and comments, valid ranges of</span></div>
+<div class="line"><a name="l01009"></a><span class="lineno"> 1009</span>&#160;<span class="comment"> *  function parameters are expressed in interval notation. This is a pair of</span></div>
+<div class="line"><a name="l01010"></a><span class="lineno"> 1010</span>&#160;<span class="comment"> *  numbers representing the two ends of the range, separated by a comma. The</span></div>
+<div class="line"><a name="l01011"></a><span class="lineno"> 1011</span>&#160;<span class="comment"> *  the pair of numbers is surrounded by brackets. Square brackets</span></div>
+<div class="line"><a name="l01012"></a><span class="lineno"> 1012</span>&#160;<span class="comment"> *  indicate an inclusive end-of-range, and round brackets (parentheses)</span></div>
+<div class="line"><a name="l01013"></a><span class="lineno"> 1013</span>&#160;<span class="comment"> *  indicate an exclusive end-of range.</span></div>
+<div class="line"><a name="l01014"></a><span class="lineno"> 1014</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l01015"></a><span class="lineno"> 1015</span>&#160;<span class="comment"> *  Examples:</span></div>
+<div class="line"><a name="l01016"></a><span class="lineno"> 1016</span>&#160;<span class="comment"> *  - [0,10] means all values from 0 to 10 inclusive</span></div>
+<div class="line"><a name="l01017"></a><span class="lineno"> 1017</span>&#160;<span class="comment"> *  - [0.0, 360.0) means all values from 0.0 up to but not including 360.0</span></div>
+<div class="line"><a name="l01018"></a><span class="lineno"> 1018</span>&#160;<span class="comment"> *      itself.</span></div>
+<div class="line"><a name="l01019"></a><span class="lineno"> 1019</span>&#160;<span class="comment"> *  - (-π, +π] means all values from -π, but not including -π itself, up to and</span></div>
+<div class="line"><a name="l01020"></a><span class="lineno"> 1020</span>&#160;<span class="comment"> *      including +π.</span></div>
+<div class="line"><a name="l01021"></a><span class="lineno"> 1021</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l01022"></a><span class="lineno"> 1022</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l01023"></a><span class="lineno"> 1023</span>&#160;<span class="comment">/*! \page page-sign-conventions Sign and direction conventions</span></div>
+<div class="line"><a name="l01024"></a><span class="lineno"> 1024</span>&#160;<span class="comment"> *  The following conventions apply throughout this software.</span></div>
+<div class="line"><a name="l01025"></a><span class="lineno"> 1025</span>&#160;<span class="comment"> *      - Terrestrial coordinates (latitude and longitude).</span></div>
+<div class="line"><a name="l01026"></a><span class="lineno"> 1026</span>&#160;<span class="comment"> *          - Polar form\n</span></div>
+<div class="line"><a name="l01027"></a><span class="lineno"> 1027</span>&#160;<span class="comment"> *            Longitudes east of Greenwich are positive, those west are</span></div>
+<div class="line"><a name="l01028"></a><span class="lineno"> 1028</span>&#160;<span class="comment"> *            negative.</span></div>
+<div class="line"><a name="l01029"></a><span class="lineno"> 1029</span>&#160;<span class="comment"> *            Latitudes north of the equator are positive, those south are</span></div>
+<div class="line"><a name="l01030"></a><span class="lineno"> 1030</span>&#160;<span class="comment"> *            negative. When the Earth is viewed from above the north pole</span></div>
+<div class="line"><a name="l01031"></a><span class="lineno"> 1031</span>&#160;<span class="comment"> *            looking towards the centre of the earth, longitude increases in an</span></div>
+<div class="line"><a name="l01032"></a><span class="lineno"> 1032</span>&#160;<span class="comment"> *            anticlockwise direction.</span></div>
+<div class="line"><a name="l01033"></a><span class="lineno"> 1033</span>&#160;<span class="comment"> *          - Rectangular form\n</span></div>
+<div class="line"><a name="l01034"></a><span class="lineno"> 1034</span>&#160;<span class="comment"> *            The position is indicated by a vector, whose components are as</span></div>
+<div class="line"><a name="l01035"></a><span class="lineno"> 1035</span>&#160;<span class="comment"> *            follows:</span></div>
+<div class="line"><a name="l01036"></a><span class="lineno"> 1036</span>&#160;<span class="comment"> *              - the x axis points from the centre of the earth towards the</span></div>
+<div class="line"><a name="l01037"></a><span class="lineno"> 1037</span>&#160;<span class="comment"> *                equator at 0° longitude,</span></div>
+<div class="line"><a name="l01038"></a><span class="lineno"> 1038</span>&#160;<span class="comment"> *              - the y axis points to 90° longitude, and</span></div>
+<div class="line"><a name="l01039"></a><span class="lineno"> 1039</span>&#160;<span class="comment"> *              -  the z axis points to the north pole.</span></div>
+<div class="line"><a name="l01040"></a><span class="lineno"> 1040</span>&#160;<span class="comment"> *              .</span></div>
+<div class="line"><a name="l01041"></a><span class="lineno"> 1041</span>&#160;<span class="comment"> *            This is a right-handed set.</span></div>
+<div class="line"><a name="l01042"></a><span class="lineno"> 1042</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l01043"></a><span class="lineno"> 1043</span>&#160;<span class="comment"> *      - Equatorial coordinates (Right Ascension and declination).</span></div>
+<div class="line"><a name="l01044"></a><span class="lineno"> 1044</span>&#160;<span class="comment"> *          - Polar form\n</span></div>
+<div class="line"><a name="l01045"></a><span class="lineno"> 1045</span>&#160;<span class="comment"> *            The equator is the projection of the Earth&#39;s equator out into</span></div>
+<div class="line"><a name="l01046"></a><span class="lineno"> 1046</span>&#160;<span class="comment"> *            space, and the north celestial pole is the projection of the north</span></div>
+<div class="line"><a name="l01047"></a><span class="lineno"> 1047</span>&#160;<span class="comment"> *            pole out into space. When viewed from north celestial pole looking</span></div>
+<div class="line"><a name="l01048"></a><span class="lineno"> 1048</span>&#160;<span class="comment"> *            down towards the origin, Right Ascension increases in an</span></div>
+<div class="line"><a name="l01049"></a><span class="lineno"> 1049</span>&#160;<span class="comment"> *            anticlockwise direction (i.e. eastwards, like longitude), and</span></div>
+<div class="line"><a name="l01050"></a><span class="lineno"> 1050</span>&#160;<span class="comment"> *            north declinations are positive, south are negative.</span></div>
+<div class="line"><a name="l01051"></a><span class="lineno"> 1051</span>&#160;<span class="comment"> *          - Rectangular form\n</span></div>
+<div class="line"><a name="l01052"></a><span class="lineno"> 1052</span>&#160;<span class="comment"> *              - x points to the March Equinox (0° RA),</span></div>
+<div class="line"><a name="l01053"></a><span class="lineno"> 1053</span>&#160;<span class="comment"> *                  (\ref page-vernal-equinox &quot;unfortunately&quot; known as the</span></div>
+<div class="line"><a name="l01054"></a><span class="lineno"> 1054</span>&#160;<span class="comment"> *                  vernal equinox).</span></div>
+<div class="line"><a name="l01055"></a><span class="lineno"> 1055</span>&#160;<span class="comment"> *              - y points to 90° RA, and</span></div>
+<div class="line"><a name="l01056"></a><span class="lineno"> 1056</span>&#160;<span class="comment"> *              - z points to the north celestial pole.</span></div>
+<div class="line"><a name="l01057"></a><span class="lineno"> 1057</span>&#160;<span class="comment"> *              .</span></div>
+<div class="line"><a name="l01058"></a><span class="lineno"> 1058</span>&#160;<span class="comment"> *            (This is also a right-handed set.)</span></div>
+<div class="line"><a name="l01059"></a><span class="lineno"> 1059</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l01060"></a><span class="lineno"> 1060</span>&#160;<span class="comment"> *      - Ecliptic coordinates. (Ecliptic latitude and longitude).\n</span></div>
+<div class="line"><a name="l01061"></a><span class="lineno"> 1061</span>&#160;<span class="comment"> *        These are exactly analogous to terrestrial coordinates, in that</span></div>
+<div class="line"><a name="l01062"></a><span class="lineno"> 1062</span>&#160;<span class="comment"> *        longitude increases anticlockwise, and the rectangular coordinate</span></div>
+<div class="line"><a name="l01063"></a><span class="lineno"> 1063</span>&#160;<span class="comment"> *        vector is a right-handed set.</span></div>
+<div class="line"><a name="l01064"></a><span class="lineno"> 1064</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l01065"></a><span class="lineno"> 1065</span>&#160;<span class="comment"> *      - Horizon coordinates (azimuth and elevation (or altitude)).</span></div>
+<div class="line"><a name="l01066"></a><span class="lineno"> 1066</span>&#160;<span class="comment"> *          - Polar form\n</span></div>
+<div class="line"><a name="l01067"></a><span class="lineno"> 1067</span>&#160;<span class="comment"> *            Azimuth increases in a clockwise direction from True North (just</span></div>
+<div class="line"><a name="l01068"></a><span class="lineno"> 1068</span>&#160;<span class="comment"> *            like a compass bearing).</span></div>
+<div class="line"><a name="l01069"></a><span class="lineno"> 1069</span>&#160;<span class="comment"> *          - Rectangular form\n</span></div>
+<div class="line"><a name="l01070"></a><span class="lineno"> 1070</span>&#160;<span class="comment"> *              - x points to the True North horizon,</span></div>
+<div class="line"><a name="l01071"></a><span class="lineno"> 1071</span>&#160;<span class="comment"> *              - y  points the East horizon, and</span></div>
+<div class="line"><a name="l01072"></a><span class="lineno"> 1072</span>&#160;<span class="comment"> *              - z points to the zenith.</span></div>
+<div class="line"><a name="l01073"></a><span class="lineno"> 1073</span>&#160;<span class="comment"> *              .</span></div>
+<div class="line"><a name="l01074"></a><span class="lineno"> 1074</span>&#160;<span class="comment"> *            This is a left-handed set. (Compared to a right-handed set, the x</span></div>
+<div class="line"><a name="l01075"></a><span class="lineno"> 1075</span>&#160;<span class="comment"> *            and y axes are swapped.)</span></div>
+<div class="line"><a name="l01076"></a><span class="lineno"> 1076</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l01077"></a><span class="lineno"> 1077</span>&#160;<span class="comment"> *      - (Hour angle and declination).</span></div>
+<div class="line"><a name="l01078"></a><span class="lineno"> 1078</span>&#160;<span class="comment"> *          - Polar form\n</span></div>
+<div class="line"><a name="l01079"></a><span class="lineno"> 1079</span>&#160;<span class="comment"> *            Hour angles are measured positive westward. This means it</span></div>
+<div class="line"><a name="l01080"></a><span class="lineno"> 1080</span>&#160;<span class="comment"> *            increases clockwise, unlike Right Ascension.</span></div>
+<div class="line"><a name="l01081"></a><span class="lineno"> 1081</span>&#160;<span class="comment"> *          - Rectangular form\n</span></div>
+<div class="line"><a name="l01082"></a><span class="lineno"> 1082</span>&#160;<span class="comment"> *              - x points to the intersection of the local meridian and the</span></div>
+<div class="line"><a name="l01083"></a><span class="lineno"> 1083</span>&#160;<span class="comment"> *                celestial equator,</span></div>
+<div class="line"><a name="l01084"></a><span class="lineno"> 1084</span>&#160;<span class="comment"> *              - y points to HA = 90°, and</span></div>
+<div class="line"><a name="l01085"></a><span class="lineno"> 1085</span>&#160;<span class="comment"> *              - z points to the north celestial pole.</span></div>
+<div class="line"><a name="l01086"></a><span class="lineno"> 1086</span>&#160;<span class="comment"> *              .</span></div>
+<div class="line"><a name="l01087"></a><span class="lineno"> 1087</span>&#160;<span class="comment"> *            Like Horizon coordinates, this is a left-handed set.</span></div>
+<div class="line"><a name="l01088"></a><span class="lineno"> 1088</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l01089"></a><span class="lineno"> 1089</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l01090"></a><span class="lineno"> 1090</span>&#160;<span class="comment">/*! \page page-vernal-equinox Vernal equinox</span></div>
+<div class="line"><a name="l01091"></a><span class="lineno"> 1091</span>&#160;<span class="comment"> *  The equinox that occurs in March is normally referred to as the vernal</span></div>
+<div class="line"><a name="l01092"></a><span class="lineno"> 1092</span>&#160;<span class="comment"> *  equinox. This is unfortunate, because of the meaning of the word vernal:</span></div>
+<div class="line"><a name="l01093"></a><span class="lineno"> 1093</span>&#160;<span class="comment"> * \par</span></div>
+<div class="line"><a name="l01094"></a><span class="lineno"> 1094</span>&#160;<span class="comment"> *      \b ver′nal \em adj. of or occurring in spring.\n</span></div>
+<div class="line"><a name="l01095"></a><span class="lineno"> 1095</span>&#160;<span class="comment"> *      -- The Collins Concise Dictionary, 4th edn. 1999</span></div>
+<div class="line"><a name="l01096"></a><span class="lineno"> 1096</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l01097"></a><span class="lineno"> 1097</span>&#160;<span class="comment"> *  Obviously it never occurred to the person who coined this term for the</span></div>
+<div class="line"><a name="l01098"></a><span class="lineno"> 1098</span>&#160;<span class="comment"> *  equinox that the Southern Hemisphere exists. Because \em everybody in the</span></div>
+<div class="line"><a name="l01099"></a><span class="lineno"> 1099</span>&#160;<span class="comment"> *  Southern Hemisphere knows that the spring equinox occurs in September, not</span></div>
+<div class="line"><a name="l01100"></a><span class="lineno"> 1100</span>&#160;<span class="comment"> *  March.</span></div>
+<div class="line"><a name="l01101"></a><span class="lineno"> 1101</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l01102"></a><span class="lineno"> 1102</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="astruct_sky___site_prop_html_a247a7f60778413de593949f7e38a7d3b"><div class="ttname"><a href="struct_sky___site_prop.html#a247a7f60778413de593949f7e38a7d3b">Sky_SiteProp::azElPolM</a></div><div class="ttdeci">V3D_Matrix azElPolM</div><div class="ttdoc">rotation matrix from TIRS to Az/El coords</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00325">sky.h:325</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_a466c347ccb8d5664a77217ba8dff2adf"><div class="ttname"><a href="vectors3d_8h.html#a466c347ccb8d5664a77217ba8dff2adf">v3d_magVSq</a></div><div class="ttdeci">double v3d_magVSq(const V3D_Vector *srcV)</div><div class="ttdoc">Return the square of the magnitude of the specified vector.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00253">vectors3d.c:253</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_a87f7944947c8c442bea214be3936dfc7"><div class="ttname"><a href="vectors3d_8h.html#a87f7944947c8c442bea214be3936dfc7">v3d_multMxM</a></div><div class="ttdeci">V3D_Matrix * v3d_multMxM(V3D_Matrix *destM, const V3D_Matrix *srcM1, const V3D_Matrix *srcM2)</div><div class="ttdoc">Multiply 3x3 matrix by 3x3 matrix to give a new 3x3 matrix, as per [destM] = [srcM1]*[srcM2].</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00496">vectors3d.c:496</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_ab9c960dd291b2aabcc56ac188b15dcb7"><div class="ttname"><a href="vectors3d_8h.html#ab9c960dd291b2aabcc56ac188b15dcb7">v3d_polarToRect</a></div><div class="ttdeci">V3D_Vector * v3d_polarToRect(V3D_Vector *destV, double alpha_rad, double delta_rad)</div><div class="ttdoc">Converts polar (curvilinear) coordinates to equivalent rectangular (Cartesian) coordinates.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00275">vectors3d.c:275</a></div></div>
 <div class="ttc" id="asky_8h_html_a0797b1e268ac7cc5b052c0623883eb74"><div class="ttname"><a href="sky_8h.html#a0797b1e268ac7cc5b052c0623883eb74">sky_siteTirsToTopo</a></div><div class="ttdeci">void sky_siteTirsToTopo(const V3D_Vector *terInterV, double dist_au, const Sky_SiteProp *site, Sky_SiteHorizon *topo)</div><div class="ttdoc">Transform a coordinate vector from the Terrestrial Intermediate Reference System to topocentric Az/El...</div><div class="ttdef"><b>Definition:</b> <a href="sky-site_8c_source.html#l00378">sky-site.c:378</a></div></div>
+<div class="ttc" id="astruct_sky___site_prop_html_afd4d4d35cba5c790f2d6b1d6beff5cd2"><div class="ttname"><a href="struct_sky___site_prop.html#afd4d4d35cba5c790f2d6b1d6beff5cd2">Sky_SiteProp::astLat_rad</a></div><div class="ttdeci">double astLat_rad</div><div class="ttdoc">Astronomical latitude of site (ϕA) (radian)</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00316">sky.h:316</a></div></div>
 <div class="ttc" id="asky_8h_html_a185862b772bcb6ef6eebf5cb33de09a6"><div class="ttname"><a href="sky_8h.html#a185862b772bcb6ef6eebf5cb33de09a6">sky_setSiteLocation</a></div><div class="ttdeci">void sky_setSiteLocation(double latitude_deg, double longitude_deg, double height_m, Sky_SiteProp *site)</div><div class="ttdoc">Initialise the site structure by calculating those site-related values that do not change with time.</div><div class="ttdef"><b>Definition:</b> <a href="sky-site_8c_source.html#l00105">sky-site.c:105</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_ac466df06b542786b39581a61253f608e"><div class="ttname"><a href="vectors3d_8h.html#ac466df06b542786b39581a61253f608e">v3d_rectToPolar</a></div><div class="ttdeci">void v3d_rectToPolar(double *alpha_rad, double *delta_rad, const V3D_Vector *srcV)</div><div class="ttdoc">Converts rectangular (Cartesian) coordinates to the equivalent polar (curvilinear) ones.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00306">vectors3d.c:306</a></div></div>
-<div class="ttc" id="astruct_sky___site_prop_html"><div class="ttname"><a href="struct_sky___site_prop.html">Sky_SiteProp</a></div><div class="ttdoc">Site properties.</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00305">sky.h:305</a></div></div>
-<div class="ttc" id="astruct_sky___site_horizon_html_af3e53b572114255a5a5afda8deabc495"><div class="ttname"><a href="struct_sky___site_horizon.html#af3e53b572114255a5a5afda8deabc495">Sky_SiteHorizon::azimuth_rad</a></div><div class="ttdeci">double azimuth_rad</div><div class="ttdoc">azimuth (radian)</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00130">sky.h:130</a></div></div>
+<div class="ttc" id="astruct_sky___site_prop_html_a4202f89b64eb38639ff18c1c7661ea92"><div class="ttname"><a href="struct_sky___site_prop.html#a4202f89b64eb38639ff18c1c7661ea92">Sky_SiteProp::azElM</a></div><div class="ttdeci">V3D_Matrix * azElM</div><div class="ttdoc">points to either azElPolM or azElBaseM</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00324">sky.h:324</a></div></div>
+<div class="ttc" id="astruct_sky___site_prop_html_aab696090a4382fe21fe21820e72777f8"><div class="ttname"><a href="struct_sky___site_prop.html#aab696090a4382fe21fe21820e72777f8">Sky_SiteProp::geocRadius_km</a></div><div class="ttdeci">double geocRadius_km</div><div class="ttdoc">Approx geocentric radius of site (≈ ae*ρ)(km)</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00318">sky.h:318</a></div></div>
+<div class="ttc" id="astruct_sky___site_prop_html_a82258ed693d26f4d9f7bc22c7d378f48"><div class="ttname"><a href="struct_sky___site_prop.html#a82258ed693d26f4d9f7bc22c7d378f48">Sky_SiteProp::haDecM</a></div><div class="ttdeci">V3D_Matrix haDecM</div><div class="ttdoc">rotation matrix from Az/El to HA/Dec coords</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00327">sky.h:327</a></div></div>
+<div class="ttc" id="astruct_sky___site_prop_html_a04104394e3aea04ce74e30ad576fa6bb"><div class="ttname"><a href="struct_sky___site_prop.html#a04104394e3aea04ce74e30ad576fa6bb">Sky_SiteProp::rhoSin_au</a></div><div class="ttdeci">double rhoSin_au</div><div class="ttdoc">ae*ρ*sin(ϕ - ϕ′) geocentre-to-site x (AU)</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00319">sky.h:319</a></div></div>
+<div class="ttc" id="astruct_sky___site_prop_html"><div class="ttname"><a href="struct_sky___site_prop.html">Sky_SiteProp</a></div><div class="ttdoc">Site properties.</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00315">sky.h:315</a></div></div>
+<div class="ttc" id="astruct_sky___site_horizon_html_af3e53b572114255a5a5afda8deabc495"><div class="ttname"><a href="struct_sky___site_horizon.html#af3e53b572114255a5a5afda8deabc495">Sky_SiteHorizon::azimuth_rad</a></div><div class="ttdeci">double azimuth_rad</div><div class="ttdoc">azimuth (radian)</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00131">sky.h:131</a></div></div>
 <div class="ttc" id="asky_8h_html_a297ba340f931e59201a108c6a9e67800"><div class="ttname"><a href="sky_8h.html#a297ba340f931e59201a108c6a9e67800">sky_adjustSiteForPolarMotion</a></div><div class="ttdeci">void sky_adjustSiteForPolarMotion(const Sky_PolarMot *polar, Sky_SiteProp *site)</div><div class="ttdoc">Modify our azEl rotation matrix to incorporate a polar motion rotation matrix.</div><div class="ttdef"><b>Definition:</b> <a href="sky-site_8c_source.html#l00347">sky-site.c:347</a></div></div>
-<div class="ttc" id="astruct_sky___site_prop_html_a8b1fd161b9450f8945ac3bb8d8a8bc09"><div class="ttname"><a href="struct_sky___site_prop.html#a8b1fd161b9450f8945ac3bb8d8a8bc09">Sky_SiteProp::timeZone_d</a></div><div class="ttdeci">double timeZone_d</div><div class="ttdoc">time zone offset from UTC (fraction of a day)</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00313">sky.h:313</a></div></div>
+<div class="ttc" id="astruct_sky___site_prop_html_a8b1fd161b9450f8945ac3bb8d8a8bc09"><div class="ttname"><a href="struct_sky___site_prop.html#a8b1fd161b9450f8945ac3bb8d8a8bc09">Sky_SiteProp::timeZone_d</a></div><div class="ttdeci">double timeZone_d</div><div class="ttdoc">time zone offset from UTC (fraction of a day)</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00323">sky.h:323</a></div></div>
 <div class="ttc" id="asky_8h_html_a9df313095294ca3e1fd6bfa9f53065b8"><div class="ttname"><a href="sky_8h.html#a9df313095294ca3e1fd6bfa9f53065b8">sky_setupSiteSurface</a></div><div class="ttdeci">void sky_setupSiteSurface(double azimuth_deg, double slope_deg, Sky_SiteHorizon *surface)</div><div class="ttdoc">Set the orientation and slope of a surface (such as a solar panel) for which you want to calculate th...</div><div class="ttdef"><b>Definition:</b> <a href="sky-site_8c_source.html#l00317">sky-site.c:317</a></div></div>
 <div class="ttc" id="astruct_v3_d___matrix_html"><div class="ttname"><a href="struct_v3_d___matrix.html">V3D_Matrix</a></div><div class="ttdoc">3x3 matrix.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8h_source.html#l00051">vectors3d.h:51</a></div></div>
 <div class="ttc" id="ainstead-of-math_8h_html"><div class="ttname"><a href="instead-of-math_8h.html">instead-of-math.h</a></div><div class="ttdoc">instead-of-math.h - header to be included instead of math.h</div></div>
 <div class="ttc" id="astruct_v3_d___vector_html"><div class="ttname"><a href="struct_v3_d___vector.html">V3D_Vector</a></div><div class="ttdoc">3x1 vector.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8h_source.html#l00057">vectors3d.h:57</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_aba2139d0a343e8ad73631daa686b791d"><div class="ttname"><a href="vectors3d_8h.html#aba2139d0a343e8ad73631daa686b791d">v3d_dotProductV</a></div><div class="ttdeci">double v3d_dotProductV(const V3D_Vector *srcV1, const V3D_Vector *srcV2)</div><div class="ttdoc">Return the dot product of the two vectors: res = [srcV1] · [srcV2] or res = ||srcV1|| * ||srcV2|| * c...</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00148">vectors3d.c:148</a></div></div>
-<div class="ttc" id="astruct_sky___polar_mot_html"><div class="ttname"><a href="struct_sky___polar_mot.html">Sky_PolarMot</a></div><div class="ttdoc">This structure contains polar motion parameters and a rotation matrix.</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00190">sky.h:190</a></div></div>
+<div class="ttc" id="astruct_sky___polar_mot_html"><div class="ttname"><a href="struct_sky___polar_mot.html">Sky_PolarMot</a></div><div class="ttdoc">This structure contains polar motion parameters and a rotation matrix.</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00196">sky.h:196</a></div></div>
 <div class="ttc" id="asky_8h_html_a982a0d853512a67d9e2177845e605dc4"><div class="ttname"><a href="sky_8h.html#a982a0d853512a67d9e2177845e605dc4">sky_setSiteTimeZone</a></div><div class="ttdeci">void sky_setSiteTimeZone(double timeZone_h, Sky_SiteProp *site)</div><div class="ttdoc">Set the time zone offset for this site.</div><div class="ttdef"><b>Definition:</b> <a href="sky-site_8c_source.html#l00293">sky-site.c:293</a></div></div>
+<div class="ttc" id="astruct_sky___site_prop_html_add90d383aac929b7ded5e8ca768a5ec6"><div class="ttname"><a href="struct_sky___site_prop.html#add90d383aac929b7ded5e8ca768a5ec6">Sky_SiteProp::astLong_rad</a></div><div class="ttdeci">double astLong_rad</div><div class="ttdoc">Astronomical longitude of site (radian)</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00317">sky.h:317</a></div></div>
 <div class="ttc" id="asky_8h_html_a29b6ad0e946c885c8a170bfdaa922ece"><div class="ttname"><a href="sky_8h.html#a29b6ad0e946c885c8a170bfdaa922ece">sky_setSiteTempPress</a></div><div class="ttdeci">void sky_setSiteTempPress(double temperature_degC, double pressure_hPa, Sky_SiteProp *site)</div><div class="ttdoc">Set refraction coefficients based on atmospheric temperature and pressure at the site.</div><div class="ttdef"><b>Definition:</b> <a href="sky-site_8c_source.html#l00261">sky-site.c:261</a></div></div>
+<div class="ttc" id="astruct_sky___site_prop_html_a95ce729a3ce149654b6d3630b97a265f"><div class="ttname"><a href="struct_sky___site_prop.html#a95ce729a3ce149654b6d3630b97a265f">Sky_SiteProp::rhoCos_au</a></div><div class="ttdeci">double rhoCos_au</div><div class="ttdoc">-ae*ρ*cos(ϕ - ϕ′) geocentre-to-site z (AU)</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00320">sky.h:320</a></div></div>
 <div class="ttc" id="asky_8h_html"><div class="ttname"><a href="sky_8h.html">sky.h</a></div><div class="ttdoc">sky.h - structures and routines for astronomical observing &amp; tracking</div></div>
 <div class="ttc" id="avectors3d_8h_html_af4f8f0d21389bf84d1321e6c7739c513"><div class="ttname"><a href="vectors3d_8h.html#af4f8f0d21389bf84d1321e6c7739c513">v3d_createRotationMatrix</a></div><div class="ttdeci">V3D_Matrix * v3d_createRotationMatrix(V3D_Matrix *destM, V3D_AxisNames axis, double angle_rad)</div><div class="ttdoc">Creates a matrix to rotate a coordinate system about an axis.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00372">vectors3d.c:372</a></div></div>
-<div class="ttc" id="astruct_sky___site_horizon_html_ae425fbe0a9c704a2baac80803f22c0e1"><div class="ttname"><a href="struct_sky___site_horizon.html#ae425fbe0a9c704a2baac80803f22c0e1">Sky_SiteHorizon::elevation_rad</a></div><div class="ttdeci">double elevation_rad</div><div class="ttdoc">elevation (or altitude) (radian)</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00131">sky.h:131</a></div></div>
+<div class="ttc" id="astruct_sky___site_horizon_html_ae425fbe0a9c704a2baac80803f22c0e1"><div class="ttname"><a href="struct_sky___site_horizon.html#ae425fbe0a9c704a2baac80803f22c0e1">Sky_SiteHorizon::elevation_rad</a></div><div class="ttdeci">double elevation_rad</div><div class="ttdoc">elevation (or altitude) (radian)</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00132">sky.h:132</a></div></div>
 <div class="ttc" id="asky_8h_html_a05846caf4fbc0dfe00c77cdb1faf6079"><div class="ttname"><a href="sky_8h.html#a05846caf4fbc0dfe00c77cdb1faf6079">sky_siteAzElToHaDec</a></div><div class="ttdeci">void sky_siteAzElToHaDec(const V3D_Vector *topoV, const Sky_SiteProp *site, double *hourAngle_rad, double *declination_rad)</div><div class="ttdoc">Take a topocentric position vector in Azimuth/Elevation frame and use it to calculate the observed Ho...</div><div class="ttdef"><b>Definition:</b> <a href="sky-site_8c_source.html#l00511">sky-site.c:511</a></div></div>
+<div class="ttc" id="astruct_sky___site_prop_html_a73064d4f6a9a519a0dd08c80e1c9b3a0"><div class="ttname"><a href="struct_sky___site_prop.html#a73064d4f6a9a519a0dd08c80e1c9b3a0">Sky_SiteProp::refracPT</a></div><div class="ttdeci">double refracPT</div><div class="ttdoc">Refraction correction: pressure &amp; temperature.</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00322">sky.h:322</a></div></div>
 <div class="ttc" id="ainstead-of-math_8h_html_aca4a8517bc9ee41c78a0365018315d4d"><div class="ttname"><a href="instead-of-math_8h.html#aca4a8517bc9ee41c78a0365018315d4d">sincos</a></div><div class="ttdeci">static void sincos(double angle_rad, double *sinA, double *cosA)</div><div class="ttdoc">Calculates sine and cosine of an angle.</div><div class="ttdef"><b>Definition:</b> <a href="instead-of-math_8h_source.html#l00114">instead-of-math.h:114</a></div></div>
 <div class="ttc" id="asky_8h_html_aa393888d1c0cb90591bba47452d99db4"><div class="ttname"><a href="sky_8h.html#aa393888d1c0cb90591bba47452d99db4">sky_siteIncidence_rad</a></div><div class="ttdeci">double sky_siteIncidence_rad(const V3D_Vector *topoV, const V3D_Vector *surfaceV)</div><div class="ttdoc">Calculate the incidence angle of rays from the celestial object described by topoV (such as the sun) ...</div><div class="ttdef"><b>Definition:</b> <a href="sky-site_8c_source.html#l00547">sky-site.c:547</a></div></div>
 <div class="ttc" id="asky_8h_html_a031a736d11ac57f7bf73cb8f68bb5aec"><div class="ttname"><a href="sky_8h.html#a031a736d11ac57f7bf73cb8f68bb5aec">sky_setSiteLoc2</a></div><div class="ttdeci">void sky_setSiteLoc2(double astLat_deg, double astLong_deg, double geodLat_deg, double geodLong_deg, double height_m, Sky_SiteProp *site)</div><div class="ttdoc">Alternative initialisation function to sky_setSiteLocation().</div><div class="ttdef"><b>Definition:</b> <a href="sky-site_8c_source.html#l00156">sky-site.c:156</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_a930a88294d68f9b66901b8eaf44305a5"><div class="ttname"><a href="vectors3d_8h.html#a930a88294d68f9b66901b8eaf44305a5">v3d_multMxV</a></div><div class="ttdeci">V3D_Vector * v3d_multMxV(V3D_Vector *destV, const V3D_Matrix *srcM, const V3D_Vector *srcV)</div><div class="ttdoc">Multiply 3x3 matrix by 3x1 vector to give a new 3x1 vector, as per equation [destV] = [srcM] * [srcV]...</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00434">vectors3d.c:434</a></div></div>
-<div class="ttc" id="astruct_sky___site_horizon_html"><div class="ttname"><a href="struct_sky___site_horizon.html">Sky_SiteHorizon</a></div><div class="ttdoc">Coordinates of a celestial object in the horizon frame, in both rectangular and polar forms.</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00128">sky.h:128</a></div></div>
-<div class="ttc" id="astruct_sky___site_horizon_html_ace117bb5b44490a867fa5cf25902984e"><div class="ttname"><a href="struct_sky___site_horizon.html#ace117bb5b44490a867fa5cf25902984e">Sky_SiteHorizon::rectV</a></div><div class="ttdeci">V3D_Vector rectV</div><div class="ttdoc">unit vector in horizon coordinates</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00129">sky.h:129</a></div></div>
+<div class="ttc" id="astruct_sky___site_prop_html_a40b368f9a23b00be068970193fb94775"><div class="ttname"><a href="struct_sky___site_prop.html#a40b368f9a23b00be068970193fb94775">Sky_SiteProp::azElBaseM</a></div><div class="ttdeci">V3D_Matrix azElBaseM</div><div class="ttdoc">as above, but excluding polar motion correctn</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00326">sky.h:326</a></div></div>
+<div class="ttc" id="astruct_sky___site_prop_html_ab1ccfeec950b988ad21f1977fbbf6f7c"><div class="ttname"><a href="struct_sky___site_prop.html#ab1ccfeec950b988ad21f1977fbbf6f7c">Sky_SiteProp::diurnalAberr</a></div><div class="ttdeci">double diurnalAberr</div><div class="ttdoc">Diurnal aberration: caused by earth rotation.</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00321">sky.h:321</a></div></div>
+<div class="ttc" id="astruct_sky___site_horizon_html"><div class="ttname"><a href="struct_sky___site_horizon.html">Sky_SiteHorizon</a></div><div class="ttdoc">Coordinates of a celestial object in the horizon frame, in both rectangular and polar forms.</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00129">sky.h:129</a></div></div>
+<div class="ttc" id="astruct_sky___site_horizon_html_ace117bb5b44490a867fa5cf25902984e"><div class="ttname"><a href="struct_sky___site_horizon.html#ace117bb5b44490a867fa5cf25902984e">Sky_SiteHorizon::rectV</a></div><div class="ttdeci">V3D_Vector rectV</div><div class="ttdoc">unit vector in horizon coordinates</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00130">sky.h:130</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

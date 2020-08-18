@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['miscellaneous_230',['Miscellaneous',['../page-misc.html',1,'']]]
+  ['edits_20you_20may_20want_20to_20make_20to_20general_2eh_299',['Edits you may want to make to general.h',['../page-general-h.html',1,'page-how-to-use']]],
+  ['edits_20you_20may_20want_20to_20make_20to_20sky_2eh_300',['Edits you may want to make to sky.h',['../page-sky-h.html',1,'page-how-to-use']]],
+  ['edits_20you_20may_20want_20to_20make_20to_20skyfast_2ec_301',['Edits you may want to make to skyfast.c',['../page-skyfast-c.html',1,'page-how-to-use']]]
 ];

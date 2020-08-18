@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.2-1</span>
+   &#160;<span id="projectnumber">0.1.4-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('sky0_8c_source.html',''); initResizabl
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:  David Hoadley</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * Description: (see sky0.h)</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * </span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * Copyright (c) 2020, David Hoadley &lt;vcrumble@westnet.com.au&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * All rights reserved.</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> *</span></div>
@@ -332,247 +332,263 @@ $(document).ready(function(){initNavTree('sky0_8c_source.html',''); initResizabl
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">        _Supplement to the Astronomical Almanac_ 1984.</span></div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment"> \par When to call this function</span></div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">    The values calculated by this routine change only slowly. If using this</span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">    routine as part of tracking a celestial object, using values that were</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">    calculated for the nearest hour will introduce almost imperceptible errors.</span></div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">    So it need be called only once per hour. </span></div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;{</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="comment">/* Fundamental Nutation arguments at date */</span></div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <span class="keywordtype">double</span> l;   <span class="comment">// l  - mean anomaly of the Moon (radian) (usually called M?)</span></div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="keywordtype">double</span> lp;  <span class="comment">// l&#39; - mean anomaly of the Sun (Earth) (radian) (M&#39;?)</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keywordtype">double</span> om;  <span class="comment">/* Ω  - longitude of the ascending node of the Moon&#39;s mean orbit</span></div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">                        on the ecliptic, measured from the mean equinox of date</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">                        (radian) */</span></div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keywordtype">double</span> d;   <span class="comment">// D  - mean elongation of the Moon from the Sun (radian)</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keywordtype">double</span> f;   <span class="comment">// F  - Mean longitude of the Moon (L) minus mean longitude of</span></div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                <span class="comment">//      the Moon&#39;s node (radian), = L - Ω</span></div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    </div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordtype">double</span> psiSum_masx10;       <span class="comment">// Nutation in longitude (units - 0.1 mas)</span></div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="keywordtype">double</span> epsSum_masx10;       <span class="comment">// Nutation in obliquity (units - 0.1 mas)</span></div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="keywordtype">double</span> a_rad;               <span class="comment">// angle - summation of args (radian)</span></div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    </div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    REQUIRE_NOT_NULL(nut);</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <span class="comment">// Calculate FUNDAMENTAL ARGUMENTS in the FK5 reference system</span></div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <span class="comment">// Mean elongation of the moon from the sun (called X0 in NREL SPA)</span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    d = degToRad(297.85036 + t_cy * (445267.11148</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                                     + t_cy * (-0.0019142</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                                               + t_cy * (1.0/189474.0))));</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    </div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="comment">// Solar Mean Anomaly = Mean longitude of the sun minus mean longitude of</span></div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="comment">// the sun&#39;s perigee (called X1 in NREL SPA)</span></div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    lp = degToRad(357.52772 + t_cy * (35999.05034</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;                                      + t_cy * (-0.0001603</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                                                + t_cy * (-1.0/300000.0))));</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="comment">// Lunar Mean Anomaly = Mean longitude of the moon minus mean longitude of</span></div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <span class="comment">// the moon &#39;s perigee (called X2 in NREL SPA)</span></div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    l = degToRad(134.96298 + t_cy * (477198.867398</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                                     + t_cy * (0.0086972</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;                                               + t_cy * (1.0/56250.0))));</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="comment">// Mean longitude of the moon minus mean longitude of the moon&#39;s node</span></div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    <span class="comment">// (called X3 in NREL SPA and (mistakenly, I think) called the Moon&#39;s </span></div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    <span class="comment">// Argument of Latitude)</span></div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    f = degToRad(93.27191 + t_cy * (483202.017538</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                                    + t_cy * (-0.0036825</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                                              + t_cy * (1.0/327270.0))));</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <span class="comment">// Longitude of the mean ascending node of the lunar orbit on the</span></div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <span class="comment">// ecliptic, measured from the mean equinox of date (X4 in NREL SPA)</span></div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    om = degToRad(125.04452 + t_cy * (-1934.136261</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                                     + t_cy * (0.0020708</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                                               + t_cy * (1.0/450000.0))));</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="preprocessor">#if 0</span></div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    printf(<span class="stringliteral">&quot;Nutation Args: d (X0) = %f°, lp (X1) = %f°, l (X2) = %f°\n&quot;</span></div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;           <span class="stringliteral">&quot;               f (X3) = %f°, om (X4) = %f°\n&quot;</span>, </div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;           radToDeg(d), radToDeg(lp), radToDeg(l), radToDeg(f), radToDeg(om));</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    </div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    <span class="comment">// Multiply through the table of nutation co-efficients and add up all the</span></div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <span class="comment">// terms.</span></div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    psiSum_masx10 = 0.0;</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    epsSum_masx10 = 0.0;</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="keywordflow">for</span> (i = 0; i &lt; Y_COUNT; i++) {</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        a_rad = d * Y_TERMS[i][0] + lp * Y_TERMS[i][1] + l * Y_TERMS[i][2]</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;                              + f * Y_TERMS[i][3] + om * Y_TERMS[i][4];</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        psiSum_masx10 += sin(a_rad) * (PE_TERMS[i][TERM_PSI_A]</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;                                        + t_cy * PE_TERMS[i][TERM_PSI_B]);</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        epsSum_masx10 += cos(a_rad) * (PE_TERMS[i][TERM_EPS_C]</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;                                        + t_cy * PE_TERMS[i][TERM_EPS_D]);</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    }</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    <span class="comment">// Convert results to radians</span></div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    nut-&gt;<a class="code" href="struct_sky0___nut1980.html#a9b0da8604707a438f6396f12d2c3994b">dPsi_rad</a> = psiSum_masx10 * MILLIARCSECx10_TO_RAD;</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    nut-&gt;<a class="code" href="struct_sky0___nut1980.html#aef39025a6d0b655f7ad0ffd9641762b6">dEps_rad</a> = epsSum_masx10 * MILLIARCSECx10_TO_RAD;</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;}</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
-<div class="line"><a name="l00326"></a><span class="lineno"><a class="line" href="sky0_8h.html#a5955058c81d1be6ec0e466900c52c69e">  326</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="sky0_8h.html#a5955058c81d1be6ec0e466900c52c69e">sky0_epsilonSpa</a>(<span class="keywordtype">double</span> t_cy, <a class="code" href="struct_sky0___nut1980.html">Sky0_Nut1980</a> *nut)<span class="comment"></span></div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment">/*! Calculate the obliquity of the ecliptic and the equation of the equinoxes</span></div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="comment"> \param[in]     t_cy    centuries since J2000.0, TT timescale</span></div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="comment"> \param[in,out] nut     [in]  field \a nut-&gt;dPsi_rad - Nutation in longitude Δψ,</span></div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="comment">                              as returned by function sky0_nutationSpa()</span></div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="comment">                              (radian)\n</span></div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="comment">                        [in]  field \a nut-&gt;dEps_rad - Nutation in obliquity Δε,</span></div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="comment">                              as returned by function sky0_nutationSpa()</span></div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="comment">                              (radian)\n</span></div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="comment">                        [out] field \a nut-&gt;eps0_rad - Mean obliquity of the</span></div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="comment">                              ecliptic ε0 (radian)\n</span></div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="comment">                        [out] field \a nut-&gt;eqEq_rad - Equation of the equinoxes</span></div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment">                              = Δψ * cos(ε0) (radian) Note: not seconds</span></div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="comment"> \par Reference</span></div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment">    Reda, I. and Andreas, A. (2003), &quot;Solar Position Algorithm</span></div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">    for Solar Radiation Applications&quot;, National Renewable Energy Laboratory,</span></div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment">    NREL publication no. NREL/TP-560-34302, section 3.5.1</span></div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment"> \par When to call this function</span></div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="comment">    The values calculated by this routine change only slowly. If using this</span></div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="comment">    routine as part of tracking a celestial object, using values that were</span></div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="comment">    calculated for the nearest hour will introduce almost imperceptible errors.</span></div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment">    So it need be called only once per hour. </span></div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;{</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    <span class="keywordtype">double</span> eps0_as;</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    <span class="keywordtype">double</span> u = t_cy/100.0;</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;    REQUIRE_NOT_NULL(nut);</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    eps0_as = 84381.448</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;              + u * (-4680.93</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;                   + u * (-1.55</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;                        + u * (1999.25</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;                             + u * (-51.38</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;                                  + u * (-249.67</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;                                       + u * (-39.05</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;                                            + u * (7.12</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;                                                 + u * (27.87</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;                                                      + u * (5.79</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;                                                           + u * 2.45)))))))));</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    nut-&gt;<a class="code" href="struct_sky0___nut1980.html#a0065d9c181b8403f9cd37237540bb004">eps0_rad</a> = arcsecToRad(eps0_as);</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    <span class="comment">// Calculate the Equation of the Equinoxes in radian (not in seconds, which</span></div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    <span class="comment">// is more usually done)</span></div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;   nut-&gt;<a class="code" href="struct_sky0___nut1980.html#a9c13083bb211839f27757fb90210af55">eqEq_rad</a> = nut-&gt;<a class="code" href="struct_sky0___nut1980.html#a9b0da8604707a438f6396f12d2c3994b">dPsi_rad</a> * cos(nut-&gt;<a class="code" href="struct_sky0___nut1980.html#a0065d9c181b8403f9cd37237540bb004">eps0_rad</a> + nut-&gt;<a class="code" href="struct_sky0___nut1980.html#aef39025a6d0b655f7ad0ffd9641762b6">dEps_rad</a>);</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;}</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; </div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160; </div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160; </div>
-<div class="line"><a name="l00376"></a><span class="lineno"><a class="line" href="sky0_8h.html#aa283558d4b41e1a3e71e46f98e4c9af6">  376</a></span>&#160;GLOBAL <span class="keywordtype">double</span> <a class="code" href="sky0_8h.html#aa283558d4b41e1a3e71e46f98e4c9af6">sky0_gmSiderealTimeSpa</a>(<span class="keywordtype">double</span> du)<span class="comment"></span></div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="comment">/*! Calculate the Greenwich mean sidereal time using the algorithm from the NREL</span></div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="comment">    SPA document. This is basically the IAU 1982 algorithm, but the various</span></div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="comment">    constants have been scaled in degrees.</span></div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="comment"> \returns    Greenwich Mean Sidereal Time (radian)</span></div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="comment"> \param[in]  du  days since J2000.0, UT1 timescale</span></div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;<span class="comment"> \par Reference</span></div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="comment">    Reda, I. and Andreas, A. (2003), &quot;Solar Position Algorithm</span></div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment">    for Solar Radiation Applications&quot;, National Renewable Energy Laboratory,</span></div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="comment">    NREL publication no. NREL/TP-560-34302, section 3.8.1 &amp; 3.8.2</span></div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment"> \par When to call this function</span></div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment">    If you are tracking a celestial object, you need not call this function</span></div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment">    directly. So long as you call sky0_appToTirs() every time around your</span></div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment">    control loop, it will call this function for you.</span></div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;{</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> B0 = 280.46061837 * DEG2RAD;        <span class="comment">// 67310.54841 s</span></div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> B1 = 360.98564736629 * DEG2RAD;     <span class="comment">// 86636.55536791 s</span></div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> B2 = 0.000387933 * DEG2RAD;         <span class="comment">// 0.093104 s</span></div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> B3 = (-1.0 / 38710000.0) * DEG2RAD; <span class="comment">// -6.2e-6 s</span></div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="preprocessor">#if 0</span></div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> B0d = 4.89496121274; <span class="comment">// 3579;</span></div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> B1d = 6.300388098984957;</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> B2d = 6.77070812713916E-06;</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> B3d = -4.50872966157151E-10;</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160; </div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    <span class="keywordtype">double</span> gmst_rad;        <span class="comment">// Greenwich Mean Sidereal Time (radian)</span></div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    <span class="keywordtype">double</span> tu;              <span class="comment">// Julian centuries since J2000.0, UT1 timescale</span></div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    </div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    tu = du / JUL_CENT;</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    gmst_rad = B0 + B1 * du + (tu * tu * (B2 + (tu * B3))); </div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160; </div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="instead-of-math_8h.html#a06e957a5e5c08a30b4ea3c02f2664405">normalize</a>(gmst_rad, TWOPI);</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;}</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160; </div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160; </div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160; </div>
-<div class="line"><a name="l00416"></a><span class="lineno"><a class="line" href="sky0_8h.html#a420b9af8dd92d7151d5ccc253c417954">  416</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="sky0_8h.html#a420b9af8dd92d7151d5ccc253c417954">sky0_appToTirs</a>(<span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *appV,</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;                           <span class="keywordtype">double</span>           j2kUT1_d,</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;                           <span class="keywordtype">double</span>           eqEq_rad,</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;                           <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *terInterV)<span class="comment"></span></div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="comment">/*! Convert a position in geocentric apparent coordinates to geocentric</span></div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="comment">    coordinates in the Terrestrial Intermediate Reference System. This is the </span></div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="comment">    first stage of converting apparent coordinates to topocentric coordinates.</span></div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="comment">    The resulting vector depends upon the current rotational position of the</span></div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="comment">    Earth. (For the second stage, to obtain topocentric coordinates, call</span></div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="comment">    routine sky_siteTirsToTopo()).</span></div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="comment"> \param[in] appV     Position vector of apparent place</span></div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="comment">                     (unit vector in equatorial coordinates)</span></div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="comment"> \param[in] j2kUT1_d days since J2000.0, UT1 timescale, as returned by function</span></div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="comment">                     sky_updateTimes() in the \a j2kUT1_d field of the</span></div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="comment">                     Sky_Times struct.</span></div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="comment"> \param[in] eqEq_rad Equation of the equinoxes (radian), as returned by function</span></div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment">                     sky0_epsilonSpa() in the \a eqEq_rad field of the</span></div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="comment">                     Sky0_Nut1980 struct.</span></div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="comment">   </span></div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="comment"> \param[out] terInterV  Position vector in Terrestrial Intermediate Ref System</span></div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="comment">   </span></div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="comment"> \par When to call this function</span></div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="comment">    When you have the position of a celestial object expressed in Apparent</span></div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="comment">    coordinates, use this function to convert it to Terrestrial coordinates at</span></div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="comment">    the relevant rotational position of the earth. (Effectively you are</span></div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment">    converting from Right Ascension and Declination to the negative of the</span></div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="comment">    Greenwich Hour Angle and Declination.)</span></div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="comment">    If you are running a control loop to enable continuous tracking</span></div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment">    of this object, you will need to call this function (once) every time around</span></div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="comment">    your control loop.</span></div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="comment"> \par</span></div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment">    Follow this function with a call to sky_siteTirsToTopo() to obtain the</span></div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment">    object&#39;s position in topocentric coordinates at the observing site.</span></div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;{</div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;    <span class="keywordtype">double</span>      gast_rad;   <span class="comment">// Greenwich Apparent Sidereal Time (GAST)</span></div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;    <a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a>  earthRotM;  <span class="comment">// rotation matrix for current GAST</span></div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160; </div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;    REQUIRE_NOT_NULL(appV);</div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;    REQUIRE_NOT_NULL(terInterV);</div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160; </div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;    <span class="comment">/* Get sidereal times */</span></div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;    gast_rad = <a class="code" href="sky0_8h.html#aa283558d4b41e1a3e71e46f98e4c9af6">sky0_gmSiderealTimeSpa</a>(j2kUT1_d) + eqEq_rad;</div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160; </div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;    <span class="comment">/* Create earth rotation matrix from the current Apparent Sidereal Time */</span></div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;    <a class="code" href="vectors3d_8h.html#af4f8f0d21389bf84d1321e6c7739c513">v3d_createRotationMatrix</a>(&amp;earthRotM, Zaxis, gast_rad);</div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160; </div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;    <span class="comment">/* Convert apparent posn to posn in Terrestrial Intermediate Ref System */</span></div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;    <a class="code" href="vectors3d_8h.html#a930a88294d68f9b66901b8eaf44305a5">v3d_multMxV</a>(terInterV, &amp;earthRotM, appV);</div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;}</div>
-<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160; </div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160; </div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;<span class="comment"> * Local functions (not called from other modules)</span></div>
-<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;<span class="comment">/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
-<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160; </div>
-<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160; </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">    It is quite likely that you will not need to call this function directly. It</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">    is used in the Solar Position Algorithm and the Moon Position Algorithm, so</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">    if you call sun_nrelApparent() or sun_nrelTopocentric(), or</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">    call moon_nrelApparent() or moon_nrelTopocentric(), those routines will call</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">    this routine for you. Likewise, if you are tracking the Sun or Moon using</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">    the skyfast module, the call to skyfast_init() will call either</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">    sun_nrelApparent() or moon_nrelApparent(), and therefore call this routine</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">    for you.</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment"> \par</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">    The values calculated by this routine change only slowly. So if you are</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">    calling it yourself, you can call it infrequently. Intervals of up to an</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">    hour between calls will not introduce much error.</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;{</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="comment">/* Fundamental Nutation arguments at date */</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordtype">double</span> l;   <span class="comment">// l  - mean anomaly of the Moon (radian) (usually called M?)</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordtype">double</span> lp;  <span class="comment">// l&#39; - mean anomaly of the Sun (Earth) (radian) (M&#39;?)</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="keywordtype">double</span> om;  <span class="comment">/* Ω  - longitude of the ascending node of the Moon&#39;s mean orbit</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">                        on the ecliptic, measured from the mean equinox of date</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">                        (radian) */</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keywordtype">double</span> d;   <span class="comment">// D  - mean elongation of the Moon from the Sun (radian)</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="keywordtype">double</span> f;   <span class="comment">// F  - Mean longitude of the Moon (L) minus mean longitude of</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;                <span class="comment">//      the Moon&#39;s node (radian), = L - Ω</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="keywordtype">double</span> psiSum_masx10;       <span class="comment">// Nutation in longitude (units - 0.1 mas)</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <span class="keywordtype">double</span> epsSum_masx10;       <span class="comment">// Nutation in obliquity (units - 0.1 mas)</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <span class="keywordtype">int</span> i;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keywordtype">double</span> a_rad;               <span class="comment">// angle - summation of args (radian)</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    REQUIRE_NOT_NULL(nut);</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="comment">// Calculate FUNDAMENTAL ARGUMENTS in the FK5 reference system</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="comment">// Mean elongation of the moon from the sun (called X0 in NREL SPA)</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    d = degToRad(297.85036 + t_cy * (445267.11148</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                                     + t_cy * (-0.0019142</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;                                               + t_cy * (1.0/189474.0))));</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="comment">// Solar Mean Anomaly = Mean longitude of the sun minus mean longitude of</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    <span class="comment">// the sun&#39;s perigee (called X1 in NREL SPA)</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    lp = degToRad(357.52772 + t_cy * (35999.05034</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;                                      + t_cy * (-0.0001603</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                                                + t_cy * (-1.0/300000.0))));</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    <span class="comment">// Lunar Mean Anomaly = Mean longitude of the moon minus mean longitude of</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    <span class="comment">// the moon &#39;s perigee (called X2 in NREL SPA)</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    l = degToRad(134.96298 + t_cy * (477198.867398</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                                     + t_cy * (0.0086972</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                                               + t_cy * (1.0/56250.0))));</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <span class="comment">// Mean longitude of the moon minus mean longitude of the moon&#39;s node</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <span class="comment">// (called X3 in NREL SPA and (mistakenly, I think) called the Moon&#39;s</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="comment">// Argument of Latitude)</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    f = degToRad(93.27191 + t_cy * (483202.017538</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                                    + t_cy * (-0.0036825</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                                              + t_cy * (1.0/327270.0))));</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <span class="comment">// Longitude of the mean ascending node of the lunar orbit on the</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    <span class="comment">// ecliptic, measured from the mean equinox of date (X4 in NREL SPA)</span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    om = degToRad(125.04452 + t_cy * (-1934.136261</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                                     + t_cy * (0.0020708</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                                               + t_cy * (1.0/450000.0))));</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="preprocessor">#if 0</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    printf(<span class="stringliteral">&quot;Nutation Args: d (X0) = %f°, lp (X1) = %f°, l (X2) = %f°\n&quot;</span></div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;           <span class="stringliteral">&quot;               f (X3) = %f°, om (X4) = %f°\n&quot;</span>,</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;           radToDeg(d), radToDeg(lp), radToDeg(l), radToDeg(f), radToDeg(om));</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    <span class="comment">// Multiply through the table of nutation co-efficients and add up all the</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <span class="comment">// terms.</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    psiSum_masx10 = 0.0;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    epsSum_masx10 = 0.0;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keywordflow">for</span> (i = 0; i &lt; Y_COUNT; i++) {</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        a_rad = d * Y_TERMS[i][0] + lp * Y_TERMS[i][1] + l * Y_TERMS[i][2]</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                              + f * Y_TERMS[i][3] + om * Y_TERMS[i][4];</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        psiSum_masx10 += sin(a_rad) * (PE_TERMS[i][TERM_PSI_A]</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;                                        + t_cy * PE_TERMS[i][TERM_PSI_B]);</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        epsSum_masx10 += cos(a_rad) * (PE_TERMS[i][TERM_EPS_C]</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;                                        + t_cy * PE_TERMS[i][TERM_EPS_D]);</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    }</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <span class="comment">// Convert results to radians</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    nut-&gt;<a class="code" href="struct_sky0___nut1980.html#a9b0da8604707a438f6396f12d2c3994b">dPsi_rad</a> = psiSum_masx10 * MILLIARCSECx10_TO_RAD;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    nut-&gt;<a class="code" href="struct_sky0___nut1980.html#aef39025a6d0b655f7ad0ffd9641762b6">dEps_rad</a> = epsSum_masx10 * MILLIARCSECx10_TO_RAD;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;}</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; </div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160; </div>
+<div class="line"><a name="l00334"></a><span class="lineno"><a class="line" href="sky0_8h.html#a5955058c81d1be6ec0e466900c52c69e">  334</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="sky0_8h.html#a5955058c81d1be6ec0e466900c52c69e">sky0_epsilonSpa</a>(<span class="keywordtype">double</span> t_cy, <a class="code" href="struct_sky0___nut1980.html">Sky0_Nut1980</a> *nut)<span class="comment"></span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="comment">/*! Calculate the obliquity of the ecliptic and the equation of the equinoxes</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="comment"> \param[in]     t_cy    centuries since J2000.0, TT timescale</span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="comment"> \param[in,out] nut     [in]  field \a nut-&gt;dPsi_rad - Nutation in longitude Δψ,</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment">                              as returned by function sky0_nutationSpa()</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="comment">                              (radian)\n</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="comment">                        [in]  field \a nut-&gt;dEps_rad - Nutation in obliquity Δε,</span></div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment">                              as returned by function sky0_nutationSpa()</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">                              (radian)\n</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment">                        [out] field \a nut-&gt;eps0_rad - Mean obliquity of the</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment">                              ecliptic ε0 (radian)\n</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment">                        [out] field \a nut-&gt;eqEq_rad - Equation of the equinoxes</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="comment">                              = Δψ * cos(ε0 + Δε) (radian) Note: not seconds</span></div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="comment"> \par Reference</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment">    Reda, I. and Andreas, A. (2003), &quot;Solar Position Algorithm</span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="comment">    for Solar Radiation Applications&quot;, National Renewable Energy Laboratory,</span></div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="comment">    NREL publication no. NREL/TP-560-34302, section 3.5.1</span></div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment"> \par When to call this function</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment">    It is quite likely that you will not need to call this function directly. It</span></div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="comment">    is used in the Solar Position Algorithm and the Moon Position Algorithm, so</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment">    if you call sun_nrelApparent() or sun_nrelTopocentric(), or</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment">    call moon_nrelApparent() or moon_nrelTopocentric(), those routines will call</span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">    this routine for you. Likewise, if you are tracking the Sun or Moon using</span></div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment">    the skyfast module, the call to skyfast_init() will call either</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment">    sun_nrelApparent() or moon_nrelApparent(), and therefore call this routine</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment">    for you.</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="comment"> \par</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="comment">    The values calculated by this routine change only slowly. So if you are</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="comment">    calling it yourself, you can call it infrequently. Intervals of up to an</span></div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="comment">    hour between calls will not introduce much error.</span></div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;{</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    <span class="keywordtype">double</span> eps0_as;</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    <span class="keywordtype">double</span> u = t_cy/100.0;</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; </div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    REQUIRE_NOT_NULL(nut);</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; </div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    eps0_as = 84381.448</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;              + u * (-4680.93</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;                   + u * (-1.55</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;                        + u * (1999.25</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;                             + u * (-51.38</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;                                  + u * (-249.67</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;                                       + u * (-39.05</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;                                            + u * (7.12</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;                                                 + u * (27.87</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;                                                      + u * (5.79</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;                                                           + u * 2.45)))))))));</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    nut-&gt;<a class="code" href="struct_sky0___nut1980.html#a0065d9c181b8403f9cd37237540bb004">eps0_rad</a> = arcsecToRad(eps0_as);</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    <span class="comment">// Calculate the Equation of the Equinoxes in radian (not in seconds, which</span></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    <span class="comment">// is more usually done)</span></div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;   nut-&gt;<a class="code" href="struct_sky0___nut1980.html#a9c13083bb211839f27757fb90210af55">eqEq_rad</a> = nut-&gt;<a class="code" href="struct_sky0___nut1980.html#a9b0da8604707a438f6396f12d2c3994b">dPsi_rad</a> * cos(nut-&gt;<a class="code" href="struct_sky0___nut1980.html#a0065d9c181b8403f9cd37237540bb004">eps0_rad</a> + nut-&gt;<a class="code" href="struct_sky0___nut1980.html#aef39025a6d0b655f7ad0ffd9641762b6">dEps_rad</a>);</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;}</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160; </div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160; </div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160; </div>
+<div class="line"><a name="l00392"></a><span class="lineno"><a class="line" href="sky0_8h.html#aa283558d4b41e1a3e71e46f98e4c9af6">  392</a></span>&#160;GLOBAL <span class="keywordtype">double</span> <a class="code" href="sky0_8h.html#aa283558d4b41e1a3e71e46f98e4c9af6">sky0_gmSiderealTimeSpa</a>(<span class="keywordtype">double</span> du)<span class="comment"></span></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment">/*! Calculate the Greenwich mean sidereal time using the algorithm from the NREL</span></div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="comment">    SPA document. This is basically the IAU 1982 algorithm, but the various</span></div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="comment">    constants have been scaled in degrees.</span></div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="comment"> \returns    Greenwich Mean Sidereal Time (radian)</span></div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="comment"> \param[in]  du  days since J2000.0, UT1 timescale</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="comment"> \par Reference</span></div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="comment">    Reda, I. and Andreas, A. (2003), &quot;Solar Position Algorithm</span></div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="comment">    for Solar Radiation Applications&quot;, National Renewable Energy Laboratory,</span></div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="comment">    NREL publication no. NREL/TP-560-34302, section 3.8.1 &amp; 3.8.2</span></div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="comment"> \par When to call this function</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="comment">    If you are tracking a celestial object, you need not call this function</span></div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="comment">    directly. So long as you call sky0_appToTirs() every time around your</span></div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="comment">    control loop, it will call this function for you.</span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;{</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> B0 = 280.46061837 * DEG2RAD;        <span class="comment">// 67310.54841 s</span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> B1 = 360.98564736629 * DEG2RAD;     <span class="comment">// 86636.55536791 s</span></div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> B2 = 0.000387933 * DEG2RAD;         <span class="comment">// 0.093104 s</span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> B3 = (-1.0 / 38710000.0) * DEG2RAD; <span class="comment">// -6.2e-6 s</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="preprocessor">#if 0</span></div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> B0d = 4.89496121274; <span class="comment">// 3579;</span></div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> B1d = 6.300388098984957;</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> B2d = 6.77070812713916E-06;</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> B3d = -4.50872966157151E-10;</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160; </div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;    <span class="keywordtype">double</span> gmst_rad;        <span class="comment">// Greenwich Mean Sidereal Time (radian)</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    <span class="keywordtype">double</span> tu;              <span class="comment">// Julian centuries since J2000.0, UT1 timescale</span></div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160; </div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    tu = du / JUL_CENT;</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;    gmst_rad = B0 + B1 * du + (tu * tu * (B2 + (tu * B3)));</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160; </div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="instead-of-math_8h.html#a06e957a5e5c08a30b4ea3c02f2664405">normalize</a>(gmst_rad, TWOPI);</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;}</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160; </div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160; </div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160; </div>
+<div class="line"><a name="l00432"></a><span class="lineno"><a class="line" href="sky0_8h.html#a420b9af8dd92d7151d5ccc253c417954">  432</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="sky0_8h.html#a420b9af8dd92d7151d5ccc253c417954">sky0_appToTirs</a>(<span class="keyword">const</span> <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *appV,</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;                           <span class="keywordtype">double</span>           j2kUT1_d,</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;                           <span class="keywordtype">double</span>           eqEq_rad,</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;                           <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *terInterV)<span class="comment"></span></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="comment">/*! Convert a position in geocentric apparent coordinates to geocentric</span></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="comment">    coordinates in the Terrestrial Intermediate Reference System. This is the</span></div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="comment">    first stage of converting apparent coordinates to topocentric coordinates.</span></div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="comment">    The resulting vector depends upon the current rotational position of the</span></div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="comment">    Earth. (For the second stage, to obtain topocentric coordinates, call</span></div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment">    routine sky_siteTirsToTopo()).</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="comment"> \param[in] appV     Position vector of apparent place</span></div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="comment">                     (unit vector in equatorial coordinates)</span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment"> \param[in] j2kUT1_d days since J2000.0, UT1 timescale, as returned by function</span></div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="comment">                     sky_updateTimes() in the \a j2kUT1_d field of the</span></div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="comment">                     Sky_Times struct.</span></div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment"> \param[in] eqEq_rad Equation of the equinoxes (radian), as returned by function</span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment">                     sky0_epsilonSpa() in the \a eqEq_rad field of the</span></div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="comment">                     Sky0_Nut1980 struct.</span></div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="comment"> \param[out] terInterV  Position vector in Terrestrial Intermediate Ref System</span></div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="comment"> \par When to call this function</span></div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="comment">    When you have the position of a celestial object expressed in Apparent</span></div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="comment">    coordinates, use this function to convert it to Terrestrial coordinates at</span></div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="comment">    the relevant rotational position of the earth. (Effectively you are</span></div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="comment">    converting from Right Ascension and Declination to the negative of the</span></div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="comment">    Greenwich Hour Angle and Declination.)</span></div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="comment">    If you are running a control loop to enable continuous tracking</span></div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;<span class="comment">    of this object, you will need to call this function (once) every time around</span></div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;<span class="comment">    your control loop.</span></div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;<span class="comment"> \par</span></div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<span class="comment">    Follow this function with a call to sky_siteTirsToTopo() to obtain the</span></div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;<span class="comment">    object&#39;s position in topocentric coordinates at the observing site.</span></div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;{</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;    <span class="keywordtype">double</span>      gast_rad;   <span class="comment">// Greenwich Apparent Sidereal Time (GAST)</span></div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;    <a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a>  earthRotM;  <span class="comment">// rotation matrix for current GAST</span></div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160; </div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;    REQUIRE_NOT_NULL(appV);</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;    REQUIRE_NOT_NULL(terInterV);</div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160; </div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;    <span class="comment">/* Get sidereal times */</span></div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;    gast_rad = <a class="code" href="sky0_8h.html#aa283558d4b41e1a3e71e46f98e4c9af6">sky0_gmSiderealTimeSpa</a>(j2kUT1_d) + eqEq_rad;</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160; </div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;    <span class="comment">/* Create earth rotation matrix from the current Apparent Sidereal Time */</span></div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;    <a class="code" href="vectors3d_8h.html#af4f8f0d21389bf84d1321e6c7739c513">v3d_createRotationMatrix</a>(&amp;earthRotM, Zaxis, gast_rad);</div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160; </div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;    <span class="comment">/* Convert apparent posn to posn in Terrestrial Intermediate Ref System */</span></div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;    <a class="code" href="vectors3d_8h.html#a930a88294d68f9b66901b8eaf44305a5">v3d_multMxV</a>(terInterV, &amp;earthRotM, appV);</div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;}</div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160; </div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160; </div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;<span class="comment"> * Local functions (not called from other modules)</span></div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;<span class="comment">/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160; </div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="asky0_8h_html_aa283558d4b41e1a3e71e46f98e4c9af6"><div class="ttname"><a href="sky0_8h.html#aa283558d4b41e1a3e71e46f98e4c9af6">sky0_gmSiderealTimeSpa</a></div><div class="ttdeci">double sky0_gmSiderealTimeSpa(double du)</div><div class="ttdoc">Calculate the Greenwich mean sidereal time using the algorithm from the NREL SPA document.</div><div class="ttdef"><b>Definition:</b> <a href="sky0_8c_source.html#l00376">sky0.c:376</a></div></div>
+<div class="ttc" id="asky0_8h_html_aa283558d4b41e1a3e71e46f98e4c9af6"><div class="ttname"><a href="sky0_8h.html#aa283558d4b41e1a3e71e46f98e4c9af6">sky0_gmSiderealTimeSpa</a></div><div class="ttdeci">double sky0_gmSiderealTimeSpa(double du)</div><div class="ttdoc">Calculate the Greenwich mean sidereal time using the algorithm from the NREL SPA document.</div><div class="ttdef"><b>Definition:</b> <a href="sky0_8c_source.html#l00392">sky0.c:392</a></div></div>
 <div class="ttc" id="asky0_8h_html_a7a264cd6849a45a5edc1c660c8b76aa6"><div class="ttname"><a href="sky0_8h.html#a7a264cd6849a45a5edc1c660c8b76aa6">sky0_nutationSpa</a></div><div class="ttdeci">void sky0_nutationSpa(double t_cy, Sky0_Nut1980 *nut)</div><div class="ttdoc">Calculates the nutation in longitude and obliquity, according to the algorithm set out in the NREL SP...</div><div class="ttdef"><b>Definition:</b> <a href="sky0_8c_source.html#l00222">sky0.c:222</a></div></div>
 <div class="ttc" id="aastron_8h_html"><div class="ttname"><a href="astron_8h.html">astron.h</a></div><div class="ttdoc">astron.h - assorted definitions useful for astronomy</div></div>
-<div class="ttc" id="asky0_8h_html_a420b9af8dd92d7151d5ccc253c417954"><div class="ttname"><a href="sky0_8h.html#a420b9af8dd92d7151d5ccc253c417954">sky0_appToTirs</a></div><div class="ttdeci">void sky0_appToTirs(const V3D_Vector *appV, double j2kUT1_d, double eqEq_rad, V3D_Vector *terInterV)</div><div class="ttdoc">Convert a position in geocentric apparent coordinates to geocentric coordinates in the Terrestrial In...</div><div class="ttdef"><b>Definition:</b> <a href="sky0_8c_source.html#l00416">sky0.c:416</a></div></div>
+<div class="ttc" id="asky0_8h_html_a420b9af8dd92d7151d5ccc253c417954"><div class="ttname"><a href="sky0_8h.html#a420b9af8dd92d7151d5ccc253c417954">sky0_appToTirs</a></div><div class="ttdeci">void sky0_appToTirs(const V3D_Vector *appV, double j2kUT1_d, double eqEq_rad, V3D_Vector *terInterV)</div><div class="ttdoc">Convert a position in geocentric apparent coordinates to geocentric coordinates in the Terrestrial In...</div><div class="ttdef"><b>Definition:</b> <a href="sky0_8c_source.html#l00432">sky0.c:432</a></div></div>
 <div class="ttc" id="astruct_sky0___nut1980_html_a9b0da8604707a438f6396f12d2c3994b"><div class="ttname"><a href="struct_sky0___nut1980.html#a9b0da8604707a438f6396f12d2c3994b">Sky0_Nut1980::dPsi_rad</a></div><div class="ttdeci">double dPsi_rad</div><div class="ttdoc">Nutation in longitude (Δψ) (radian)</div><div class="ttdef"><b>Definition:</b> <a href="sky0_8h_source.html#l00074">sky0.h:74</a></div></div>
 <div class="ttc" id="astruct_sky0___nut1980_html_aef39025a6d0b655f7ad0ffd9641762b6"><div class="ttname"><a href="struct_sky0___nut1980.html#aef39025a6d0b655f7ad0ffd9641762b6">Sky0_Nut1980::dEps_rad</a></div><div class="ttdeci">double dEps_rad</div><div class="ttdoc">Nutation in obliquity (Δε) (radian)</div><div class="ttdef"><b>Definition:</b> <a href="sky0_8h_source.html#l00075">sky0.h:75</a></div></div>
-<div class="ttc" id="asky0_8h_html_a5955058c81d1be6ec0e466900c52c69e"><div class="ttname"><a href="sky0_8h.html#a5955058c81d1be6ec0e466900c52c69e">sky0_epsilonSpa</a></div><div class="ttdeci">void sky0_epsilonSpa(double t_cy, Sky0_Nut1980 *nut)</div><div class="ttdoc">Calculate the obliquity of the ecliptic and the equation of the equinoxes.</div><div class="ttdef"><b>Definition:</b> <a href="sky0_8c_source.html#l00326">sky0.c:326</a></div></div>
+<div class="ttc" id="asky0_8h_html_a5955058c81d1be6ec0e466900c52c69e"><div class="ttname"><a href="sky0_8h.html#a5955058c81d1be6ec0e466900c52c69e">sky0_epsilonSpa</a></div><div class="ttdeci">void sky0_epsilonSpa(double t_cy, Sky0_Nut1980 *nut)</div><div class="ttdoc">Calculate the obliquity of the ecliptic and the equation of the equinoxes.</div><div class="ttdef"><b>Definition:</b> <a href="sky0_8c_source.html#l00334">sky0.c:334</a></div></div>
 <div class="ttc" id="astruct_v3_d___matrix_html"><div class="ttname"><a href="struct_v3_d___matrix.html">V3D_Matrix</a></div><div class="ttdoc">3x3 matrix.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8h_source.html#l00051">vectors3d.h:51</a></div></div>
 <div class="ttc" id="ainstead-of-math_8h_html"><div class="ttname"><a href="instead-of-math_8h.html">instead-of-math.h</a></div><div class="ttdoc">instead-of-math.h - header to be included instead of math.h</div></div>
 <div class="ttc" id="astruct_v3_d___vector_html"><div class="ttname"><a href="struct_v3_d___vector.html">V3D_Vector</a></div><div class="ttdoc">3x1 vector.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8h_source.html#l00057">vectors3d.h:57</a></div></div>

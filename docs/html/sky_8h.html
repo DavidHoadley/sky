@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.2-1</span>
+   &#160;<span id="projectnumber">0.1.4-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -105,7 +105,7 @@ Data Structures</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coordinates of a celestial object in the horizon frame, in both rectangular and polar forms.  <a href="struct_sky___site_horizon.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_sky___delta_ts.html">Sky_DeltaTs</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This structure contains relatively constant data, and is set up by one of the three functions <a class="el" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a" title="Set up the various delta time values for use in ongoing calculations.">sky_initTime()</a>, <a class="el" href="sky_8h.html#a15ad9a782e54212cb22bd0658b6541a0" title="Initialise delta times with simple default values.">sky_initTimeSimple()</a> or <a class="el" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902" title="Set up the various delta time values for use in ongoing calculations.">sky_initTimeDetailed()</a>.  <a href="struct_sky___delta_ts.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This structure contains relatively constant data, and is set up by one of the three functions <a class="el" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a" title="This is one of three alternative routines for setting up the various delta time values for use in ong...">sky_initTime()</a>, <a class="el" href="sky_8h.html#a15ad9a782e54212cb22bd0658b6541a0" title="This is one of three alternative routines for setting up the various delta time values for use in ong...">sky_initTimeSimple()</a> or <a class="el" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902" title="This is one of three alternative routines for setting up the various delta time values for use in ong...">sky_initTimeDetailed()</a>.  <a href="struct_sky___delta_ts.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_sky___times.html">Sky_Times</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This structure contains the continuously varying time (and earth rotation) data, in various forms that we will find useful.  <a href="struct_sky___times.html#details">More...</a><br /></td></tr>
@@ -120,13 +120,13 @@ Data Structures</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:abf770ba7cb996e73f59f41f24b172e3a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a">sky_initTime</a> (int deltaAT_s, double deltaUT_s, <a class="el" href="struct_sky___delta_ts.html">Sky_DeltaTs</a> *d)</td></tr>
-<tr class="memdesc:abf770ba7cb996e73f59f41f24b172e3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up the various delta time values for use in ongoing calculations.  <a href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a">More...</a><br /></td></tr>
+<tr class="memdesc:abf770ba7cb996e73f59f41f24b172e3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is one of three alternative routines for setting up the various delta time values for use in ongoing calculations.  <a href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a">More...</a><br /></td></tr>
 <tr class="separator:abf770ba7cb996e73f59f41f24b172e3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15ad9a782e54212cb22bd0658b6541a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sky_8h.html#a15ad9a782e54212cb22bd0658b6541a0">sky_initTimeSimple</a> (<a class="el" href="struct_sky___delta_ts.html">Sky_DeltaTs</a> *d)</td></tr>
-<tr class="memdesc:a15ad9a782e54212cb22bd0658b6541a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise delta times with simple default values.  <a href="sky_8h.html#a15ad9a782e54212cb22bd0658b6541a0">More...</a><br /></td></tr>
+<tr class="memdesc:a15ad9a782e54212cb22bd0658b6541a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is one of three alternative routines for setting up the various delta time values for use in ongoing calculations.  <a href="sky_8h.html#a15ad9a782e54212cb22bd0658b6541a0">More...</a><br /></td></tr>
 <tr class="separator:a15ad9a782e54212cb22bd0658b6541a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4295dc6df66f02c4def3160782a06902"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902">sky_initTimeDetailed</a> (double mjdUtc, double usnoMjdBase, double usnoCoeffC11, double usnoCoeffC12, int deltaAT_s, <a class="el" href="struct_sky___delta_ts.html">Sky_DeltaTs</a> *d)</td></tr>
-<tr class="memdesc:a4295dc6df66f02c4def3160782a06902"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up the various delta time values for use in ongoing calculations.  <a href="sky_8h.html#a4295dc6df66f02c4def3160782a06902">More...</a><br /></td></tr>
+<tr class="memdesc:a4295dc6df66f02c4def3160782a06902"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is one of three alternative routines for setting up the various delta time values for use in ongoing calculations.  <a href="sky_8h.html#a4295dc6df66f02c4def3160782a06902">More...</a><br /></td></tr>
 <tr class="separator:a4295dc6df66f02c4def3160782a06902"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ea25f7ed8d0a77b756ec42e628fd4ee"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sky_8h.html#a9ea25f7ed8d0a77b756ec42e628fd4ee">sky_calTimeToJ2kd</a> (int year, int month, int day, int hour, int minute, double second, double tz_h)</td></tr>
 <tr class="memdesc:a9ea25f7ed8d0a77b756ec42e628fd4ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of days (and fraction of a day) since noon 2000 Jan 1 (UTC) of the given calendar date and time.  <a href="sky_8h.html#a9ea25f7ed8d0a77b756ec42e628fd4ee">More...</a><br /></td></tr>
@@ -134,8 +134,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a1aee1eec802ff35faf9ac14a73c8d129"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sky_8h.html#a1aee1eec802ff35faf9ac14a73c8d129">sky_unixTimeToJ2kd</a> (time_t unixTime)</td></tr>
 <tr class="memdesc:a1aee1eec802ff35faf9ac14a73c8d129"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a time in Unix system time format to days since 2000 Jan 1, noon UTC.  <a href="sky_8h.html#a1aee1eec802ff35faf9ac14a73c8d129">More...</a><br /></td></tr>
 <tr class="separator:a1aee1eec802ff35faf9ac14a73c8d129"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7513b8f36999901f10d8d430695b327"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sky_8h.html#af7513b8f36999901f10d8d430695b327">sky_unixTimespecToJ2kd</a> (struct timespec uTs)</td></tr>
-<tr class="memdesc:af7513b8f36999901f10d8d430695b327"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a time in Unix timespec format to days since 2000 Jan 1, noon UTC.  <a href="sky_8h.html#af7513b8f36999901f10d8d430695b327">More...</a><br /></td></tr>
+<tr class="memitem:af7513b8f36999901f10d8d430695b327"><td class="memItemLeft" align="right" valign="top"><a id="af7513b8f36999901f10d8d430695b327"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>sky_unixTimespecToJ2kd</b> (struct timespec uTs)</td></tr>
 <tr class="separator:af7513b8f36999901f10d8d430695b327"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a348fbf0f078de1a802c81696f999913e"><td class="memItemLeft" align="right" valign="top"><a id="a348fbf0f078de1a802c81696f999913e"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>sky_calTimeToMjd</b> (int year, int month, int day, int hour, int minute, double second, double tz_h)</td></tr>
@@ -208,7 +208,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 </ul>
 <p>You will need to separately include one of the following modules:</p><ul>
 <li><a class="el" href="sky0_8h.html" title="sky0.h - astronomical coordinate conversion for NREL Sun Position Algorithm">sky0.h</a> (and <a class="el" href="sky0_8c_source.html">sky0.c</a>) for nutation routines and sidereal time routines suitable for tracking the Sun or the Moon using the NREL Solar Position Algorithm and Moon Position Algorithm</li>
-<li>(future) sky1.h (and sky1.c) for IAU 1980 precession, nutation and sidereal time routines, suitable for tracking stars</li>
+<li>(future) <a class="el" href="sky1_8h.html" title="sky1.h - astronomical coordinate conversion routines, IAU 1980">sky1.h</a> (and <a class="el" href="sky1_8c_source.html">sky1.c</a>) for IAU 1980 precession, nutation and sidereal time routines, suitable for tracking stars</li>
 <li>(future) sky2.h (and sky2.c) for IAU 2000 precession, nutation and sidereal time routines, suitable for tracking stars</li>
 </ul>
 <hr  />
@@ -247,8 +247,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
       </table>
 </div><div class="memdoc">
 
-<p>Set up the various delta time values for use in ongoing calculations. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>This is one of three alternative routines for setting up the various delta time values for use in ongoing calculations. </p>
+<p>(The other two are <a class="el" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902" title="This is one of three alternative routines for setting up the various delta time values for use in ong...">sky_initTimeDetailed()</a> and <a class="el" href="sky_8h.html#a15ad9a782e54212cb22bd0658b6541a0" title="This is one of three alternative routines for setting up the various delta time values for use in ong...">sky_initTimeSimple()</a>). For an explanation of these delta times, see <a class="el" href="page-timescales.html">Timescales, and converting between them</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">deltaAT_s</td><td>(= TAI - UTC). Cumulative number of leap seconds (seconds) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">deltaUT_s</td><td>(= UT1 - UTC) (seconds). Valid range [-0.9,+0.9] </td></tr>
@@ -261,7 +261,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
   </table>
   </dd>
 </dl>
-<dl class="section user"><dt>When to call this function</dt><dd>Call at program startup time. Use this routine if you have opted for option 3A, 3B or 3D in the note at the bottom of this file (see <a class="el" href="page-timescales.html">Timescales, and converting between them</a>). (Use <a class="el" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902" title="Set up the various delta time values for use in ongoing calculations.">sky_initTimeDetailed()</a> if you have opted for option 3C.)</dd></dl>
+<dl class="section user"><dt>When to call this function</dt><dd>Call at program startup time. Use this routine if you have opted for option 3A, 3B or 3D in the note at the bottom of this file (see <a class="el" href="page-timescales.html">Timescales, and converting between them</a>). (Use <a class="el" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902" title="This is one of three alternative routines for setting up the various delta time values for use in ong...">sky_initTimeDetailed()</a> if you have opted for option 3C.)</dd></dl>
 <hr  />
  <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_sun_8c-example.html#a4">demo1_sun.c</a>, <a class="el" href="demo2_sun_tracking_8c-example.html#a4">demo2_sun_tracking.c</a>, and <a class="el" href="demo3_moon_8c-example.html#a3">demo3_moon.c</a>.</dd>
 </dl>
@@ -286,8 +286,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
       </table>
 </div><div class="memdoc">
 
-<p>Initialise delta times with simple default values. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>This is one of three alternative routines for setting up the various delta time values for use in ongoing calculations. </p>
+<p>(The other two are <a class="el" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a" title="This is one of three alternative routines for setting up the various delta time values for use in ong...">sky_initTime()</a> and <a class="el" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902" title="This is one of three alternative routines for setting up the various delta time values for use in ong...">sky_initTimeDetailed()</a>). This function initialises the delta times with simnple default values. For an explanation of these delta times, see <a class="el" href="page-timescales.html">Timescales, and converting between them</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">d</td><td>Fields initialised as follows:<ul>
 <li><em>d-&gt;deltaUT_d</em> initialised to 0.0</li>
@@ -298,10 +298,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
   </table>
   </dd>
 </dl>
-<dl class="section user"><dt>When to call this function</dt><dd>Call this function at program startup time. Use this routine if you don't need the high accuracy of sub-second time. But if you do need it, call <a class="el" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a" title="Set up the various delta time values for use in ongoing calculations.">sky_initTime()</a> or <a class="el" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902" title="Set up the various delta time values for use in ongoing calculations.">sky_initTimeDetailed()</a> instead.</dd></dl>
+<dl class="section user"><dt>When to call this function</dt><dd>Call this function at program startup time. Use this routine if you don't need the high accuracy of sub-second time. But if you do need it, call <a class="el" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a" title="This is one of three alternative routines for setting up the various delta time values for use in ong...">sky_initTime()</a> or <a class="el" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902" title="This is one of three alternative routines for setting up the various delta time values for use in ong...">sky_initTimeDetailed()</a> instead.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00176">176</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00181">181</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
 </div>
@@ -355,8 +355,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
       </table>
 </div><div class="memdoc">
 
-<p>Set up the various delta time values for use in ongoing calculations. </p>
-<p>This version of the function uses a prediction formula to calculate the value of delta_UT, rather than having it specified directly. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>This is one of three alternative routines for setting up the various delta time values for use in ongoing calculations. </p>
+<p>(The other two are <a class="el" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a" title="This is one of three alternative routines for setting up the various delta time values for use in ong...">sky_initTime()</a> and <a class="el" href="sky_8h.html#a15ad9a782e54212cb22bd0658b6541a0" title="This is one of three alternative routines for setting up the various delta time values for use in ong...">sky_initTimeSimple()</a>). This routine uses a prediction formula to calculate the value of delta_UT, rather than having it specified directly. For an explanation of these delta times, see <a class="el" href="page-timescales.html">Timescales, and converting between them</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">mjdUtc</td><td>Modified Julian Date (= JD - 2 400 000.5), UTC timescale </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">usnoMjdBase,usnoCoeffC11,usnoCoeffC12</td><td>US Naval Observatory prediction formula values. These three values are obtained from "Bulletin A" of the International Earth Rotation Service (IERS), updated at the IERS (&amp; USNO) website from time to time (see <a class="el" href="page-timescales.html">Timescales, and converting between them</a>) </td></tr>
@@ -370,12 +370,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
   </table>
   </dd>
 </dl>
-<dl class="section user"><dt>When to call this function</dt><dd>Call this function at program startup time. Use this routine if you have opted for option 3C in the note at the bottom of this file (see <a class="el" href="page-timescales.html">Timescales, and converting between them</a>). (Use <a class="el" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a" title="Set up the various delta time values for use in ongoing calculations.">sky_initTime()</a> instead, if you have opted for option 3A, 3B or 3D.) If your program runs uninterrupted for many days, you may wish to call this function once per day with an updated value for <em>mjdUtc</em>.</dd></dl>
+<dl class="section user"><dt>When to call this function</dt><dd>Call this function at program startup time. Use this routine if you have opted for option 3C in the note at the bottom of this file (see <a class="el" href="page-timescales.html">Timescales, and converting between them</a>). (Use <a class="el" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a" title="This is one of three alternative routines for setting up the various delta time values for use in ong...">sky_initTime()</a> instead, if you have opted for option 3A, 3B or 3D.) If your program runs uninterrupted for many days, you may wish to call this function once per day with an updated value for <em>mjdUtc</em>.</dd></dl>
 <hr  />
  <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo4_multiple_sites_8c-example.html#a7">demo4_multiple_sites.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00131">131</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00134">134</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
 </div>
@@ -436,20 +436,21 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 </div><div class="memdoc">
 
 <p>Return the number of days (and fraction of a day) since noon 2000 Jan 1 (UTC) of the given calendar date and time. </p>
-<dl class="section return"><dt>Returns</dt><dd>days since Julian date 2 451 545.0, UTC timescale </dd></dl>
+<p>This is one of three alternative routines that return a J2KD - the other two are <a class="el" href="sky_8h.html#a1aee1eec802ff35faf9ac14a73c8d129" title="Convert a time in Unix system time format to days since 2000 Jan 1, noon UTC.">sky_unixTimeToJ2kd()</a> and sky_unixTimespecToJ2kd(). </p><dl class="section return"><dt>Returns</dt><dd>days since Julian date 2 451 545.0, UTC timescale </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">year,month,day</td><td>calendar date </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">hour</td><td>valid range [0, 23] </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">minute</td><td>valid range [0, 59] </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">second</td><td>valid range [0.0, 60.0) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tz_h</td><td>time zone offset (hours), positive for zones east of Greenwich (e.g. Australian time zones AEST = +10.0, ACST = +9.5, AEDT = +11.0; UTC = 0.0; USA time zones are negative)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tz_h</td><td>time zone offset (hours), positive for zones east of Greenwich (e.g. Australian time zones AEST = +10.0, ACST = +9.5, AEDT = +11.0; UTC = 0.0; USA time zones are negative) </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section user"><dt>When to call this routine</dt><dd>Call this (or one of the alternative routines) before each call to <a class="el" href="sky_8h.html#a03279243991e42a3edbeaac243ae2dc7" title="Convert the given &quot;J2KD&quot; in the UTC timescale to the other timescales, and pre-calculate some other q...">sky_updateTimes()</a>.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00226">226</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00241">241</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
 </div>
@@ -470,49 +471,20 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 </div><div class="memdoc">
 
 <p>Convert a time in Unix system time format to days since 2000 Jan 1, noon UTC. </p>
-<dl class="section return"><dt>Returns</dt><dd>days since Julian Date 2 451 545.0, UTC timescale </dd></dl>
+<p>This is one of three alternative routines that return a J2KD - the other two are <a class="el" href="sky_8h.html#a9ea25f7ed8d0a77b756ec42e628fd4ee" title="Return the number of days (and fraction of a day) since noon 2000 Jan 1 (UTC) of the given calendar d...">sky_calTimeToJ2kd()</a> and sky_unixTimespecToJ2kd(). </p><dl class="section return"><dt>Returns</dt><dd>days since Julian Date 2 451 545.0, UTC timescale </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">unixTime</td><td>- time in C standard <code>time_t</code> (or unix) format ((sort of) seconds since 1-Jan-1970 UTC)</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>This routine has no better resolution than one second. Use routine sky_unixTimespecToMjd() or sky_calTimeToMjd() instead, if you need sub-second resolution</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This routine has no better resolution than one second. Use routine sky_unixTimespecToMjd() or sky_calTimeToMjd() instead, if you need sub-second resolution. </dd></dl>
+<dl class="section user"><dt>When to call this routine</dt><dd>Call this (or one of the alternative routines) before each call to <a class="el" href="sky_8h.html#a03279243991e42a3edbeaac243ae2dc7" title="Convert the given &quot;J2KD&quot; in the UTC timescale to the other timescales, and pre-calculate some other q...">sky_updateTimes()</a>.</dd></dl>
 <hr  />
  <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_sun_8c-example.html#a14">demo1_sun.c</a>, <a class="el" href="demo2_sun_tracking_8c-example.html#a14">demo2_sun_tracking.c</a>, <a class="el" href="demo3_moon_8c-example.html#a13">demo3_moon.c</a>, and <a class="el" href="demo4_multiple_sites_8c-example.html#a6">demo4_multiple_sites.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00255">255</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
-
-</div>
-</div>
-<a id="af7513b8f36999901f10d8d430695b327"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7513b8f36999901f10d8d430695b327">&#9670;&nbsp;</a></span>sky_unixTimespecToJ2kd()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double sky_unixTimespecToJ2kd </td>
-          <td>(</td>
-          <td class="paramtype">struct timespec&#160;</td>
-          <td class="paramname"><em>uTs</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Convert a time in Unix timespec format to days since 2000 Jan 1, noon UTC. </p>
-<dl class="section return"><dt>Returns</dt><dd>days since Julian Date 2 451 545.0, UTC timescale </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">uTs</td><td>- time in "timespec" format, a combination of (sort of) seconds since 1-Jan-1970 UTC, and nanoseconds of the current second. This is the form returned by the POSIX <code>clock_gettime()</code> function.</td></tr>
-  </table>
-  </dd>
-</dl>
-<hr  />
- 
-<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00271">271</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00275">275</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
 </div>
@@ -551,18 +523,19 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 <p>Convert the given "J2KD" in the UTC timescale to the other timescales, and pre-calculate some other quantities. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">j2kUtc_d</td><td>Date in "J2KD" form - i.e. the number of days elapsed since 2000 Jan 1.5 (= JD - 2 451 545.0), UTC timescale </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">d</td><td>The various delta T values as set by one of <a class="el" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a" title="Set up the various delta time values for use in ongoing calculations.">sky_initTime()</a>, <a class="el" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902" title="Set up the various delta time values for use in ongoing calculations.">sky_initTimeDetailed()</a> or <a class="el" href="sky_8h.html#a15ad9a782e54212cb22bd0658b6541a0" title="Initialise delta times with simple default values.">sky_initTimeSimple()</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">j2kUtc_d</td><td>Date in "J2KD" form - i.e. the number of days elapsed since 2000 Jan 1.5 (= JD - 2 451 545.0), UTC timescale, as returned by <a class="el" href="sky_8h.html#a9ea25f7ed8d0a77b756ec42e628fd4ee" title="Return the number of days (and fraction of a day) since noon 2000 Jan 1 (UTC) of the given calendar d...">sky_calTimeToJ2kd()</a>, <a class="el" href="sky_8h.html#a1aee1eec802ff35faf9ac14a73c8d129" title="Convert a time in Unix system time format to days since 2000 Jan 1, noon UTC.">sky_unixTimeToJ2kd()</a> or sky_unixTimespecToJ2kd(). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">d</td><td>The various delta T values as set by one of <a class="el" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a" title="This is one of three alternative routines for setting up the various delta time values for use in ong...">sky_initTime()</a>, <a class="el" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902" title="This is one of three alternative routines for setting up the various delta time values for use in ong...">sky_initTimeDetailed()</a> or <a class="el" href="sky_8h.html#a15ad9a782e54212cb22bd0658b6541a0" title="This is one of three alternative routines for setting up the various delta time values for use in ong...">sky_initTimeSimple()</a> </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">t</td><td>All fields are updated</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section user"><dt>Reference</dt><dd><em>Astronomical Almanac</em> 2007, page B9 (for Earth Rotation Angle)</dd></dl>
+<dl class="section user"><dt>When to call this function</dt><dd>Call this routine before calling any routine that calculates a celestial position.</dd></dl>
 <hr  />
  <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo4_multiple_sites_8c-example.html#a13">demo4_multiple_sites.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00197">197</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00206">206</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
 </div>
@@ -619,7 +592,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 <dl class="section note"><dt>Note</dt><dd>Every time this routine is called, the routine <a class="el" href="sky_8h.html#a297ba340f931e59201a108c6a9e67800" title="Modify our azEl rotation matrix to incorporate a polar motion rotation matrix.">sky_adjustSiteForPolarMotion()</a> must be called for every site. (Typically this will be only one site.)</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00522">522</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00570">570</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
 </div>
@@ -693,7 +666,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sky_mjdToCalTime</b> 
 <dl class="section user"><dt></dt><dd>If <em>second</em> turns out to be within half a millisecond of the next round minute, this routine rounds time upwards.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00286">286</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky-time_8c_source.html#l00321">321</a> of file <a class="el" href="sky-time_8c_source.html">sky-time.c</a>.</p>
 
 </div>
 </div>

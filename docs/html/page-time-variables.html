@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.2-1</span>
+   &#160;<span id="projectnumber">0.1.4-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -97,10 +97,10 @@ $(document).ready(function(){initNavTree('page-time-variables.html',''); initRes
 <li>J2KM (My abbreviation). Julian millennia since Greenwich noon, 2000-01-01. Equals J2KC ÷ 10</li>
 </ul>
 <p>Typically the two above will be used for times in the TT timescale.</p><ul>
-<li>Julian epoch. J[2000.0 + J2KD / 365.25], TT timescale. This is used for star catalogue positions. For example, J2000.0 is JD 2 451 545.0. And 2-Jul-2020 3:00:00 (TT) is J2020.5</li>
-<li>There is also the Besselian epoch (e.g. B1950.0). Not used here.</li>
+<li>Julian epoch (e.g. J2000.0 or J2020.5). Calculated from J[2000.0 + J2KD / 365.25], TT timescale. This is used for star catalogue positions. For example, J2000.0 is JD 2 451 545.0. And 2-Jul-2020 3:00:00 (TT) is J2020.5</li>
+<li>Besselian epoch (e.g. B1950.0). This is calculated from B[1900.0 + JD - (2 415 020.313 52) / 365.242 198 781]. So B1950.0 is JD 2 433 282.423. Besselian epochs are often associated with FK4 catalogue positions. These are not supported by this software (yet).</li>
 </ul>
-<p>Many astronomical algorithms use one of the forms based on time since J2000.0 (i.e. either J2KD, J2KC or J2KM) as their time variable. For this reason, the conversion routines from calendar date/time (<a class="el" href="sky_8h.html#a9ea25f7ed8d0a77b756ec42e628fd4ee" title="Return the number of days (and fraction of a day) since noon 2000 Jan 1 (UTC) of the given calendar d...">sky_calTimeToJ2kd()</a>)and from the unix <code>time_t</code> and <code>timespec</code> formats (<a class="el" href="sky_8h.html#a1aee1eec802ff35faf9ac14a73c8d129" title="Convert a time in Unix system time format to days since 2000 Jan 1, noon UTC.">sky_unixTimeToJ2kd()</a> and <a class="el" href="sky_8h.html#af7513b8f36999901f10d8d430695b327" title="Convert a time in Unix timespec format to days since 2000 Jan 1, noon UTC.">sky_unixTimespecToJ2kd()</a>) return a variable in the J2KD form (rather than the JD or MJD forms). </p>
+<p>Many astronomical algorithms use one of the forms based on time since J2000.0 (i.e. either J2KD, J2KC or J2KM) as their time variable. For this reason, the conversion routines from calendar date/time (<a class="el" href="sky_8h.html#a9ea25f7ed8d0a77b756ec42e628fd4ee" title="Return the number of days (and fraction of a day) since noon 2000 Jan 1 (UTC) of the given calendar d...">sky_calTimeToJ2kd()</a>)and from the unix <code>time_t</code> and <code>timespec</code> formats (<a class="el" href="sky_8h.html#a1aee1eec802ff35faf9ac14a73c8d129" title="Convert a time in Unix system time format to days since 2000 Jan 1, noon UTC.">sky_unixTimeToJ2kd()</a> and sky_unixTimespecToJ2kd()) return a variable in the J2KD form (rather than the JD or MJD forms). </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

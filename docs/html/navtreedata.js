@@ -32,6 +32,7 @@ var NAVTREE =
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ],
+    [ "About this code, and how to use it", "page-about.html", "page-about" ],
     [ "Conventions used in this code", "page-conventions.html", "page-conventions" ],
     [ "About time", "page-time.html", "page-time" ],
     [ "Miscellaneous", "page-misc.html", "page-misc" ],

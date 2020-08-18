@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.2-1</span>
+   &#160;<span id="projectnumber">0.1.4-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -120,12 +120,12 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="sky0_8h.html" title="sky0.h - astronomical coordinate conversion for NREL Sun Position Algorithm">sky0.h</a> - astronomical coordinate conversion for NREL Sun Position Algorithm </p>
 <dl class="section author"><dt>Author</dt><dd>David Hoadley</dd></dl>
-<p>This is one of three alternative modules: <a class="el" href="sky0_8h.html" title="sky0.h - astronomical coordinate conversion for NREL Sun Position Algorithm">sky0.h</a> / <a class="el" href="sky0_8c_source.html">sky0.c</a>, sky1.h / sky1.c and sky2.h / sky2.c. They contain routines for transforming astronomical positions from frame to another: precession, nutation, sidereal time etc. and they reflect changes in the International Astronomical Union's precession and nutation theory. The differences are:</p><ul>
+<p>This is one of three alternative modules: <a class="el" href="sky0_8h.html" title="sky0.h - astronomical coordinate conversion for NREL Sun Position Algorithm">sky0.h</a> / <a class="el" href="sky0_8c_source.html">sky0.c</a>, <a class="el" href="sky1_8h.html" title="sky1.h - astronomical coordinate conversion routines, IAU 1980">sky1.h</a> / <a class="el" href="sky1_8c_source.html">sky1.c</a> and sky2.h / sky2.c. They contain routines for transforming astronomical positions from frame to another: precession, nutation, sidereal time etc. and they reflect changes in the International Astronomical Union's precession and nutation theory. The differences are:</p><ul>
 <li><a class="el" href="sky0_8h.html" title="sky0.h - astronomical coordinate conversion for NREL Sun Position Algorithm">sky0.h</a> / <a class="el" href="sky0_8c_source.html">sky0.c</a>: nutation, obliquity and sidereal time routines from the NREL Solar Position Algorithm document. These are based on the IAU 1980 nutation theory.</li>
-<li>sky1.h / sky1.c: precession, nutation and their associated rotation matrices, obliquity and sidereal time. These are the IAU 1980 precession and nutation theory.</li>
+<li><a class="el" href="sky1_8h.html" title="sky1.h - astronomical coordinate conversion routines, IAU 1980">sky1.h</a> / <a class="el" href="sky1_8c_source.html">sky1.c</a>: precession, nutation and their associated rotation matrices, obliquity and sidereal time. These are the IAU 1980 precession and nutation theory.</li>
 <li>sky2.h / sky2.c: precession, nutation and their associated rotation matrices, obliquity and sidereal time. These are the newer IAU 2000 precession and nutation theory.</li>
 </ul>
-<p>This module (<a class="el" href="sky0_8h.html" title="sky0.h - astronomical coordinate conversion for NREL Sun Position Algorithm">sky0.h</a> / <a class="el" href="sky0_8c_source.html">sky0.c</a>) contains only those routines necessary for supporting the NREL Solar Position Algorithm and Moon Position algorithms. Basically this is a subset of the routines in the sky1.h / sky1.c module. Precession is omitted, and the nutation routine uses only the largest 63 terms of the IAU 1980 nutation algorithm.</p>
+<p>This module (<a class="el" href="sky0_8h.html" title="sky0.h - astronomical coordinate conversion for NREL Sun Position Algorithm">sky0.h</a> / <a class="el" href="sky0_8c_source.html">sky0.c</a>) contains only those routines necessary for supporting the NREL Solar Position Algorithm and Moon Position algorithms. Basically this is a subset of the routines in the <a class="el" href="sky1_8h.html" title="sky1.h - astronomical coordinate conversion routines, IAU 1980">sky1.h</a> / <a class="el" href="sky1_8c_source.html">sky1.c</a> module. Precession is omitted, and the nutation routine uses only the largest 63 terms of the IAU 1980 nutation algorithm.</p>
 <hr  />
  
 <p class="definition">Definition in file <a class="el" href="sky0_8h_source.html">sky0.h</a>.</p>
@@ -170,7 +170,8 @@ Functions</h2></td></tr>
  Final report of the IAU Working Group on Nutation, chairman P.K.Seidelmann, 1980, published in <em>Celestial Mechanics</em>, Vol 27, pp79-106, 1982.<br  />
  also Kaplan,G.H. <em>USNO circular no. 163</em>, pp A3-6, 1981.<br  />
  <em>Supplement to the Astronomical Almanac</em> 1984.</dd></dl>
-<dl class="section user"><dt>When to call this function</dt><dd>The values calculated by this routine change only slowly. If using this routine as part of tracking a celestial object, using values that were calculated for the nearest hour will introduce almost imperceptible errors. So it need be called only once per hour.</dd></dl>
+<dl class="section user"><dt>When to call this function</dt><dd>It is quite likely that you will not need to call this function directly. It is used in the Solar Position Algorithm and the Moon Position Algorithm, so if you call <a class="el" href="sun_8h.html#a257ebc73aa83eef26448d451eeb086da" title="Calculate the Sun&#39;s position as a unit vector and a distance, in apparent coordinates.">sun_nrelApparent()</a> or <a class="el" href="sun_8h.html#ac555d348d21360e65ff644212d7f84b4" title="Calls sun_nrelApparent() to calculate the Sun&#39;s position in apparent coordinates using the NREL Sun P...">sun_nrelTopocentric()</a>, or call <a class="el" href="moon_8h.html#ae26dfd26ce7ba3a93eaa9ac24982016d" title="Calculate the Moon&#39;s position as a unit vector and a distance, in apparent coordinates.">moon_nrelApparent()</a> or <a class="el" href="moon_8h.html#a3f0db3b9becd20ad7efe437f6e999394" title="Calls moon_nrelApparent() to calculate the Moon&#39;s position in apparent coordinates using the NREL Moo...">moon_nrelTopocentric()</a>, those routines will call this routine for you. Likewise, if you are tracking the Sun or Moon using the skyfast module, the call to <a class="el" href="skyfast_8h.html#ac22205943c218e19d4313fc71dda43d4" title="Initialise those items that take a long time to calculate, but which do not need to be recalculated f...">skyfast_init()</a> will call either <a class="el" href="sun_8h.html#a257ebc73aa83eef26448d451eeb086da" title="Calculate the Sun&#39;s position as a unit vector and a distance, in apparent coordinates.">sun_nrelApparent()</a> or <a class="el" href="moon_8h.html#ae26dfd26ce7ba3a93eaa9ac24982016d" title="Calculate the Moon&#39;s position as a unit vector and a distance, in apparent coordinates.">moon_nrelApparent()</a>, and therefore call this routine for you. </dd></dl>
+<dl class="section user"><dt></dt><dd>The values calculated by this routine change only slowly. So if you are calling it yourself, you can call it infrequently. Intervals of up to an hour between calls will not introduce much error.</dd></dl>
 <hr  />
  
 <p class="definition">Definition at line <a class="el" href="sky0_8c_source.html#l00222">222</a> of file <a class="el" href="sky0_8c_source.html">sky0.c</a>.</p>
@@ -210,16 +211,17 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in,out]</td><td class="paramname">nut</td><td>[in] field <em>nut-&gt;dPsi_rad</em> - Nutation in longitude Δψ, as returned by function <a class="el" href="sky0_8h.html#a7a264cd6849a45a5edc1c660c8b76aa6" title="Calculates the nutation in longitude and obliquity, according to the algorithm set out in the NREL SP...">sky0_nutationSpa()</a> (radian)<br  />
  [in] field <em>nut-&gt;dEps_rad</em> - Nutation in obliquity Δε, as returned by function <a class="el" href="sky0_8h.html#a7a264cd6849a45a5edc1c660c8b76aa6" title="Calculates the nutation in longitude and obliquity, according to the algorithm set out in the NREL SP...">sky0_nutationSpa()</a> (radian)<br  />
  [out] field <em>nut-&gt;eps0_rad</em> - Mean obliquity of the ecliptic ε0 (radian)<br  />
- [out] field <em>nut-&gt;eqEq_rad</em> - Equation of the equinoxes = Δψ * cos(ε0) (radian) Note: not seconds</td></tr>
+ [out] field <em>nut-&gt;eqEq_rad</em> - Equation of the equinoxes = Δψ * cos(ε0 + Δε) (radian) Note: not seconds</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section user"><dt>Reference</dt><dd>Reda, I. and Andreas, A. (2003), "Solar Position Algorithm
     for Solar Radiation Applications", National Renewable Energy Laboratory, NREL publication no. NREL/TP-560-34302, section 3.5.1</dd></dl>
-<dl class="section user"><dt>When to call this function</dt><dd>The values calculated by this routine change only slowly. If using this routine as part of tracking a celestial object, using values that were calculated for the nearest hour will introduce almost imperceptible errors. So it need be called only once per hour.</dd></dl>
+<dl class="section user"><dt>When to call this function</dt><dd>It is quite likely that you will not need to call this function directly. It is used in the Solar Position Algorithm and the Moon Position Algorithm, so if you call <a class="el" href="sun_8h.html#a257ebc73aa83eef26448d451eeb086da" title="Calculate the Sun&#39;s position as a unit vector and a distance, in apparent coordinates.">sun_nrelApparent()</a> or <a class="el" href="sun_8h.html#ac555d348d21360e65ff644212d7f84b4" title="Calls sun_nrelApparent() to calculate the Sun&#39;s position in apparent coordinates using the NREL Sun P...">sun_nrelTopocentric()</a>, or call <a class="el" href="moon_8h.html#ae26dfd26ce7ba3a93eaa9ac24982016d" title="Calculate the Moon&#39;s position as a unit vector and a distance, in apparent coordinates.">moon_nrelApparent()</a> or <a class="el" href="moon_8h.html#a3f0db3b9becd20ad7efe437f6e999394" title="Calls moon_nrelApparent() to calculate the Moon&#39;s position in apparent coordinates using the NREL Moo...">moon_nrelTopocentric()</a>, those routines will call this routine for you. Likewise, if you are tracking the Sun or Moon using the skyfast module, the call to <a class="el" href="skyfast_8h.html#ac22205943c218e19d4313fc71dda43d4" title="Initialise those items that take a long time to calculate, but which do not need to be recalculated f...">skyfast_init()</a> will call either <a class="el" href="sun_8h.html#a257ebc73aa83eef26448d451eeb086da" title="Calculate the Sun&#39;s position as a unit vector and a distance, in apparent coordinates.">sun_nrelApparent()</a> or <a class="el" href="moon_8h.html#ae26dfd26ce7ba3a93eaa9ac24982016d" title="Calculate the Moon&#39;s position as a unit vector and a distance, in apparent coordinates.">moon_nrelApparent()</a>, and therefore call this routine for you. </dd></dl>
+<dl class="section user"><dt></dt><dd>The values calculated by this routine change only slowly. So if you are calling it yourself, you can call it infrequently. Intervals of up to an hour between calls will not introduce much error.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky0_8c_source.html#l00326">326</a> of file <a class="el" href="sky0_8c_source.html">sky0.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky0_8c_source.html#l00334">334</a> of file <a class="el" href="sky0_8c_source.html">sky0.c</a>.</p>
 
 </div>
 </div>
@@ -252,7 +254,7 @@ Functions</h2></td></tr>
 <dl class="section user"><dt>When to call this function</dt><dd>If you are tracking a celestial object, you need not call this function directly. So long as you call <a class="el" href="sky0_8h.html#a420b9af8dd92d7151d5ccc253c417954" title="Convert a position in geocentric apparent coordinates to geocentric coordinates in the Terrestrial In...">sky0_appToTirs()</a> every time around your control loop, it will call this function for you.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky0_8c_source.html#l00376">376</a> of file <a class="el" href="sky0_8c_source.html">sky0.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky0_8c_source.html#l00392">392</a> of file <a class="el" href="sky0_8c_source.html">sky0.c</a>.</p>
 
 </div>
 </div>
@@ -310,7 +312,7 @@ Functions</h2></td></tr>
  <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo4_multiple_sites_8c-example.html#a16">demo4_multiple_sites.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sky0_8c_source.html#l00416">416</a> of file <a class="el" href="sky0_8c_source.html">sky0.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky0_8c_source.html#l00432">432</a> of file <a class="el" href="sky0_8c_source.html">sky0.c</a>.</p>
 
 </div>
 </div>

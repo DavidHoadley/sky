@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.2-1</span>
+   &#160;<span id="projectnumber">0.1.4-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('skyfast_8c_source.html',''); initResiz
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * Author:  David Hoadley</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * Description: (see skyfast.h)</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * </span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * Copyright (c) 2020, David Hoadley &lt;vcrumble@westnet.com.au&gt;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * All rights reserved.</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> *</span></div>
@@ -174,9 +174,9 @@ $(document).ready(function(){initNavTree('skyfast_8c_source.html',''); initResiz
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"> * Local variables (not accessed by other modules)</span></div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;LOCAL <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a>  lfiA, lfiB, lfiC;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;LOCAL <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a>  *last = &amp;lfiA;      <span class="comment">// items calculated for time in past</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;LOCAL <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a>  *next = &amp;lfiB;      <span class="comment">// items calculated for time ahead</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;LOCAL <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a>  *oneAfter = &amp;lfiC;  <span class="comment">// items calculated for time after next</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;LOCAL <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a>  *last = &amp;lfiA;    <span class="comment">// items calculated for time in past</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;LOCAL <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a>  *next = &amp;lfiB;    <span class="comment">// items calculated for time ahead</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;LOCAL <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a>  *oneAfter = &amp;lfiC;<span class="comment">// ditto for time after next</span></div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;LOCAL <span class="keyword">volatile</span> <span class="keywordtype">bool</span>       oneAfterIsValid = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;LOCAL void (*callback)(<span class="keywordtype">double</span> j2kTT_cy, <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a> *pos);</div>
@@ -213,8 +213,8 @@ $(document).ready(function(){initNavTree('skyfast_8c_source.html',''); initResiz
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">        3.  for time \a tStartUtc_d + 2 x \a fullRecalcalcInterval_mins.</span></div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">        .</span></div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">    For example, to track the Sun, specify the function sun_nrelApparent() when</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">    calling this routine. To track the Moon, specify the function </span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">    moon_nrelApparent(). </span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">    calling this routine. To track the Moon, specify the function</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">    moon_nrelApparent().</span></div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">    The routine skyfast_getApprox() can then be called</span></div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">    (at a high frequency if required) to calculate the current position of the</span></div>
@@ -228,7 +228,7 @@ $(document).ready(function(){initNavTree('skyfast_8c_source.html',''); initResiz
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">                          \a getApparent (minutes). This value must be greater</span></div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">                          than zero. (Otherwise you will get a precondition</span></div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">                          failure.)</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment"> \param[in]  deltas       Delta T values, as set by the sky_initTime() (or </span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment"> \param[in]  deltas       Delta T values, as set by the sky_initTime() (or</span></div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">                          sky_initTimeSimple() or sky_initTimeDetailed())</span></div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">                          routines</span></div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment"> \param      getApparent  Function to get the position of a celestial object in</span></div>
@@ -264,7 +264,7 @@ $(document).ready(function(){initNavTree('skyfast_8c_source.html',''); initResiz
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="comment">/* Save the function address for later call by skyfast_backgroundUpdate() */</span></div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    callback = getApparent;</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    </div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <a class="code" href="sky_8h.html#a03279243991e42a3edbeaac243ae2dc7">sky_updateTimes</a>(tStartUtc_d, deltas, &amp;atime);</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="comment">/* Save the recalculation rate, converted from minutes to centuries. */</span></div>
@@ -272,7 +272,7 @@ $(document).ready(function(){initNavTree('skyfast_8c_source.html',''); initResiz
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    calcTimeTT_cy = atime.<a class="code" href="struct_sky___times.html#a3c9436d4d73659b99d777051b8b095e5">j2kTT_cy</a>;</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    getApparent(calcTimeTT_cy, last);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="comment">/* Now do the same for the next time (e.g. next hour) */</span></div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    calcTimeTT_cy += recalcInterval_cy;</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    getApparent(calcTimeTT_cy, next);</div>
@@ -291,10 +291,10 @@ $(document).ready(function(){initNavTree('skyfast_8c_source.html',''); initResiz
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">    coordinates and the equation of the equinoxes have been performed for the</span></div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment">    time called &quot;oneAfter&quot; (i.e. the time after the time called &quot;next&quot;). If they</span></div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">    have not, this function performs those calculations.</span></div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">    This function calls the function that you previously supplied to function</span></div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">    skyfast_init() (parameter \a getApparent).</span></div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">   </span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment"> \par When to call this function</span></div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">    This function is designed to be called in a low priority loop, or at</span></div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment">    background level, using any available leftover processor time to slowly</span></div>
@@ -306,7 +306,7 @@ $(document).ready(function(){initNavTree('skyfast_8c_source.html',''); initResiz
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;{</div>
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordtype">double</span>  t_cy;</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    REQUIRE(recalcInterval_cy &gt; 0.0);   <span class="comment">/* skyfast_init() must be called before now */</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    REQUIRE(recalcInterval_cy &gt; 0.0);  <span class="comment">// skyfast_init() not called before now?</span></div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keywordflow">if</span> (!oneAfterIsValid) {</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        t_cy = next-&gt;<a class="code" href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">timestamp_cy</a> + recalcInterval_cy;</div>
@@ -355,7 +355,7 @@ $(document).ready(function(){initNavTree('skyfast_8c_source.html',''); initResiz
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">           requires that our low frequency/low priority routine has completed</span></div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">           filling in all the data for oneAfter. */</span></div>
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        REQUIRE(oneAfterIsValid);</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        startCriticalSection();</div>
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        temp = last;</div>
 <div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        last = next;</div>
@@ -400,23 +400,69 @@ $(document).ready(function(){initNavTree('skyfast_8c_source.html',''); initResiz
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">/*! \page page-skyfast-c Edits you may want to make to skyfast.c</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment"> *  There are four different ways that you might want to use the skyfast</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment"> *  module. It can be configured to run in two threads or one. To</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment"> *  control this, define one or none of the following three macros. (Don&#39;t</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="comment"> *  define more than one.) They are BARE_METAL_THREADS, POSIX_THREADS or</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment"> *  NO_THREADS.</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment"> *  The four different approaches are:</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment"> *      1. The simplest approach is to define NO_THREADS (or not to define any</span></div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="comment"> *          macro at all), and not to call the skyfast_backgroundUpdate()</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment"> *          routine at all. The limitation is that you will only be able to</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="comment"> *          track your object for a period that is twice as long as the number</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="comment"> *          that you pass to the \a fullRecalcInterval_mins parameter of routine</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="comment"> *          skyfast_init(), in minutes. If you try to track longer than this,</span></div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="comment"> *          the program will abort.</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="comment"> *      2. The next simplest is once again to define NO_THREADS (or not to</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="comment"> *          define any macro at all), and to put calls to</span></div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="comment"> *          skyfast_backgroundUpdate() in the same loop as your calls to</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="comment"> *          skyfast_getApprox(). You will benefit from the faster execution of</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="comment"> *          skyfast_getApprox(), but every \a fullRecalcInterval_mins minutes,</span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="comment"> *          a full recalculation will take place. That is, the loop will take</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment"> *          much longer to execute than it does all the rest of the time.</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="comment"> *      3. If the occasional long loop execution time is not acceptable to you,</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="comment"> *          (say, it might upset your tracking control loop), consider using two</span></div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment"> *          threads. In this approach, you set up a high-frequency,</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment"> *          high-priority task to drive the control calculations. This task</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment"> *          calls skyfast_getApprox(). A background task calls</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment"> *          skyfast_backgroundUpdate() to perform the slow calculations at very</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment"> *          low priority. To use this approach, define either BARE_METAL_THREADS</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="comment"> *          or POSIX_THREADS.</span></div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="comment"> *          BARE_METAL_THREADS is intended for small embedded processors without</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment"> *          an operating system. You set your high-priority task to be triggered</span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="comment"> *          by a timer interrupt. To control access to shared data, this makes</span></div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="comment"> *          use of two other macros, which you will need to define for your</span></div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment"> *          processor. They are called \c disableInterrupts() and</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment"> *          \c enableInterrupts(), and it should be obvious from those names</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment"> *          what it is that you need to make them do.</span></div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="comment"> *      4. The fourth approach is basically the same as the third, but it</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment"> *          enables implementation on processors running a POSIX-compliant</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment"> *          operating system (such as Linux). You will need to define the</span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment"> *          POSIX_THREADS macro, and then create the posix</span></div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment"> *          threads yourself; this macro simply causes this module to use the</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment"> *          pthreads Mutex mechanism to control access to shared data.</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment"> */</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="astruct_sky___true_equatorial_html_adef22951bb0a838e98406ee8fa36e641"><div class="ttname"><a href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">Sky_TrueEquatorial::appCirsV</a></div><div class="ttdeci">V3D_Vector appCirsV</div><div class="ttdoc">Direction of object in apparent or CIRS coordinates (effectively a unit vector).</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00109">sky.h:109</a></div></div>
-<div class="ttc" id="astruct_sky___delta_ts_html"><div class="ttname"><a href="struct_sky___delta_ts.html">Sky_DeltaTs</a></div><div class="ttdoc">This structure contains relatively constant data, and is set up by one of the three functions sky_ini...</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00160">sky.h:160</a></div></div>
+<div class="ttc" id="astruct_sky___true_equatorial_html_adef22951bb0a838e98406ee8fa36e641"><div class="ttname"><a href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">Sky_TrueEquatorial::appCirsV</a></div><div class="ttdeci">V3D_Vector appCirsV</div><div class="ttdoc">Direction of object in apparent or CIRS coordinates (effectively a unit vector).</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00110">sky.h:110</a></div></div>
+<div class="ttc" id="astruct_sky___delta_ts_html"><div class="ttname"><a href="struct_sky___delta_ts.html">Sky_DeltaTs</a></div><div class="ttdoc">This structure contains relatively constant data, and is set up by one of the three functions sky_ini...</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00166">sky.h:166</a></div></div>
 <div class="ttc" id="aastron_8h_html"><div class="ttname"><a href="astron_8h.html">astron.h</a></div><div class="ttdoc">astron.h - assorted definitions useful for astronomy</div></div>
-<div class="ttc" id="asky_8h_html_a03279243991e42a3edbeaac243ae2dc7"><div class="ttname"><a href="sky_8h.html#a03279243991e42a3edbeaac243ae2dc7">sky_updateTimes</a></div><div class="ttdeci">void sky_updateTimes(double j2kUtc_d, const Sky_DeltaTs *d, Sky_Times *t)</div><div class="ttdoc">Convert the given &quot;J2KD&quot; in the UTC timescale to the other timescales, and pre-calculate some other q...</div><div class="ttdef"><b>Definition:</b> <a href="sky-time_8c_source.html#l00197">sky-time.c:197</a></div></div>
-<div class="ttc" id="astruct_sky___true_equatorial_html"><div class="ttname"><a href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a></div><div class="ttdoc">Struct used for holding an object's coordinates in equatorial apparent or Intermediate coordinates.</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00105">sky.h:105</a></div></div>
+<div class="ttc" id="asky_8h_html_a03279243991e42a3edbeaac243ae2dc7"><div class="ttname"><a href="sky_8h.html#a03279243991e42a3edbeaac243ae2dc7">sky_updateTimes</a></div><div class="ttdeci">void sky_updateTimes(double j2kUtc_d, const Sky_DeltaTs *d, Sky_Times *t)</div><div class="ttdoc">Convert the given &quot;J2KD&quot; in the UTC timescale to the other timescales, and pre-calculate some other q...</div><div class="ttdef"><b>Definition:</b> <a href="sky-time_8c_source.html#l00206">sky-time.c:206</a></div></div>
+<div class="ttc" id="astruct_sky___true_equatorial_html"><div class="ttname"><a href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a></div><div class="ttdoc">Struct used for holding an object's coordinates in equatorial apparent or Intermediate coordinates.</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00106">sky.h:106</a></div></div>
 <div class="ttc" id="askyfast_8h_html_afb9144e153624a3bf899af40eca07ac0"><div class="ttname"><a href="skyfast_8h.html#afb9144e153624a3bf899af40eca07ac0">skyfast_getApprox</a></div><div class="ttdeci">void skyfast_getApprox(double t_cy, Sky_TrueEquatorial *approx)</div><div class="ttdoc">Get the best approximation to the celestial object's apparent coordinates and distance,...</div><div class="ttdef"><b>Definition:</b> <a href="skyfast_8c_source.html#l00234">skyfast.c:234</a></div></div>
-<div class="ttc" id="astruct_sky___times_html_a3c9436d4d73659b99d777051b8b095e5"><div class="ttname"><a href="struct_sky___times.html#a3c9436d4d73659b99d777051b8b095e5">Sky_Times::j2kTT_cy</a></div><div class="ttdeci">double j2kTT_cy</div><div class="ttdoc">Julian centuries since J2000.0, TT timescale [T].</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00182">sky.h:182</a></div></div>
-<div class="ttc" id="astruct_sky___times_html"><div class="ttname"><a href="struct_sky___times.html">Sky_Times</a></div><div class="ttdoc">This structure contains the continuously varying time (and earth rotation) data, in various forms tha...</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00178">sky.h:178</a></div></div>
-<div class="ttc" id="astruct_sky___true_equatorial_html_a9c13083bb211839f27757fb90210af55"><div class="ttname"><a href="struct_sky___true_equatorial.html#a9c13083bb211839f27757fb90210af55">Sky_TrueEquatorial::eqEq_rad</a></div><div class="ttdeci">double eqEq_rad</div><div class="ttdoc">Equation of the Equinoxes (radian).</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00114">sky.h:114</a></div></div>
+<div class="ttc" id="astruct_sky___times_html_a3c9436d4d73659b99d777051b8b095e5"><div class="ttname"><a href="struct_sky___times.html#a3c9436d4d73659b99d777051b8b095e5">Sky_Times::j2kTT_cy</a></div><div class="ttdeci">double j2kTT_cy</div><div class="ttdoc">Julian centuries since J2000.0, TT timescale [T].</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00188">sky.h:188</a></div></div>
+<div class="ttc" id="astruct_sky___times_html"><div class="ttname"><a href="struct_sky___times.html">Sky_Times</a></div><div class="ttdoc">This structure contains the continuously varying time (and earth rotation) data, in various forms tha...</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00184">sky.h:184</a></div></div>
+<div class="ttc" id="astruct_sky___true_equatorial_html_a9c13083bb211839f27757fb90210af55"><div class="ttname"><a href="struct_sky___true_equatorial.html#a9c13083bb211839f27757fb90210af55">Sky_TrueEquatorial::eqEq_rad</a></div><div class="ttdeci">double eqEq_rad</div><div class="ttdoc">Equation of the Equinoxes (radian).</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00115">sky.h:115</a></div></div>
 <div class="ttc" id="askyfast_8h_html_a3e351824c719ae6e465c1886a20a1a9c"><div class="ttname"><a href="skyfast_8h.html#a3e351824c719ae6e465c1886a20a1a9c">skyfast_backgroundUpdate</a></div><div class="ttdeci">void skyfast_backgroundUpdate(void)</div><div class="ttdoc">Recalculation of the low frequency quantities.</div><div class="ttdef"><b>Definition:</b> <a href="skyfast_8c_source.html#l00199">skyfast.c:199</a></div></div>
 <div class="ttc" id="askyfast_8h_html_ac22205943c218e19d4313fc71dda43d4"><div class="ttname"><a href="skyfast_8h.html#ac22205943c218e19d4313fc71dda43d4">skyfast_init</a></div><div class="ttdeci">void skyfast_init(double tStartUtc_d, int fullRecalcInterval_mins, const Sky_DeltaTs *deltas, void(*getApparent)(double j2kTT_cy, Sky_TrueEquatorial *pos))</div><div class="ttdoc">Initialise those items that take a long time to calculate, but which do not need to be recalculated f...</div><div class="ttdef"><b>Definition:</b> <a href="skyfast_8c_source.html#l00111">skyfast.c:111</a></div></div>
-<div class="ttc" id="astruct_sky___true_equatorial_html_a0f919185f0cb457f8ef18530392eaa00"><div class="ttname"><a href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">Sky_TrueEquatorial::timestamp_cy</a></div><div class="ttdeci">double timestamp_cy</div><div class="ttdoc">Time applying to the other figures in this struct (centuries since J2000.0, TT timescale)</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00106">sky.h:106</a></div></div>
-<div class="ttc" id="astruct_sky___true_equatorial_html_a1eaa585fcc5e1c69290dc1daea7e48af"><div class="ttname"><a href="struct_sky___true_equatorial.html#a1eaa585fcc5e1c69290dc1daea7e48af">Sky_TrueEquatorial::distance_au</a></div><div class="ttdeci">double distance_au</div><div class="ttdoc">Distance to object (Astronomical Units) or 0.0 for far distant objects (that is, those with negligibl...</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00111">sky.h:111</a></div></div>
+<div class="ttc" id="astruct_sky___true_equatorial_html_a0f919185f0cb457f8ef18530392eaa00"><div class="ttname"><a href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">Sky_TrueEquatorial::timestamp_cy</a></div><div class="ttdeci">double timestamp_cy</div><div class="ttdoc">Time applying to the other figures in this struct (centuries since J2000.0, TT timescale)</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00107">sky.h:107</a></div></div>
+<div class="ttc" id="astruct_sky___true_equatorial_html_a1eaa585fcc5e1c69290dc1daea7e48af"><div class="ttname"><a href="struct_sky___true_equatorial.html#a1eaa585fcc5e1c69290dc1daea7e48af">Sky_TrueEquatorial::distance_au</a></div><div class="ttdeci">double distance_au</div><div class="ttdoc">Distance to object (Astronomical Units) or 0.0 for far distant objects (that is, those with negligibl...</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00112">sky.h:112</a></div></div>
 <div class="ttc" id="askyfast_8h_html"><div class="ttname"><a href="skyfast_8h.html">skyfast.h</a></div><div class="ttdoc">skyfast.h - set up and use interpolation for rapid calculation of a celestial object's apparent coord...</div></div>
 <div class="ttc" id="asun_8h_html"><div class="ttname"><a href="sun_8h.html">sun.h</a></div><div class="ttdoc">sun.h - routines to calculate the Sun's position</div></div>
 <div class="ttc" id="asky0_8h_html"><div class="ttname"><a href="sky0_8h.html">sky0.h</a></div><div class="ttdoc">sky0.h - astronomical coordinate conversion for NREL Sun Position Algorithm</div></div>

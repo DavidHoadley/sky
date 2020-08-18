@@ -45,7 +45,6 @@
 
 #include "astron.h"
 #include "general.h"
-#include "star.h"
 
 /*
  * Local #defines and typedefs

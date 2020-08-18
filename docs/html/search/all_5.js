@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['j2ktt_5fcy_20',['j2kTT_cy',['../struct_sky___times.html#a3c9436d4d73659b99d777051b8b095e5',1,'Sky_Times']]],
-  ['j2ktt_5fd_21',['j2kTT_d',['../struct_sky___times.html#a0436d3f8bfbe8b26d68be63fbc97a085',1,'Sky_Times']]],
-  ['j2kut1_5fd_22',['j2kUT1_d',['../struct_sky___times.html#aa778912c8c4444e742c3d58b37280a68',1,'Sky_Times']]]
+  ['hadecm_29',['haDecM',['../struct_sky___site_prop.html#a82258ed693d26f4d9f7bc22c7d378f48',1,'Sky_SiteProp']]],
+  ['how_20to_20use_20this_20code_30',['How to use this code',['../page-how-to-use.html',1,'page-about']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mjdutc_215',['mjdUtc',['../struct_sky___times.html#ae2e870a1ab063072a1376a81854d79fc',1,'Sky_Times']]]
+  ['hadecm_274',['haDecM',['../struct_sky___site_prop.html#a82258ed693d26f4d9f7bc22c7d378f48',1,'Sky_SiteProp']]]
 ];
