@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.4-1</span>
+   &#160;<span id="projectnumber">0.1.5-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -107,21 +107,21 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a361432e10e6f4e24dae1143780bb4978"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="skyio_8h.html#a361432e10e6f4e24dae1143780bb4978">skyio_degToDmsStr</a> (char destStr[], int destStrLen, double angle_deg, int decimals)</td></tr>
-<tr class="memdesc:a361432e10e6f4e24dae1143780bb4978"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to take an angle in degrees and return a string of the form [±]DDD°MM′SS.sss″ correctly rounding according to the number of decimal places to be shown.  <a href="skyio_8h.html#a361432e10e6f4e24dae1143780bb4978">More...</a><br /></td></tr>
-<tr class="separator:a361432e10e6f4e24dae1143780bb4978"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c57865e99d030403725d97f36bf8f49"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="skyio_8h.html#a0c57865e99d030403725d97f36bf8f49">skyio_hrsToHmsStr</a> (char destStr[], int destStrLen, double angle_h, int decimals)</td></tr>
-<tr class="memdesc:a0c57865e99d030403725d97f36bf8f49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to take an angle in hours and return a string in hours, minutes and seconds form - "±HH:MM:SS.sss" - correctly rounding according to the number of decimal places to be shown.  <a href="skyio_8h.html#a0c57865e99d030403725d97f36bf8f49">More...</a><br /></td></tr>
-<tr class="separator:a0c57865e99d030403725d97f36bf8f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c19000cf76232e191faf1c44634ad53"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="skyio_8h.html#a5c19000cf76232e191faf1c44634ad53">skyio_degToDmsStr</a> (char destStr[], size_t destStrSize, double angle_deg, unsigned decimals)</td></tr>
+<tr class="memdesc:a5c19000cf76232e191faf1c44634ad53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to take an angle in degrees and return a string of the form [±]DDD°MM′SS.sss″ correctly rounding according to the number of decimal places to be shown.  <a href="skyio_8h.html#a5c19000cf76232e191faf1c44634ad53">More...</a><br /></td></tr>
+<tr class="separator:a5c19000cf76232e191faf1c44634ad53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a934ef2f54a950999b029b18bea0b5759"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="skyio_8h.html#a934ef2f54a950999b029b18bea0b5759">skyio_hrsToHmsStr</a> (char destStr[], size_t destStrSize, double angle_h, unsigned decimals)</td></tr>
+<tr class="memdesc:a934ef2f54a950999b029b18bea0b5759"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to take an angle in hours and return a string in hours, minutes and seconds form - "±HH:MM:SS.sss" - correctly rounding according to the number of decimal places to be shown.  <a href="skyio_8h.html#a934ef2f54a950999b029b18bea0b5759">More...</a><br /></td></tr>
+<tr class="separator:a934ef2f54a950999b029b18bea0b5759"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10370b9c3f00f0abeedf1fc26135ac12"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="skyio_8h.html#a10370b9c3f00f0abeedf1fc26135ac12">skyio_sxStrToAng</a> (const char angleStr[], const char **endPtr, int *error)</td></tr>
 <tr class="memdesc:a10370b9c3f00f0abeedf1fc26135ac12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a string containing an angle (or a time) in sexagesimal format to the angle's value.  <a href="skyio_8h.html#a10370b9c3f00f0abeedf1fc26135ac12">More...</a><br /></td></tr>
 <tr class="separator:a10370b9c3f00f0abeedf1fc26135ac12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23323b59082541dd33e90f58bd7b5c6d"><td class="memItemLeft" align="right" valign="top">static char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="skyio_8h.html#a23323b59082541dd33e90f58bd7b5c6d">skyio_radToDmsStr</a> (char destStr[], int destStrLen, double angle_rad, int decimals)</td></tr>
-<tr class="memdesc:a23323b59082541dd33e90f58bd7b5c6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to take an angle in radian and return a string in degrees, arcminutes and arcseconds form - [±]DDD°MM′SS.sss″ - correctly rounding according to the number of decimal places to be shown.  <a href="skyio_8h.html#a23323b59082541dd33e90f58bd7b5c6d">More...</a><br /></td></tr>
-<tr class="separator:a23323b59082541dd33e90f58bd7b5c6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79fa508b5d41bfe40819d53689b1562c"><td class="memItemLeft" align="right" valign="top">static char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="skyio_8h.html#a79fa508b5d41bfe40819d53689b1562c">skyio_radToHmsStr</a> (char destStr[], int destStrLen, double angle_rad, int decimals)</td></tr>
-<tr class="memdesc:a79fa508b5d41bfe40819d53689b1562c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to take an angle in radian and return a string in hours, minutes and seconds form - "±HH:MM:SS.sss" - correctly rounding according to the number of decimal places to be shown.  <a href="skyio_8h.html#a79fa508b5d41bfe40819d53689b1562c">More...</a><br /></td></tr>
-<tr class="separator:a79fa508b5d41bfe40819d53689b1562c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2285590eae12aa715441e257db8819e"><td class="memItemLeft" align="right" valign="top">static char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="skyio_8h.html#ad2285590eae12aa715441e257db8819e">skyio_radToDmsStr</a> (char destStr[], size_t destStrSize, double angle_rad, unsigned decimals)</td></tr>
+<tr class="memdesc:ad2285590eae12aa715441e257db8819e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to take an angle in radian and return a string in degrees, arcminutes and arcseconds form - [±]DDD°MM′SS.sss″ - correctly rounding according to the number of decimal places to be shown.  <a href="skyio_8h.html#ad2285590eae12aa715441e257db8819e">More...</a><br /></td></tr>
+<tr class="separator:ad2285590eae12aa715441e257db8819e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7d26878b7c1262a58e4c54c1673b9b5"><td class="memItemLeft" align="right" valign="top">static char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="skyio_8h.html#aa7d26878b7c1262a58e4c54c1673b9b5">skyio_radToHmsStr</a> (char destStr[], size_t destStrSize, double angle_rad, unsigned decimals)</td></tr>
+<tr class="memdesc:aa7d26878b7c1262a58e4c54c1673b9b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to take an angle in radian and return a string in hours, minutes and seconds form - "±HH:MM:SS.sss" - correctly rounding according to the number of decimal places to be shown.  <a href="skyio_8h.html#aa7d26878b7c1262a58e4c54c1673b9b5">More...</a><br /></td></tr>
+<tr class="separator:aa7d26878b7c1262a58e4c54c1673b9b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8dd7e21b6c506c2c296e299bbeb3ade7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="skyio_8h.html#a8dd7e21b6c506c2c296e299bbeb3ade7">skyio_printJ2kd</a> (double j2kd)</td></tr>
 <tr class="memdesc:a8dd7e21b6c506c2c296e299bbeb3ade7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write out a J2KD as a calendar date and time.  <a href="skyio_8h.html#a8dd7e21b6c506c2c296e299bbeb3ade7">More...</a><br /></td></tr>
 <tr class="separator:a8dd7e21b6c506c2c296e299bbeb3ade7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,8 +140,8 @@ Functions</h2></td></tr>
  
 <p class="definition">Definition in file <a class="el" href="skyio_8h_source.html">skyio.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a361432e10e6f4e24dae1143780bb4978"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a361432e10e6f4e24dae1143780bb4978">&#9670;&nbsp;</a></span>skyio_degToDmsStr()</h2>
+<a id="a5c19000cf76232e191faf1c44634ad53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c19000cf76232e191faf1c44634ad53">&#9670;&nbsp;</a></span>skyio_degToDmsStr()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -155,8 +155,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>destStrLen</em>, </td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>destStrSize</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -167,7 +167,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">unsigned&#160;</td>
           <td class="paramname"><em>decimals</em>&#160;</td>
         </tr>
         <tr>
@@ -183,7 +183,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">destStr</td><td>Destination character string </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">destStrLen</td><td>Length of destination string </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">destStrSize</td><td>Size of destination string (max available length + 1) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">angle_deg</td><td>The angle to be written out (degrees). Valid range:(-360, 360); larger numbers may well be written OK, but there is a risk of overflowing an intermediate variable. No error will be detected, just a wrong answer will be written. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">decimals</td><td>Number of digits after the decimal point to display. Valid range: [0,9] (or [0,3] if long int is only a 32-bit number); numbers outside this range will be clamped to this range.</td></tr>
   </table>
@@ -195,8 +195,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a0c57865e99d030403725d97f36bf8f49"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c57865e99d030403725d97f36bf8f49">&#9670;&nbsp;</a></span>skyio_hrsToHmsStr()</h2>
+<a id="a934ef2f54a950999b029b18bea0b5759"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a934ef2f54a950999b029b18bea0b5759">&#9670;&nbsp;</a></span>skyio_hrsToHmsStr()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -210,8 +210,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>destStrLen</em>, </td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>destStrSize</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -222,7 +222,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">unsigned&#160;</td>
           <td class="paramname"><em>decimals</em>&#160;</td>
         </tr>
         <tr>
@@ -238,7 +238,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">destStr</td><td>Destination character string </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">destStrLen</td><td>Length of destination string </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">destStrSize</td><td>Size of destination string (max available length + 1) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">angle_h</td><td>The angle to be written out (hours). Valid range:(-24.0, 24.0); larger numbers may well be written OK, but there is a risk of overflowing an intermediate variable. No error will be detected, just a wrong answer will be written. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">decimals</td><td>Number of digits after the decimal point to display. Valid range: [0,9] (or [0,3] if long int is only a 32-bit number); numbers outside this range will be clamped to this range.</td></tr>
   </table>
@@ -304,8 +304,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a23323b59082541dd33e90f58bd7b5c6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23323b59082541dd33e90f58bd7b5c6d">&#9670;&nbsp;</a></span>skyio_radToDmsStr()</h2>
+<a id="ad2285590eae12aa715441e257db8819e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2285590eae12aa715441e257db8819e">&#9670;&nbsp;</a></span>skyio_radToDmsStr()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -322,8 +322,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>destStrLen</em>, </td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>destStrSize</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -334,7 +334,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">unsigned&#160;</td>
           <td class="paramname"><em>decimals</em>&#160;</td>
         </tr>
         <tr>
@@ -355,22 +355,22 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">destStr</td><td>Destination character string </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">destStrLen</td><td>Length of destination string </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">destStrSize</td><td>Size of destination string (max available length + 1) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">angle_rad</td><td>The angle to be written out (radian). Valid range:(-2*Pi, 2*Pi); larger numbers may well be written OK, but there is a risk of overflowing an intermediate variable. No error will be detected, just a wrong answer will be written. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">decimals</td><td>Number of digits after the decimal point to display. Valid range: [0,9] (or [0,3] if long int is only a 32-bit number); numbers outside this range will be clamped to this range.</td></tr>
   </table>
   </dd>
 </dl>
 <hr  />
- <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_sun_8c-example.html#a18">demo1_sun.c</a>, <a class="el" href="demo2_sun_tracking_8c-example.html#a20">demo2_sun_tracking.c</a>, <a class="el" href="demo3_moon_8c-example.html#a17">demo3_moon.c</a>, and <a class="el" href="demo4_multiple_sites_8c-example.html#a24">demo4_multiple_sites.c</a>.</dd>
+ <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="demo1_sun_8c-example.html#a18">demo1_sun.c</a>, <a class="el" href="demo2_sun_tracking_8c-example.html#a20">demo2_sun_tracking.c</a>, <a class="el" href="demo3_moon_8c-example.html#a17">demo3_moon.c</a>, and <a class="el" href="demo4_multiple_sites_8c-example.html#a25">demo4_multiple_sites.c</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="skyio_8h_source.html#l00111">111</a> of file <a class="el" href="skyio_8h_source.html">skyio.h</a>.</p>
 
 </div>
 </div>
-<a id="a79fa508b5d41bfe40819d53689b1562c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a79fa508b5d41bfe40819d53689b1562c">&#9670;&nbsp;</a></span>skyio_radToHmsStr()</h2>
+<a id="aa7d26878b7c1262a58e4c54c1673b9b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7d26878b7c1262a58e4c54c1673b9b5">&#9670;&nbsp;</a></span>skyio_radToHmsStr()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -387,8 +387,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>destStrLen</em>, </td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>destStrSize</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -399,7 +399,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">unsigned&#160;</td>
           <td class="paramname"><em>decimals</em>&#160;</td>
         </tr>
         <tr>
@@ -420,7 +420,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">destStr</td><td>Destination character string </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">destStrLen</td><td>Length of destination string </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">destStrSize</td><td>Size of destination string (max available length + 1) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">angle_rad</td><td>The angle to be written out (radian). Valid range:(-2*Pi, 2*Pi); larger numbers may well be written OK, but there is a risk of overflowing an intermediate variable. No error will be detected, just a wrong answer will be written. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">decimals</td><td>Number of digits after the decimal point to display. Valid range: [0,9] (or [0,3] if long int is only a 32-bit number); numbers outside this range will be clamped to this range.</td></tr>
   </table>

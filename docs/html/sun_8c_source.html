@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.4-1</span>
+   &#160;<span id="projectnumber">0.1.5-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -133,13 +133,13 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sun_8h.html">sun.h</a>&quot;</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="astron_8h.html">astron.h</a>&quot;</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#include &quot;general.h&quot;</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="general_8h.html">general.h</a>&quot;</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="vectors3d_8h.html">vectors3d.h</a>&quot;</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> * Local #defines and typedefs </span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;DEFINE_THIS_FILE;                       <span class="comment">// For use by REQUIRE() - assertions.</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<a class="code" href="general_8h.html#af9f431fdeb7703d5a95fab8a67109ce0">DEFINE_THIS_FILE</a>;                       <span class="comment">// For use by REQUIRE() - assertions.</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">/*      Constants from NREL SPA algorithm */</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#define L_COUNT 6</span></div>
@@ -156,14 +156,14 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"> * Prototypes for local functions (not called from other modules).</span></div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;LOCAL <span class="keywordtype">double</span> sunLongitude(<span class="keywordtype">double</span> t_ka);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;LOCAL <span class="keywordtype">double</span> sunLatitude(<span class="keywordtype">double</span> t_ka);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;LOCAL <span class="keywordtype">double</span> sunDistance(<span class="keywordtype">double</span> t_ka);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;LOCAL <span class="keywordtype">double</span> solarNoonApprox(<span class="keywordtype">double</span>             noonGuess_d,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keywordtype">double</span> sunLongitude(<span class="keywordtype">double</span> t_ka);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keywordtype">double</span> sunLatitude(<span class="keywordtype">double</span> t_ka);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keywordtype">double</span> sunDistance(<span class="keywordtype">double</span> t_ka);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keywordtype">double</span> solarNoonApprox(<span class="keywordtype">double</span>             noonGuess_d,</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                             <span class="keyword">const</span> <a class="code" href="struct_sky___delta_ts.html">Sky_DeltaTs</a>  *deltas,</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                             <span class="keyword">const</span> <a class="code" href="struct_sky___site_prop.html">Sky_SiteProp</a> *site,</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                             <a class="code" href="struct_sky___site_horizon.html">Sky_SiteHorizon</a> *topo);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;LOCAL <span class="keywordtype">double</span> riseSetApprox(<span class="keywordtype">double</span>             risesetGuess_d,</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keywordtype">double</span> riseSetApprox(<span class="keywordtype">double</span>             risesetGuess_d,</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                           <span class="keywordtype">bool</span>               getSunrise,</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                           <span class="keyword">const</span> <a class="code" href="struct_sky___delta_ts.html">Sky_DeltaTs</a>  *deltas,</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                           <span class="keyword">const</span> <a class="code" href="struct_sky___site_prop.html">Sky_SiteProp</a> *site,</div>
@@ -191,7 +191,7 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="sun_8h.html#a697f8cd30a2c41f04cf775a41df23037">  105</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="sun_8h.html#a697f8cd30a2c41f04cf775a41df23037">sun_aaApparentApprox</a>(<span class="keywordtype">double</span> n,</div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="sun_8h.html#a697f8cd30a2c41f04cf775a41df23037">  105</a></span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">void</span> <a class="code" href="sun_8h.html#a697f8cd30a2c41f04cf775a41df23037">sun_aaApparentApprox</a>(<span class="keywordtype">double</span> n,</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                                 <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *appV,</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                                 <span class="keywordtype">double</span>     *dist_au)<span class="comment"></span></div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">/*! This function calculates an approximate Sun position in apparent coordinates</span></div>
@@ -216,25 +216,25 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordtype">double</span> lambda_deg;      <span class="comment">// Ecliptic longitude (degrees)</span></div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordtype">double</span> epsilon_deg;     <span class="comment">// Obliquity of ecliptic (degrees)</span></div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    REQUIRE_NOT_NULL(appV);</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    REQUIRE_NOT_NULL(dist_au);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <a class="code" href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a>(appV);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <a class="code" href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a>(dist_au);</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    L_deg = <a class="code" href="instead-of-math_8h.html#a06e957a5e5c08a30b4ea3c02f2664405">normalize</a>(280.461 + (0.9856474 * n), 360.0);</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    g_deg = <a class="code" href="instead-of-math_8h.html#a06e957a5e5c08a30b4ea3c02f2664405">normalize</a>(357.529 + (0.9856003 * n), 360.0);</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    lambda_deg = L_deg + 1.915 * sin(degToRad(g_deg))</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                       + 0.02 * sin(degToRad(g_deg + g_deg));</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    lambda_deg = L_deg + 1.915 * sin(<a class="code" href="general_8h.html#a4f5648074de7b472ac90dede0d0aa6de">degToRad</a>(g_deg))</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                       + 0.02 * sin(<a class="code" href="general_8h.html#a4f5648074de7b472ac90dede0d0aa6de">degToRad</a>(g_deg + g_deg));</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    epsilon_deg = 23.439 - (0.0000004 * n);</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    appV-&gt;a[0] = cos(degToRad(lambda_deg));</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    appV-&gt;a[1] = cos(degToRad(epsilon_deg)) * sin(degToRad(lambda_deg));</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    appV-&gt;a[2] = sin(degToRad(epsilon_deg)) * sin(degToRad(lambda_deg));</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    appV-&gt;a[0] = cos(<a class="code" href="general_8h.html#a4f5648074de7b472ac90dede0d0aa6de">degToRad</a>(lambda_deg));</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    appV-&gt;a[1] = cos(<a class="code" href="general_8h.html#a4f5648074de7b472ac90dede0d0aa6de">degToRad</a>(epsilon_deg)) * sin(<a class="code" href="general_8h.html#a4f5648074de7b472ac90dede0d0aa6de">degToRad</a>(lambda_deg));</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    appV-&gt;a[2] = sin(<a class="code" href="general_8h.html#a4f5648074de7b472ac90dede0d0aa6de">degToRad</a>(epsilon_deg)) * sin(<a class="code" href="general_8h.html#a4f5648074de7b472ac90dede0d0aa6de">degToRad</a>(lambda_deg));</div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    </div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    *dist_au = 1.00014 - 0.01671 * cos(degToRad(g_deg))</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                       - 0.00014 * cos(degToRad(g_deg + g_deg));</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    *dist_au = 1.00014 - 0.01671 * cos(<a class="code" href="general_8h.html#a4f5648074de7b472ac90dede0d0aa6de">degToRad</a>(g_deg))</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                       - 0.00014 * cos(<a class="code" href="general_8h.html#a4f5648074de7b472ac90dede0d0aa6de">degToRad</a>(g_deg + g_deg));</div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;}</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
-<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="sun_8h.html#a8b8eff53c5adde4f9144a308aab0e8ba">  148</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="sun_8h.html#a8b8eff53c5adde4f9144a308aab0e8ba">sun_nrelApp2</a>(<span class="keywordtype">double</span>             t_cy,</div>
+<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="sun_8h.html#a8b8eff53c5adde4f9144a308aab0e8ba">  148</a></span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">void</span> <a class="code" href="sun_8h.html#a8b8eff53c5adde4f9144a308aab0e8ba">sun_nrelApp2</a>(<span class="keywordtype">double</span>             t_cy,</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                         <span class="keyword">const</span> <a class="code" href="struct_sky0___nut1980.html">Sky0_Nut1980</a> *nut,</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                         <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a> *appV,</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                         <span class="keywordtype">double</span>     *dist_au)<span class="comment"></span></div>
@@ -269,8 +269,8 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a>  epsM;       <span class="comment">// Rotation by obliquity of ecliptic</span></div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a>  eclipV;     <span class="comment">// Sun position in rectangular ecliptic coordinates</span></div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    REQUIRE_NOT_NULL(appV);</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    REQUIRE_NOT_NULL(dist_au);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <a class="code" href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a>(appV);</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <a class="code" href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a>(dist_au);</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    t_ka = t_cy / 10.0;</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
@@ -285,7 +285,7 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">       apparent longitude is the Sun&#39;s position 499 seconds earlier than the</span></div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">       geometric position, because it took light that much time to reach Earth.)</span></div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">       This is steps 3.6 and 3.7 of the SPA algorithm. */</span></div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    lambda_rad += nut-&gt;<a class="code" href="struct_sky0___nut1980.html#a9b0da8604707a438f6396f12d2c3994b">dPsi_rad</a> - arcsecToRad(20.4898) / *dist_au;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    lambda_rad += nut-&gt;<a class="code" href="struct_sky0___nut1980.html#a9b0da8604707a438f6396f12d2c3994b">dPsi_rad</a> - <a class="code" href="astron_8h.html#a757c7972f565158c61eae7c712f24b35">arcsecToRad</a>(20.4898) / *dist_au;</div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="comment">/* Convert to rectangular coordinates */</span></div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <a class="code" href="vectors3d_8h.html#ab9c960dd291b2aabcc56ac188b15dcb7">v3d_polarToRect</a>(&amp;eclipV, lambda_rad, beta_rad);</div>
@@ -297,7 +297,7 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
-<div class="line"><a name="l00211"></a><span class="lineno"><a class="line" href="sun_8h.html#a257ebc73aa83eef26448d451eeb086da">  211</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="sun_8h.html#a257ebc73aa83eef26448d451eeb086da">sun_nrelApparent</a>(<span class="keywordtype">double</span> j2kTT_cy, <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a> *pos)<span class="comment"></span></div>
+<div class="line"><a name="l00211"></a><span class="lineno"><a class="line" href="sun_8h.html#a257ebc73aa83eef26448d451eeb086da">  211</a></span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">void</span> <a class="code" href="sun_8h.html#a257ebc73aa83eef26448d451eeb086da">sun_nrelApparent</a>(<span class="keywordtype">double</span> j2kTT_cy, <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a> *pos)<span class="comment"></span></div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">/*! Calculate the Sun&#39;s position as a unit vector and a distance, in apparent</span></div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">    coordinates. It calls sun_nrelApp2() to obtain the Sun&#39;s position, after</span></div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">    having called sky0_nutationSpa() to obtain the necessary nutation terms.</span></div>
@@ -333,7 +333,7 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;{</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <a class="code" href="struct_sky0___nut1980.html">Sky0_Nut1980</a>   nut;</div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    REQUIRE_NOT_NULL(pos);</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <a class="code" href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a>(pos);</div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="comment">/* Calculate nutation (steps 3.4 of the algorithm in the SPA document) */</span></div>
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <a class="code" href="sky0_8h.html#a7a264cd6849a45a5edc1c660c8b76aa6">sky0_nutationSpa</a>(j2kTT_cy, &amp;nut);</div>
@@ -352,7 +352,7 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
-<div class="line"><a name="l00266"></a><span class="lineno"><a class="line" href="sun_8h.html#ac555d348d21360e65ff644212d7f84b4">  266</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="sun_8h.html#ac555d348d21360e65ff644212d7f84b4">sun_nrelTopocentric</a>(<span class="keywordtype">double</span>             j2kUtc_d,</div>
+<div class="line"><a name="l00266"></a><span class="lineno"><a class="line" href="sun_8h.html#ac555d348d21360e65ff644212d7f84b4">  266</a></span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">void</span> <a class="code" href="sun_8h.html#ac555d348d21360e65ff644212d7f84b4">sun_nrelTopocentric</a>(<span class="keywordtype">double</span>             j2kUtc_d,</div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;                                <span class="keyword">const</span> <a class="code" href="struct_sky___delta_ts.html">Sky_DeltaTs</a>  *deltas,</div>
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;                                <span class="keyword">const</span> <a class="code" href="struct_sky___site_prop.html">Sky_SiteProp</a> *site,</div>
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;                                <a class="code" href="struct_sky___site_horizon.html">Sky_SiteHorizon</a> *topo)<span class="comment"></span></div>
@@ -381,9 +381,9 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    <a class="code" href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a> pos;     <span class="comment">// geocentric position of the Sun and distance</span></div>
 <div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <a class="code" href="struct_v3_d___vector.html">V3D_Vector</a>         terInterV; <span class="comment">// unit vector in Terrestrial Intermed Ref Sys</span></div>
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    REQUIRE_NOT_NULL(deltas);</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    REQUIRE_NOT_NULL(site);</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    REQUIRE_NOT_NULL(topo);</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <a class="code" href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a>(deltas);</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <a class="code" href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a>(site);</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <a class="code" href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a>(topo);</div>
 <div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    <a class="code" href="sky_8h.html#a03279243991e42a3edbeaac243ae2dc7">sky_updateTimes</a>(j2kUtc_d, deltas, &amp;atime);</div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; </div>
@@ -396,7 +396,7 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
 <div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
 <div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
-<div class="line"><a name="l00310"></a><span class="lineno"><a class="line" href="sun_8h.html#a42caefa9705e53013331f3f3ec683de6">  310</a></span>&#160;GLOBAL <span class="keywordtype">double</span> <a class="code" href="sun_8h.html#a42caefa9705e53013331f3f3ec683de6">sun_solarNoon</a>(<span class="keywordtype">int</span>                year,</div>
+<div class="line"><a name="l00310"></a><span class="lineno"><a class="line" href="sun_8h.html#a42caefa9705e53013331f3f3ec683de6">  310</a></span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">double</span> <a class="code" href="sun_8h.html#a42caefa9705e53013331f3f3ec683de6">sun_solarNoon</a>(<span class="keywordtype">int</span>                year,</div>
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;                            <span class="keywordtype">int</span>                month,</div>
 <div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;                            <span class="keywordtype">int</span>                day,</div>
 <div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;                            <span class="keyword">const</span> <a class="code" href="struct_sky___delta_ts.html">Sky_DeltaTs</a>  *deltas,</div>
@@ -431,8 +431,8 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    <a class="code" href="struct_sky___site_horizon.html">Sky_SiteHorizon</a> topo1;      <span class="comment">// Sun apparent position</span></div>
 <div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keywordtype">double</span>          estimate_d; <span class="comment">// estimate of the J2KD of solar noon</span></div>
 <div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160; </div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    REQUIRE_NOT_NULL(deltas);</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    REQUIRE_NOT_NULL(site);</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    <a class="code" href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a>(deltas);</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    <a class="code" href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a>(site);</div>
 <div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160; </div>
 <div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    <span class="comment">/* Make an initial guess of civil noon on the specified day */</span></div>
 <div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    estimate_d = <a class="code" href="sky_8h.html#a9ea25f7ed8d0a77b756ec42e628fd4ee">sky_calTimeToJ2kd</a>(year, month, day,</div>
@@ -449,7 +449,7 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; </div>
 <div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160; </div>
 <div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; </div>
-<div class="line"><a name="l00363"></a><span class="lineno"><a class="line" href="sun_8h.html#a2b95525b0966c30a2002fae909e6ebc5">  363</a></span>&#160;GLOBAL <span class="keywordtype">double</span> <a class="code" href="sun_8h.html#a2b95525b0966c30a2002fae909e6ebc5">sun_riseSet</a>(<span class="keywordtype">int</span>                year,</div>
+<div class="line"><a name="l00363"></a><span class="lineno"><a class="line" href="sun_8h.html#a2b95525b0966c30a2002fae909e6ebc5">  363</a></span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">double</span> <a class="code" href="sun_8h.html#a2b95525b0966c30a2002fae909e6ebc5">sun_riseSet</a>(<span class="keywordtype">int</span>                year,</div>
 <div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;                          <span class="keywordtype">int</span>                month,</div>
 <div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;                          <span class="keywordtype">int</span>                day,</div>
 <div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;                          <span class="keywordtype">bool</span>               getSunrise,</div>
@@ -499,8 +499,8 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    <span class="keywordtype">double</span>          estimate_d; <span class="comment">// estimate of the MJD of sunrise or sunset time</span></div>
 <div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    <a class="code" href="struct_sky___site_prop.html">Sky_SiteProp</a>    st;         <span class="comment">// copy of site details, without refraction</span></div>
 <div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160; </div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    REQUIRE_NOT_NULL(deltas);</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;    REQUIRE_NOT_NULL(site);</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    <a class="code" href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a>(deltas);</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;    <a class="code" href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a>(site);</div>
 <div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160; </div>
 <div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;   <span class="comment">/* Sunrise and set calculations assume a standard refraction at the horizon</span></div>
 <div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="comment">    * of 34 arcminutes, and a Sun semi-diameter of 16 arcminutes. So the </span></div>
@@ -541,7 +541,7 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;LOCAL <span class="keywordtype">double</span> sunLongitude(<span class="keywordtype">double</span> t_ka)</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keywordtype">double</span> sunLongitude(<span class="keywordtype">double</span> t_ka)</div>
 <div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="comment">/* This routine performs steps 3.2.1 to 3.2.4, 3.2.6, 3.3.1 and 3.3.2 of the</span></div>
 <div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="comment">   algorithm outlined in the SPA document</span></div>
 <div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="comment"> Returns - Sun geocentric longitude (radian) (geometric)</span></div>
@@ -702,12 +702,12 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;    };</div>
 <div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;    <span class="comment">/* Allow access to l0..l5 as if they form a single array lt[][] */</span></div>
 <div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> SunSeries *lt[L_COUNT] = { l0, l1, l2, l3, l4, l5 };</div>
-<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> lSubcount[L_COUNT] = { ARRAY_SIZE(l0),</div>
-<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;                                            ARRAY_SIZE(l1),</div>
-<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;                                            ARRAY_SIZE(l2),</div>
-<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;                                            ARRAY_SIZE(l3),</div>
-<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;                                            ARRAY_SIZE(l4),</div>
-<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;                                            ARRAY_SIZE(l5)};</div>
+<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> lSubcount[L_COUNT] = { <a class="code" href="general_8h.html#a284dcf044d06c5016bfda2cca6d91f95">ARRAY_SIZE</a>(l0),</div>
+<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;                                            <a class="code" href="general_8h.html#a284dcf044d06c5016bfda2cca6d91f95">ARRAY_SIZE</a>(l1),</div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;                                            <a class="code" href="general_8h.html#a284dcf044d06c5016bfda2cca6d91f95">ARRAY_SIZE</a>(l2),</div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;                                            <a class="code" href="general_8h.html#a284dcf044d06c5016bfda2cca6d91f95">ARRAY_SIZE</a>(l3),</div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;                                            <a class="code" href="general_8h.html#a284dcf044d06c5016bfda2cca6d91f95">ARRAY_SIZE</a>(l4),</div>
+<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;                                            <a class="code" href="general_8h.html#a284dcf044d06c5016bfda2cca6d91f95">ARRAY_SIZE</a>(l5)};</div>
 <div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160; </div>
 <div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;    <span class="keywordtype">double</span> sum[L_COUNT];</div>
 <div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;    <span class="keywordtype">int</span>    i, j;</div>
@@ -733,14 +733,14 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;    </div>
 <div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;    <span class="comment">/* Convert Earth heliocentric longitude to Sun geocentric longitude (radian)</span></div>
 <div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;<span class="comment">       and force into the range 0 to TwoPi */</span></div>
-<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;    earthSum += PI;</div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;    earthSum += <a class="code" href="general_8h.html#a598a3330b3c21701223ee0ca14316eca">PI</a>;</div>
 <div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;    </div>
-<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="instead-of-math_8h.html#a06e957a5e5c08a30b4ea3c02f2664405">normalize</a>(earthSum, TWOPI);</div>
+<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="instead-of-math_8h.html#a06e957a5e5c08a30b4ea3c02f2664405">normalize</a>(earthSum, <a class="code" href="general_8h.html#a4912c64aec0c943b7985db6cb61ff83a">TWOPI</a>);</div>
 <div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;}</div>
 <div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160; </div>
 <div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160; </div>
 <div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160; </div>
-<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;LOCAL <span class="keywordtype">double</span> sunLatitude(<span class="keywordtype">double</span> t_ka)</div>
+<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keywordtype">double</span> sunLatitude(<span class="keywordtype">double</span> t_ka)</div>
 <div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;<span class="comment">/* This routine performs steps 3.2.7 and 3.3.3 of the algorithm outlined</span></div>
 <div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;<span class="comment">   in the SPA document</span></div>
 <div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;<span class="comment"> Returns - Sun geocentric latitude (radian)</span></div>
@@ -771,8 +771,8 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;    };</div>
 <div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;    <span class="comment">/* Allow access to b0..b1 as if they form a single array bt[][] */</span></div>
 <div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> SunSeries *bt[B_COUNT] = { b0, b1 };</div>
-<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> bSubcount[B_COUNT] = { ARRAY_SIZE(b0),</div>
-<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;                                            ARRAY_SIZE(b1) };</div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> bSubcount[B_COUNT] = { <a class="code" href="general_8h.html#a284dcf044d06c5016bfda2cca6d91f95">ARRAY_SIZE</a>(b0),</div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;                                            <a class="code" href="general_8h.html#a284dcf044d06c5016bfda2cca6d91f95">ARRAY_SIZE</a>(b1) };</div>
 <div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160; </div>
 <div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;    <span class="keywordtype">double</span> sum[B_COUNT];</div>
 <div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;    <span class="keywordtype">int</span>    i, j;</div>
@@ -797,7 +797,7 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160; </div>
 <div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160; </div>
 <div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160; </div>
-<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;LOCAL <span class="keywordtype">double</span> sunDistance(<span class="keywordtype">double</span> t_ka)</div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keywordtype">double</span> sunDistance(<span class="keywordtype">double</span> t_ka)</div>
 <div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;<span class="comment">/* This routine performs step 3.2.8 of the algorithm outlined in the SPA</span></div>
 <div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;<span class="comment">   document.</span></div>
 <div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;<span class="comment"> Returns - distance to the sun (astronomical units)</span></div>
@@ -886,11 +886,11 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;    };</div>
 <div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;    <span class="comment">/* Allow access to r0..r4 as if they form a single array rt[][] */</span></div>
 <div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> SunSeries *rt[R_COUNT] = { r0, r1, r2, r3, r4 };</div>
-<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> rSubcount[R_COUNT] = { ARRAY_SIZE(r0),</div>
-<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;                                            ARRAY_SIZE(r1),</div>
-<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;                                            ARRAY_SIZE(r2),</div>
-<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;                                            ARRAY_SIZE(r3),</div>
-<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;                                            ARRAY_SIZE(r4)};</div>
+<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> rSubcount[R_COUNT] = { <a class="code" href="general_8h.html#a284dcf044d06c5016bfda2cca6d91f95">ARRAY_SIZE</a>(r0),</div>
+<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;                                            <a class="code" href="general_8h.html#a284dcf044d06c5016bfda2cca6d91f95">ARRAY_SIZE</a>(r1),</div>
+<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;                                            <a class="code" href="general_8h.html#a284dcf044d06c5016bfda2cca6d91f95">ARRAY_SIZE</a>(r2),</div>
+<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;                                            <a class="code" href="general_8h.html#a284dcf044d06c5016bfda2cca6d91f95">ARRAY_SIZE</a>(r3),</div>
+<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;                                            <a class="code" href="general_8h.html#a284dcf044d06c5016bfda2cca6d91f95">ARRAY_SIZE</a>(r4)};</div>
 <div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160; </div>
 <div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;    <span class="keywordtype">double</span> sum[R_COUNT];</div>
 <div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;    <span class="keywordtype">int</span>    i, j;</div>
@@ -918,7 +918,7 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160; </div>
 <div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160; </div>
 <div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160; </div>
-<div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;LOCAL <span class="keywordtype">double</span> solarNoonApprox(<span class="keywordtype">double</span>             noonGuess_d,</div>
+<div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keywordtype">double</span> solarNoonApprox(<span class="keywordtype">double</span>             noonGuess_d,</div>
 <div class="line"><a name="l00833"></a><span class="lineno">  833</span>&#160;                             <span class="keyword">const</span> <a class="code" href="struct_sky___delta_ts.html">Sky_DeltaTs</a>  *deltas,</div>
 <div class="line"><a name="l00834"></a><span class="lineno">  834</span>&#160;                             <span class="keyword">const</span> <a class="code" href="struct_sky___site_prop.html">Sky_SiteProp</a> *site,</div>
 <div class="line"><a name="l00835"></a><span class="lineno">  835</span>&#160;                             <a class="code" href="struct_sky___site_horizon.html">Sky_SiteHorizon</a> *topo)</div>
@@ -952,12 +952,12 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00863"></a><span class="lineno">  863</span>&#160;<span class="comment">       time until object will pass meridian) in units of Sidereal time. But</span></div>
 <div class="line"><a name="l00864"></a><span class="lineno">  864</span>&#160;<span class="comment">       the sun moves against the fixed stars in that time, so, as an</span></div>
 <div class="line"><a name="l00865"></a><span class="lineno">  865</span>&#160;<span class="comment">       approximation, subtract HA from Solar time (UT1) instead. */</span></div>
-<div class="line"><a name="l00866"></a><span class="lineno">  866</span>&#160;    <span class="keywordflow">return</span> noonGuess_d - ha_rad / TWOPI;</div>
+<div class="line"><a name="l00866"></a><span class="lineno">  866</span>&#160;    <span class="keywordflow">return</span> noonGuess_d - ha_rad / <a class="code" href="general_8h.html#a4912c64aec0c943b7985db6cb61ff83a">TWOPI</a>;</div>
 <div class="line"><a name="l00867"></a><span class="lineno">  867</span>&#160;}</div>
 <div class="line"><a name="l00868"></a><span class="lineno">  868</span>&#160; </div>
 <div class="line"><a name="l00869"></a><span class="lineno">  869</span>&#160; </div>
 <div class="line"><a name="l00870"></a><span class="lineno">  870</span>&#160; </div>
-<div class="line"><a name="l00871"></a><span class="lineno">  871</span>&#160;LOCAL <span class="keywordtype">double</span> riseSetApprox(<span class="keywordtype">double</span>             risesetGuess_d,</div>
+<div class="line"><a name="l00871"></a><span class="lineno">  871</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keywordtype">double</span> riseSetApprox(<span class="keywordtype">double</span>             risesetGuess_d,</div>
 <div class="line"><a name="l00872"></a><span class="lineno">  872</span>&#160;                           <span class="keywordtype">bool</span>               getSunrise,</div>
 <div class="line"><a name="l00873"></a><span class="lineno">  873</span>&#160;                           <span class="keyword">const</span> <a class="code" href="struct_sky___delta_ts.html">Sky_DeltaTs</a>  *deltas,</div>
 <div class="line"><a name="l00874"></a><span class="lineno">  874</span>&#160;                           <span class="keyword">const</span> <a class="code" href="struct_sky___site_prop.html">Sky_SiteProp</a> *site,</div>
@@ -1008,7 +1008,7 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00919"></a><span class="lineno">  919</span>&#160;    </div>
 <div class="line"><a name="l00920"></a><span class="lineno">  920</span>&#160;    <span class="comment">/* assuming Dec remains constant over the period, find out where dec circle</span></div>
 <div class="line"><a name="l00921"></a><span class="lineno">  921</span>&#160;<span class="comment">       intersects the Elevation = -50 arcminute circle */</span></div>
-<div class="line"><a name="l00922"></a><span class="lineno">  922</span>&#160;    cosHa2 = (sin(degToRad(-50.0/60.0)) - sin(site-&gt;<a class="code" href="struct_sky___site_prop.html#afd4d4d35cba5c790f2d6b1d6beff5cd2">astLat_rad</a>) * sin(dec_rad))</div>
+<div class="line"><a name="l00922"></a><span class="lineno">  922</span>&#160;    cosHa2 = (sin(<a class="code" href="general_8h.html#a4f5648074de7b472ac90dede0d0aa6de">degToRad</a>(-50.0/60.0)) - sin(site-&gt;<a class="code" href="struct_sky___site_prop.html#afd4d4d35cba5c790f2d6b1d6beff5cd2">astLat_rad</a>) * sin(dec_rad))</div>
 <div class="line"><a name="l00923"></a><span class="lineno">  923</span>&#160;             / (cos(site-&gt;<a class="code" href="struct_sky___site_prop.html#afd4d4d35cba5c790f2d6b1d6beff5cd2">astLat_rad</a>) * cos(dec_rad));</div>
 <div class="line"><a name="l00924"></a><span class="lineno">  924</span>&#160;    <span class="comment">/* If there is no intersection, the Sun either doesn&#39;t rise or doesn&#39;t set</span></div>
 <div class="line"><a name="l00925"></a><span class="lineno">  925</span>&#160;<span class="comment">       on this day at this latitude.  */</span></div>
@@ -1027,7 +1027,7 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00938"></a><span class="lineno">  938</span>&#160;        <span class="comment">/* Subtract difference in HA from Solar time (not sidereal time)</span></div>
 <div class="line"><a name="l00939"></a><span class="lineno">  939</span>&#160;<span class="comment">           i.e. this is the same approximation used in routine</span></div>
 <div class="line"><a name="l00940"></a><span class="lineno">  940</span>&#160;<span class="comment">           solarNoonApprox() above. */</span></div>
-<div class="line"><a name="l00941"></a><span class="lineno">  941</span>&#160;        riseSetApprox_d = risesetGuess_d - (ha1_rad - ha2_rad) / TWOPI;</div>
+<div class="line"><a name="l00941"></a><span class="lineno">  941</span>&#160;        riseSetApprox_d = risesetGuess_d - (ha1_rad - ha2_rad) / <a class="code" href="general_8h.html#a4912c64aec0c943b7985db6cb61ff83a">TWOPI</a>;</div>
 <div class="line"><a name="l00942"></a><span class="lineno">  942</span>&#160;    }</div>
 <div class="line"><a name="l00943"></a><span class="lineno">  943</span>&#160;    <span class="keywordflow">return</span> riseSetApprox_d;</div>
 <div class="line"><a name="l00944"></a><span class="lineno">  944</span>&#160;}</div>
@@ -1035,6 +1035,7 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="line"><a name="l00946"></a><span class="lineno">  946</span>&#160;<span class="comment">/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="ageneral_8h_html"><div class="ttname"><a href="general_8h.html">general.h</a></div><div class="ttdoc">general.h - definitions of general use to (standard) C programs</div></div>
 <div class="ttc" id="astruct_sky___true_equatorial_html_adef22951bb0a838e98406ee8fa36e641"><div class="ttname"><a href="struct_sky___true_equatorial.html#adef22951bb0a838e98406ee8fa36e641">Sky_TrueEquatorial::appCirsV</a></div><div class="ttdeci">V3D_Vector appCirsV</div><div class="ttdoc">Direction of object in apparent or CIRS coordinates (effectively a unit vector).</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00110">sky.h:110</a></div></div>
 <div class="ttc" id="astruct_sky___delta_ts_html"><div class="ttname"><a href="struct_sky___delta_ts.html">Sky_DeltaTs</a></div><div class="ttdoc">This structure contains relatively constant data, and is set up by one of the three functions sky_ini...</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00166">sky.h:166</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_ab9c960dd291b2aabcc56ac188b15dcb7"><div class="ttname"><a href="vectors3d_8h.html#ab9c960dd291b2aabcc56ac188b15dcb7">v3d_polarToRect</a></div><div class="ttdeci">V3D_Vector * v3d_polarToRect(V3D_Vector *destV, double alpha_rad, double delta_rad)</div><div class="ttdoc">Converts polar (curvilinear) coordinates to equivalent rectangular (Cartesian) coordinates.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00275">vectors3d.c:275</a></div></div>
@@ -1042,11 +1043,16 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="ttc" id="asky0_8h_html_a7a264cd6849a45a5edc1c660c8b76aa6"><div class="ttname"><a href="sky0_8h.html#a7a264cd6849a45a5edc1c660c8b76aa6">sky0_nutationSpa</a></div><div class="ttdeci">void sky0_nutationSpa(double t_cy, Sky0_Nut1980 *nut)</div><div class="ttdoc">Calculates the nutation in longitude and obliquity, according to the algorithm set out in the NREL SP...</div><div class="ttdef"><b>Definition:</b> <a href="sky0_8c_source.html#l00222">sky0.c:222</a></div></div>
 <div class="ttc" id="asun_8h_html_a8b8eff53c5adde4f9144a308aab0e8ba"><div class="ttname"><a href="sun_8h.html#a8b8eff53c5adde4f9144a308aab0e8ba">sun_nrelApp2</a></div><div class="ttdeci">void sun_nrelApp2(double t_cy, const Sky0_Nut1980 *nut, V3D_Vector *appV, double *dist_au)</div><div class="ttdoc">This function calculates the Sun position in apparent coordinates, using the NREL SPA algorithm (see ...</div><div class="ttdef"><b>Definition:</b> <a href="sun_8c_source.html#l00148">sun.c:148</a></div></div>
 <div class="ttc" id="aastron_8h_html"><div class="ttname"><a href="astron_8h.html">astron.h</a></div><div class="ttdoc">astron.h - assorted definitions useful for astronomy</div></div>
+<div class="ttc" id="ageneral_8h_html_a284dcf044d06c5016bfda2cca6d91f95"><div class="ttname"><a href="general_8h.html#a284dcf044d06c5016bfda2cca6d91f95">ARRAY_SIZE</a></div><div class="ttdeci">#define ARRAY_SIZE(x__)</div><div class="ttdoc">Because C passes arrays to functions by passing only a pointer to the zero'th element of the array,...</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00194">general.h:194</a></div></div>
 <div class="ttc" id="astruct_sky___site_prop_html_afd4d4d35cba5c790f2d6b1d6beff5cd2"><div class="ttname"><a href="struct_sky___site_prop.html#afd4d4d35cba5c790f2d6b1d6beff5cd2">Sky_SiteProp::astLat_rad</a></div><div class="ttdeci">double astLat_rad</div><div class="ttdoc">Astronomical latitude of site (ϕA) (radian)</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00316">sky.h:316</a></div></div>
 <div class="ttc" id="asky_8h_html_a03279243991e42a3edbeaac243ae2dc7"><div class="ttname"><a href="sky_8h.html#a03279243991e42a3edbeaac243ae2dc7">sky_updateTimes</a></div><div class="ttdeci">void sky_updateTimes(double j2kUtc_d, const Sky_DeltaTs *d, Sky_Times *t)</div><div class="ttdoc">Convert the given &quot;J2KD&quot; in the UTC timescale to the other timescales, and pre-calculate some other q...</div><div class="ttdef"><b>Definition:</b> <a href="sky-time_8c_source.html#l00206">sky-time.c:206</a></div></div>
 <div class="ttc" id="astruct_sky___true_equatorial_html"><div class="ttname"><a href="struct_sky___true_equatorial.html">Sky_TrueEquatorial</a></div><div class="ttdoc">Struct used for holding an object's coordinates in equatorial apparent or Intermediate coordinates.</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00106">sky.h:106</a></div></div>
 <div class="ttc" id="asun_8h_html_ac555d348d21360e65ff644212d7f84b4"><div class="ttname"><a href="sun_8h.html#ac555d348d21360e65ff644212d7f84b4">sun_nrelTopocentric</a></div><div class="ttdeci">void sun_nrelTopocentric(double j2kUtc_d, const Sky_DeltaTs *deltas, const Sky_SiteProp *site, Sky_SiteHorizon *topo)</div><div class="ttdoc">Calls sun_nrelApparent() to calculate the Sun's position in apparent coordinates using the NREL Sun P...</div><div class="ttdef"><b>Definition:</b> <a href="sun_8c_source.html#l00266">sun.c:266</a></div></div>
+<div class="ttc" id="ageneral_8h_html_a3758dd5d300a594312c95bc393378df0"><div class="ttname"><a href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a></div><div class="ttdeci">#define LOCAL</div><div class="ttdoc">C has some very silly default behaviours.</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00133">general.h:133</a></div></div>
+<div class="ttc" id="ageneral_8h_html_a598a3330b3c21701223ee0ca14316eca"><div class="ttname"><a href="general_8h.html#a598a3330b3c21701223ee0ca14316eca">PI</a></div><div class="ttdeci">#define PI</div><div class="ttdoc">,</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00158">general.h:158</a></div></div>
+<div class="ttc" id="ageneral_8h_html_a3de33738fd3c7e77bffbcfaefc3e7645"><div class="ttname"><a href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a></div><div class="ttdeci">#define GLOBAL</div><div class="ttdoc">See above.</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00134">general.h:134</a></div></div>
 <div class="ttc" id="astruct_sky___times_html_a3c9436d4d73659b99d777051b8b095e5"><div class="ttname"><a href="struct_sky___times.html#a3c9436d4d73659b99d777051b8b095e5">Sky_Times::j2kTT_cy</a></div><div class="ttdeci">double j2kTT_cy</div><div class="ttdoc">Julian centuries since J2000.0, TT timescale [T].</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00188">sky.h:188</a></div></div>
+<div class="ttc" id="ageneral_8h_html_ab696637d7513e2620546fc6f4997dab5"><div class="ttname"><a href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a></div><div class="ttdeci">#define REQUIRE_NOT_NULL(pointer_)</div><div class="ttdoc">,</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00308">general.h:308</a></div></div>
 <div class="ttc" id="astruct_sky___times_html"><div class="ttname"><a href="struct_sky___times.html">Sky_Times</a></div><div class="ttdoc">This structure contains the continuously varying time (and earth rotation) data, in various forms tha...</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00184">sky.h:184</a></div></div>
 <div class="ttc" id="astruct_sky___true_equatorial_html_a9c13083bb211839f27757fb90210af55"><div class="ttname"><a href="struct_sky___true_equatorial.html#a9c13083bb211839f27757fb90210af55">Sky_TrueEquatorial::eqEq_rad</a></div><div class="ttdeci">double eqEq_rad</div><div class="ttdoc">Equation of the Equinoxes (radian).</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00115">sky.h:115</a></div></div>
 <div class="ttc" id="astruct_sky___site_prop_html"><div class="ttname"><a href="struct_sky___site_prop.html">Sky_SiteProp</a></div><div class="ttdoc">Site properties.</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00315">sky.h:315</a></div></div>
@@ -1054,14 +1060,18 @@ $(document).ready(function(){initNavTree('sun_8c_source.html',''); initResizable
 <div class="ttc" id="astruct_sky0___nut1980_html_a9b0da8604707a438f6396f12d2c3994b"><div class="ttname"><a href="struct_sky0___nut1980.html#a9b0da8604707a438f6396f12d2c3994b">Sky0_Nut1980::dPsi_rad</a></div><div class="ttdeci">double dPsi_rad</div><div class="ttdoc">Nutation in longitude (Δψ) (radian)</div><div class="ttdef"><b>Definition:</b> <a href="sky0_8h_source.html#l00074">sky0.h:74</a></div></div>
 <div class="ttc" id="asun_8h_html_a697f8cd30a2c41f04cf775a41df23037"><div class="ttname"><a href="sun_8h.html#a697f8cd30a2c41f04cf775a41df23037">sun_aaApparentApprox</a></div><div class="ttdeci">void sun_aaApparentApprox(double n, V3D_Vector *appV, double *dist_au)</div><div class="ttdoc">This function calculates an approximate Sun position in apparent coordinates using the algorithm give...</div><div class="ttdef"><b>Definition:</b> <a href="sun_8c_source.html#l00105">sun.c:105</a></div></div>
 <div class="ttc" id="astruct_sky0___nut1980_html_aef39025a6d0b655f7ad0ffd9641762b6"><div class="ttname"><a href="struct_sky0___nut1980.html#aef39025a6d0b655f7ad0ffd9641762b6">Sky0_Nut1980::dEps_rad</a></div><div class="ttdeci">double dEps_rad</div><div class="ttdoc">Nutation in obliquity (Δε) (radian)</div><div class="ttdef"><b>Definition:</b> <a href="sky0_8h_source.html#l00075">sky0.h:75</a></div></div>
+<div class="ttc" id="ageneral_8h_html_a4912c64aec0c943b7985db6cb61ff83a"><div class="ttname"><a href="general_8h.html#a4912c64aec0c943b7985db6cb61ff83a">TWOPI</a></div><div class="ttdeci">#define TWOPI</div><div class="ttdoc">,</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00160">general.h:160</a></div></div>
 <div class="ttc" id="astruct_sky___true_equatorial_html_a0f919185f0cb457f8ef18530392eaa00"><div class="ttname"><a href="struct_sky___true_equatorial.html#a0f919185f0cb457f8ef18530392eaa00">Sky_TrueEquatorial::timestamp_cy</a></div><div class="ttdeci">double timestamp_cy</div><div class="ttdoc">Time applying to the other figures in this struct (centuries since J2000.0, TT timescale)</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00107">sky.h:107</a></div></div>
 <div class="ttc" id="asky0_8h_html_a5955058c81d1be6ec0e466900c52c69e"><div class="ttname"><a href="sky0_8h.html#a5955058c81d1be6ec0e466900c52c69e">sky0_epsilonSpa</a></div><div class="ttdeci">void sky0_epsilonSpa(double t_cy, Sky0_Nut1980 *nut)</div><div class="ttdoc">Calculate the obliquity of the ecliptic and the equation of the equinoxes.</div><div class="ttdef"><b>Definition:</b> <a href="sky0_8c_source.html#l00334">sky0.c:334</a></div></div>
 <div class="ttc" id="astruct_sky___site_prop_html_a8b1fd161b9450f8945ac3bb8d8a8bc09"><div class="ttname"><a href="struct_sky___site_prop.html#a8b1fd161b9450f8945ac3bb8d8a8bc09">Sky_SiteProp::timeZone_d</a></div><div class="ttdeci">double timeZone_d</div><div class="ttdoc">time zone offset from UTC (fraction of a day)</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00323">sky.h:323</a></div></div>
 <div class="ttc" id="astruct_v3_d___matrix_html"><div class="ttname"><a href="struct_v3_d___matrix.html">V3D_Matrix</a></div><div class="ttdoc">3x3 matrix.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8h_source.html#l00051">vectors3d.h:51</a></div></div>
+<div class="ttc" id="aastron_8h_html_a757c7972f565158c61eae7c712f24b35"><div class="ttname"><a href="astron_8h.html#a757c7972f565158c61eae7c712f24b35">arcsecToRad</a></div><div class="ttdeci">static double arcsecToRad(double angle_as)</div><div class="ttdoc">Returns angle_as converted from arcseconds to radians.</div><div class="ttdef"><b>Definition:</b> <a href="astron_8h_source.html#l00043">astron.h:43</a></div></div>
 <div class="ttc" id="astruct_sky___true_equatorial_html_a1eaa585fcc5e1c69290dc1daea7e48af"><div class="ttname"><a href="struct_sky___true_equatorial.html#a1eaa585fcc5e1c69290dc1daea7e48af">Sky_TrueEquatorial::distance_au</a></div><div class="ttdeci">double distance_au</div><div class="ttdoc">Distance to object (Astronomical Units) or 0.0 for far distant objects (that is, those with negligibl...</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00112">sky.h:112</a></div></div>
 <div class="ttc" id="ainstead-of-math_8h_html"><div class="ttname"><a href="instead-of-math_8h.html">instead-of-math.h</a></div><div class="ttdoc">instead-of-math.h - header to be included instead of math.h</div></div>
 <div class="ttc" id="astruct_v3_d___vector_html"><div class="ttname"><a href="struct_v3_d___vector.html">V3D_Vector</a></div><div class="ttdoc">3x1 vector.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8h_source.html#l00057">vectors3d.h:57</a></div></div>
+<div class="ttc" id="ageneral_8h_html_a4f5648074de7b472ac90dede0d0aa6de"><div class="ttname"><a href="general_8h.html#a4f5648074de7b472ac90dede0d0aa6de">degToRad</a></div><div class="ttdeci">static double degToRad(double angle_deg)</div><div class="ttdoc">Returns angle_deg converted from degrees to radians.</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00180">general.h:180</a></div></div>
 <div class="ttc" id="asun_8h_html_a2b95525b0966c30a2002fae909e6ebc5"><div class="ttname"><a href="sun_8h.html#a2b95525b0966c30a2002fae909e6ebc5">sun_riseSet</a></div><div class="ttdeci">double sun_riseSet(int year, int month, int day, bool getSunrise, const Sky_DeltaTs *deltas, const Sky_SiteProp *site, Sky_SiteHorizon *topo)</div><div class="ttdoc">Routine to calculate the time of sunrise or sunset for the day specified by year, month and day.</div><div class="ttdef"><b>Definition:</b> <a href="sun_8c_source.html#l00363">sun.c:363</a></div></div>
+<div class="ttc" id="ageneral_8h_html_af9f431fdeb7703d5a95fab8a67109ce0"><div class="ttname"><a href="general_8h.html#af9f431fdeb7703d5a95fab8a67109ce0">DEFINE_THIS_FILE</a></div><div class="ttdeci">#define DEFINE_THIS_FILE</div><div class="ttdoc">Leave DEFINE_THIS_FILE undefined.</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00252">general.h:252</a></div></div>
 <div class="ttc" id="astruct_sky0___nut1980_html_a0065d9c181b8403f9cd37237540bb004"><div class="ttname"><a href="struct_sky0___nut1980.html#a0065d9c181b8403f9cd37237540bb004">Sky0_Nut1980::eps0_rad</a></div><div class="ttdeci">double eps0_rad</div><div class="ttdoc">Mean obliquity of ecliptic at date (ε0)(radian)</div><div class="ttdef"><b>Definition:</b> <a href="sky0_8h_source.html#l00076">sky0.h:76</a></div></div>
 <div class="ttc" id="astruct_sky0___nut1980_html"><div class="ttname"><a href="struct_sky0___nut1980.html">Sky0_Nut1980</a></div><div class="ttdoc">Nutation angles and obliquity.</div><div class="ttdef"><b>Definition:</b> <a href="sky0_8h_source.html#l00073">sky0.h:73</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_af4f8f0d21389bf84d1321e6c7739c513"><div class="ttname"><a href="vectors3d_8h.html#af4f8f0d21389bf84d1321e6c7739c513">v3d_createRotationMatrix</a></div><div class="ttdeci">V3D_Matrix * v3d_createRotationMatrix(V3D_Matrix *destM, V3D_AxisNames axis, double angle_rad)</div><div class="ttdoc">Creates a matrix to rotate a coordinate system about an axis.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00372">vectors3d.c:372</a></div></div>

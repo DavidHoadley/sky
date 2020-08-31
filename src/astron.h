@@ -20,18 +20,18 @@
  * Global #defines and typedefs
  */
 /* Useful astronomical constants */
-#define MJD_B1900   15019.81352         /* MJD of Besselian std epoch B1900.0 */
-#define MJD_B1950   33281.92346         /* MJD of Besselian std epoch B1950.0 */
-#define MJD_J2000   51544.5             /* MJD of Fundamental Epoch J2000.0 */
-#define TROP_CENT   36524.2198781       /* Length of Tropical Century in days */
-#define JUL_CENT    36525.0             /* Length of Julian Century in days */
+#define MJD_B1900   15019.81352     /*!< MJD of Besselian std epoch B1900.0 */
+#define MJD_B1950   33281.92346     /*!< MJD of Besselian std epoch B1950.0 */
+#define MJD_J2000   51544.5         /*!< MJD of Fundamental Epoch J2000.0 */
+#define TROP_CENT   36524.2198781   /*!< Length of Tropical Century in days */
+#define JUL_CENT    36525.0         /*!< Length of Julian Century in days */
 
-#define ARCSEC2RAD  (PI / 648000.0)     /* arcseconds to radian */
-#define RAD2ARCSEC  (648000.0 / PI)     /* radian to arcseconds */
-#define SEC2RAD     (PI / 43200.0)      /* seconds(time) to radian */
-#define RAD2SEC     (43200.0 / PI)      /* radian to seconds(time) */
-#define HRS2RAD     (PI / 12.0)         /* hours to radians */
-#define RAD2HRS     (12.0 / PI)         /* radians to hours */
+#define ARCSEC2RAD  (PI / 648000.0)     /*!< arcseconds to radians */
+#define RAD2ARCSEC  (648000.0 / PI)     /*!< radians to arcseconds */
+#define SEC2RAD     (PI / 43200.0)      /*!< seconds(time) to radians */
+#define RAD2SEC     (43200.0 / PI)      /*!< radians to seconds(time) */
+#define HRS2RAD     (PI / 12.0)         /*!< hours to radians */
+#define RAD2HRS     (12.0 / PI)         /*!< radians to hours */
 
 /*
  * Functions
@@ -39,15 +39,21 @@
 /*      Convert angle from one unit to another */
 #ifdef PREDEF_STANDARD_C_1999
 /*          Compiler supports inline functions */
-static inline double arcsecToRad(double angle_arcsec) {
-                                            return angle_arcsec*ARCSEC2RAD; }
+/*! Returns \a angle_as converted from arcseconds to radians */
+static inline double arcsecToRad(double angle_as) {
+                                                return angle_as * ARCSEC2RAD; }
+/*! Returns \a angle_rad converted from radians to arcseconds */
 static inline double radToArcsec(double angle_rad) {
-                                            return angle_rad * RAD2ARCSEC; }
+                                                return angle_rad * RAD2ARCSEC; }
 
+/*! Returns \a angle_s converted from seconds to radians */
 static inline double secToRad(double angle_s)   { return angle_s * SEC2RAD; }
+/*! Returns \a angle_rad converted from radians to seconds */
 static inline double radToSec(double angle_rad) { return angle_rad * RAD2SEC; }
 
+/*! Returns \a angle_h converted from hours to radians */
 static inline double hrsToRad(double angle_h)   { return angle_h * HRS2RAD; }
+/*! Returns \a angle_rad converted from radians to hours */
 static inline double radToHrs(double angle_rad) { return angle_rad * RAD2HRS; }
 
 #else

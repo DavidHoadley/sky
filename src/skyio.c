@@ -4,7 +4,7 @@
  * Author:  David Hoadley
  *
  * Description: (see skyio.h)
- * 
+ *
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
  * All rights reserved.
  *
@@ -52,7 +52,7 @@
 /*
  * Local #defines and typedefs
  */
-DEFINE_THIS_FILE;                       // For use by REQUIRE() - assertions.
+DEFINE_THIS_FILE;                       /* For use by REQUIRE() - assertions.*/
 
 /*
  * Prototypes for local functions (not called from other modules)
@@ -72,7 +72,7 @@ LOCAL const char cMinute[] = "′";
 LOCAL const char cSecond[] = "″";
 
 LOCAL const char decimalChar = '.';         // use ',' if you prefer.
-LOCAL const char fieldSeparator = ',';      
+LOCAL const char fieldSeparator = ',';
 
 /*
  *==============================================================================
@@ -86,9 +86,9 @@ LOCAL const char fieldSeparator = ',';
  *------------------------------------------------------------------------------
  */
 GLOBAL char *skyio_degToDmsStr(char destStr[],
-                               int destStrLen,
-                               double angle_deg,
-                               int decimals)
+                               size_t   destStrSize,
+                               double   angle_deg,
+                               unsigned decimals)
 /*! Routine to take an angle in degrees and return a string of the form
         [±]DDD°MM′SS.sss″
     correctly rounding according to the number of decimal places to be shown.
@@ -96,7 +96,7 @@ GLOBAL char *skyio_degToDmsStr(char destStr[],
     round to ±360° will be written out as 0°.
  \returns                Pointer to \a destStr
  \param[out] destStr     Destination character string
- \param[in]  destStrLen  Length of destination string
+ \param[in]  destStrSize Size of destination string (max available length + 1)
  \param[in]  angle_deg   The angle to be written out (degrees).
                            Valid range:(-360, 360); larger numbers may well be
                            written OK, but there is a risk of overflowing an
@@ -108,12 +108,12 @@ GLOBAL char *skyio_degToDmsStr(char destStr[],
                            clamped to this range.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
-    const int  minLen = 8 + (sizeof(cDegree) - 1) + (sizeof(cMinute) - 1)
-                          + (sizeof(cSecond) - 1);
+    const unsigned minLen = 8 + (sizeof(cDegree) - 1) + (sizeof(cMinute) - 1)
+                              + (sizeof(cSecond) - 1);
 
     long int angle_asxd;    // angle_deg, converted to arcseconds x 10^decimals
-    int      reqLen;        // required length of string to fit the output
-    int      i, j;
+    unsigned reqLen;        // required length of string to fit the output
+    unsigned i, j;
     int      roundup;
     ldiv_t   q;
 
@@ -129,7 +129,7 @@ GLOBAL char *skyio_degToDmsStr(char destStr[],
     reqLen = minLen + decimals + (decimals > 0 ? 1 : 0);
     // Make sure caller has supplied a big enough string to hold all the digits
     // that they have requested
-    REQUIRE(destStrLen > reqLen);
+    REQUIRE(destStrSize > reqLen);
 
     roundup = 1;
     for (i = 0; i < decimals; i++) {
@@ -178,30 +178,30 @@ GLOBAL char *skyio_degToDmsStr(char destStr[],
 
     for (j = 0; (j < 1) || (q.quot != 0); j++) {
         q = ldiv(q.quot, 10);
-        destStr[--i] = digits[q.rem];        
+        destStr[--i] = digits[q.rem];
     }
     destStr[--i] = (angle_deg < 0.0) ? '-' : '+';
     while (i > 0) {
         destStr[--i] = ' ';
     }
-    
+
     return destStr;
 }
 
 
 
 GLOBAL char *skyio_hrsToHmsStr(char destStr[],
-                               int destStrLen,
-                               double angle_h,
-                               int decimals)
+                               size_t   destStrSize,
+                               double   angle_h,
+                               unsigned decimals)
 /*! Routine to take an angle in hours and return a string in hours, minutes and
-    seconds form - "±HH:MM:SS.sss" - 
+    seconds form - "±HH:MM:SS.sss" -
     correctly rounding according to the number of decimal places to be shown.
     The angle is assumed to be within the range (-24.0, 24.0). Angles which
     round to ±24:00:00 will be written out as 0:00:00.
  \returns                Pointer to \a destStr
  \param[out] destStr     Destination character string
- \param[in]  destStrLen  Length of destination string
+ \param[in]  destStrSize Size of destination string (max available length + 1)
  \param[in]  angle_h     The angle to be written out (hours).
                          Valid range:(-24.0, 24.0); larger numbers may well be
                          written OK, but there is a risk of overflowing an
@@ -214,8 +214,8 @@ GLOBAL char *skyio_hrsToHmsStr(char destStr[],
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 {
     long int angle_sxd;     // angle_h, converted to seconds x 10^decimals
-    int      i, j;
-    int      reqLen;        // required length of string to fit the output
+    unsigned i, j;
+    unsigned reqLen;        // required length of string to fit the output
     int      roundup;
     ldiv_t   q;
 
@@ -231,7 +231,7 @@ GLOBAL char *skyio_hrsToHmsStr(char destStr[],
     reqLen = 9 + decimals + (decimals > 0 ? 1 : 0);
     // Make sure caller has supplied a big enough string to hold all the digits
     // that they have requested
-    REQUIRE(destStrLen > reqLen);
+    REQUIRE(destStrSize > reqLen);
 
 
     roundup = 1;
@@ -273,11 +273,11 @@ GLOBAL char *skyio_hrsToHmsStr(char destStr[],
 
     for (j = 0; j < 2; j++) {
         q = ldiv(q.quot, 10);
-        destStr[--i] = digits[q.rem];        
+        destStr[--i] = digits[q.rem];
     }
 
     destStr[--i] = (angle_h < 0.0) ? '-' : '+';
-    
+
     ENSURE(i == 0);     // If not, we have stuffed up filling the string
 
     return destStr;
@@ -330,9 +330,9 @@ GLOBAL double skyio_sxStrToAng(const char angleStr[],
     double      divideBy;
     double      frac;               // value of digits that follow decimal point
     int         status;             // error code
-    // Hold the results of decoding in separate array members for degrees/hours,
-    // minutes and seconds. Put an invalid value into one of them, so that we
-    // can later detect the case when angleStr contains no decodable value.
+    /* Hold the results of decoding in separate array members for degrees/hours,
+       minutes and seconds. Put an invalid value into one of them, so that we
+       can later detect the case when angleStr contains no decodable value. */
     double      results[4] = {0.0, -1.0, 0.0, 0.0};
     double      *res = results;     // point to relevant member of results[]
 
@@ -373,7 +373,7 @@ GLOBAL double skyio_sxStrToAng(const char angleStr[],
             } else {
                 // Not a digit or point, so we have reached the end of the field
                 if ((pointFound) || (decodeState == stSecs)) {
-                    // This must be the last field we will decode
+                    /* This must be the last field we will decode */
                     if (isblank(*ch)) {
                         done = true;            // exit now
                     } else if (*ch == fieldSeparator) {
@@ -389,8 +389,8 @@ GLOBAL double skyio_sxStrToAng(const char angleStr[],
             break;
 
         case stEnding:
-            // Skip over any trailing non-blank chars.
-            // Stop when we find white space
+            /* Skip over any trailing non-blank chars.
+               Stop when we find white space */
             if (isblank(*ch)) {
                 done = true;
             }
@@ -399,15 +399,15 @@ GLOBAL double skyio_sxStrToAng(const char angleStr[],
         default:
             break;
         }
-        
+
         if (done) {
-            // exit the loop without incrementing our character pointer ch
+            /* exit the loop without incrementing our character pointer ch */
             break;
         }
     }
     status = 0;
     if (results[1] < 0.0) {
-        // There was no number in angleStr. Return zero and an error code.
+        /* There was no number in angleStr. Return zero and an error code. */
         results[1] = 0.0;
         status = NO_ANGLE;
     }

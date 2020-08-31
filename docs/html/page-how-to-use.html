@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.4-1</span>
+   &#160;<span id="projectnumber">0.1.5-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -88,12 +88,12 @@ $(document).ready(function(){initNavTree('page-how-to-use.html',''); initResizab
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>The code has been provided as a set of separate files for you to include in your project. It has not been configured as a monolithic library, because there are likely to be parts that you don't want to include. But importantly, it is assumed that you will want to make some choices, and you will need to do that by making some simple edits to the source code of various modules. Here are some guidelines.</p>
-<h3><a class="anchor" id="autotoc_md5"></a>
+<h3><a class="anchor" id="autotoc_md6"></a>
 Required files</h3>
 <ul>
 <li>For all applications:<ul>
 <li>The basic sky routines - <a class="el" href="sky_8h.html" title="sky.h - structures and routines for astronomical observing &amp; tracking">sky.h</a> &amp; <a class="el" href="sky-time_8c_source.html">sky-time.c</a> &amp; <a class="el" href="sky-site_8c_source.html">sky-site.c</a></li>
-<li>Low level support routines and definitions - <a class="el" href="general_8h_source.html">general.h</a>, <a class="el" href="astron_8h.html" title="astron.h - assorted definitions useful for astronomy">astron.h</a>, <a class="el" href="instead-of-math_8h.html" title="instead-of-math.h - header to be included instead of math.h">instead-of-math.h</a>, <a class="el" href="vectors3d_8h.html" title="vectors3d.h - Three dimensional geometry, vectors and matrices">vectors3d.h</a> &amp; <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</li>
+<li>Low level support routines and definitions - <a class="el" href="general_8h.html" title="general.h - definitions of general use to (standard) C programs">general.h</a>, <a class="el" href="astron_8h.html" title="astron.h - assorted definitions useful for astronomy">astron.h</a>, <a class="el" href="instead-of-math_8h.html" title="instead-of-math.h - header to be included instead of math.h">instead-of-math.h</a>, <a class="el" href="vectors3d_8h.html" title="vectors3d.h - Three dimensional geometry, vectors and matrices">vectors3d.h</a> &amp; <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</li>
 </ul>
 </li>
 <li>For solar position calculations: the "all applications" set above, plus <a class="el" href="sky0_8h.html" title="sky0.h - astronomical coordinate conversion for NREL Sun Position Algorithm">sky0.h</a> &amp; <a class="el" href="sky0_8c_source.html">sky0.c</a>, and <a class="el" href="sun_8h.html" title="sun.h - routines to calculate the Sun&#39;s position">sun.h</a> &amp; <a class="el" href="sun_8c_source.html">sun.c</a></li>
@@ -106,7 +106,7 @@ Required files</h3>
 <li>For tracking a star: the above, plus <a class="el" href="skyfast_8h.html" title="skyfast.h - set up and use interpolation for rapid calculation of a celestial object&#39;s apparent coord...">skyfast.h</a> &amp; <a class="el" href="skyfast_8c_source.html">skyfast.c</a></li>
 </ul>
 <p>You may also want to use <a class="el" href="skyio_8h.html" title="skyio.h - output and formatting routines and a read routine">skyio.h</a> and <a class="el" href="skyio_8c_source.html">skyio.c</a> to format the output angles for display for the Sun, Moon or planets.</p>
-<h3><a class="anchor" id="autotoc_md6"></a>
+<h3><a class="anchor" id="autotoc_md7"></a>
 Editing the code</h3>
 <p>You are likely to want to make some basic edits to the code, as listed below. But before you do, make sure your editor can handle files in UTF-8 format. MacOS and Linux systems certainly will do this without you needing to think about it. Only Windows systems still using old 8-bit code pages like the Windows-1252 page are likely to have any issues. (You should move away from them to UTF-8 in any case. UTF-8 can handle any character; those old code pages don't.)</p><ul>
 <li><a class="el" href="page-general-h.html">Edits you may want to make to general.h</a></li>

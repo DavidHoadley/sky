@@ -2,6 +2,7 @@ var sky1_8h =
 [
     [ "Sky1_Prec1976", "struct_sky1___prec1976.html", "struct_sky1___prec1976" ],
     [ "Sky1_Nut1980", "struct_sky1___nut1980.html", "struct_sky1___nut1980" ],
+    [ "sky1_frameBiasFK5", "sky1_8h.html#af1ae1a3711d82cba97bd4d54f812a86e", null ],
     [ "sky1_precessionIAU1976", "sky1_8h.html#a443dfb8c35b2c9a7ed11e4f4df14e7df", null ],
     [ "sky1_createPrec1976Matrix", "sky1_8h.html#ac92f2acd0623795c195cbf848458c662", null ],
     [ "sky1_nutationIAU1980", "sky1_8h.html#a61813485e959ed0208086d946e33ad4c", null ],

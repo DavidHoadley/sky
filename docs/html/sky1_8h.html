@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.4-1</span>
+   &#160;<span id="projectnumber">0.1.5-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -107,6 +107,9 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:af1ae1a3711d82cba97bd4d54f812a86e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sky1_8h.html#af1ae1a3711d82cba97bd4d54f812a86e">sky1_frameBiasFK5</a> (<a class="el" href="struct_v3_d___matrix.html">V3D_Matrix</a> *biasM)</td></tr>
+<tr class="memdesc:af1ae1a3711d82cba97bd4d54f812a86e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the frame bias matrix from the IAU 2000 precession-nutation model.  <a href="sky1_8h.html#af1ae1a3711d82cba97bd4d54f812a86e">More...</a><br /></td></tr>
+<tr class="separator:af1ae1a3711d82cba97bd4d54f812a86e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a443dfb8c35b2c9a7ed11e4f4df14e7df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sky1_8h.html#a443dfb8c35b2c9a7ed11e4f4df14e7df">sky1_precessionIAU1976</a> (double t0, double t1, <a class="el" href="struct_sky1___prec1976.html">Sky1_Prec1976</a> *terms)</td></tr>
 <tr class="memdesc:a443dfb8c35b2c9a7ed11e4f4df14e7df"><td class="mdescLeft">&#160;</td><td class="mdescRight">This procedure calculates the equatorial precession parameters ζ, z, and θ which represent the rotation required to transform the FK5 equatorial reference system of Julian epoch t0 to that of Julian epoch t1, according to the IAU 1976 precession constants.  <a href="sky1_8h.html#a443dfb8c35b2c9a7ed11e4f4df14e7df">More...</a><br /></td></tr>
 <tr class="separator:a443dfb8c35b2c9a7ed11e4f4df14e7df"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -145,6 +148,36 @@ Functions</h2></td></tr>
  
 <p class="definition">Definition in file <a class="el" href="sky1_8h_source.html">sky1.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="af1ae1a3711d82cba97bd4d54f812a86e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1ae1a3711d82cba97bd4d54f812a86e">&#9670;&nbsp;</a></span>sky1_frameBiasFK5()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sky1_frameBiasFK5 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_v3_d___matrix.html">V3D_Matrix</a> *&#160;</td>
+          <td class="paramname"><em>biasM</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create the frame bias matrix from the IAU 2000 precession-nutation model. </p>
+<p>This matrix is used to convert coordinates from the Geocentric Celestial Reference System (GCRS) to FK5 reference system. (Although anything to do with the ICRS/GCRS is related to the IAU2000+ precession-nutation theory, this routine is included here to allow ICRS star catalogue positions to be converted to apparent coordinates using the IAU1980 precession-nutation theory, which is quite good enough for tracking. It is not good enough for astrometry, but it will get us to better than within an arcsecond of our desired apparent position). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">biasM</td><td>Frame bias matrix <b>B</b> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Reference:</dt><dd><em>Astronomical Almanac</em> 2007, page B28</dd></dl>
+<hr  />
+ 
+<p class="definition">Definition at line <a class="el" href="sky1_8c_source.html#l00339">339</a> of file <a class="el" href="sky1_8c_source.html">sky1.c</a>.</p>
+
+</div>
+</div>
 <a id="a443dfb8c35b2c9a7ed11e4f4df14e7df"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a443dfb8c35b2c9a7ed11e4f4df14e7df">&#9670;&nbsp;</a></span>sky1_precessionIAU1976()</h2>
 
@@ -192,7 +225,7 @@ Functions</h2></td></tr>
 <dl class="section user"><dt></dt><dd>The values calculated by this routine change only slowly. So if you are calling it yourself, you can call it infrequently. Intervals of up to an hour between calls will not introduce much error. This function is also called by <a class="el" href="sky1_8h.html#ace44a5ea8db1f9ee75c14fd67daaa45e" title="Call the various precession and nutation routines in this module to create a combined precession and ...">sky1_createNPmatrix()</a>.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky1_8c_source.html#l00339">339</a> of file <a class="el" href="sky1_8c_source.html">sky1.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky1_8c_source.html#l00375">375</a> of file <a class="el" href="sky1_8c_source.html">sky1.c</a>.</p>
 
 </div>
 </div>
@@ -223,7 +256,8 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>This routine calculates the precession matrix, based on angles ζ, z, and θ. </p>
-<p><em>precM</em> is the combined orthogonal rotation matrix P, required for rigorous precession transformations using rectangular coordinates and matrix methods: V1 = P * V0 It appears to be calculated from P = R3(-z) * R2(θ) * R3(-ζ) </p><dl class="params"><dt>Parameters</dt><dd>
+<p><em>precM</em> is the combined orthogonal rotation matrix <b>P</b>, required for rigorous precession transformations using rectangular coordinates and matrix methods: V1 = P * V0 It appears to be calculated from<br  />
+ <b>P</b> = R3(-z) × R2(θ) × R3(-ζ) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">terms</td><td>The three precession angles ζ, z, θ, as returned by <a class="el" href="sky1_8h.html#a443dfb8c35b2c9a7ed11e4f4df14e7df" title="This procedure calculates the equatorial precession parameters ζ, z, and θ which represent the rotati...">sky1_precessionIAU1976()</a> </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">precM</td><td>Precession rotation matrix</td></tr>
@@ -235,7 +269,7 @@ Functions</h2></td></tr>
 <dl class="section user"><dt>When to call this function</dt><dd>Call this function after new values of ζ, z and θ have been calculated by routine <a class="el" href="sky1_8h.html#a443dfb8c35b2c9a7ed11e4f4df14e7df" title="This procedure calculates the equatorial precession parameters ζ, z, and θ which represent the rotati...">sky1_precessionIAU1976()</a>. So, again, it need only be called infrequently. But as mentioned for that function, it is quite likely that you will not need to call this function directly. Any of the functions <a class="el" href="sky1_8h.html#ace44a5ea8db1f9ee75c14fd67daaa45e" title="Call the various precession and nutation routines in this module to create a combined precession and ...">sky1_createNPmatrix()</a>, star_getApparent(), star_getTopocentric(), <a class="el" href="planet_8h.html#a96b2ba1bce82bbd875d0740576a24262" title="Calculate the position of the currently selected planet as a unit vector and a distance,...">planet_getApparent()</a> or <a class="el" href="planet_8h.html#ae551d337a5eb752a7e5e56417392e923" title="Calls planet_getApparent() to calculate the planet&#39;s position in apparent coordinates,...">planet_getTopocentric()</a> will call this routine for you.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky1_8c_source.html#l00401">401</a> of file <a class="el" href="sky1_8c_source.html">sky1.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky1_8c_source.html#l00437">437</a> of file <a class="el" href="sky1_8c_source.html">sky1.c</a>.</p>
 
 </div>
 </div>
@@ -307,7 +341,7 @@ Functions</h2></td></tr>
 <dl class="section user"><dt></dt><dd>The values calculated by this routine change only slowly. So if you are calling it yourself, you can call it infrequently. Intervals of up to an hour between calls will not introduce much error. This function is also called by <a class="el" href="sky1_8h.html#ace44a5ea8db1f9ee75c14fd67daaa45e" title="Call the various precession and nutation routines in this module to create a combined precession and ...">sky1_createNPmatrix()</a>.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky1_8c_source.html#l00445">445</a> of file <a class="el" href="sky1_8c_source.html">sky1.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky1_8c_source.html#l00481">481</a> of file <a class="el" href="sky1_8c_source.html">sky1.c</a>.</p>
 
 </div>
 </div>
@@ -353,7 +387,7 @@ Functions</h2></td></tr>
 <dl class="section user"><dt>When to call this function</dt><dd>Call this function after new values of Δψ, and Δε have been calculated by routine <a class="el" href="sky1_8h.html#a61813485e959ed0208086d946e33ad4c" title="Calculates the nutation in longitude and obliquity, according to the IAU 1980 Nutation Theory.">sky1_nutationIAU1980()</a>. So, again, it need only be called infrequently. But as mentioned for that function, it is quite likely that you will not need to call this function directly. Any of the functions <a class="el" href="sky1_8h.html#ace44a5ea8db1f9ee75c14fd67daaa45e" title="Call the various precession and nutation routines in this module to create a combined precession and ...">sky1_createNPmatrix()</a>, star_getApparent(), star_getTopocentric(), <a class="el" href="planet_8h.html#a96b2ba1bce82bbd875d0740576a24262" title="Calculate the position of the currently selected planet as a unit vector and a distance,...">planet_getApparent()</a> or <a class="el" href="planet_8h.html#ae551d337a5eb752a7e5e56417392e923" title="Calls planet_getApparent() to calculate the planet&#39;s position in apparent coordinates,...">planet_getTopocentric()</a> will call this routine for you.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky1_8c_source.html#l00600">600</a> of file <a class="el" href="sky1_8c_source.html">sky1.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky1_8c_source.html#l00631">631</a> of file <a class="el" href="sky1_8c_source.html">sky1.c</a>.</p>
 
 </div>
 </div>
@@ -397,7 +431,7 @@ Functions</h2></td></tr>
 <dl class="section user"><dt>When to call this function</dt><dd>Call it after you have called <a class="el" href="sky1_8h.html#a61813485e959ed0208086d946e33ad4c" title="Calculates the nutation in longitude and obliquity, according to the IAU 1980 Nutation Theory.">sky1_nutationIAU1980()</a> and <a class="el" href="sky1_8h.html#a956ebf3c1277943e770093830777ca0d" title="Calculate the obliquity of the ecliptic and the equation of the equinoxes.">sky1_epsilon1980()</a>. As mentioned for the other functions above, this need only be done infrequently. But also as mentioned, it is quite likely that you will not need to call this function directly. Any of the functions <a class="el" href="sky1_8h.html#ace44a5ea8db1f9ee75c14fd67daaa45e" title="Call the various precession and nutation routines in this module to create a combined precession and ...">sky1_createNPmatrix()</a>, star_getApparent(), star_getTopocentric(), <a class="el" href="planet_8h.html#a96b2ba1bce82bbd875d0740576a24262" title="Calculate the position of the currently selected planet as a unit vector and a distance,...">planet_getApparent()</a> or <a class="el" href="planet_8h.html#ae551d337a5eb752a7e5e56417392e923" title="Calls planet_getApparent() to calculate the planet&#39;s position in apparent coordinates,...">planet_getTopocentric()</a> will call this routine for you.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky1_8c_source.html#l00645">645</a> of file <a class="el" href="sky1_8c_source.html">sky1.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky1_8c_source.html#l00676">676</a> of file <a class="el" href="sky1_8c_source.html">sky1.c</a>.</p>
 
 </div>
 </div>
@@ -453,7 +487,7 @@ Functions</h2></td></tr>
 <dl class="section user"><dt>When to call this function</dt><dd>Call this function if you are tracking non-solar system objects. The resulting matrix changes only very slowly, so this function needs to be called only once per hour.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky1_8c_source.html#l00690">690</a> of file <a class="el" href="sky1_8c_source.html">sky1.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky1_8c_source.html#l00721">721</a> of file <a class="el" href="sky1_8c_source.html">sky1.c</a>.</p>
 
 </div>
 </div>
@@ -485,7 +519,7 @@ Functions</h2></td></tr>
 <dl class="section user"><dt>When to call this function</dt><dd>If you are tracking a celestial object, you need not call this function directly. So long as you call <a class="el" href="sky1_8h.html#aa5023b9fbc0669c62f1422e13e5a6df1" title="Convert a position in geocentric apparent coordinates to geocentric coordinates in the Terrestrial In...">sky1_appToTirs()</a> every time around your control loop, it will call this function for you.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky1_8c_source.html#l00735">735</a> of file <a class="el" href="sky1_8c_source.html">sky1.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky1_8c_source.html#l00766">766</a> of file <a class="el" href="sky1_8c_source.html">sky1.c</a>.</p>
 
 </div>
 </div>
@@ -541,7 +575,7 @@ Functions</h2></td></tr>
 <dl class="section user"><dt></dt><dd>Follow this function with a call to <a class="el" href="sky_8h.html#a0797b1e268ac7cc5b052c0623883eb74" title="Transform a coordinate vector from the Terrestrial Intermediate Reference System to topocentric Az/El...">sky_siteTirsToTopo()</a> to obtain the object's position in topocentric coordinates at the observing site.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="sky1_8c_source.html#l00779">779</a> of file <a class="el" href="sky1_8c_source.html">sky1.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sky1_8c_source.html#l00810">810</a> of file <a class="el" href="sky1_8c_source.html">sky1.c</a>.</p>
 
 </div>
 </div>

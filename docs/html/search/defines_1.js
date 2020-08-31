@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['skyio_5fradtodmsstr_209',['skyio_radToDmsStr',['../skyio_8h.html#a4c6529b30f4f09b7452bbda43930d05b',1,'skyio.h']]],
-  ['skyio_5fradtohmsstr_210',['skyio_radToHmsStr',['../skyio_8h.html#a30c731985af9e06bcc8053b72089dc49',1,'skyio.h']]]
+  ['define_5fthis_5ffile_345',['DEFINE_THIS_FILE',['../general_8h.html#af9f431fdeb7703d5a95fab8a67109ce0',1,'general.h']]],
+  ['deg2rad_346',['DEG2RAD',['../general_8h.html#af7e8592d0a634bd3642e9fd508ea8022',1,'general.h']]]
 ];

@@ -1,7 +1,7 @@
 var files_dup =
 [
     [ "astron.h", "astron_8h.html", "astron_8h" ],
-    [ "general.h", "general_8h_source.html", null ],
+    [ "general.h", "general_8h.html", "general_8h" ],
     [ "instead-of-math.h", "instead-of-math_8h.html", "instead-of-math_8h" ],
     [ "main.c", "main_8c.html", "main_8c" ],
     [ "moon.c", "moon_8c_source.html", null ],

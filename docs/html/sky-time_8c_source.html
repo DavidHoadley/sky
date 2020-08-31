@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.4-1</span>
+   &#160;<span id="projectnumber">0.1.5-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -133,12 +133,12 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sky_8h.html">sky.h</a>&quot;</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="astron_8h.html">astron.h</a>&quot;</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#include &quot;general.h&quot;</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="general_8h.html">general.h</a>&quot;</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> * Local #defines and typedefs</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;DEFINE_THIS_FILE;                       <span class="comment">// For use by REQUIRE() - assertions.</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<a class="code" href="general_8h.html#af9f431fdeb7703d5a95fab8a67109ce0">DEFINE_THIS_FILE</a>;                       <span class="comment">// For use by REQUIRE() - assertions.</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#ifdef INCLUDE_MJD_ROUTINES</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#define MJD_1JAN1970    40587</span></div>
@@ -156,11 +156,11 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"> * Prototypes for local functions (not called from other modules).</span></div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;LOCAL <span class="keywordtype">double</span> getDeltaUT1_s(<span class="keywordtype">double</span> mjdUtc,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keywordtype">double</span> getDeltaUT1_s(<span class="keywordtype">double</span> mjdUtc,</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                           <span class="keywordtype">double</span> usnoMjdBase,</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                           <span class="keywordtype">double</span> usnoCoeffC11,</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                           <span class="keywordtype">double</span> usnoCoeffC12);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;LOCAL <span class="keywordtype">double</span> calendarToJ2kd(<span class="keywordtype">int</span> year, <span class="keywordtype">int</span> month, <span class="keywordtype">int</span> day);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keywordtype">double</span> calendarToJ2kd(<span class="keywordtype">int</span> year, <span class="keywordtype">int</span> month, <span class="keywordtype">int</span> day);</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"> * Global variables accessible by other modules</span></div>
@@ -182,7 +182,7 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a">   96</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a">sky_initTime</a>(<span class="keywordtype">int</span> deltaAT_s, <span class="keywordtype">double</span> deltaUT_s, <a class="code" href="struct_sky___delta_ts.html">Sky_DeltaTs</a> *d)<span class="comment"></span></div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a">   96</a></span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">void</span> <a class="code" href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a">sky_initTime</a>(<span class="keywordtype">int</span> deltaAT_s, <span class="keywordtype">double</span> deltaUT_s, <a class="code" href="struct_sky___delta_ts.html">Sky_DeltaTs</a> *d)<span class="comment"></span></div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">/*! This is one of three alternative routines for setting up the various delta</span></div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">    time values for use in ongoing calculations. (The other two are</span></div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">    sky_initTimeDetailed() and sky_initTimeSimple()). For an explanation of</span></div>
@@ -208,7 +208,7 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordtype">double</span> deltaTT_s;                   <span class="comment">// TT - UTC (seconds)</span></div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordtype">double</span> deltaT_s;                    <span class="comment">// TT - UT1 (seconds)</span></div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    REQUIRE_NOT_NULL(d);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <a class="code" href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a>(d);</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    deltaTT_s = deltaTAI_s + deltaAT_s;</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    d-&gt;<a class="code" href="struct_sky___delta_ts.html#a4d56cb595e1c9b502b8267dc243ae7df">deltaTT_d</a> = deltaTT_s / 86400.0;</div>
@@ -220,7 +220,7 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902">  134</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902">sky_initTimeDetailed</a>(<span class="keywordtype">double</span> mjdUtc,</div>
+<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902">  134</a></span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">void</span> <a class="code" href="sky_8h.html#a4295dc6df66f02c4def3160782a06902">sky_initTimeDetailed</a>(<span class="keywordtype">double</span> mjdUtc,</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                                 <span class="keywordtype">double</span> usnoMjdBase,</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                                 <span class="keywordtype">double</span> usnoCoeffC11,</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                                 <span class="keywordtype">double</span> usnoCoeffC12,</div>
@@ -267,7 +267,7 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
-<div class="line"><a name="l00181"></a><span class="lineno"><a class="line" href="sky_8h.html#a15ad9a782e54212cb22bd0658b6541a0">  181</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="sky_8h.html#a15ad9a782e54212cb22bd0658b6541a0">sky_initTimeSimple</a>(<a class="code" href="struct_sky___delta_ts.html">Sky_DeltaTs</a> *d)<span class="comment"></span></div>
+<div class="line"><a name="l00181"></a><span class="lineno"><a class="line" href="sky_8h.html#a15ad9a782e54212cb22bd0658b6541a0">  181</a></span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">void</span> <a class="code" href="sky_8h.html#a15ad9a782e54212cb22bd0658b6541a0">sky_initTimeSimple</a>(<a class="code" href="struct_sky___delta_ts.html">Sky_DeltaTs</a> *d)<span class="comment"></span></div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">/*! This is one of three alternative routines for setting up the various delta</span></div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">    time values for use in ongoing calculations. (The other two are</span></div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">    sky_initTime() and sky_initTimeDetailed()). This function initialises the</span></div>
@@ -292,7 +292,7 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
-<div class="line"><a name="l00206"></a><span class="lineno"><a class="line" href="sky_8h.html#a03279243991e42a3edbeaac243ae2dc7">  206</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="sky_8h.html#a03279243991e42a3edbeaac243ae2dc7">sky_updateTimes</a>(<span class="keywordtype">double</span>            j2kUtc_d,</div>
+<div class="line"><a name="l00206"></a><span class="lineno"><a class="line" href="sky_8h.html#a03279243991e42a3edbeaac243ae2dc7">  206</a></span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">void</span> <a class="code" href="sky_8h.html#a03279243991e42a3edbeaac243ae2dc7">sky_updateTimes</a>(<span class="keywordtype">double</span>            j2kUtc_d,</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;                            <span class="keyword">const</span> <a class="code" href="struct_sky___delta_ts.html">Sky_DeltaTs</a> *d,</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;                            <a class="code" href="struct_sky___times.html">Sky_Times</a> *t)<span class="comment"></span></div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment">/*! Convert the given &quot;J2KD&quot; in the UTC timescale to the other timescales, and</span></div>
@@ -314,20 +314,20 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">    position.</span></div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;{</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    REQUIRE_NOT_NULL(d);</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    REQUIRE_NOT_NULL(t);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <a class="code" href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a>(d);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <a class="code" href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a>(t);</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    t-&gt;<a class="code" href="struct_sky___times.html#ae2e870a1ab063072a1376a81854d79fc">mjdUtc</a> = j2kUtc_d + MJD_J2000;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    t-&gt;<a class="code" href="struct_sky___times.html#ae2e870a1ab063072a1376a81854d79fc">mjdUtc</a> = j2kUtc_d + <a class="code" href="astron_8h.html#a66fe78c0dbf71837a963e849028afdd9">MJD_J2000</a>;</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    t-&gt;<a class="code" href="struct_sky___times.html#aa778912c8c4444e742c3d58b37280a68">j2kUT1_d</a> = j2kUtc_d + d-&gt;<a class="code" href="struct_sky___delta_ts.html#a2aab09aef86d7899a953a99817cc7102">deltaUT_d</a>;</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    t-&gt;<a class="code" href="struct_sky___times.html#a0436d3f8bfbe8b26d68be63fbc97a085">j2kTT_d</a>  = j2kUtc_d + d-&gt;<a class="code" href="struct_sky___delta_ts.html#a4d56cb595e1c9b502b8267dc243ae7df">deltaTT_d</a>;</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    t-&gt;<a class="code" href="struct_sky___times.html#a3c9436d4d73659b99d777051b8b095e5">j2kTT_cy</a> = t-&gt;<a class="code" href="struct_sky___times.html#a0436d3f8bfbe8b26d68be63fbc97a085">j2kTT_d</a> / JUL_CENT;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    t-&gt;<a class="code" href="struct_sky___times.html#ab0f1ac51fc6e8e64b6de445bbeec72b5">era_rad</a> = (0.7790572732640 + 1.00273781191135488 * t-&gt;<a class="code" href="struct_sky___times.html#aa778912c8c4444e742c3d58b37280a68">j2kUT1_d</a>) * TWOPI;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    t-&gt;<a class="code" href="struct_sky___times.html#a3c9436d4d73659b99d777051b8b095e5">j2kTT_cy</a> = t-&gt;<a class="code" href="struct_sky___times.html#a0436d3f8bfbe8b26d68be63fbc97a085">j2kTT_d</a> / <a class="code" href="astron_8h.html#aa35fdc740efc4fc6bf6dc9fb156fff76">JUL_CENT</a>;</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    t-&gt;<a class="code" href="struct_sky___times.html#ab0f1ac51fc6e8e64b6de445bbeec72b5">era_rad</a> = (0.7790572732640 + 1.00273781191135488 * t-&gt;<a class="code" href="struct_sky___times.html#aa778912c8c4444e742c3d58b37280a68">j2kUT1_d</a>) * <a class="code" href="general_8h.html#a4912c64aec0c943b7985db6cb61ff83a">TWOPI</a>;</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;}</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; </div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
-<div class="line"><a name="l00241"></a><span class="lineno"><a class="line" href="sky_8h.html#a9ea25f7ed8d0a77b756ec42e628fd4ee">  241</a></span>&#160;GLOBAL <span class="keywordtype">double</span> <a class="code" href="sky_8h.html#a9ea25f7ed8d0a77b756ec42e628fd4ee">sky_calTimeToJ2kd</a>(<span class="keywordtype">int</span> year, <span class="keywordtype">int</span> month, <span class="keywordtype">int</span> day,</div>
+<div class="line"><a name="l00241"></a><span class="lineno"><a class="line" href="sky_8h.html#a9ea25f7ed8d0a77b756ec42e628fd4ee">  241</a></span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">double</span> <a class="code" href="sky_8h.html#a9ea25f7ed8d0a77b756ec42e628fd4ee">sky_calTimeToJ2kd</a>(<span class="keywordtype">int</span> year, <span class="keywordtype">int</span> month, <span class="keywordtype">int</span> day,</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                                <span class="keywordtype">int</span> hour, <span class="keywordtype">int</span> minute, <span class="keywordtype">double</span> second,</div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                                <span class="keywordtype">double</span> tz_h)<span class="comment"></span></div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">/*! Return the number of days (and fraction of a day) since noon 2000 Jan 1</span></div>
@@ -361,7 +361,7 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
-<div class="line"><a name="l00275"></a><span class="lineno"><a class="line" href="sky_8h.html#a1aee1eec802ff35faf9ac14a73c8d129">  275</a></span>&#160;GLOBAL <span class="keywordtype">double</span> <a class="code" href="sky_8h.html#a1aee1eec802ff35faf9ac14a73c8d129">sky_unixTimeToJ2kd</a>(time_t unixTime)<span class="comment"></span></div>
+<div class="line"><a name="l00275"></a><span class="lineno"><a class="line" href="sky_8h.html#a1aee1eec802ff35faf9ac14a73c8d129">  275</a></span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">double</span> <a class="code" href="sky_8h.html#a1aee1eec802ff35faf9ac14a73c8d129">sky_unixTimeToJ2kd</a>(time_t unixTime)<span class="comment"></span></div>
 <div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">/*! Convert a time in Unix system time format to days since 2000 Jan 1, noon</span></div>
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">    UTC. This is one of three alternative</span></div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment">    routines that return a J2KD - the other two are sky_calTimeToJ2kd() and</span></div>
@@ -384,7 +384,7 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
 <div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="preprocessor">#ifdef POSIX_SYSTEM</span></div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;GLOBAL <span class="keywordtype">double</span> sky_unixTimespecToJ2kd(<span class="keyword">struct</span> timespec uTs)<span class="comment"></span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">double</span> sky_unixTimespecToJ2kd(<span class="keyword">struct</span> timespec uTs)<span class="comment"></span></div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment">/*! Convert a time in Unix timespec format to days since 2000 Jan 1, noon UTC.</span></div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment">    This is one of three alternative routines that return a J2KD - the other two</span></div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment">    are sky_calTimeToJ2kd() and sky_unixTimeToJ2kd().</span></div>
@@ -407,7 +407,7 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
 <div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
 <div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; </div>
-<div class="line"><a name="l00321"></a><span class="lineno"><a class="line" href="sky_8h.html#a6afa64839aaee5925d90c013e8eaa0b2">  321</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="sky_8h.html#a6afa64839aaee5925d90c013e8eaa0b2">sky_j2kdToCalTime</a>(<span class="keywordtype">double</span> j2k_d,</div>
+<div class="line"><a name="l00321"></a><span class="lineno"><a class="line" href="sky_8h.html#a6afa64839aaee5925d90c013e8eaa0b2">  321</a></span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">void</span> <a class="code" href="sky_8h.html#a6afa64839aaee5925d90c013e8eaa0b2">sky_j2kdToCalTime</a>(<span class="keywordtype">double</span> j2k_d,</div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;                              <span class="keywordtype">int</span> *year,</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;                              <span class="keywordtype">int</span> *month,</div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;                              <span class="keywordtype">int</span> *day,</div>
@@ -485,7 +485,7 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160; </div>
 <div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160; </div>
 <div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="preprocessor">#ifdef INCLUDE_MJD_ROUTINES</span></div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;GLOBAL <span class="keywordtype">double</span> sky_calTimeToMjd(<span class="keywordtype">int</span> year, <span class="keywordtype">int</span> month, <span class="keywordtype">int</span> day,</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">double</span> sky_calTimeToMjd(<span class="keywordtype">int</span> year, <span class="keywordtype">int</span> month, <span class="keywordtype">int</span> day,</div>
 <div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;                               <span class="keywordtype">int</span> hour, <span class="keywordtype">int</span> minute, <span class="keywordtype">double</span> second,</div>
 <div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;                               <span class="keywordtype">double</span> tz_h)<span class="comment"></span></div>
 <div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="comment">/*! Return the Modified Julian Date (= Julian Date - 2 400 000.5) of a calendar</span></div>
@@ -508,7 +508,7 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;    <span class="keywordtype">double</span> mjd;</div>
 <div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    <span class="keywordtype">double</span> timeOfDay_d;</div>
 <div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160; </div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    mjd = calendarToJ2kd(year,month, day) + MJD_J2000;</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    mjd = calendarToJ2kd(year,month, day) + <a class="code" href="astron_8h.html#a66fe78c0dbf71837a963e849028afdd9">MJD_J2000</a>;</div>
 <div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160; </div>
 <div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    timeOfDay_d = (second + 60.0 * (minute + 60.0 * (hour - tz_h))) / 86400.0;</div>
 <div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;    mjd += timeOfDay_d;</div>
@@ -517,7 +517,7 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160; </div>
 <div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160; </div>
 <div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160; </div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;GLOBAL <span class="keywordtype">double</span> sky_unixTimeToMjd(time_t unixTime)<span class="comment"></span></div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">double</span> sky_unixTimeToMjd(time_t unixTime)<span class="comment"></span></div>
 <div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment">/*! Convert a time in Unix system time format to Modified Julian Date</span></div>
 <div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="comment"> \returns  the Modified Julian Date (= Julian Date - 2 400 000.5), UTC timescale</span></div>
 <div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="comment"> \param[in] unixTime - time in C standard \c time_t (or unix) format</span></div>
@@ -537,7 +537,7 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160; </div>
 <div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160; </div>
 <div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="preprocessor">#ifdef POSIX_SYSTEM</span></div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;GLOBAL <span class="keywordtype">double</span> sky_unixTimespecToMjd(<span class="keyword">struct</span> timespec uTs)<span class="comment"></span></div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">double</span> sky_unixTimespecToMjd(<span class="keyword">struct</span> timespec uTs)<span class="comment"></span></div>
 <div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="comment">/*! Convert a time in Unix timespec format to Modified Julian Date</span></div>
 <div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="comment"> \returns  the Modified Julian Date (= Julian Date - 2 400 000.5), UTC timescale</span></div>
 <div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="comment"> \param[in] uTs - time in &quot;timespec&quot; format, a combination of (sort of) seconds</span></div>
@@ -556,7 +556,7 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160; </div>
 <div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160; </div>
 <div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160; </div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;GLOBAL <span class="keywordtype">void</span> sky_updateTimesFromMjd(<span class="keywordtype">double</span> mjdUtc,</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">void</span> sky_updateTimesFromMjd(<span class="keywordtype">double</span> mjdUtc,</div>
 <div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;                                <span class="keyword">const</span> <a class="code" href="struct_sky___delta_ts.html">Sky_DeltaTs</a> *d,</div>
 <div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;                                <a class="code" href="struct_sky___times.html">Sky_Times</a> *t)<span class="comment"></span></div>
 <div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;<span class="comment">/*! Convert the given MJD in the UTC timescale to the other timescales, and</span></div>
@@ -578,22 +578,22 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;    <span class="keywordtype">double</span> mjdUT1;  <span class="comment">// Modified Julian Date (= JD - 2 400 000.5), UT1 timescale</span></div>
 <div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;    <span class="keywordtype">double</span> mjdTT;   <span class="comment">// MJD as above, TT timescale</span></div>
 <div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160; </div>
-<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;    REQUIRE_NOT_NULL(d);</div>
-<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;    REQUIRE_NOT_NULL(t);</div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;    <a class="code" href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a>(d);</div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;    <a class="code" href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a>(t);</div>
 <div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160; </div>
 <div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;    t-&gt;<a class="code" href="struct_sky___times.html#ae2e870a1ab063072a1376a81854d79fc">mjdUtc</a> = mjdUtc;</div>
 <div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;    mjdUT1    = mjdUtc + d-&gt;<a class="code" href="struct_sky___delta_ts.html#a2aab09aef86d7899a953a99817cc7102">deltaUT_d</a>;</div>
 <div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;    mjdTT     = mjdUtc + d-&gt;<a class="code" href="struct_sky___delta_ts.html#a4d56cb595e1c9b502b8267dc243ae7df">deltaTT_d</a>;</div>
 <div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160; </div>
-<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;    t-&gt;<a class="code" href="struct_sky___times.html#aa778912c8c4444e742c3d58b37280a68">j2kUT1_d</a> = mjdUT1 - MJD_J2000;</div>
-<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;    t-&gt;<a class="code" href="struct_sky___times.html#a0436d3f8bfbe8b26d68be63fbc97a085">j2kTT_d</a>  = mjdTT - MJD_J2000;</div>
-<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;    t-&gt;<a class="code" href="struct_sky___times.html#a3c9436d4d73659b99d777051b8b095e5">j2kTT_cy</a> = t-&gt;<a class="code" href="struct_sky___times.html#a0436d3f8bfbe8b26d68be63fbc97a085">j2kTT_d</a> / JUL_CENT;</div>
-<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;    t-&gt;<a class="code" href="struct_sky___times.html#ab0f1ac51fc6e8e64b6de445bbeec72b5">era_rad</a> = (0.7790572732640 + 1.00273781191135488 * t-&gt;<a class="code" href="struct_sky___times.html#aa778912c8c4444e742c3d58b37280a68">j2kUT1_d</a>) * TWOPI;</div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;    t-&gt;<a class="code" href="struct_sky___times.html#aa778912c8c4444e742c3d58b37280a68">j2kUT1_d</a> = mjdUT1 - <a class="code" href="astron_8h.html#a66fe78c0dbf71837a963e849028afdd9">MJD_J2000</a>;</div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;    t-&gt;<a class="code" href="struct_sky___times.html#a0436d3f8bfbe8b26d68be63fbc97a085">j2kTT_d</a>  = mjdTT - <a class="code" href="astron_8h.html#a66fe78c0dbf71837a963e849028afdd9">MJD_J2000</a>;</div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;    t-&gt;<a class="code" href="struct_sky___times.html#a3c9436d4d73659b99d777051b8b095e5">j2kTT_cy</a> = t-&gt;<a class="code" href="struct_sky___times.html#a0436d3f8bfbe8b26d68be63fbc97a085">j2kTT_d</a> / <a class="code" href="astron_8h.html#aa35fdc740efc4fc6bf6dc9fb156fff76">JUL_CENT</a>;</div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;    t-&gt;<a class="code" href="struct_sky___times.html#ab0f1ac51fc6e8e64b6de445bbeec72b5">era_rad</a> = (0.7790572732640 + 1.00273781191135488 * t-&gt;<a class="code" href="struct_sky___times.html#aa778912c8c4444e742c3d58b37280a68">j2kUT1_d</a>) * <a class="code" href="general_8h.html#a4912c64aec0c943b7985db6cb61ff83a">TWOPI</a>;</div>
 <div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;}</div>
 <div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160; </div>
 <div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160; </div>
 <div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160; </div>
-<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;GLOBAL <span class="keywordtype">void</span> sky_mjdToCalTime(<span class="keywordtype">double</span> mjd,</div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">void</span> sky_mjdToCalTime(<span class="keywordtype">double</span> mjd,</div>
 <div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;                             <span class="keywordtype">int</span> *year,</div>
 <div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;                             <span class="keywordtype">int</span> *month,</div>
 <div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;                             <span class="keywordtype">int</span> *day,</div>
@@ -656,7 +656,7 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160; </div>
 <div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160; </div>
 <div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160; </div>
-<div class="line"><a name="l00570"></a><span class="lineno"><a class="line" href="sky_8h.html#a670f5ac7522664ecdfc25c88d6cde7cf">  570</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="sky_8h.html#a670f5ac7522664ecdfc25c88d6cde7cf">sky_setPolarMotion</a>(<span class="keywordtype">double</span> xPolar_as,</div>
+<div class="line"><a name="l00570"></a><span class="lineno"><a class="line" href="sky_8h.html#a670f5ac7522664ecdfc25c88d6cde7cf">  570</a></span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">void</span> <a class="code" href="sky_8h.html#a670f5ac7522664ecdfc25c88d6cde7cf">sky_setPolarMotion</a>(<span class="keywordtype">double</span> xPolar_as,</div>
 <div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;                               <span class="keywordtype">double</span> yPolar_as,</div>
 <div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;                               <span class="keywordtype">double</span> t_cy,</div>
 <div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;                               <a class="code" href="struct_sky___polar_mot.html">Sky_PolarMot</a> *polar)<span class="comment"></span></div>
@@ -683,7 +683,7 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;    <span class="keywordtype">double</span>      sPrime_as;          <span class="comment">// Secular drift</span></div>
 <div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;    <a class="code" href="struct_v3_d___matrix.html">V3D_Matrix</a>  yM, xM, sM, tempM;  <span class="comment">// temporary rotation matrices</span></div>
 <div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160; </div>
-<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;    REQUIRE_NOT_NULL(polar);</div>
+<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;    <a class="code" href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a>(polar);</div>
 <div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160; </div>
 <div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;    polar-&gt;xPolar_as = xPolar_as;</div>
 <div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;    polar-&gt;yPolar_as = yPolar_as;</div>
@@ -704,9 +704,9 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;        sPrime_as = -0.000047 * t_cy;</div>
 <div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160; </div>
 <div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;        <span class="comment">/* matrix is R1(-y) * R2(-x) * R3(s&#39;) */</span></div>
-<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;        <a class="code" href="vectors3d_8h.html#af4f8f0d21389bf84d1321e6c7739c513">v3d_createRotationMatrix</a>(&amp;sM, Zaxis, arcsecToRad(sPrime_as));</div>
-<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;        <a class="code" href="vectors3d_8h.html#af4f8f0d21389bf84d1321e6c7739c513">v3d_createRotationMatrix</a>(&amp;xM, Yaxis, arcsecToRad(-xPolar_as));</div>
-<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;        <a class="code" href="vectors3d_8h.html#af4f8f0d21389bf84d1321e6c7739c513">v3d_createRotationMatrix</a>(&amp;yM, Xaxis, arcsecToRad(-yPolar_as));</div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;        <a class="code" href="vectors3d_8h.html#af4f8f0d21389bf84d1321e6c7739c513">v3d_createRotationMatrix</a>(&amp;sM, Zaxis, <a class="code" href="astron_8h.html#a757c7972f565158c61eae7c712f24b35">arcsecToRad</a>(sPrime_as));</div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;        <a class="code" href="vectors3d_8h.html#af4f8f0d21389bf84d1321e6c7739c513">v3d_createRotationMatrix</a>(&amp;xM, Yaxis, <a class="code" href="astron_8h.html#a757c7972f565158c61eae7c712f24b35">arcsecToRad</a>(-xPolar_as));</div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;        <a class="code" href="vectors3d_8h.html#af4f8f0d21389bf84d1321e6c7739c513">v3d_createRotationMatrix</a>(&amp;yM, Xaxis, <a class="code" href="astron_8h.html#a757c7972f565158c61eae7c712f24b35">arcsecToRad</a>(-yPolar_as));</div>
 <div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;        <a class="code" href="vectors3d_8h.html#a87f7944947c8c442bea214be3936dfc7">v3d_multMxM</a>(&amp;polar-&gt;corrM, &amp;yM, <a class="code" href="vectors3d_8h.html#a87f7944947c8c442bea214be3936dfc7">v3d_multMxM</a>(&amp;tempM, &amp;xM, &amp;sM));</div>
 <div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;    }</div>
 <div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;}</div>
@@ -720,7 +720,7 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;LOCAL <span class="keywordtype">double</span> getDeltaUT1_s(<span class="keywordtype">double</span> mjdUtc,</div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keywordtype">double</span> getDeltaUT1_s(<span class="keywordtype">double</span> mjdUtc,</div>
 <div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;                           <span class="keywordtype">double</span> usnoMjdBase,</div>
 <div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;                           <span class="keywordtype">double</span> usnoCoeffC11,</div>
 <div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;                           <span class="keywordtype">double</span> usnoCoeffC12)</div>
@@ -740,7 +740,7 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">double</span> B = -0.012;</div>
 <div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">double</span> C = -0.006;</div>
 <div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">double</span> D = 0.007;</div>
-<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">double</span> bYear = TROP_CENT / 100.0;     <span class="comment">// No of days in Besselian year</span></div>
+<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">double</span> bYear = <a class="code" href="astron_8h.html#a2f59b3b456c23acb079e95d4dbb69c17">TROP_CENT</a> / 100.0;     <span class="comment">// No of days in Besselian year</span></div>
 <div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;                                                <span class="comment">// (= tropical year at B1900.0)</span></div>
 <div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;    <span class="keywordtype">double</span> n;</div>
 <div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;    <span class="keywordtype">double</span> mjDateBYR;</div>
@@ -750,16 +750,16 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160; </div>
 <div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;    <span class="comment">/* Calculate the MJD of the beginning of the current Besselian year and</span></div>
 <div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;<span class="comment">       the fractional part of the Besselian year to date */</span></div>
-<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;    n = floor((mjdUtc - MJD_B1900) / bYear);</div>
-<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;    mjDateBYR = MJD_B1900 + n * bYear;</div>
+<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;    n = floor((mjdUtc - <a class="code" href="astron_8h.html#aac9ac26a0c1e6fc16e14c68405e6f786">MJD_B1900</a>) / bYear);</div>
+<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;    mjDateBYR = <a class="code" href="astron_8h.html#aac9ac26a0c1e6fc16e14c68405e6f786">MJD_B1900</a> + n * bYear;</div>
 <div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;    delBYR = (mjdUtc - mjDateBYR) / bYear;</div>
 <div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160; </div>
 <div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;    <span class="comment">/* Calculate the seasonal variation of UT in seconds, using the standard</span></div>
 <div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;<span class="comment">       Markowitz time series (this is UT2 - UT1) */</span></div>
-<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;    seasonalVariation = A * sin(TWOPI * delBYR)</div>
-<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;                        + B * cos(TWOPI * delBYR)</div>
-<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;                        + C * sin(4.0 * PI * delBYR)</div>
-<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;                        + D * cos(4.0 * PI * delBYR);</div>
+<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;    seasonalVariation = A * sin(<a class="code" href="general_8h.html#a4912c64aec0c943b7985db6cb61ff83a">TWOPI</a> * delBYR)</div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;                        + B * cos(<a class="code" href="general_8h.html#a4912c64aec0c943b7985db6cb61ff83a">TWOPI</a> * delBYR)</div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;                        + C * sin(4.0 * <a class="code" href="general_8h.html#a598a3330b3c21701223ee0ca14316eca">PI</a> * delBYR)</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;                        + D * cos(4.0 * <a class="code" href="general_8h.html#a598a3330b3c21701223ee0ca14316eca">PI</a> * delBYR);</div>
 <div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160; </div>
 <div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;    <span class="comment">/* Calculate the current value of Delta UT1 (= UT1 - UTC) in seconds from</span></div>
 <div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;<span class="comment">       the seasonal variations and the USNO prediction formula.</span></div>
@@ -772,7 +772,7 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160; </div>
 <div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160; </div>
 <div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160; </div>
-<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;LOCAL <span class="keywordtype">double</span> calendarToJ2kd(<span class="keywordtype">int</span> year, <span class="keywordtype">int</span> month, <span class="keywordtype">int</span> day)</div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keywordtype">double</span> calendarToJ2kd(<span class="keywordtype">int</span> year, <span class="keywordtype">int</span> month, <span class="keywordtype">int</span> day)</div>
 <div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;<span class="comment">/*  Return the number of days elapsed since Greenwich noon on 2000-01-01 of a</span></div>
 <div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;<span class="comment">    calendar date, as at midnight at the beginning of the day, UTC.</span></div>
 <div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;<span class="comment"> Returns - the days elapsed since Julian date 2 451 545.0 (2000 Jan 1.5).</span></div>
@@ -957,7 +957,9 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="line"><a name="l00868"></a><span class="lineno">  868</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aastron_8h_html_a2f59b3b456c23acb079e95d4dbb69c17"><div class="ttname"><a href="astron_8h.html#a2f59b3b456c23acb079e95d4dbb69c17">TROP_CENT</a></div><div class="ttdeci">#define TROP_CENT</div><div class="ttdoc">Length of Tropical Century in days.</div><div class="ttdef"><b>Definition:</b> <a href="astron_8h_source.html#l00026">astron.h:26</a></div></div>
 <div class="ttc" id="avectors3d_8h_html_a87f7944947c8c442bea214be3936dfc7"><div class="ttname"><a href="vectors3d_8h.html#a87f7944947c8c442bea214be3936dfc7">v3d_multMxM</a></div><div class="ttdeci">V3D_Matrix * v3d_multMxM(V3D_Matrix *destM, const V3D_Matrix *srcM1, const V3D_Matrix *srcM2)</div><div class="ttdoc">Multiply 3x3 matrix by 3x3 matrix to give a new 3x3 matrix, as per [destM] = [srcM1]*[srcM2].</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00496">vectors3d.c:496</a></div></div>
+<div class="ttc" id="ageneral_8h_html"><div class="ttname"><a href="general_8h.html">general.h</a></div><div class="ttdoc">general.h - definitions of general use to (standard) C programs</div></div>
 <div class="ttc" id="asky_8h_html_a6afa64839aaee5925d90c013e8eaa0b2"><div class="ttname"><a href="sky_8h.html#a6afa64839aaee5925d90c013e8eaa0b2">sky_j2kdToCalTime</a></div><div class="ttdeci">void sky_j2kdToCalTime(double j2k_d, int *year, int *month, int *day, int *hour, int *minute, double *second)</div><div class="ttdoc">This procedure converts the integral part of the date in &quot;J2KD&quot; form to a calendar date and the fract...</div><div class="ttdef"><b>Definition:</b> <a href="sky-time_8c_source.html#l00321">sky-time.c:321</a></div></div>
 <div class="ttc" id="astruct_sky___delta_ts_html_aedcd03a06873f16093082cdfd0319a13"><div class="ttname"><a href="struct_sky___delta_ts.html#aedcd03a06873f16093082cdfd0319a13">Sky_DeltaTs::deltaT_d</a></div><div class="ttdeci">double deltaT_d</div><div class="ttdoc">TT - UT1, scaled to days.</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00168">sky.h:168</a></div></div>
 <div class="ttc" id="astruct_sky___delta_ts_html"><div class="ttname"><a href="struct_sky___delta_ts.html">Sky_DeltaTs</a></div><div class="ttdoc">This structure contains relatively constant data, and is set up by one of the three functions sky_ini...</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00166">sky.h:166</a></div></div>
@@ -965,18 +967,28 @@ $(document).ready(function(){initNavTree('sky-time_8c_source.html',''); initResi
 <div class="ttc" id="aastron_8h_html"><div class="ttname"><a href="astron_8h.html">astron.h</a></div><div class="ttdoc">astron.h - assorted definitions useful for astronomy</div></div>
 <div class="ttc" id="asky_8h_html_a670f5ac7522664ecdfc25c88d6cde7cf"><div class="ttname"><a href="sky_8h.html#a670f5ac7522664ecdfc25c88d6cde7cf">sky_setPolarMotion</a></div><div class="ttdeci">void sky_setPolarMotion(double xPolar_as, double yPolar_as, double t_cy, Sky_PolarMot *polar)</div><div class="ttdoc">Update polar motion correction.</div><div class="ttdef"><b>Definition:</b> <a href="sky-time_8c_source.html#l00570">sky-time.c:570</a></div></div>
 <div class="ttc" id="asky_8h_html_a03279243991e42a3edbeaac243ae2dc7"><div class="ttname"><a href="sky_8h.html#a03279243991e42a3edbeaac243ae2dc7">sky_updateTimes</a></div><div class="ttdeci">void sky_updateTimes(double j2kUtc_d, const Sky_DeltaTs *d, Sky_Times *t)</div><div class="ttdoc">Convert the given &quot;J2KD&quot; in the UTC timescale to the other timescales, and pre-calculate some other q...</div><div class="ttdef"><b>Definition:</b> <a href="sky-time_8c_source.html#l00206">sky-time.c:206</a></div></div>
+<div class="ttc" id="aastron_8h_html_a66fe78c0dbf71837a963e849028afdd9"><div class="ttname"><a href="astron_8h.html#a66fe78c0dbf71837a963e849028afdd9">MJD_J2000</a></div><div class="ttdeci">#define MJD_J2000</div><div class="ttdoc">MJD of Fundamental Epoch J2000.0.</div><div class="ttdef"><b>Definition:</b> <a href="astron_8h_source.html#l00025">astron.h:25</a></div></div>
+<div class="ttc" id="ageneral_8h_html_a3758dd5d300a594312c95bc393378df0"><div class="ttname"><a href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a></div><div class="ttdeci">#define LOCAL</div><div class="ttdoc">C has some very silly default behaviours.</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00133">general.h:133</a></div></div>
+<div class="ttc" id="ageneral_8h_html_a598a3330b3c21701223ee0ca14316eca"><div class="ttname"><a href="general_8h.html#a598a3330b3c21701223ee0ca14316eca">PI</a></div><div class="ttdeci">#define PI</div><div class="ttdoc">,</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00158">general.h:158</a></div></div>
+<div class="ttc" id="ageneral_8h_html_a3de33738fd3c7e77bffbcfaefc3e7645"><div class="ttname"><a href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a></div><div class="ttdeci">#define GLOBAL</div><div class="ttdoc">See above.</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00134">general.h:134</a></div></div>
 <div class="ttc" id="astruct_sky___times_html_a3c9436d4d73659b99d777051b8b095e5"><div class="ttname"><a href="struct_sky___times.html#a3c9436d4d73659b99d777051b8b095e5">Sky_Times::j2kTT_cy</a></div><div class="ttdeci">double j2kTT_cy</div><div class="ttdoc">Julian centuries since J2000.0, TT timescale [T].</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00188">sky.h:188</a></div></div>
+<div class="ttc" id="ageneral_8h_html_ab696637d7513e2620546fc6f4997dab5"><div class="ttname"><a href="general_8h.html#ab696637d7513e2620546fc6f4997dab5">REQUIRE_NOT_NULL</a></div><div class="ttdeci">#define REQUIRE_NOT_NULL(pointer_)</div><div class="ttdoc">,</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00308">general.h:308</a></div></div>
 <div class="ttc" id="astruct_sky___times_html"><div class="ttname"><a href="struct_sky___times.html">Sky_Times</a></div><div class="ttdoc">This structure contains the continuously varying time (and earth rotation) data, in various forms tha...</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00184">sky.h:184</a></div></div>
 <div class="ttc" id="astruct_sky___times_html_ab0f1ac51fc6e8e64b6de445bbeec72b5"><div class="ttname"><a href="struct_sky___times.html#ab0f1ac51fc6e8e64b6de445bbeec72b5">Sky_Times::era_rad</a></div><div class="ttdeci">double era_rad</div><div class="ttdoc">Earth Rotation Angle (radian) [θ].</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00189">sky.h:189</a></div></div>
 <div class="ttc" id="astruct_sky___delta_ts_html_a2aab09aef86d7899a953a99817cc7102"><div class="ttname"><a href="struct_sky___delta_ts.html#a2aab09aef86d7899a953a99817cc7102">Sky_DeltaTs::deltaUT_d</a></div><div class="ttdeci">double deltaUT_d</div><div class="ttdoc">UT1 - UTC, scaled to days.</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00167">sky.h:167</a></div></div>
+<div class="ttc" id="ageneral_8h_html_a4912c64aec0c943b7985db6cb61ff83a"><div class="ttname"><a href="general_8h.html#a4912c64aec0c943b7985db6cb61ff83a">TWOPI</a></div><div class="ttdeci">#define TWOPI</div><div class="ttdoc">,</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00160">general.h:160</a></div></div>
+<div class="ttc" id="aastron_8h_html_aac9ac26a0c1e6fc16e14c68405e6f786"><div class="ttname"><a href="astron_8h.html#aac9ac26a0c1e6fc16e14c68405e6f786">MJD_B1900</a></div><div class="ttdeci">#define MJD_B1900</div><div class="ttdoc">MJD of Besselian std epoch B1900.0.</div><div class="ttdef"><b>Definition:</b> <a href="astron_8h_source.html#l00023">astron.h:23</a></div></div>
 <div class="ttc" id="astruct_v3_d___matrix_html"><div class="ttname"><a href="struct_v3_d___matrix.html">V3D_Matrix</a></div><div class="ttdoc">3x3 matrix.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8h_source.html#l00051">vectors3d.h:51</a></div></div>
+<div class="ttc" id="aastron_8h_html_a757c7972f565158c61eae7c712f24b35"><div class="ttname"><a href="astron_8h.html#a757c7972f565158c61eae7c712f24b35">arcsecToRad</a></div><div class="ttdeci">static double arcsecToRad(double angle_as)</div><div class="ttdoc">Returns angle_as converted from arcseconds to radians.</div><div class="ttdef"><b>Definition:</b> <a href="astron_8h_source.html#l00043">astron.h:43</a></div></div>
 <div class="ttc" id="asky_8h_html_a4295dc6df66f02c4def3160782a06902"><div class="ttname"><a href="sky_8h.html#a4295dc6df66f02c4def3160782a06902">sky_initTimeDetailed</a></div><div class="ttdeci">void sky_initTimeDetailed(double mjdUtc, double usnoMjdBase, double usnoCoeffC11, double usnoCoeffC12, int deltaAT_s, Sky_DeltaTs *d)</div><div class="ttdoc">This is one of three alternative routines for setting up the various delta time values for use in ong...</div><div class="ttdef"><b>Definition:</b> <a href="sky-time_8c_source.html#l00134">sky-time.c:134</a></div></div>
 <div class="ttc" id="astruct_sky___times_html_a0436d3f8bfbe8b26d68be63fbc97a085"><div class="ttname"><a href="struct_sky___times.html#a0436d3f8bfbe8b26d68be63fbc97a085">Sky_Times::j2kTT_d</a></div><div class="ttdeci">double j2kTT_d</div><div class="ttdoc">days since J2000.0, TT timescale [D]</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00187">sky.h:187</a></div></div>
 <div class="ttc" id="asky_8h_html_a1aee1eec802ff35faf9ac14a73c8d129"><div class="ttname"><a href="sky_8h.html#a1aee1eec802ff35faf9ac14a73c8d129">sky_unixTimeToJ2kd</a></div><div class="ttdeci">double sky_unixTimeToJ2kd(time_t unixTime)</div><div class="ttdoc">Convert a time in Unix system time format to days since 2000 Jan 1, noon UTC.</div><div class="ttdef"><b>Definition:</b> <a href="sky-time_8c_source.html#l00275">sky-time.c:275</a></div></div>
 <div class="ttc" id="astruct_sky___polar_mot_html"><div class="ttname"><a href="struct_sky___polar_mot.html">Sky_PolarMot</a></div><div class="ttdoc">This structure contains polar motion parameters and a rotation matrix.</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00196">sky.h:196</a></div></div>
+<div class="ttc" id="ageneral_8h_html_af9f431fdeb7703d5a95fab8a67109ce0"><div class="ttname"><a href="general_8h.html#af9f431fdeb7703d5a95fab8a67109ce0">DEFINE_THIS_FILE</a></div><div class="ttdeci">#define DEFINE_THIS_FILE</div><div class="ttdoc">Leave DEFINE_THIS_FILE undefined.</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00252">general.h:252</a></div></div>
 <div class="ttc" id="asky_8h_html_abf770ba7cb996e73f59f41f24b172e3a"><div class="ttname"><a href="sky_8h.html#abf770ba7cb996e73f59f41f24b172e3a">sky_initTime</a></div><div class="ttdeci">void sky_initTime(int deltaAT_s, double deltaUT_s, Sky_DeltaTs *d)</div><div class="ttdoc">This is one of three alternative routines for setting up the various delta time values for use in ong...</div><div class="ttdef"><b>Definition:</b> <a href="sky-time_8c_source.html#l00096">sky-time.c:96</a></div></div>
 <div class="ttc" id="asky_8h_html"><div class="ttname"><a href="sky_8h.html">sky.h</a></div><div class="ttdoc">sky.h - structures and routines for astronomical observing &amp; tracking</div></div>
 <div class="ttc" id="avectors3d_8h_html_af4f8f0d21389bf84d1321e6c7739c513"><div class="ttname"><a href="vectors3d_8h.html#af4f8f0d21389bf84d1321e6c7739c513">v3d_createRotationMatrix</a></div><div class="ttdeci">V3D_Matrix * v3d_createRotationMatrix(V3D_Matrix *destM, V3D_AxisNames axis, double angle_rad)</div><div class="ttdoc">Creates a matrix to rotate a coordinate system about an axis.</div><div class="ttdef"><b>Definition:</b> <a href="vectors3d_8c_source.html#l00372">vectors3d.c:372</a></div></div>
+<div class="ttc" id="aastron_8h_html_aa35fdc740efc4fc6bf6dc9fb156fff76"><div class="ttname"><a href="astron_8h.html#aa35fdc740efc4fc6bf6dc9fb156fff76">JUL_CENT</a></div><div class="ttdeci">#define JUL_CENT</div><div class="ttdoc">Length of Julian Century in days.</div><div class="ttdef"><b>Definition:</b> <a href="astron_8h_source.html#l00027">astron.h:27</a></div></div>
 <div class="ttc" id="astruct_sky___times_html_ae2e870a1ab063072a1376a81854d79fc"><div class="ttname"><a href="struct_sky___times.html#ae2e870a1ab063072a1376a81854d79fc">Sky_Times::mjdUtc</a></div><div class="ttdeci">double mjdUtc</div><div class="ttdoc">Modified Julian Date (= JD - 2 400 000.5), UTC.</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00185">sky.h:185</a></div></div>
 <div class="ttc" id="astruct_sky___times_html_aa778912c8c4444e742c3d58b37280a68"><div class="ttname"><a href="struct_sky___times.html#aa778912c8c4444e742c3d58b37280a68">Sky_Times::j2kUT1_d</a></div><div class="ttdeci">double j2kUT1_d</div><div class="ttdoc">days since J2000.0, UT1 timescale [Du]</div><div class="ttdef"><b>Definition:</b> <a href="sky_8h_source.html#l00186">sky.h:186</a></div></div>
 <div class="ttc" id="asky_8h_html_a15ad9a782e54212cb22bd0658b6541a0"><div class="ttname"><a href="sky_8h.html#a15ad9a782e54212cb22bd0658b6541a0">sky_initTimeSimple</a></div><div class="ttdeci">void sky_initTimeSimple(Sky_DeltaTs *d)</div><div class="ttdoc">This is one of three alternative routines for setting up the various delta time values for use in ong...</div><div class="ttdef"><b>Definition:</b> <a href="sky-time_8c_source.html#l00181">sky-time.c:181</a></div></div>

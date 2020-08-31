@@ -1,6 +1,6 @@
 # Makefile for sun and moon position code
 
-# It is intended that make be run from wihin the directory containing the
+# It is intended that make be run from within the directory containing the
 # source files (rather than say, its parent directory), mainly so that assertion
 # error messages within C code that use the __FILE__ string contain the file's
 # name without any path string attached.
@@ -13,6 +13,8 @@
 # solution, and create a variable C_HDRS := $(wildcard *.h), and replace the
 # dependency for .c files with $(C_OBJS): $(BLD_DIR)/%.o: %.c $(C_HDRS)
 # (i.e. making each .c file dependent on every .h file).
+
+CC := clang
 
 # where to put object (.o), dependency (.d), executable and documentation files
 BLD_DIR := ../build
@@ -122,7 +124,7 @@ all:	$(BIN_DIR)/sun1     doc
 
 ##$(BLD_DIR)/version.o: version.c general.h version.h
 ##	@echo "Compiling" $<
-##	$(NO_ECHO)gcc -c $(CFLAGS_WARN) $(CFLAGS_VERS) -DSW_REV_MAJ=$(APP_REV_MAJ) -DSW_REV_MIN=$(APP_REV_MIN) -DSW_REV_BLD=$(APP_REV_PATCH)  $< -o $@
+##	$(NO_ECHO)$(CC) -c $(CFLAGS_WARN) $(CFLAGS_VERS) -DSW_REV_MAJ=$(APP_REV_MAJ) -DSW_REV_MIN=$(APP_REV_MIN) -DSW_REV_BLD=$(APP_REV_PATCH)  $< -o $@
 
 $(C_OBJS): $(BLD_DIR)/%.o: %.c $(DEP_DIR)/%.d | $(DEP_DIR) $(BLD_DIR)
 	@echo "Compiling" $<
@@ -132,9 +134,10 @@ $(P_OBJS): $(BLD_DIR)/%.o: %.cpp | $(DEP_DIR) $(BLD_DIR)
 	@echo "Compiling" $<
 	$(NO_ECHO)g++ -c $(FLAGS) $(CXXFLAGS) $(INCLUDE_DIRS) $< -o $@
 
-$(BIN_DIR)/sun1:   $(P_OBJS) $(C_OBJS) $(BLD_DIR)/version.o | $(BIN_DIR)
+##$(BIN_DIR)/sun1:   $(P_OBJS) $(C_OBJS) $(BLD_DIR)/version.o | $(BIN_DIR)
+$(BIN_DIR)/sun1:   $(P_OBJS) $(C_OBJS) | $(BIN_DIR)
 	@echo "Linking" $@
-	$(NO_ECHO)gcc $(LFLAGS) -o $(BIN_DIR)/sun1 $(P_OBJS) $(C_OBJS) $(L_OPTS)
+	$(NO_ECHO)$(CC) $(LFLAGS) -o $(BIN_DIR)/sun1 $(P_OBJS) $(C_OBJS) $(L_OPTS)
 
 doc:  $(DOC_DIR)/html/index.html
 

@@ -87,6 +87,8 @@ typedef struct {
 extern "C" {
 #endif
 
+void sky1_frameBiasFK5(V3D_Matrix *biasM);
+
 void sky1_precessionIAU1976(double t0, double t1, Sky1_Prec1976 *terms);
 void sky1_createPrec1976Matrix(const Sky1_Prec1976 *terms, V3D_Matrix *precM);
 

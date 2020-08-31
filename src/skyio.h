@@ -72,14 +72,14 @@ extern "C" {
  */
 /*      Convert from an angle (or a time) into a sexagesimal text string */
 char *skyio_degToDmsStr(char destStr[],
-                        int destStrLen,
-                        double angle_deg,
-                        int decimals);
+                        size_t   destStrSize,
+                        double   angle_deg,
+                        unsigned decimals);
 
 char *skyio_hrsToHmsStr(char destStr[],
-                        int destStrLen,
-                        double angle_h,
-                        int decimals);
+                        size_t   destStrSize,
+                        double   angle_h,
+                        unsigned decimals);
 
 /*      Convert from a sexagesimal text string to an angle */
 double skyio_sxStrToAng(const char angleStr[],
@@ -95,7 +95,7 @@ double skyio_sxStrToAng(const char angleStr[],
     round to ±360° will be written out as 0°.
  \returns                Pointer to \a destStr
  \param[out] destStr     Destination character string
- \param[in]  destStrLen  Length of destination string
+ \param[in]  destStrSize Size of destination string (max available length + 1)
  \param[in]  angle_rad   The angle to be written out (radian).
                            Valid range:(-2*Pi, 2*Pi); larger numbers may well be
                            written OK, but there is a risk of overflowing an
@@ -109,16 +109,16 @@ double skyio_sxStrToAng(const char angleStr[],
 #if defined (PREDEF_STANDARD_C_1999)
 /*          Compiler supports inline functions */
 static inline char *skyio_radToDmsStr(char destStr[],
-                                      int destStrLen,
-                                      double angle_rad,
-                                      int decimals)
+                                      size_t   destStrSize,
+                                      double   angle_rad,
+                                      unsigned decimals)
 {
-   return skyio_degToDmsStr(destStr, destStrLen, radToDeg(angle_rad), decimals);
+   return skyio_degToDmsStr(destStr, destStrSize, radToDeg(angle_rad),decimals);
 }
 #else
  /*          C89/C90 compiler - no inline functions. Need macros instead */
- #define skyio_radToDmsStr(destStr__, destStrLen__, angle_rad__, decimals__)  \
-    skyio_degToDmsStr(destStr__, destStrLen__,                                \
+ #define skyio_radToDmsStr(destStr__, destStrSize__, angle_rad__, decimals__) \
+    skyio_degToDmsStr(destStr__, destStrSize__,                               \
                       radToDeg(angle_rad__), decimals__)
 #endif
 
@@ -130,7 +130,7 @@ static inline char *skyio_radToDmsStr(char destStr[],
     round to ±24:00:00 will be written out as 0:00:00.
  \returns                Pointer to \a destStr
  \param[out] destStr     Destination character string
- \param[in]  destStrLen  Length of destination string
+ \param[in]  destStrSize Size of destination string (max available length + 1)
  \param[in]  angle_rad   The angle to be written out (radian).
                          Valid range:(-2*Pi, 2*Pi); larger numbers may well be
                          written OK, but there is a risk of overflowing an
@@ -144,16 +144,16 @@ static inline char *skyio_radToDmsStr(char destStr[],
 #if defined (PREDEF_STANDARD_C_1999)
 /*          Compiler supports inline functions */
 static inline char *skyio_radToHmsStr(char destStr[],
-                                      int destStrLen,
-                                      double angle_rad,
-                                      int decimals)
+                                      size_t   destStrSize,
+                                      double   angle_rad,
+                                      unsigned decimals)
 {
-   return skyio_hrsToHmsStr(destStr, destStrLen, radToHrs(angle_rad), decimals);
+   return skyio_hrsToHmsStr(destStr, destStrSize, radToHrs(angle_rad),decimals);
 }
 #else
  /*          C89/C90 compiler - no inline functions. Need macros instead */
- #define skyio_radToHmsStr(destStr__, destStrLen__, angle_rad__, decimals__)  \
-    skyio_hrsToHmsStr(destStr__, destStrLen__,                                \
+ #define skyio_radToHmsStr(destStr__, destStrSize__, angle_rad__, decimals__) \
+    skyio_hrsToHmsStr(destStr__, destStrSize__,                               \
                       radToHrs(angle_rad__), decimals__)
 #endif
 

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['normalize_186',['normalize',['../instead-of-math_8h.html#a06e957a5e5c08a30b4ea3c02f2664405',1,'instead-of-math.h']]]
+  ['hrstorad_227',['hrsToRad',['../astron_8h.html#afd11de1e170dfacdc8baa23f5c836dd2',1,'astron.h']]]
 ];

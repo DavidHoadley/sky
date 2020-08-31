@@ -336,6 +336,42 @@ LOCAL const int nTerms[] = { NUM_TERMS, 72, 63, 49, 35 };
  *
  *------------------------------------------------------------------------------
  */
+GLOBAL void sky1_frameBiasFK5(V3D_Matrix *biasM)
+/*! Create the frame bias matrix from the IAU 2000 precession-nutation model.
+    This matrix is used to convert coordinates from the Geocentric Celestial
+    Reference System (GCRS) to FK5 reference system. (Although anything to do
+    with the ICRS/GCRS is related to the IAU2000+ precession-nutation theory,
+    this routine is included here to allow ICRS star catalogue positions to be
+    converted to apparent coordinates using the IAU1980 precession-nutation
+    theory, which is quite good enough for tracking. It is not good enough for
+    astrometry, but it will get us to better than within an arcsecond of our
+    desired apparent position).
+ \param[out] biasM  Frame bias matrix \b B
+
+ \par Reference:
+    _Astronomical Almanac_ 2007, page B28
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+{
+    const double eta0_as    = -19.9 / 1000.0;
+    const double xi0_as     =  9.1 / 1000.0;
+    const double dAlpha0_as = -22.9 / 1000.0;
+    V3D_Matrix   cM, bM, aM;
+
+    REQUIRE_NOT_NULL(biasM);
+
+    /* First intermediate result. [cM] = [R2(xi0)] x [R3(dAlpha0)] */
+    v3d_createRotationMatrix(&aM, Zaxis, arcsecToRad(dAlpha0_as));
+    v3d_createRotationMatrix(&bM, Yaxis, arcsecToRad(xi0_as));
+    v3d_multMxM(&cM, &bM, &aM);
+
+    /* Re-use aM for rotation by eta0, obtain
+     *      [biasM] = [R1(eta0)] x [R2(xi0)] x [R3(dAlpha0)] */
+    v3d_createRotationMatrix(&aM, Xaxis, arcsecToRad(-eta0_as));
+    v3d_multMxM(biasM, &aM, &cM);
+}
+
+
+
 GLOBAL void sky1_precessionIAU1976(double t0_cy,
                                    double t1_cy,
                                    Sky1_Prec1976 *terms)
@@ -401,12 +437,12 @@ GLOBAL void sky1_precessionIAU1976(double t0_cy,
 GLOBAL void sky1_createPrec1976Matrix(const Sky1_Prec1976 *terms,
                                       V3D_Matrix *precM)
 /*! This routine calculates the precession matrix, based on angles ζ, z, and θ.
-    \a precM is the combined orthogonal rotation matrix P, required for
+    \a precM is the combined orthogonal rotation matrix \b P, required for
     rigorous precession transformations using rectangular coordinates and matrix
     methods:
         V1 = P * V0
-   It appears to be calculated from
-        P = R3(-z) * R2(θ) * R3(-ζ)
+   It appears to be calculated from\n
+        \b P = R3(-z) × R2(θ) × R3(-ζ)
  \param[in]  terms  The three precession angles ζ, z, θ, as returned by
                         sky1_precessionIAU1976()
  \param[out] precM  Precession rotation matrix
@@ -569,11 +605,6 @@ GLOBAL void sky1_nutationIAU1980(double t_cy,
     //om = normalize(om, TWOPI) - TWOPI;
     //-
 
-#if 0
-    printf("Nutation Args: d (X0) = %f°, lp (X1) = %f°, l (X2) = %f°\n"
-           "               f (X3) = %f°, om (X4) = %f°\n",
-           radToDeg(d), radToDeg(lp), radToDeg(l), radToDeg(f), radToDeg(om));
-#endif
 
     // Multiply through the table of nutation co-efficients and add up all the
     // terms.

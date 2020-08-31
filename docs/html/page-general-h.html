@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.4-1</span>
+   &#160;<span id="projectnumber">0.1.5-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -84,10 +84,10 @@ $(document).ready(function(){initNavTree('page-general-h.html',''); initResizabl
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Edits you may want to make to <a class="el" href="general_8h_source.html">general.h</a> </div>  </div>
+<div class="title">Edits you may want to make to <a class="el" href="general_8h.html" title="general.h - definitions of general use to (standard) C programs">general.h</a> </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h4><a class="anchor" id="autotoc_md7"></a>
+<div class="textblock"><h4><a class="anchor" id="autotoc_md8"></a>
 Integer types with a C89/C90 compiler.</h4>
 <p>If you are compiling your code using a C89/C90 compiler, you will need to check that the following lines are correct for your target processor. (If you have a C99 or later compiler, you can skip this section.) </p><pre class="fragment">   typedef signed short int    int16_t;
    typedef unsigned short int  uint16_t;
@@ -95,7 +95,7 @@ Integer types with a C89/C90 compiler.</h4>
    typedef unsigned int        uint32_t;
 </pre><p> If, for example, your processor defines an int as being 16 bits wide, you will get some strange warning messages. One possibility I have seen is "general.h:105:1: warning: division by zero [-Wdiv-by-zero]". Another possibility is "general.h:105:1: error: expression is not an integer constant expression". The important thing to do is to look at the line number where the error was detected, where you will see a line like </p><pre class="fragment">   static_assert(sizeof(int16_t) == 2,  "typedef of int16_t is wrong");
 </pre><p> To fix the problem, don't change the line containing the static_assert(), go back and change the line(s) containing the typedef(s), so that these four types (<code>int16_t</code>, <code>uint16_t</code>, <code>int32_t</code> &amp; <code>uint32_t</code>) are correctly defined for your processor.</p>
-<h4><a class="anchor" id="autotoc_md8"></a>
+<h4><a class="anchor" id="autotoc_md9"></a>
 Assertion checking</h4>
 <p>Many routines in this collection use assertions to check their parameters. In particular, parameters which are passed by address are checked to make sure that a NULL pointer has not been passed to them. You can control this checking by defining three macros within this file. They are:</p><ul>
 <li>ASSERTION_LEVEL. Use this to set how much checking is done. While you are still writing and testing your own code which uses this code, you are strongly recommended to keep this defined at a non-zero value.</li>

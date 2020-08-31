@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['planet_5fgetapp2_187',['planet_getApp2',['../planet_8h.html#a5537e7fa6dc7a119db7480f6c41a083a',1,'planet.c']]],
-  ['planet_5fgetapparent_188',['planet_getApparent',['../planet_8h.html#a96b2ba1bce82bbd875d0740576a24262',1,'planet.c']]],
-  ['planet_5fgetgeocentric_189',['planet_getGeocentric',['../planet_8h.html#aac8668ecd824c8cebe01d3177eac7dc0',1,'planet.c']]],
-  ['planet_5fgetheliocentric_190',['planet_getHeliocentric',['../planet_8h.html#a00375bff8432800a290e6bc59573bbda',1,'planet.c']]],
-  ['planet_5fgettopocentric_191',['planet_getTopocentric',['../planet_8h.html#ae551d337a5eb752a7e5e56417392e923',1,'planet.c']]],
-  ['planet_5fsetcurrent_192',['planet_setCurrent',['../planet_8h.html#abd6638052f0e3b0e693f604871d752cf',1,'planet.c']]]
+  ['moon_5fnrelapp2_228',['moon_nrelApp2',['../moon_8h.html#a9b267f69e671ecb03fe804c51cb8f214',1,'moon.c']]],
+  ['moon_5fnrelapparent_229',['moon_nrelApparent',['../moon_8h.html#ae26dfd26ce7ba3a93eaa9ac24982016d',1,'moon.c']]],
+  ['moon_5fnreltopocentric_230',['moon_nrelTopocentric',['../moon_8h.html#a3f0db3b9becd20ad7efe437f6e999394',1,'moon.c']]],
+  ['moon_5friseset_231',['moon_riseSet',['../moon_8h.html#a1f11644142c66b3c46fbd792ff279d6f',1,'moon.c']]]
 ];

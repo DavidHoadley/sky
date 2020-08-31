@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['j2ktt_5fcy_34',['j2kTT_cy',['../struct_sky___times.html#a3c9436d4d73659b99d777051b8b095e5',1,'Sky_Times']]],
-  ['j2ktt_5fd_35',['j2kTT_d',['../struct_sky___times.html#a0436d3f8bfbe8b26d68be63fbc97a085',1,'Sky_Times']]],
-  ['j2kut1_5fd_36',['j2kUT1_d',['../struct_sky___times.html#aa778912c8c4444e742c3d58b37280a68',1,'Sky_Times']]]
+  ['instead_2dof_2dmath_2eh_46',['instead-of-math.h',['../instead-of-math_8h.html',1,'']]],
+  ['invariant_47',['INVARIANT',['../general_8h.html#ab29cd17c5ba90d0b15add308adaa144f',1,'general.h']]],
+  ['ispower2_48',['ISPOWER2',['../general_8h.html#a27281ffa708c0719548f1c70ffe09c9d',1,'general.h']]],
+  ['interpolation_20and_20its_20errors_49',['Interpolation and its errors',['../page-interpolation.html',1,'']]],
+  ['interval_20notation_50',['Interval notation',['../page-interval-notation.html',1,'page-conventions']]]
 ];

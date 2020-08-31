@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.4-1</span>
+   &#160;<span id="projectnumber">0.1.5-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -142,7 +142,7 @@ $(document).ready(function(){initNavTree('skyio_8h_source.html',''); initResizab
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"> *      Character set: UTF-8. (Non-ASCII characters appear in this file)</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"> *----------------------------------------------------------------------------*/</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#include &quot;general.h&quot;</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="general_8h.html">general.h</a>&quot;</span></div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="astron_8h.html">astron.h</a>&quot;</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">/*</span></div>
@@ -160,15 +160,15 @@ $(document).ready(function(){initNavTree('skyio_8h_source.html',''); initResizab
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"> * Global functions available to be called by other modules</span></div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">/*      Convert from an angle (or a time) into a sexagesimal text string */</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordtype">char</span> *<a class="code" href="skyio_8h.html#a361432e10e6f4e24dae1143780bb4978">skyio_degToDmsStr</a>(<span class="keywordtype">char</span> destStr[],</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                        <span class="keywordtype">int</span> destStrLen,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                        <span class="keywordtype">double</span> angle_deg,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                        <span class="keywordtype">int</span> decimals);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordtype">char</span> *<a class="code" href="skyio_8h.html#a5c19000cf76232e191faf1c44634ad53">skyio_degToDmsStr</a>(<span class="keywordtype">char</span> destStr[],</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                        <span class="keywordtype">size_t</span>   destStrSize,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                        <span class="keywordtype">double</span>   angle_deg,</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                        <span class="keywordtype">unsigned</span> decimals);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordtype">char</span> *<a class="code" href="skyio_8h.html#a0c57865e99d030403725d97f36bf8f49">skyio_hrsToHmsStr</a>(<span class="keywordtype">char</span> destStr[],</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                        <span class="keywordtype">int</span> destStrLen,</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                        <span class="keywordtype">double</span> angle_h,</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                        <span class="keywordtype">int</span> decimals);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordtype">char</span> *<a class="code" href="skyio_8h.html#a934ef2f54a950999b029b18bea0b5759">skyio_hrsToHmsStr</a>(<span class="keywordtype">char</span> destStr[],</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                        <span class="keywordtype">size_t</span>   destStrSize,</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                        <span class="keywordtype">double</span>   angle_h,</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                        <span class="keywordtype">unsigned</span> decimals);</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">/*      Convert from a sexagesimal text string to an angle */</span></div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keywordtype">double</span> <a class="code" href="skyio_8h.html#a10370b9c3f00f0abeedf1fc26135ac12">skyio_sxStrToAng</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> angleStr[],</div>
@@ -184,7 +184,7 @@ $(document).ready(function(){initNavTree('skyio_8h_source.html',''); initResizab
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">    round to ±360° will be written out as 0°.</span></div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment"> \returns                Pointer to \a destStr</span></div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment"> \param[out] destStr     Destination character string</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment"> \param[in]  destStrLen  Length of destination string</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment"> \param[in]  destStrSize Size of destination string (max available length + 1)</span></div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment"> \param[in]  angle_rad   The angle to be written out (radian).</span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">                           Valid range:(-2*Pi, 2*Pi); larger numbers may well be</span></div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">                           written OK, but there is a risk of overflowing an</span></div>
@@ -197,17 +197,17 @@ $(document).ready(function(){initNavTree('skyio_8h_source.html',''); initResizab
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">#if defined (PREDEF_STANDARD_C_1999)</span></div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">/*          Compiler supports inline functions */</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="skyio_8h.html#a23323b59082541dd33e90f58bd7b5c6d">  111</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">char</span> *<a class="code" href="skyio_8h.html#a23323b59082541dd33e90f58bd7b5c6d">skyio_radToDmsStr</a>(<span class="keywordtype">char</span> destStr[],</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                                      <span class="keywordtype">int</span> destStrLen,</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                                      <span class="keywordtype">double</span> angle_rad,</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                                      <span class="keywordtype">int</span> decimals)</div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="skyio_8h.html#ad2285590eae12aa715441e257db8819e">  111</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">char</span> *<a class="code" href="skyio_8h.html#ad2285590eae12aa715441e257db8819e">skyio_radToDmsStr</a>(<span class="keywordtype">char</span> destStr[],</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                                      <span class="keywordtype">size_t</span>   destStrSize,</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                                      <span class="keywordtype">double</span>   angle_rad,</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                                      <span class="keywordtype">unsigned</span> decimals)</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;{</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="skyio_8h.html#a361432e10e6f4e24dae1143780bb4978">skyio_degToDmsStr</a>(destStr, destStrLen, radToDeg(angle_rad), decimals);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="skyio_8h.html#a5c19000cf76232e191faf1c44634ad53">skyio_degToDmsStr</a>(destStr, destStrSize, <a class="code" href="general_8h.html#a89c798e7384f71fd1cefb5b79d21059b">radToDeg</a>(angle_rad),decimals);</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;}</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor">#else</span></div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; <span class="comment">/*          C89/C90 compiler - no inline functions. Need macros instead */</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor"> #define skyio_radToDmsStr(destStr__, destStrLen__, angle_rad__, decimals__)  \</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor">    skyio_degToDmsStr(destStr__, destStrLen__,                                \</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor"> #define skyio_radToDmsStr(destStr__, destStrSize__, angle_rad__, decimals__) \</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor">    skyio_degToDmsStr(destStr__, destStrSize__,                               \</span></div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="preprocessor">                      radToDeg(angle_rad__), decimals__)</span></div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
@@ -219,7 +219,7 @@ $(document).ready(function(){initNavTree('skyio_8h_source.html',''); initResizab
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">    round to ±24:00:00 will be written out as 0:00:00.</span></div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment"> \returns                Pointer to \a destStr</span></div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment"> \param[out] destStr     Destination character string</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment"> \param[in]  destStrLen  Length of destination string</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment"> \param[in]  destStrSize Size of destination string (max available length + 1)</span></div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment"> \param[in]  angle_rad   The angle to be written out (radian).</span></div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">                         Valid range:(-2*Pi, 2*Pi); larger numbers may well be</span></div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">                         written OK, but there is a risk of overflowing an</span></div>
@@ -232,17 +232,17 @@ $(document).ready(function(){initNavTree('skyio_8h_source.html',''); initResizab
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="preprocessor">#if defined (PREDEF_STANDARD_C_1999)</span></div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">/*          Compiler supports inline functions */</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="skyio_8h.html#a79fa508b5d41bfe40819d53689b1562c">  146</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">char</span> *<a class="code" href="skyio_8h.html#a79fa508b5d41bfe40819d53689b1562c">skyio_radToHmsStr</a>(<span class="keywordtype">char</span> destStr[],</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                                      <span class="keywordtype">int</span> destStrLen,</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                                      <span class="keywordtype">double</span> angle_rad,</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                                      <span class="keywordtype">int</span> decimals)</div>
+<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="skyio_8h.html#aa7d26878b7c1262a58e4c54c1673b9b5">  146</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">char</span> *<a class="code" href="skyio_8h.html#aa7d26878b7c1262a58e4c54c1673b9b5">skyio_radToHmsStr</a>(<span class="keywordtype">char</span> destStr[],</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                                      <span class="keywordtype">size_t</span>   destStrSize,</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                                      <span class="keywordtype">double</span>   angle_rad,</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                                      <span class="keywordtype">unsigned</span> decimals)</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;{</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="skyio_8h.html#a0c57865e99d030403725d97f36bf8f49">skyio_hrsToHmsStr</a>(destStr, destStrLen, radToHrs(angle_rad), decimals);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="skyio_8h.html#a934ef2f54a950999b029b18bea0b5759">skyio_hrsToHmsStr</a>(destStr, destStrSize, <a class="code" href="astron_8h.html#a6bcab1295a9373fef4c7db68b62deae9">radToHrs</a>(angle_rad),decimals);</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;}</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="preprocessor">#else</span></div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; <span class="comment">/*          C89/C90 compiler - no inline functions. Need macros instead */</span></div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="preprocessor"> #define skyio_radToHmsStr(destStr__, destStrLen__, angle_rad__, decimals__)  \</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="preprocessor">    skyio_hrsToHmsStr(destStr__, destStrLen__,                                \</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="preprocessor"> #define skyio_radToHmsStr(destStr__, destStrSize__, angle_rad__, decimals__) \</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="preprocessor">    skyio_hrsToHmsStr(destStr__, destStrSize__,                               \</span></div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="preprocessor">                      radToHrs(angle_rad__), decimals__)</span></div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
@@ -262,13 +262,16 @@ $(document).ready(function(){initNavTree('skyio_8h_source.html',''); initResizab
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="ageneral_8h_html"><div class="ttname"><a href="general_8h.html">general.h</a></div><div class="ttdoc">general.h - definitions of general use to (standard) C programs</div></div>
+<div class="ttc" id="askyio_8h_html_ad2285590eae12aa715441e257db8819e"><div class="ttname"><a href="skyio_8h.html#ad2285590eae12aa715441e257db8819e">skyio_radToDmsStr</a></div><div class="ttdeci">static char * skyio_radToDmsStr(char destStr[], size_t destStrSize, double angle_rad, unsigned decimals)</div><div class="ttdoc">Routine to take an angle in radian and return a string in degrees, arcminutes and arcseconds form - [...</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8h_source.html#l00111">skyio.h:111</a></div></div>
+<div class="ttc" id="askyio_8h_html_aa7d26878b7c1262a58e4c54c1673b9b5"><div class="ttname"><a href="skyio_8h.html#aa7d26878b7c1262a58e4c54c1673b9b5">skyio_radToHmsStr</a></div><div class="ttdeci">static char * skyio_radToHmsStr(char destStr[], size_t destStrSize, double angle_rad, unsigned decimals)</div><div class="ttdoc">Routine to take an angle in radian and return a string in hours, minutes and seconds form - &quot;±HH:MM:S...</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8h_source.html#l00146">skyio.h:146</a></div></div>
 <div class="ttc" id="aastron_8h_html"><div class="ttname"><a href="astron_8h.html">astron.h</a></div><div class="ttdoc">astron.h - assorted definitions useful for astronomy</div></div>
+<div class="ttc" id="askyio_8h_html_a934ef2f54a950999b029b18bea0b5759"><div class="ttname"><a href="skyio_8h.html#a934ef2f54a950999b029b18bea0b5759">skyio_hrsToHmsStr</a></div><div class="ttdeci">char * skyio_hrsToHmsStr(char destStr[], size_t destStrSize, double angle_h, unsigned decimals)</div><div class="ttdoc">Routine to take an angle in hours and return a string in hours, minutes and seconds form - &quot;±HH:MM:SS...</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8c_source.html#l00193">skyio.c:193</a></div></div>
 <div class="ttc" id="askyio_8h_html_a10370b9c3f00f0abeedf1fc26135ac12"><div class="ttname"><a href="skyio_8h.html#a10370b9c3f00f0abeedf1fc26135ac12">skyio_sxStrToAng</a></div><div class="ttdeci">double skyio_sxStrToAng(const char angleStr[], const char **endPtr, int *error)</div><div class="ttdoc">Convert a string containing an angle (or a time) in sexagesimal format to the angle's value.</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8c_source.html#l00288">skyio.c:288</a></div></div>
-<div class="ttc" id="askyio_8h_html_a79fa508b5d41bfe40819d53689b1562c"><div class="ttname"><a href="skyio_8h.html#a79fa508b5d41bfe40819d53689b1562c">skyio_radToHmsStr</a></div><div class="ttdeci">static char * skyio_radToHmsStr(char destStr[], int destStrLen, double angle_rad, int decimals)</div><div class="ttdoc">Routine to take an angle in radian and return a string in hours, minutes and seconds form - &quot;±HH:MM:S...</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8h_source.html#l00146">skyio.h:146</a></div></div>
-<div class="ttc" id="askyio_8h_html_a0c57865e99d030403725d97f36bf8f49"><div class="ttname"><a href="skyio_8h.html#a0c57865e99d030403725d97f36bf8f49">skyio_hrsToHmsStr</a></div><div class="ttdeci">char * skyio_hrsToHmsStr(char destStr[], int destStrLen, double angle_h, int decimals)</div><div class="ttdoc">Routine to take an angle in hours and return a string in hours, minutes and seconds form - &quot;±HH:MM:SS...</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8c_source.html#l00193">skyio.c:193</a></div></div>
-<div class="ttc" id="askyio_8h_html_a23323b59082541dd33e90f58bd7b5c6d"><div class="ttname"><a href="skyio_8h.html#a23323b59082541dd33e90f58bd7b5c6d">skyio_radToDmsStr</a></div><div class="ttdeci">static char * skyio_radToDmsStr(char destStr[], int destStrLen, double angle_rad, int decimals)</div><div class="ttdoc">Routine to take an angle in radian and return a string in degrees, arcminutes and arcseconds form - [...</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8h_source.html#l00111">skyio.h:111</a></div></div>
+<div class="ttc" id="aastron_8h_html_a6bcab1295a9373fef4c7db68b62deae9"><div class="ttname"><a href="astron_8h.html#a6bcab1295a9373fef4c7db68b62deae9">radToHrs</a></div><div class="ttdeci">static double radToHrs(double angle_rad)</div><div class="ttdoc">Returns angle_rad converted from radians to hours.</div><div class="ttdef"><b>Definition:</b> <a href="astron_8h_source.html#l00057">astron.h:57</a></div></div>
 <div class="ttc" id="askyio_8h_html_a8dd7e21b6c506c2c296e299bbeb3ade7"><div class="ttname"><a href="skyio_8h.html#a8dd7e21b6c506c2c296e299bbeb3ade7">skyio_printJ2kd</a></div><div class="ttdeci">void skyio_printJ2kd(double j2kd)</div><div class="ttdoc">Write out a J2KD as a calendar date and time.</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8c_source.html#l00426">skyio.c:426</a></div></div>
-<div class="ttc" id="askyio_8h_html_a361432e10e6f4e24dae1143780bb4978"><div class="ttname"><a href="skyio_8h.html#a361432e10e6f4e24dae1143780bb4978">skyio_degToDmsStr</a></div><div class="ttdeci">char * skyio_degToDmsStr(char destStr[], int destStrLen, double angle_deg, int decimals)</div><div class="ttdoc">Routine to take an angle in degrees and return a string of the form [±]DDD°MM′SS.sss″ correctly round...</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8c_source.html#l00088">skyio.c:88</a></div></div>
+<div class="ttc" id="askyio_8h_html_a5c19000cf76232e191faf1c44634ad53"><div class="ttname"><a href="skyio_8h.html#a5c19000cf76232e191faf1c44634ad53">skyio_degToDmsStr</a></div><div class="ttdeci">char * skyio_degToDmsStr(char destStr[], size_t destStrSize, double angle_deg, unsigned decimals)</div><div class="ttdoc">Routine to take an angle in degrees and return a string of the form [±]DDD°MM′SS.sss″ correctly round...</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8c_source.html#l00088">skyio.c:88</a></div></div>
+<div class="ttc" id="ageneral_8h_html_a89c798e7384f71fd1cefb5b79d21059b"><div class="ttname"><a href="general_8h.html#a89c798e7384f71fd1cefb5b79d21059b">radToDeg</a></div><div class="ttdeci">static double radToDeg(double angle_rad)</div><div class="ttdoc">Returns angle_rad converted from radians to degrees.</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00182">general.h:182</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

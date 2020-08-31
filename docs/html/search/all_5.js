@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['hadecm_29',['haDecM',['../struct_sky___site_prop.html#a82258ed693d26f4d9f7bc22c7d378f48',1,'Sky_SiteProp']]],
-  ['how_20to_20use_20this_20code_30',['How to use this code',['../page-how-to-use.html',1,'page-about']]]
+  ['general_2eh_38',['general.h',['../general_8h.html',1,'']]],
+  ['geocradius_5fkm_39',['geocRadius_km',['../struct_sky___site_prop.html#aab696090a4382fe21fe21820e72777f8',1,'Sky_SiteProp']]],
+  ['global_40',['GLOBAL',['../general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645',1,'general.h']]]
 ];

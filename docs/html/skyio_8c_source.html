@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.4-1</span>
+   &#160;<span id="projectnumber">0.1.5-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('skyio_8c_source.html',''); initResizab
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:  David Hoadley</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * Description: (see skyio.h)</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * </span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * Copyright (c) 2020, David Hoadley &lt;vcrumble@westnet.com.au&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * All rights reserved.</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> *</span></div>
@@ -135,13 +135,13 @@ $(document).ready(function(){initNavTree('skyio_8c_source.html',''); initResizab
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">/* Local and project includes */</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="skyio_8h.html">skyio.h</a>&quot;</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#include &quot;general.h&quot;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="general_8h.html">general.h</a>&quot;</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sky_8h.html">sky.h</a>&quot;</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"> * Local #defines and typedefs</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;DEFINE_THIS_FILE;                       <span class="comment">// For use by REQUIRE() - assertions.</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<a class="code" href="general_8h.html#af9f431fdeb7703d5a95fab8a67109ce0">DEFINE_THIS_FILE</a>;                       <span class="comment">/* For use by REQUIRE() - assertions.*/</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"> * Prototypes for local functions (not called from other modules)</span></div>
@@ -155,13 +155,13 @@ $(document).ready(function(){initNavTree('skyio_8c_source.html',''); initResizab
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"> * Local variables (not accessed by other modules)</span></div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;LOCAL <span class="keyword">const</span> <span class="keywordtype">char</span> digits[] = <span class="stringliteral">&quot;0123456789&quot;</span>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;LOCAL <span class="keyword">const</span> <span class="keywordtype">char</span> cDegree[] = <span class="stringliteral">&quot;°&quot;</span>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;LOCAL <span class="keyword">const</span> <span class="keywordtype">char</span> cMinute[] = <span class="stringliteral">&quot;′&quot;</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;LOCAL <span class="keyword">const</span> <span class="keywordtype">char</span> cSecond[] = <span class="stringliteral">&quot;″&quot;</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keyword">const</span> <span class="keywordtype">char</span> digits[] = <span class="stringliteral">&quot;0123456789&quot;</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keyword">const</span> <span class="keywordtype">char</span> cDegree[] = <span class="stringliteral">&quot;°&quot;</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keyword">const</span> <span class="keywordtype">char</span> cMinute[] = <span class="stringliteral">&quot;′&quot;</span>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keyword">const</span> <span class="keywordtype">char</span> cSecond[] = <span class="stringliteral">&quot;″&quot;</span>;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;LOCAL <span class="keyword">const</span> <span class="keywordtype">char</span> decimalChar = <span class="charliteral">&#39;.&#39;</span>;         <span class="comment">// use &#39;,&#39; if you prefer.</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;LOCAL <span class="keyword">const</span> <span class="keywordtype">char</span> fieldSeparator = <span class="charliteral">&#39;,&#39;</span>;      </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keyword">const</span> <span class="keywordtype">char</span> decimalChar = <span class="charliteral">&#39;.&#39;</span>;         <span class="comment">// use &#39;,&#39; if you prefer.</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<a class="code" href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a> <span class="keyword">const</span> <span class="keywordtype">char</span> fieldSeparator = <span class="charliteral">&#39;,&#39;</span>;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"> *==============================================================================</span></div>
@@ -174,10 +174,10 @@ $(document).ready(function(){initNavTree('skyio_8c_source.html',''); initResizab
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"> *------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="skyio_8h.html#a361432e10e6f4e24dae1143780bb4978">   88</a></span>&#160;GLOBAL <span class="keywordtype">char</span> *<a class="code" href="skyio_8h.html#a361432e10e6f4e24dae1143780bb4978">skyio_degToDmsStr</a>(<span class="keywordtype">char</span> destStr[],</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                               <span class="keywordtype">int</span> destStrLen,</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                               <span class="keywordtype">double</span> angle_deg,</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                               <span class="keywordtype">int</span> decimals)<span class="comment"></span></div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="skyio_8h.html#a5c19000cf76232e191faf1c44634ad53">   88</a></span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">char</span> *<a class="code" href="skyio_8h.html#a5c19000cf76232e191faf1c44634ad53">skyio_degToDmsStr</a>(<span class="keywordtype">char</span> destStr[],</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                               <span class="keywordtype">size_t</span>   destStrSize,</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                               <span class="keywordtype">double</span>   angle_deg,</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                               <span class="keywordtype">unsigned</span> decimals)<span class="comment"></span></div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">/*! Routine to take an angle in degrees and return a string of the form</span></div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">        [±]DDD°MM′SS.sss″</span></div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">    correctly rounding according to the number of decimal places to be shown.</span></div>
@@ -185,7 +185,7 @@ $(document).ready(function(){initNavTree('skyio_8c_source.html',''); initResizab
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">    round to ±360° will be written out as 0°.</span></div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment"> \returns                Pointer to \a destStr</span></div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment"> \param[out] destStr     Destination character string</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment"> \param[in]  destStrLen  Length of destination string</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment"> \param[in]  destStrSize Size of destination string (max available length + 1)</span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment"> \param[in]  angle_deg   The angle to be written out (degrees).</span></div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">                           Valid range:(-360, 360); larger numbers may well be</span></div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">                           written OK, but there is a risk of overflowing an</span></div>
@@ -197,12 +197,12 @@ $(document).ready(function(){initNavTree('skyio_8c_source.html',''); initResizab
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">                           clamped to this range.</span></div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;{</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">int</span>  minLen = 8 + (<span class="keyword">sizeof</span>(cDegree) - 1) + (<span class="keyword">sizeof</span>(cMinute) - 1)</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                          + (<span class="keyword">sizeof</span>(cSecond) - 1);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> minLen = 8 + (<span class="keyword">sizeof</span>(cDegree) - 1) + (<span class="keyword">sizeof</span>(cMinute) - 1)</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                              + (<span class="keyword">sizeof</span>(cSecond) - 1);</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">int</span> angle_asxd;    <span class="comment">// angle_deg, converted to arcseconds x 10^decimals</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordtype">int</span>      reqLen;        <span class="comment">// required length of string to fit the output</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordtype">int</span>      i, j;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordtype">unsigned</span> reqLen;        <span class="comment">// required length of string to fit the output</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordtype">unsigned</span> i, j;</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordtype">int</span>      roundup;</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    ldiv_t   q;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
@@ -218,7 +218,7 @@ $(document).ready(function(){initNavTree('skyio_8c_source.html',''); initResizab
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    reqLen = minLen + decimals + (decimals &gt; 0 ? 1 : 0);</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="comment">// Make sure caller has supplied a big enough string to hold all the digits</span></div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="comment">// that they have requested</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    REQUIRE(destStrLen &gt; reqLen);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <a class="code" href="general_8h.html#ab2e59cc108e9787fba04aa5692098e62">REQUIRE</a>(destStrSize &gt; reqLen);</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    roundup = 1;</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordflow">for</span> (i = 0; i &lt; decimals; i++) {</div>
@@ -267,30 +267,30 @@ $(document).ready(function(){initNavTree('skyio_8c_source.html',''); initResizab
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="keywordflow">for</span> (j = 0; (j &lt; 1) || (q.quot != 0); j++) {</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        q = ldiv(q.quot, 10);</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        destStr[--i] = digits[q.rem];        </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        destStr[--i] = digits[q.rem];</div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    }</div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    destStr[--i] = (angle_deg &lt; 0.0) ? <span class="charliteral">&#39;-&#39;</span> : <span class="charliteral">&#39;+&#39;</span>;</div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keywordflow">while</span> (i &gt; 0) {</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        destStr[--i] = <span class="charliteral">&#39; &#39;</span>;</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    }</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <span class="keywordflow">return</span> destStr;</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;}</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno"><a class="line" href="skyio_8h.html#a0c57865e99d030403725d97f36bf8f49">  193</a></span>&#160;GLOBAL <span class="keywordtype">char</span> *<a class="code" href="skyio_8h.html#a0c57865e99d030403725d97f36bf8f49">skyio_hrsToHmsStr</a>(<span class="keywordtype">char</span> destStr[],</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                               <span class="keywordtype">int</span> destStrLen,</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                               <span class="keywordtype">double</span> angle_h,</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                               <span class="keywordtype">int</span> decimals)<span class="comment"></span></div>
+<div class="line"><a name="l00193"></a><span class="lineno"><a class="line" href="skyio_8h.html#a934ef2f54a950999b029b18bea0b5759">  193</a></span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">char</span> *<a class="code" href="skyio_8h.html#a934ef2f54a950999b029b18bea0b5759">skyio_hrsToHmsStr</a>(<span class="keywordtype">char</span> destStr[],</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                               <span class="keywordtype">size_t</span>   destStrSize,</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                               <span class="keywordtype">double</span>   angle_h,</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                               <span class="keywordtype">unsigned</span> decimals)<span class="comment"></span></div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">/*! Routine to take an angle in hours and return a string in hours, minutes and</span></div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">    seconds form - &quot;±HH:MM:SS.sss&quot; - </span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">    seconds form - &quot;±HH:MM:SS.sss&quot; -</span></div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">    correctly rounding according to the number of decimal places to be shown.</span></div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">    The angle is assumed to be within the range (-24.0, 24.0). Angles which</span></div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">    round to ±24:00:00 will be written out as 0:00:00.</span></div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment"> \returns                Pointer to \a destStr</span></div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment"> \param[out] destStr     Destination character string</span></div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment"> \param[in]  destStrLen  Length of destination string</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment"> \param[in]  destStrSize Size of destination string (max available length + 1)</span></div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment"> \param[in]  angle_h     The angle to be written out (hours).</span></div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">                         Valid range:(-24.0, 24.0); larger numbers may well be</span></div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">                         written OK, but there is a risk of overflowing an</span></div>
@@ -303,8 +303,8 @@ $(document).ready(function(){initNavTree('skyio_8c_source.html',''); initResizab
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */</span></div>
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;{</div>
 <div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">int</span> angle_sxd;     <span class="comment">// angle_h, converted to seconds x 10^decimals</span></div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keywordtype">int</span>      i, j;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordtype">int</span>      reqLen;        <span class="comment">// required length of string to fit the output</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keywordtype">unsigned</span> i, j;</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordtype">unsigned</span> reqLen;        <span class="comment">// required length of string to fit the output</span></div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keywordtype">int</span>      roundup;</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    ldiv_t   q;</div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
@@ -320,7 +320,7 @@ $(document).ready(function(){initNavTree('skyio_8c_source.html',''); initResizab
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    reqLen = 9 + decimals + (decimals &gt; 0 ? 1 : 0);</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="comment">// Make sure caller has supplied a big enough string to hold all the digits</span></div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="comment">// that they have requested</span></div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    REQUIRE(destStrLen &gt; reqLen);</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <a class="code" href="general_8h.html#ab2e59cc108e9787fba04aa5692098e62">REQUIRE</a>(destStrSize &gt; reqLen);</div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    roundup = 1;</div>
@@ -362,19 +362,19 @@ $(document).ready(function(){initNavTree('skyio_8c_source.html',''); initResizab
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    <span class="keywordflow">for</span> (j = 0; j &lt; 2; j++) {</div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        q = ldiv(q.quot, 10);</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        destStr[--i] = digits[q.rem];        </div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        destStr[--i] = digits[q.rem];</div>
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    }</div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    destStr[--i] = (angle_h &lt; 0.0) ? <span class="charliteral">&#39;-&#39;</span> : <span class="charliteral">&#39;+&#39;</span>;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    </div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    ENSURE(i == 0);     <span class="comment">// If not, we have stuffed up filling the string</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <a class="code" href="general_8h.html#ab9d985faafa6c17f81dd66e401339450">ENSURE</a>(i == 0);     <span class="comment">// If not, we have stuffed up filling the string</span></div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <span class="keywordflow">return</span> destStr;</div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;}</div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
-<div class="line"><a name="l00288"></a><span class="lineno"><a class="line" href="skyio_8h.html#a10370b9c3f00f0abeedf1fc26135ac12">  288</a></span>&#160;GLOBAL <span class="keywordtype">double</span> <a class="code" href="skyio_8h.html#a10370b9c3f00f0abeedf1fc26135ac12">skyio_sxStrToAng</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> angleStr[],</div>
+<div class="line"><a name="l00288"></a><span class="lineno"><a class="line" href="skyio_8h.html#a10370b9c3f00f0abeedf1fc26135ac12">  288</a></span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">double</span> <a class="code" href="skyio_8h.html#a10370b9c3f00f0abeedf1fc26135ac12">skyio_sxStrToAng</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> angleStr[],</div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                               <span class="keyword">const</span> <span class="keywordtype">char</span> **endPtr,</div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                               <span class="keywordtype">int</span> *error)<span class="comment"></span></div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">/*! Convert a string containing an angle (or a time) in sexagesimal format to</span></div>
@@ -419,9 +419,9 @@ $(document).ready(function(){initNavTree('skyio_8c_source.html',''); initResizab
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <span class="keywordtype">double</span>      divideBy;</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="keywordtype">double</span>      frac;               <span class="comment">// value of digits that follow decimal point</span></div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keywordtype">int</span>         status;             <span class="comment">// error code</span></div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="comment">// Hold the results of decoding in separate array members for degrees/hours,</span></div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    <span class="comment">// minutes and seconds. Put an invalid value into one of them, so that we</span></div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="comment">// can later detect the case when angleStr contains no decodable value.</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="comment">/* Hold the results of decoding in separate array members for degrees/hours,</span></div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="comment">       minutes and seconds. Put an invalid value into one of them, so that we</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="comment">       can later detect the case when angleStr contains no decodable value. */</span></div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    <span class="keywordtype">double</span>      results[4] = {0.0, -1.0, 0.0, 0.0};</div>
 <div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keywordtype">double</span>      *res = results;     <span class="comment">// point to relevant member of results[]</span></div>
 <div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
@@ -434,7 +434,7 @@ $(document).ready(function(){initNavTree('skyio_8c_source.html',''); initResizab
 <div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        <span class="keywordflow">switch</span> (decodeState) {</div>
 <div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        <span class="keywordflow">case</span> stStarting:</div>
 <div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            <span class="keywordflow">if</span> (*ch == <span class="charliteral">&#39;-&#39;</span>) { isNegative = <span class="keyword">true</span>; }</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            NOBREAK;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            <a class="code" href="general_8h.html#a96bef5af7485885e04b6e8d48a5e63fa">NOBREAK</a>;</div>
 <div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        <span class="keywordflow">case</span> stSeparator1:</div>
 <div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        <span class="keywordflow">case</span> stSeparator2:</div>
 <div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;            <span class="keywordflow">if</span> (isdigit(*ch)) {</div>
@@ -462,7 +462,7 @@ $(document).ready(function(){initNavTree('skyio_8c_source.html',''); initResizab
 <div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;            } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;                <span class="comment">// Not a digit or point, so we have reached the end of the field</span></div>
 <div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;                <span class="keywordflow">if</span> ((pointFound) || (decodeState == stSecs)) {</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;                    <span class="comment">// This must be the last field we will decode</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;                    <span class="comment">/* This must be the last field we will decode */</span></div>
 <div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;                    <span class="keywordflow">if</span> (isblank(*ch)) {</div>
 <div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;                        done = <span class="keyword">true</span>;            <span class="comment">// exit now</span></div>
 <div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;                    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (*ch == fieldSeparator) {</div>
@@ -478,8 +478,8 @@ $(document).ready(function(){initNavTree('skyio_8c_source.html',''); initResizab
 <div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;            <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160; </div>
 <div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        <span class="keywordflow">case</span> stEnding:</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;            <span class="comment">// Skip over any trailing non-blank chars.</span></div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;            <span class="comment">// Stop when we find white space</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;            <span class="comment">/* Skip over any trailing non-blank chars.</span></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment">               Stop when we find white space */</span></div>
 <div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;            <span class="keywordflow">if</span> (isblank(*ch)) {</div>
 <div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;                done = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;            }</div>
@@ -488,15 +488,15 @@ $(document).ready(function(){initNavTree('skyio_8c_source.html',''); initResizab
 <div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        <span class="keywordflow">default</span>:</div>
 <div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;            <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        }</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;        </div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160; </div>
 <div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        <span class="keywordflow">if</span> (done) {</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;            <span class="comment">// exit the loop without incrementing our character pointer ch</span></div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;            <span class="comment">/* exit the loop without incrementing our character pointer ch */</span></div>
 <div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;            <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;        }</div>
 <div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    }</div>
 <div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    status = 0;</div>
 <div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    <span class="keywordflow">if</span> (results[1] &lt; 0.0) {</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        <span class="comment">// There was no number in angleStr. Return zero and an error code.</span></div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        <span class="comment">/* There was no number in angleStr. Return zero and an error code. */</span></div>
 <div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;        results[1] = 0.0;</div>
 <div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;        status = NO_ANGLE;</div>
 <div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    }</div>
@@ -512,7 +512,7 @@ $(document).ready(function(){initNavTree('skyio_8c_source.html',''); initResizab
 <div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160; </div>
 <div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160; </div>
 <div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160; </div>
-<div class="line"><a name="l00426"></a><span class="lineno"><a class="line" href="skyio_8h.html#a8dd7e21b6c506c2c296e299bbeb3ade7">  426</a></span>&#160;GLOBAL <span class="keywordtype">void</span> <a class="code" href="skyio_8h.html#a8dd7e21b6c506c2c296e299bbeb3ade7">skyio_printJ2kd</a>(<span class="keywordtype">double</span> j2kd)<span class="comment"></span></div>
+<div class="line"><a name="l00426"></a><span class="lineno"><a class="line" href="skyio_8h.html#a8dd7e21b6c506c2c296e299bbeb3ade7">  426</a></span>&#160;<a class="code" href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a> <span class="keywordtype">void</span> <a class="code" href="skyio_8h.html#a8dd7e21b6c506c2c296e299bbeb3ade7">skyio_printJ2kd</a>(<span class="keywordtype">double</span> j2kd)<span class="comment"></span></div>
 <div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="comment">/*! Write out a J2KD as a calendar date and time. The date and time are written</span></div>
 <div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="comment">    in ISO format, separated by a space. Time is written to three decimal places</span></div>
 <div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="comment">    of seconds. No newline is written at the end.</span></div>
@@ -541,13 +541,20 @@ $(document).ready(function(){initNavTree('skyio_8c_source.html',''); initResizab
 <div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="ageneral_8h_html"><div class="ttname"><a href="general_8h.html">general.h</a></div><div class="ttdoc">general.h - definitions of general use to (standard) C programs</div></div>
 <div class="ttc" id="asky_8h_html_a6afa64839aaee5925d90c013e8eaa0b2"><div class="ttname"><a href="sky_8h.html#a6afa64839aaee5925d90c013e8eaa0b2">sky_j2kdToCalTime</a></div><div class="ttdeci">void sky_j2kdToCalTime(double j2k_d, int *year, int *month, int *day, int *hour, int *minute, double *second)</div><div class="ttdoc">This procedure converts the integral part of the date in &quot;J2KD&quot; form to a calendar date and the fract...</div><div class="ttdef"><b>Definition:</b> <a href="sky-time_8c_source.html#l00321">sky-time.c:321</a></div></div>
 <div class="ttc" id="askyio_8h_html"><div class="ttname"><a href="skyio_8h.html">skyio.h</a></div><div class="ttdoc">skyio.h - output and formatting routines and a read routine</div></div>
+<div class="ttc" id="ageneral_8h_html_ab2e59cc108e9787fba04aa5692098e62"><div class="ttname"><a href="general_8h.html#ab2e59cc108e9787fba04aa5692098e62">REQUIRE</a></div><div class="ttdeci">#define REQUIRE(test_)</div><div class="ttdoc">Check preconditions.</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00273">general.h:273</a></div></div>
+<div class="ttc" id="ageneral_8h_html_a3758dd5d300a594312c95bc393378df0"><div class="ttname"><a href="general_8h.html#a3758dd5d300a594312c95bc393378df0">LOCAL</a></div><div class="ttdeci">#define LOCAL</div><div class="ttdoc">C has some very silly default behaviours.</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00133">general.h:133</a></div></div>
+<div class="ttc" id="askyio_8h_html_a934ef2f54a950999b029b18bea0b5759"><div class="ttname"><a href="skyio_8h.html#a934ef2f54a950999b029b18bea0b5759">skyio_hrsToHmsStr</a></div><div class="ttdeci">char * skyio_hrsToHmsStr(char destStr[], size_t destStrSize, double angle_h, unsigned decimals)</div><div class="ttdoc">Routine to take an angle in hours and return a string in hours, minutes and seconds form - &quot;±HH:MM:SS...</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8c_source.html#l00193">skyio.c:193</a></div></div>
+<div class="ttc" id="ageneral_8h_html_a3de33738fd3c7e77bffbcfaefc3e7645"><div class="ttname"><a href="general_8h.html#a3de33738fd3c7e77bffbcfaefc3e7645">GLOBAL</a></div><div class="ttdeci">#define GLOBAL</div><div class="ttdoc">See above.</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00134">general.h:134</a></div></div>
 <div class="ttc" id="askyio_8h_html_a10370b9c3f00f0abeedf1fc26135ac12"><div class="ttname"><a href="skyio_8h.html#a10370b9c3f00f0abeedf1fc26135ac12">skyio_sxStrToAng</a></div><div class="ttdeci">double skyio_sxStrToAng(const char angleStr[], const char **endPtr, int *error)</div><div class="ttdoc">Convert a string containing an angle (or a time) in sexagesimal format to the angle's value.</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8c_source.html#l00288">skyio.c:288</a></div></div>
-<div class="ttc" id="askyio_8h_html_a0c57865e99d030403725d97f36bf8f49"><div class="ttname"><a href="skyio_8h.html#a0c57865e99d030403725d97f36bf8f49">skyio_hrsToHmsStr</a></div><div class="ttdeci">char * skyio_hrsToHmsStr(char destStr[], int destStrLen, double angle_h, int decimals)</div><div class="ttdoc">Routine to take an angle in hours and return a string in hours, minutes and seconds form - &quot;±HH:MM:SS...</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8c_source.html#l00193">skyio.c:193</a></div></div>
+<div class="ttc" id="ageneral_8h_html_ab9d985faafa6c17f81dd66e401339450"><div class="ttname"><a href="general_8h.html#ab9d985faafa6c17f81dd66e401339450">ENSURE</a></div><div class="ttdeci">#define ENSURE(test_)</div><div class="ttdoc">Check post-conditions.</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00279">general.h:279</a></div></div>
+<div class="ttc" id="ageneral_8h_html_af9f431fdeb7703d5a95fab8a67109ce0"><div class="ttname"><a href="general_8h.html#af9f431fdeb7703d5a95fab8a67109ce0">DEFINE_THIS_FILE</a></div><div class="ttdeci">#define DEFINE_THIS_FILE</div><div class="ttdoc">Leave DEFINE_THIS_FILE undefined.</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00252">general.h:252</a></div></div>
 <div class="ttc" id="asky_8h_html"><div class="ttname"><a href="sky_8h.html">sky.h</a></div><div class="ttdoc">sky.h - structures and routines for astronomical observing &amp; tracking</div></div>
 <div class="ttc" id="askyio_8h_html_a8dd7e21b6c506c2c296e299bbeb3ade7"><div class="ttname"><a href="skyio_8h.html#a8dd7e21b6c506c2c296e299bbeb3ade7">skyio_printJ2kd</a></div><div class="ttdeci">void skyio_printJ2kd(double j2kd)</div><div class="ttdoc">Write out a J2KD as a calendar date and time.</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8c_source.html#l00426">skyio.c:426</a></div></div>
-<div class="ttc" id="askyio_8h_html_a361432e10e6f4e24dae1143780bb4978"><div class="ttname"><a href="skyio_8h.html#a361432e10e6f4e24dae1143780bb4978">skyio_degToDmsStr</a></div><div class="ttdeci">char * skyio_degToDmsStr(char destStr[], int destStrLen, double angle_deg, int decimals)</div><div class="ttdoc">Routine to take an angle in degrees and return a string of the form [±]DDD°MM′SS.sss″ correctly round...</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8c_source.html#l00088">skyio.c:88</a></div></div>
+<div class="ttc" id="askyio_8h_html_a5c19000cf76232e191faf1c44634ad53"><div class="ttname"><a href="skyio_8h.html#a5c19000cf76232e191faf1c44634ad53">skyio_degToDmsStr</a></div><div class="ttdeci">char * skyio_degToDmsStr(char destStr[], size_t destStrSize, double angle_deg, unsigned decimals)</div><div class="ttdoc">Routine to take an angle in degrees and return a string of the form [±]DDD°MM′SS.sss″ correctly round...</div><div class="ttdef"><b>Definition:</b> <a href="skyio_8c_source.html#l00088">skyio.c:88</a></div></div>
+<div class="ttc" id="ageneral_8h_html_a96bef5af7485885e04b6e8d48a5e63fa"><div class="ttname"><a href="general_8h.html#a96bef5af7485885e04b6e8d48a5e63fa">NOBREAK</a></div><div class="ttdeci">#define NOBREAK</div><div class="ttdoc">Show reader that 'break' was not omitted by accident.</div><div class="ttdef"><b>Definition:</b> <a href="general_8h_source.html#l00143">general.h:143</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
