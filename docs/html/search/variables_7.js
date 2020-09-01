@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['rectv_331',['rectV',['../struct_sky___site_horizon.html#ace117bb5b44490a867fa5cf25902984e',1,'Sky_SiteHorizon']]],
-  ['refracpt_332',['refracPT',['../struct_sky___site_prop.html#a73064d4f6a9a519a0dd08c80e1c9b3a0',1,'Sky_SiteProp']]],
-  ['rhocos_5fau_333',['rhoCos_au',['../struct_sky___site_prop.html#a95ce729a3ce149654b6d3630b97a265f',1,'Sky_SiteProp']]],
-  ['rhosin_5fau_334',['rhoSin_au',['../struct_sky___site_prop.html#a04104394e3aea04ce74e30ad576fa6bb',1,'Sky_SiteProp']]]
+  ['mjdutc_400',['mjdUtc',['../struct_sky___times.html#ae2e870a1ab063072a1376a81854d79fc',1,'Sky_Times']]],
+  ['mudec_5fradpcy_401',['muDec_radpcy',['../struct_star___catalog_posn.html#af16c40a3cd734a79515cbb569e67702a',1,'Star_CatalogPosn']]],
+  ['mura_5fradpcy_402',['muRA_radpcy',['../struct_star___catalog_posn.html#aa5c64e9c79e52fe411a0d51c07ebee61',1,'Star_CatalogPosn']]],
+  ['murainclcosdec_403',['muRaInclCosDec',['../struct_star___catalog_posn.html#a61484047ecf75aaa92b4e86e11c016fd',1,'Star_CatalogPosn']]]
 ];

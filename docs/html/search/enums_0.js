@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['v3d_5faxisnames_340',['V3D_AxisNames',['../vectors3d_8h.html#a60bdd1223c75d5de4352cdc94464666c',1,'vectors3d.h']]]
+  ['star_5fcoorderrors_417',['Star_CoordErrors',['../star_8h.html#a14fca560e34f3dd3907e9eddf2a669c0',1,'star.h']]],
+  ['star_5fcoordsys_418',['Star_CoordSys',['../star_8h.html#a7963b31accfdc589a96ddb170b498bcd',1,'star.h']]]
 ];

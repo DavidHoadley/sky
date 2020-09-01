@@ -19,6 +19,8 @@ var files_dup =
     [ "skyfast.h", "skyfast_8h.html", "skyfast_8h" ],
     [ "skyio.c", "skyio_8c_source.html", null ],
     [ "skyio.h", "skyio_8h.html", "skyio_8h" ],
+    [ "star.c", "star_8c_source.html", null ],
+    [ "star.h", "star_8h.html", "star_8h" ],
     [ "sun.c", "sun_8c_source.html", null ],
     [ "sun.h", "sun_8h.html", "sun_8h" ],
     [ "vectors3d.c", "vectors3d_8c_source.html", null ],

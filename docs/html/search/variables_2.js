@@ -1,7 +1,11 @@
 var searchData=
 [
-  ['elevation_5frad_321',['elevation_rad',['../struct_sky___site_horizon.html#ae425fbe0a9c704a2baac80803f22c0e1',1,'Sky_SiteHorizon']]],
-  ['eps0_5frad_322',['eps0_rad',['../struct_sky0___nut1980.html#a0065d9c181b8403f9cd37237540bb004',1,'Sky0_Nut1980::eps0_rad()'],['../struct_sky1___nut1980.html#a0065d9c181b8403f9cd37237540bb004',1,'Sky1_Nut1980::eps0_rad()']]],
-  ['eqeq_5frad_323',['eqEq_rad',['../struct_sky___true_equatorial.html#a9c13083bb211839f27757fb90210af55',1,'Sky_TrueEquatorial::eqEq_rad()'],['../struct_sky0___nut1980.html#a9c13083bb211839f27757fb90210af55',1,'Sky0_Nut1980::eqEq_rad()'],['../struct_sky1___nut1980.html#a9c13083bb211839f27757fb90210af55',1,'Sky1_Nut1980::eqEq_rad()']]],
-  ['era_5frad_324',['era_rad',['../struct_sky___times.html#ab0f1ac51fc6e8e64b6de445bbeec72b5',1,'Sky_Times']]]
+  ['dec_5frad_380',['dec_rad',['../struct_star___catalog_posn.html#a52e1cad729624d937ee8ef2dfb3a4d41',1,'Star_CatalogPosn']]],
+  ['deltat_5fd_381',['deltaT_d',['../struct_sky___delta_ts.html#aedcd03a06873f16093082cdfd0319a13',1,'Sky_DeltaTs']]],
+  ['deltatt_5fd_382',['deltaTT_d',['../struct_sky___delta_ts.html#a4d56cb595e1c9b502b8267dc243ae7df',1,'Sky_DeltaTs']]],
+  ['deltaut_5fd_383',['deltaUT_d',['../struct_sky___delta_ts.html#a2aab09aef86d7899a953a99817cc7102',1,'Sky_DeltaTs']]],
+  ['deps_5frad_384',['dEps_rad',['../struct_sky0___nut1980.html#aef39025a6d0b655f7ad0ffd9641762b6',1,'Sky0_Nut1980::dEps_rad()'],['../struct_sky1___nut1980.html#aef39025a6d0b655f7ad0ffd9641762b6',1,'Sky1_Nut1980::dEps_rad()']]],
+  ['distance_5fau_385',['distance_au',['../struct_sky___true_equatorial.html#a1eaa585fcc5e1c69290dc1daea7e48af',1,'Sky_TrueEquatorial']]],
+  ['diurnalaberr_386',['diurnalAberr',['../struct_sky___site_prop.html#ab1ccfeec950b988ad21f1977fbbf6f7c',1,'Sky_SiteProp']]],
+  ['dpsi_5frad_387',['dPsi_rad',['../struct_sky0___nut1980.html#a9b0da8604707a438f6396f12d2c3994b',1,'Sky0_Nut1980::dPsi_rad()'],['../struct_sky1___nut1980.html#a9b0da8604707a438f6396f12d2c3994b',1,'Sky1_Nut1980::dPsi_rad()']]]
 ];

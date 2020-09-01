@@ -9,6 +9,7 @@ var annotated_dup =
     [ "Sky_SiteProp", "struct_sky___site_prop.html", "struct_sky___site_prop" ],
     [ "Sky_Times", "struct_sky___times.html", "struct_sky___times" ],
     [ "Sky_TrueEquatorial", "struct_sky___true_equatorial.html", "struct_sky___true_equatorial" ],
+    [ "Star_CatalogPosn", "struct_star___catalog_posn.html", "struct_star___catalog_posn" ],
     [ "V3D_Matrix", "struct_v3_d___matrix.html", "struct_v3_d___matrix" ],
     [ "V3D_Vector", "struct_v3_d___vector.html", "struct_v3_d___vector" ]
 ];

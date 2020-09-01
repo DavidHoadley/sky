@@ -29,6 +29,7 @@ var NAVTREE =
         [ "All", "globals.html", null ],
         [ "Functions", "globals_func.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
+        [ "Enumerator", "globals_eval.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ],
@@ -37,6 +38,7 @@ var NAVTREE =
     [ "About time", "page-time.html", "page-time" ],
     [ "Miscellaneous", "page-misc.html", "page-misc" ],
     [ "Interpolation and its errors", "page-interpolation.html", null ],
+    [ "Stellar reduction accuracy", "page-stellar-reduction-accuracy.html", null ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Fields", "functions.html", [
@@ -51,7 +53,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"vectors3d_8h.html#a60bdd1223c75d5de4352cdc94464666ca484d51e7c5b34e33528bc82a3094d481"
+"struct_sky___site_prop.html#a247a7f60778413de593949f7e38a7d3b"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
