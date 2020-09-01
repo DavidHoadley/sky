@@ -709,6 +709,9 @@ LOCAL void createAzElBaseM(Sky_SiteProp *site)
  *        \c malloc() calls.
  *      - Does not use any variable-length arrays. Thus stack usage is
  *        predictable.
+ *      - \c printf() calls are basically limited to debugging code.
+ *      - Very limited use of \c snprintf(). Does not use the \%f specifier in
+ *        any \c snprintf().
  *      - Uses an interpolation process to dramatically reduce the calling of
  *        trigonometric functions during tracking, with a very small loss of
  *        accuracy (see \ref page-interpolation).
@@ -811,7 +814,7 @@ LOCAL void createAzElBaseM(Sky_SiteProp *site)
  */
 
 
-/*! \page page-licensing Licensing
+/*! \page page-licensing Open Source Licensing
  *
  * All code here except for the routines planet_getHeliocentric() and
  * sky2_nutationIAU2000B() are covered by the MIT license, as follows:

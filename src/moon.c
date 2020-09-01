@@ -4,7 +4,7 @@
  * Author:  David Hoadley
  *
  * Description: (see moon.h)
- * 
+ *
  * Copyright (c) 2020, David Hoadley <vcrumble@westnet.com.au>
  * All rights reserved.
  *
@@ -66,7 +66,7 @@ typedef struct {
 } OrbTerms;
 
 /* Note there is some inconsistency in the use of terms here, when compared
- * with the fundamental arguments of the 1980 nutation theory. 
+ * with the fundamental arguments of the 1980 nutation theory.
  * NREL Moon  Nutation1980    Term description
  *    L'         (L)           Mean Longitude of the Moon
  *    D           D            Mean Elongation of the Moon from the Sun
@@ -75,14 +75,14 @@ typedef struct {
  *                Ω            Longitude of ascending node of Moon
  *    F           F            = L - Ω, Mean Longitude of Moon minus Longitude
  *                                    of ascending node.
- * 
+ *
  * In the NREL SAMPA document, sections 3.2.5 and 3.2.4, the term F is referred
  * to as the "Argument of Latitude". I believe this is wrong. F is actually
  * the MEAN Longitude of Moon minus the Longitude of the Moon's ascending node
  * (F = L - Ω), or alternatively the MEAN anomaly plus the argument of periapsis
  * (F = M' + ω). But the "Argument of Latitude" is defined as the TRUE anomaly
  * plus the argument of periapsis - i.e. u = ν + ω.
- * 
+ *
  * In the code that follows, I have kept this label, to make it easier for
  * someone reading the NREL SAMPA document to follow the code, but I have marked
  * it as "so-called" each time.
@@ -184,7 +184,7 @@ GLOBAL void moon_nrelApp2(double             t_cy,
     a1_rad = degToRad(119.75 + 131.849 * t_cy);
     a2_rad = degToRad(53.09 + 479264.29 * t_cy);
     a3_rad = degToRad(313.45 + 481266.484 * t_cy);
-    
+
     /* Steps 3.2.11 & 3.2.12 */
     dl_udeg = 3958.0 * sin(a1_rad) + 1962.0 * sin(orbt.lp_rad - orbt.f_rad)
               + 318.0 * sin(a2_rad);
@@ -203,7 +203,7 @@ GLOBAL void moon_nrelApp2(double             t_cy,
        other celestial objects are specified that way, so our routines
        converting geocentric to topocentric place expect it to be that way. */
     *dist_au = mDelta_km / au_km;
-    
+
     /* Step 3.6 */
     lamda_rad = lamdap_rad + nut->dPsi_rad;
 
@@ -216,25 +216,6 @@ GLOBAL void moon_nrelApp2(double             t_cy,
     /* Now have vector of apparent coords. Could convert to RA and Dec using
        v3d_rectToPolar(&RA, &Dec, appV) but there isn't really any need.
        Had we done so we would have performed steps 3.8 and 3.9 of NREL SAMPA */
-#if 0
-    printf("Ecliptic: Apparent Longitude = %12.7f, "
-           "Latitude = %f, Distance = %7.3f\n", 
-           radToDeg(lamda_rad), radToDeg(beta_rad), mDelta_km / 6378.137);
-#endif
-#if 0
-    {
-        char astr1[24], astr2[24];
-        double RA, Dec;
-
-        v3d_rectToPolar(&RA, &Dec, appV);
-        RA = normalize(RA, TWOPI);
-        printf("My Apparent* RA %f [%s], Dec %f [%s]\n", 
-               radToDeg(RA),
-               fmtHms(astr1, sizeof(astr1), RA, 1),
-               radToDeg(Dec),
-               fmtDms(astr2, sizeof(astr2), Dec, 0));
-    }
-#endif
 }
 
 
@@ -249,7 +230,7 @@ GLOBAL void moon_nrelApparent(double j2kTT_cy, Sky_TrueEquatorial *pos)
 
  \par When to call this function
     Because this function is computationally intensive, you may wish to limit
-    your use of this function. 
+    your use of this function.
         - if you want the Moon's position at multiple sites simultaneously at a
           single time, call this function, then follow it with a call to routine
           sky0_appToTirs(), and then make a separate call to
@@ -279,7 +260,7 @@ GLOBAL void moon_nrelApparent(double j2kTT_cy, Sky_TrueEquatorial *pos)
 
     /* Calculate nutation (steps 3.4 of the algorithm in the SPA document) */
     sky0_nutationSpa(j2kTT_cy, &nut);
-    
+
     /* Calculate the mean obliquity of the ecliptic (step 3.5) and the equation
        of the equinoxes */
     sky0_epsilonSpa(j2kTT_cy, &nut);
@@ -298,12 +279,12 @@ GLOBAL void moon_nrelTopocentric(double             j2kdUtc,
                                  const Sky_DeltaTs  *deltas,
                                  const Sky_SiteProp *site,
                                  Sky_SiteHorizon *topo)
-/*! Calls moon_nrelApparent() to calculate the Moon's position in apparent 
+/*! Calls moon_nrelApparent() to calculate the Moon's position in apparent
  *  coordinates using the NREL Moon Position Algorithm, and then converts this
  *  to topocentric horizon coordinates at the specified site.
  \param[in]  j2kdUtc  UTC time in "J2KD" form - i.e days since J2000.0
                       (= JD - 2 451 545.0)
- \param[in]  deltas   Delta T values, as set by the sky_initTime() (or 
+ \param[in]  deltas   Delta T values, as set by the sky_initTime() (or
                       sky_initTimeSimple() or sky_initTimeDetailed()) routines
  \param[in]  site     Properties of the observing site, particularly its
                       geometric location on the surface of the Earth, as set by
@@ -343,7 +324,7 @@ GLOBAL double moon_riseSet(int                   year,
     by \a year, \a month and \a day. This function uses the NREL MPA algorithm
     of moon_nrelTopocentric() to calculate the Moon's position.
  \returns                Moonrise (or moonset) time for the day given in
-                          \a year, \a month and \a day (returned as a J2KD date 
+                          \a year, \a month and \a day (returned as a J2KD date
                          (= JD - 2 451 545.0), UTC timescale).
                          To view this as a local date and time, add this
                          value to \a site->timezone_d and pass the result to
@@ -351,7 +332,7 @@ GLOBAL double moon_riseSet(int                   year,
  \param[in]  year, month, day
                          Date for which moonrise or moonset time is desired
  \param[in]  getMoonrise If true, get moonrise time. If false, get moonset time
- \param[in]  deltas      Delta T values, as set by the sky_initTime() (or 
+ \param[in]  deltas      Delta T values, as set by the sky_initTime() (or
                          sky_initTimeSimple() or sky_initTimeDetailed())
                          routines
  \param[in]  site        Properties of the observing site, particularly its
@@ -382,7 +363,7 @@ GLOBAL double moon_riseSet(int                   year,
     REQUIRE_NOT_NULL(site);
 
     /* Moonrise and set calculations assume a standard refraction at the horizon
-    * of 34 arcminutes, and a Moon semi-diameter of 16 arcminutes. So the 
+    * of 34 arcminutes, and a Moon semi-diameter of 16 arcminutes. So the
     * calculation is based on the time at which the UNREFRACTED Moon position is
     * at -50 arcmin. So copy site information, and set refraction to zero for
     * that copy, which will be passed to riseSetApprox() */
@@ -401,17 +382,12 @@ GLOBAL double moon_riseSet(int                   year,
                Don't try another iteration. */
             break;
         }
-#if 0
-        printf("Moon rise/set estimate %d: ", i + 1);
-        printMjd(estimate_d + site->timeZone_d);
-        printf("\n");
-#endif
     }
-       
+
     if (topo != NULL) {
         *topo = topo1;
     }
-    return estimate_d;  
+    return estimate_d;
 }
 
 /*
@@ -422,7 +398,7 @@ GLOBAL double moon_riseSet(int                   year,
  *------------------------------------------------------------------------------
  */
 LOCAL void moonOrbitals(double t_cy, OrbTerms *orb)
-/* Calculate the fundamental orbital parameters required to get the moon 
+/* Calculate the fundamental orbital parameters required to get the moon
    position. This is steps 3.2.1 to 3.2.5 of the NREL SAMPA document.
  Inputs
     t_cy    - julian centuries since J2000.0, TT timescale
@@ -439,7 +415,7 @@ LOCAL void moonOrbitals(double t_cy, OrbTerms *orb)
                                      + t_cy * (1.0 / 538841.0
                                                + t_cy * (-1.0 / 65194000.0))));
     orb->lp_rad = normalize(degToRad(temp_deg), TWOPI);
-    
+
     /* Mean Elongation of the Moon D */
     temp_deg = 297.8501921
                 + t_cy * (445267.1114034
@@ -473,14 +449,6 @@ LOCAL void moonOrbitals(double t_cy, OrbTerms *orb)
 
     /* Eccentricity of the Earth's orbit around the Sun */
     orb->e = 1.0 - 0.002516 * t_cy - 0.0000074 * t_cy * t_cy;
-#if 0
-    ///+
-    printf("Orbitals L' %12.7f, D %12.7f, M %12.6f, "
-           "M' %12.6f, F %12.7f, E %12.7f\n",
-           radToDeg(orb->lp_rad), radToDeg(orb->d_rad), radToDeg(orb->m_rad),
-           radToDeg(orb->mp_rad), radToDeg(orb->f_rad), orb->e);
-    ///-
-#endif
 }
 
 
@@ -727,7 +695,7 @@ LOCAL double riseSetApprox(double             risesetGuess_d,
 
     moon_nrelTopocentric(risesetGuess_d, deltas, site, topo);
     sky_siteAzElToHaDec(&topo->rectV, site, &ha1_rad, &dec_rad);
-    
+
     /* Assuming the Moon's declination remains constant over the period, find
      * out where dec circle intersects the Elevation = -50 arcminutes circle.
      * Of course the declination does not remain constant, so this estimate of
