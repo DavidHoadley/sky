@@ -682,6 +682,7 @@ LOCAL void createAzElBaseM(Sky_SiteProp *site)
  */
 
 /*! \page page-conventions Conventions used in this code
+ *      - \subpage page-c-style
  *      - \subpage page-var-suffixes
  *      - \subpage page-sec-arcsec
  *      - \subpage page-sign-conventions
@@ -951,10 +952,16 @@ LOCAL void createAzElBaseM(Sky_SiteProp *site)
  * \endverbatim
  */
 
+/*! \page page-c-style C coding style
+ *
+ *  Code here largely conforms to [this style guide](../c-style-guide.pdf)
+ */
+
 /*! \page page-var-suffixes Suffixes on variable and parameter names
  *
  *  In accordance with the naming convention spelt out in the
- *  style guide, many variables and constants have a suffix indicating their
+ *  [style guide](../c-style-guide.pdf),
+ *  many variables and constants have a suffix indicating their
  *  units. Mostly these are SI units, for example
  *      -  _d (days), _h (hours) _s (seconds) _ns (nanoseconds)
  *      -  _m (metres), _km (kilometres), _kmps (kilometres/second)

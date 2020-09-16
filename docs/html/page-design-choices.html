@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.6-1</span>
+   &#160;<span id="projectnumber">0.1.9-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -91,6 +91,8 @@ $(document).ready(function(){initNavTree('page-design-choices.html',''); initRes
 <li>The code can be compiled with a C89/C90 compliant compiler. (Some embedded systems still use compilers of this vintage.) But if a C99 or later compiler is being used, the code will use a few inline functions in place of function-like macros.</li>
 <li>Does not use any heap storage (dynamic memory). That is, there are no <code>malloc()</code> calls.</li>
 <li>Does not use any variable-length arrays. Thus stack usage is predictable.</li>
+<li><code>printf()</code> calls are basically limited to debugging code.</li>
+<li>Very limited use of <code>snprintf()</code>. Does not use the %f specifier in any <code>snprintf()</code>.</li>
 <li>Uses an interpolation process to dramatically reduce the calling of trigonometric functions during tracking, with a very small loss of accuracy (see <a class="el" href="page-interpolation.html">Interpolation and its errors</a>). </li>
 </ul>
 </div></div><!-- contents -->

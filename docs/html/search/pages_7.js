@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['miscellaneous_491',['Miscellaneous',['../page-misc.html',1,'']]]
+  ['open_20source_20licensing_493',['Open Source Licensing',['../page-licensing.html',1,'page-about']]]
 ];

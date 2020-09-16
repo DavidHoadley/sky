@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['why_20define_20vector_20and_20matrix_20arrays_20as_20structs_3f_499',['Why define vector and matrix arrays as structs?',['../page-why-struct-array.html',1,'page-misc']]]
+  ['why_20define_20vector_20and_20matrix_20arrays_20as_20structs_3f_501',['Why define vector and matrix arrays as structs?',['../page-why-struct-array.html',1,'page-misc']]]
 ];
