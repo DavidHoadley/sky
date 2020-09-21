@@ -26,7 +26,6 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.9-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -104,7 +103,7 @@ int main(void)
     double vec[3] = { 0.5, 0.5, 0.70710678119 };
 
     rectToPolar(vec, &amp;azimuth, &amp;elevation);
-    printf("Azimuth = %f, Elevation = %f\n", 
+    printf("Azimuth = %f, Elevation = %f\n",
            azimuth * 180.0 / 3.141592653589793,
            elevation * 180.0 / 3.141592653589793);
 }
@@ -122,18 +121,27 @@ int main(void)
     double elevation = 0.5;     // Ditto
     V3D_Vector vec = {{ 0.5, 0.5, 0.70710678119 }};
 
-    v3d_rectToPolar(vec, &amp;azimuth, &amp;elevation);
-    printf("Azimuth = %f, Elevation = %f\n", 
+    v3d_rectToPolar(&amp;vec, &amp;azimuth, &amp;elevation);
+    printf("Azimuth = %f, Elevation = %f\n",
            azimuth * 180.0 / 3.141592653589793,
            elevation * 180.0 / 3.141592653589793);
 }
-</pre><p>This time, you can't even compile the code, and the compiler tells you what is wrong. With the clang compiler, the messages are as follows: </p><pre class="fragment">vec2.c:12:21: error: passing 'V3D_Vector' to parameter of incompatible type
-      'double *'
-v3d_rectToPolar(vec, &amp;azimuth, &amp;elevation);
-                ^~~
+</pre><p>This time, you get two warning messages from the compiler. With the clang compiler, the messages are as follows: </p><pre class="fragment">vec2.c:12:21: warning: incompatible pointer types passing 'V3D_Vector *'
+      to parameter of type 'double *' [-Wincompatible-pointer-types]
+    v3d_rectToPolar(&amp;vec, &amp;azimuth, &amp;elevation);
+                    ^~~~
 ./vectors3d.h:74:30: note: passing argument to parameter 'alpha_rad' here
-void v3d_rectToPolar(double *alpha_rad, 
-</pre><p>I believe that this justifies using this slightly more awkward way of implementing the vectors and arrays needed for 3-D geometry. </p>
+void v3d_rectToPolar(double *alpha_rad,
+                             ^
+vec2.c:12:37: warning: incompatible pointer types passing 'double *' to
+      parameter of type 'const V3D_Vector *' [-Wincompatible-pointer-types]
+    v3d_rectToPolar(&amp;vec, &amp;azimuth, &amp;elevation);
+                                    ^~~~~~~~~~
+./vectors3d.h:76:40: note: passing argument to parameter 'srcV' here
+                     const V3D_Vector *srcV);
+</pre><p>(Actually, there is a case here for elevating this warning to an error that stops compilation, using -Werror=incompatible-pointer-types)</p>
+<p>I believe that this justifies using this slightly more awkward way of implementing the vectors and arrays needed for 3-D geometry.</p>
+<p>It also allows one to use a simple assignment statement to copy a vector or matrix, as opposed to needing to write a function to do it. (Or in the case of the IAU SOFA routines for matrix copying - two functions!) </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

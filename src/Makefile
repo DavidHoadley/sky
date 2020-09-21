@@ -78,12 +78,17 @@ CFLAGS_VERS += -DAPP_REV_MIN=\"$(APP_REV_MIN)\"
 CFLAGS_VERS += -DAPP_REV_PATCH=\"$(APP_REV_PATCH)\"
 CFLAGS_VERS += -DAPP_REV_DIRTY=\"$(APP_REV_DIRTY)\"
 
+CFLAGS_BASE := -fno-common
+CFLAGS_BASE += -ffunction-sections
+CFLAGS_BASE += -fdata-sections
+
 CFLAGS_WARN := -Wall -Wextra
 CFLAGS_WARN += -Wbad-function-cast
 CFLAGS_WARN += -Wcast-align
 CFLAGS_WARN += -Wcast-qual
 CFLAGS_WARN += -Wcomment
 CFLAGS_WARN += -Wconversion
+CFLAGS_WARN += -Wdouble-promotion
 CFLAGS_WARN += -Wdisabled-optimization
 CFLAGS_WARN += -Wfloat-equal
 CFLAGS_WARN += -Wformat-nonliteral
@@ -94,9 +99,11 @@ CFLAGS_WARN += -Wmissing-declarations
 CFLAGS_WARN += -Wmissing-format-attribute
 CFLAGS_WARN += -Wmissing-include-dirs
 CFLAGS_WARN += -Wmissing-prototypes
+CFLAGS_WARN += -Wmissing-variable-declarations
 CFLAGS_WARN += -Wold-style-definition
 CFLAGS_WARN += -Wpointer-arith
 CFLAGS_WARN += -Wredundant-decls
+CFLAGS_WARN += -Wreserved-id-macro
 CFLAGS_WARN += -Wshadow
 CFLAGS_WARN += -Wsign-conversion
 CFLAGS_WARN += -Wstrict-prototypes
@@ -104,6 +111,9 @@ CFLAGS_WARN += -Wswitch-default
 CFLAGS_WARN += -Wundef
 CFLAGS_WARN += -Wunused-macros
 CFLAGS_WARN += -Wswitch-enum
+CFLAGS_WARN += -Wunreachable-code
+##CFLAGS_WARN += -Wunreachable-code-break
+CFLAGS_WARN += -Wunreachable-code-return
 CFLAGS_WARN += -Wwrite-strings
 
 CXXFLAGS := -Wctor-dtor-privacy
@@ -113,7 +123,7 @@ CXXFLAGS += -Wsign-promo -Wstrict-null-sentinel
 LFLAGS := -g
 
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEP_DIR)/$*.d
-COMPILE.c = $(CC) $(DEPFLAGS) $(CFLAGS_WARN) -c
+COMPILE.c = $(CC) $(DEPFLAGS) $(CFLAGS_BASE) $(CFLAGS_WARN) -c
 
 DOXYFLAGS := DOXYGEN_APP_VER=$(APP_REV_MAJ).$(APP_REV_MIN).$(APP_REV_PATCH)-$(APP_REV_DIRTY)
 

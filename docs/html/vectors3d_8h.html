@@ -26,7 +26,6 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Sun position
-   &#160;<span id="projectnumber">0.1.9-1</span>
    </div>
    <div id="projectbrief">Sun position algorithm</div>
   </td>
@@ -471,7 +470,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to <em>modV1</em> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">modV1</td><td>First vector, to which <em>srcV2</em> will be added, and then re-normalized to unit length </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">modV1</td><td>First vector, to which <em>srcV2</em> will be added, and then re-normalized to unit length. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">srcV2</td><td>vector to be added to <em>modV1</em> </td></tr>
   </table>
   </dd>
@@ -479,7 +478,7 @@ Functions</h2></td></tr>
 <dl class="section user"><dt>When to call this function</dt><dd>If your vector <em>modV1</em> is a unit vector, and you want it to be a unit vector after the addition of <em>srcV2</em>, then you can use this function. But if <em>srcV2</em> is very small, you will be better off calling <a class="el" href="vectors3d_8h.html#a69ffaedc53f0fab83ec4a5077ad9f79c" title="Modify a unit length rectangular position vector modV1 by adding a small correction vector srcV2 to i...">v3d_addToUVfast()</a> instead.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00190">190</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00193">193</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
 
 </div>
 </div>
@@ -513,15 +512,15 @@ Functions</h2></td></tr>
 <p>The scaling factor for the length is approximated by the expression 1 - [modV1] · [srcV2], where the dot indicates the Dot Product. The correction vector <em>srcV2</em> must be very small. </p><dl class="section return"><dt>Returns</dt><dd>Pointer to <em>modV1</em> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">modV1</td><td>First vector, to which <em>srcV2</em> will be added, and then re-normalized to unit length </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">srcV2</td><td>vector to be added to <em>modV1</em> </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">modV1</td><td>First vector, to which <em>srcV2</em> will be added, and then re-normalized to unit length. Valid range: |modV1| == 1 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">srcV2</td><td>vector to be added to <em>modV1</em>. Valid range: |srcV2| &lt;&lt; 1</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section user"><dt>When to call this function</dt><dd>This routine performs the same function as <a class="el" href="vectors3d_8h.html#aa2557ca34ddae80a9b6c85e3747428bd" title="Modify a unit length rectangular position vector modV1 by adding a correction vector srcV2 to it and ...">v3d_addToUV()</a>, but without calling <code>sqrt()</code>, or performing divisions. This can make it quicker than <a class="el" href="vectors3d_8h.html#aa2557ca34ddae80a9b6c85e3747428bd" title="Modify a unit length rectangular position vector modV1 by adding a correction vector srcV2 to it and ...">v3d_addToUV()</a>, depending on what kind of floating point processor you have, if any. It is only valid if <em>srcV2</em> is very small.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00220">220</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00223">223</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
 
 </div>
 </div>
@@ -544,7 +543,7 @@ Functions</h2></td></tr>
 <p>Return the square of the magnitude of the specified vector. </p>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00253">253</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00258">258</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
 
 </div>
 </div>
@@ -567,7 +566,7 @@ Functions</h2></td></tr>
 <p>Return the magnitude of the specified vector. </p>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00266">266</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00271">271</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
 
 </div>
 </div>
@@ -615,7 +614,7 @@ Functions</h2></td></tr>
 </dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00275">275</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00280">280</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
 
 </div>
 </div>
@@ -662,7 +661,7 @@ Functions</h2></td></tr>
 </dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00306">306</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00311">311</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
 
 </div>
 </div>
@@ -715,17 +714,17 @@ Functions</h2></td></tr>
 <pre class="fragment">                                               ┌  1     0     0  ┐
   createRotationMatrix(M, Xaxis, θ) is R1(θ) = │  0    cosθ  sinθ│
                                                └  0   -sinθ  cosθ┘
- 
+
                                                ┌ cosθ   0   -sinθ┐
   createRotationMatrix(M, Yaxis, θ) is R2(θ) = │  0     1     0  │
                                                └ sinθ   0    cosθ┘
-  
+
                                                ┌ cosθ  sinθ   0  ┐
   createRotationMatrix(M, Zaxis, θ) is R3(θ) = │-sinθ  cosθ   0  │
                                                └  0     0     1  ┘
 </pre><hr  />
  
-<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00372">372</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00377">377</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
 
 </div>
 </div>
@@ -771,9 +770,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note</dt><dd>The same vector may be passed to <em>destV</em> and <em>srcV</em>, in which case the contents of <em>srcV</em> will be replaced.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00434">434</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00439">439</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
 
 </div>
 </div>
@@ -820,9 +820,10 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <p>Note that for an orthogonal matrix which represents a rotation about axis j by angle θ, i.e. Matrix = Rj(θ), the following identity holds: TRANSPOSE(Matrix) = INVERSE(Matrix) = Rj(-θ). This is why this is a useful routine</p>
+<dl class="section note"><dt>Note</dt><dd>The same vector may be passed to <em>destV</em> and <em>srcV</em>, in which case the contents of <em>srcV</em> will be replaced.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00462">462</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00475">475</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
 
 </div>
 </div>
@@ -868,9 +869,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note</dt><dd>The same matrix may be passed to <em>destM</em> and either of the source matrices, in which case the contents of that source matrix will be replaced.</dd></dl>
 <hr  />
  
-<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00496">496</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vectors3d_8c_source.html#l00517">517</a> of file <a class="el" href="vectors3d_8c_source.html">vectors3d.c</a>.</p>
 
 </div>
 </div>

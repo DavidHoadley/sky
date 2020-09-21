@@ -49,12 +49,10 @@ There are two guiding principles to my use of Doxygen. They are:
     file, and \param is needed to document function parameters. I also use some
     \note and \par commands, as they are not too visually distracting.
 
-###Doxygen settings file
+### Doxygen settings file
+
 The Doxyfile settings file is changed from the default as follows:
 ```
-PROJECT_NAME          = "Sun position"
-PROJECT_NUMBER        = $(DOXYGEN_APP_VER)
-PROJECT_BRIEF         = "Sun position algorithm"
 OUTPUT_DIRECTORY      = docs
 FULL_PATH_NAMES       = NO
 JAVADOC_AUTOBRIEF     = YES
@@ -69,7 +67,7 @@ SORT_MEMBER_DOCS      = NO
 INPUT                 = src
 EXAMPLE_PATH          = examples
 SOURCE_BROWSER        = YES
-STRIP_CODE_COMMENS    = NO
+STRIP_CODE_COMMENTS   = NO
 ALPHABETICAL_INDEX    = NO
 GENERATE_TREEVIEW     = YES
 GENERATE_LATEX        = NO
@@ -78,6 +76,6 @@ PREDEFINED            = PREDEF_STANDARD_C_1999
 
 Note. EXTRACT_STATIC is set to yes in order to document static inline
 functions. But I don't want to document all other static functions. That is
-achieved by NOT having a \file command in any .c file; \file appears only in .h
-files.
+achieved by __not__ having a \file command in any .c file; \file appears only
+in .h files.
 
